@@ -1,8 +1,9 @@
 v 0.3.00 (2014-05-??)
-- fixed a creep spawning bug in Old Creep War
-- removed erroneous second Merman Fighter in heroes list
-- organised heroes into factions for easier user selection
 - reorganisation and rewrite of core code
+- organised heroes into factions for easier user selection
+- dynamic item system with new armour
+- dyanmic creep spawning system with new creeps
+
 
 v 0.2.12 (2013-08-30)
 - heal and cure are now free when a player enters the shop

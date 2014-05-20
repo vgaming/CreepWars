@@ -1,9 +1,20 @@
 v 0.3.00 (2014-05-??)
-- reorganisation and rewrite of core code
+- reorganisation and rewrite of entire code base
 - organised heroes into factions for easier user selection
 - dynamic item system with new armour
-- dyanmic creep spawning system with new creeps
-
+- dynamic creep spawning system with new creeps
+- net now costs 56
+- added new large HP boost:  50 gold for +28 & +12%
+- added combo damage upgrade for 24
+- added combo strikes upgrade for 72
+- moved home positions of characters to balance gameplay
+- removed Mudcrawler
+- set AI caution to 0.10
+- players can now heal a guard more than once for 23 extra gold
+- players can buy strikes for the guards
+- Gryphon Rider:	-1 movement
+- Vampire Bat:		+2 damage & -1 damage per level
+- Thunderer:		+2 damage & -4 damage per level
 
 v 0.2.12 (2013-08-30)
 - heal and cure are now free when a player enters the shop

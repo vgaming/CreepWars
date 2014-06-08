@@ -1,4 +1,4 @@
-﻿This is an addon for "The Battle for Wesnoth"
+This is an addon for "The Battle for Wesnoth"
 Copyright (C) 2010-2013 Blitzmerker
 Copyright (C) 2014 Blitzmerker, piezocuttlefish
 

@@ -1,102 +1,112 @@
-v 0.3.00 (2014-05-??)
+v 0.3.1 (2014-06-22)
+- Added support for Wesnoth version 1.11
+
+v 0.3.0 (2014-06-21)
 - reorganisation and rewrite of entire code base
-- organised heroes into factions for easier user selection
 - dynamic item system with new armour
 - dynamic creep spawning system with new creeps
-- net now costs 56
+- moved home positions of heroes to balance gameplay
+- added ability to see heroes in Limbo
+- organised heroes into factions for easier user selection
+- added Mirror Enemy faction to copy your enemy's unit
+- removed Mudcrawler
+- set AI caution to 0.10
+- set AI aggression to 0.85
 - added new large HP boost:  50 gold for +28 & +12%
 - added combo damage upgrade for 24
 - added combo strikes upgrade for 72
-- moved home positions of characters to balance gameplay
-- removed Mudcrawler
-- set AI caution to 0.10
-- players can now heal a guard more than once for 23 extra gold
-- players can buy strikes for the guards
+- increased price of net from 45 to 56
+- decreased price of resistance from 24 to [22 minus 1 per 100 kills]
+- decreased guard healing amount from 50% to 40%
+- decreased guard healing cost from 17 to 13
+- guards can be healed more than once per turn for 23 extra gold
+- players can now buy strikes for the guards
 - Gryphon Rider:	-1 movement
+- Mermaid Initiate:	-1 movement
 - Vampire Bat:		+2 damage & -1 damage per level
 - Thunderer:		+2 damage & -4 damage per level
 
 v 0.2.12 (2013-08-30)
 - heal and cure are now free when a player enters the shop
-- max health now gives only 4% instead of 7%
+- health upgrade now gives only 4% instead of 7%
 - poisoned knife is now 4-2 instead of 4-3
 - net is now 4-2 instead of 4-1
-- display how much gold a player of a team has earned
+- added gold to scoreboard
 - unit advancement choice moved form era to scenario
 - removed wrong era warning
 - fixed some Guard/Team Leader healing bugs in old
 
 v 0.2.11.1 (2012-03-03)
--updated for Wesnoth 1.10
+- added support for Wesnoth version 1.10
 
 v 0.2.11
--3 Team match Beta2
--in 3 Team match team gets half score and gold if other teams fight each other
--Increased merman moves by 1
--Added some lvl 0 Heroes
+- 3 Team match Beta2
+- in 3 Team match, team gets half score and gold if other teams fight each other
+- Increased merman moves by 1
+- Added some lvl 0 Heroes
 
 v 0.2.10
--decreased cost for movement by 1
--decreased cost for guard curing by 1
--decreased cost for single armor upgrades by 2
--decreased cost for armor by 20
--healing a Guard now gives 50% instead of 50
--added 3 Team match Beta1
--set creep aggession from 1.0 to 0.9
--shield 'weapon' which absorbs 30% damage in defense for 40 gold
--upgrades apply also to weapons bought after the upgrades
--each weapon can only be bought once
--old mode on alternate map added
--renamed scenarios
+- decreased cost for movement by 1
+- decreased cost for guard curing by 1
+- decreased cost for single armour upgrades by 2
+- decreased cost for armour by 20
+- healing a Guard now gives 50% instead of 50
+- added 3 Team match Beta1
+- set creep aggession from 1.0 to 0.9
+- shield 'weapon' which absorbs 30% damage in defense for 40 gold
+- upgrades apply also to weapons bought after the upgrades
+- each weapon can only be bought once
+- old mode on alternate map added
+- renamed scenarios
 
 v 0.2.9
--Removed the zoc of the creeps
--Set guard Armor to 0%
--Warning if wrong era is used
--reduced the speed of Sky Drake, Elvish Rider and Dragoon creeps by 1 (now normal_mp-3)
--decreased cost for hp by 1
--added the changelog to the Help Menu Icon
--score counter does not appear anymore when a unit dies which was created by plague
+- Removed the zoc of the creeps
+- Set guard Armor to 0%
+- Warning if wrong era is used
+- reduced the speed of Sky Drake, Elvish Rider and Dragoon creeps by 1 (now normal_mp-3)
+- decreased cost for hp by 1
+- added the changelog to the Help Menu Icon
+- score counter does not appear anymore when a unit dies which was created by plague
 
 v 0.2.8
--Set Guard Health to 50 (from 200)
--set guard dmg to 5 (from 10)
--Set Leader Helth to 300 (from 1000)
--Guards get +1 max health for each creep kill
--Guards now get +10 hp on shop (not +10%)
--buy max hp gives now +13, +7% (not +10, +10%)
--removed keep for recruiting (if wrong era is used)
--decreased cost for self-upgrade slightly
--increased cost to heal guard to 17 (from 15)
--decreased cost for armor
--added a menu icon to teleport in game when you are still in the keep (because a player disconected)
+- Set Guard Health to 50 (from 200)
+- set guard dmg to 5 (from 10)
+- Set Leader Helth to 300 (from 1000)
+- Guards get +1 max health for each creep kill
+- Guards now get +10 hp on shop (not +10%)
+- buy max hp gives now +13, +7% (not +10, +10%)
+- removed keep for recruiting (if wrong era is used)
+- decreased cost for self-upgrade slightly
+- increased cost to heal guard to 17 (from 15)
+- decreased cost for armor
+- added a menu icon to teleport in game when you are still in the keep (because a player disconected)
 
 v 0.2.7
--Attacking a Guard gives +1 score
--Moved unit balancing to the era (and is a trait now)
--Restore Health now costs only 3 gold
--Elvish Shaman is now stronger (era)
+- Attacking a Guard gives +1 score
+- Moved unit balancing to the era, and is applied as traits
+- Restore Health now costs only 3 gold
+- Elvish Shaman:		+3 damage & -1 damage per level
 
 v 0.2.6
--Fixed Objectives
--stop the creeps from being placed on the void
--more compatible with 1.9 (still not working fine)
+- Fixed Objectives
+- Fixed creep spawning into void
+- Increased compatibility with Wesnoth version 1.9 (still not working fine)
 
 v 0.2.5
--Display win-message if the game is over and you are on the winning side (even if you are dead)
+- Display win-message if the game is over and you are on the winning side (even if you are dead)
 
 v 0.2.4
--Armour is a bit cheaper
--everything which has to do with gold is 90% less
--Ai now avoids the shop
--Creeps-kills now gives 4 gold
+- Armour is a bit cheaper
+- Prices reduced to 10% of original
+- Creeps no longer stand on the shop
+- Killing a creep now gives 4 gold
 
 v 0.2.3
--Added basic attack animations for weapons in shop
--Made some weapons a bit stronger
+- Added attack animations for weapons in shop
+- Made some weapons a bit stronger
 
 v 0.2.2
--Choose unit to advance to if there are >1 options.
+- Unit advancement menu added
 
 v 0.2.1
--First release on addon-server
+- First release on addon-server

@@ -1,3 +1,9 @@
+v 0.3.2 (2014-06-23)
+- Increased score given for killing a guard from 1 to 10
+- Increased gold given for killing a guard from 50 to 75
+- Increased price of reviving guard from 35 to twice the turn number
+- Fixed bug where a spawning hero kills another hero on the home space
+
 v 0.3.1 (2014-06-22)
 - Added support for Wesnoth version 1.11
 
@@ -12,13 +18,16 @@ v 0.3.0 (2014-06-21)
 - removed Mudcrawler
 - set AI caution to 0.10
 - set AI aggression to 0.85
+- decreased reward for killing guard from 100 to 50
 - added new large HP boost:  50 gold for +28 & +12%
 - added combo damage upgrade for 24
 - added combo strikes upgrade for 72
 - increased price of net from 45 to 56
+- decreased price of dagger, mace, spear, bow, and short sword from 35 to 34
 - decreased price of resistance from 24 to [22 minus 1 per 100 kills]
 - decreased guard healing amount from 50% to 40%
 - decreased guard healing cost from 17 to 13
+- decreased guard revival cost from 250 to 35
 - guards can be healed more than once per turn for 23 extra gold
 - players can now buy strikes for the guards
 - Gryphon Rider:	-1 movement

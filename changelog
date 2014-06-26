@@ -1,11 +1,18 @@
+v 0.3.3 (2014-06-25)
+- fixed bug where standing on the home of a dead guard prevented all shopping
+- creep:  Orcish Grunt		damage decreased by 1
+- creep:  Ancient Lich		appear time increased from 110 kills to 125
+- added interface for Mirror Enemy to be possible in other eras
+- in two team map, moved home positions of heroes 1 and 2 to balance gameplay
+
 v 0.3.2 (2014-06-23)
-- Increased score given for killing a guard from 1 to 10
-- Increased gold given for killing a guard from 50 to 75
-- Increased price of reviving guard from 35 to twice the turn number
-- Fixed bug where a spawning hero kills another hero on the home space
+- increased score given for killing a guard from 1 to 10
+- increased gold given for killing a guard from 50 to 75
+- increased price of reviving guard from 35 to twice the turn number
+- fixed bug where a spawning hero kills another hero on the home space
 
 v 0.3.1 (2014-06-22)
-- Added support for Wesnoth version 1.11
+- added support for Wesnoth version 1.11
 
 v 0.3.0 (2014-06-21)
 - reorganisation and rewrite of entire code base

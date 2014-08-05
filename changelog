@@ -1,3 +1,6 @@
+v 0.3.4 (2104-08-04)
+- this time, really fixed bug where shopping became impossible
+
 v 0.3.3 (2014-06-25)
 - fixed bug where standing on the home of a dead guard prevented all shopping
 - creep:  Orcish Grunt		damage decreased by 1

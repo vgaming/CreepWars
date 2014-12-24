@@ -1,4 +1,17 @@
-v 0.3.4 (2104-08-04)
+v 0.3.5 (2014-12-24)
+- added some player settings to work with iceiceice's Captain's Mode
+- changed kills earned for a guard to 2 and for a teamleader to 4
+- each combo upgrade gives a discount on all future combo upgrades, down to the price of non-combo upgrades
+- increased price of net to 72
+- increased price of poisoned knife to 56
+- changed large HP boost:  50 gold for +14 & +25%
+- changed small HP boost:  22 gold for + 4 & +11%
+- changed all creep appearance times by multiplying by 1.2
+- changed score at which creeps begin scaling to 120
+- changed rate at which creeps increase stats
+- decreased maximum number of weapons to 2
+
+v 0.3.4 (2014-08-04)
 - this time, really fixed bug where shopping became impossible
 
 v 0.3.3 (2014-06-25)

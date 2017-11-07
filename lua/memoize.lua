@@ -20,18 +20,13 @@ wesnoth.message("Development Creep Wars", "Please write feedback and any ideas y
 
 
 local ai_side_set = {}
---do
---	local str = ""
---	for _, side in ipairs(wesnoth.get_sides({ controller = "ai" })) do
---		if str ~= "" then
---			str = str .. ","
---		end
---		str = str .. side.side
---		ai_side_set[side.side] = true
---	end
---	wesnoth.set_variable("creepwars_creep_sides", str)
---end
-ai_side_set = {[4] = true, [8] = true} -- UGLY HACK !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+do
+	for _, side in pairs(wesnoth.sides) do
+		if side.controller == "ai" or side.controller == "network_ai" then
+			ai_side_set[side.side] = true
+		end
+	end
+end
 
 
 local starting_positions = {}

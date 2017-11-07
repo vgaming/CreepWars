@@ -1,4 +1,4 @@
--- << random_creep.lua  wesnoth preprocessor escape characters
+-- << random_creep.lua
 
 -- This file provides function to generate Creeps with expected cost.
 -- See end of file for the function itself, `creepwars_generate_creep`
@@ -110,7 +110,7 @@ local function generate(desired_cost)
 
 	local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 1000
 
-	local closeness_step = 1 / 100 -- widen acceptable range over time
+	local closeness_step = 1 / 1500 -- widen acceptable range over time
 	local iterations = 0
 	local creep_type
 	repeat

@@ -118,7 +118,11 @@ local function generate(desired_cost)
 		desired_closeness = desired_closeness + closeness_step
 		 creep_type = rand_creep()
 		local creep_cost = wesnoth.unit_types[creep_type].cost
-		local diff = math.abs(creep_cost - desired_cost) / (creep_cost + desired_cost) -- a cost ratio of 1:2 gives diff 0.333333
+		-- ratio 0.3333 means cost 1 : 2
+		-- ration 0.048 means cost 1 : 1.1
+		local absolute_diff = math.abs(creep_cost - desired_cost)
+		local ratio = absolute_diff / (creep_cost + desired_cost)
+		local diff = ratio + absolute_diff * 0.048 / 3 -- 10% diff is the same as 3gold diff
 	-- print("creep type is: " .. creep_type .. " (" .. creep_cost .. "), diff: " .. diff .. ", desired_closeness: " .. desired_closeness)
 	until diff < desired_closeness
 	local u = wesnoth.create_unit { type = creep_type, upkeep = 0 }

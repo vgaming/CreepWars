@@ -11,14 +11,15 @@ if memoize_ai_side_set[side_number] then
 	local kills = wesnoth.get_variable("cw_score.kills." .. wesnoth.sides[side_number].team_name)
 	--local helper = wesnoth.require "lua/helper.lua"
 
-	local creeps_max = 9 -- wesnoth.get_variable("CW_CREEPS_MAX")
+	local creeps_max = 10 -- wesnoth.get_variable("CW_CREEPS_MAX")
 	local creeps_count_before = #wesnoth.get_units { side = side_number } -- wesnoth-1.13+ wesnoth.sides[side].num_units
 
 	print("creeps_max: " .. creeps_max .. ", before: " .. creeps_count_before)
 
+	-- 0->5  35->20+  60->35  93->50  100->60
 	for i = creeps_count_before + 1, creeps_max do
 		local x, y = wesnoth.find_vacant_tile(memoize_starting_positions[side_number].x, memoize_starting_positions[side_number].y)
-		local u = gen_creep(5 + kills / 3)
+		local u = gen_creep(5 + kills * 0.5)
 		u.side = side_number
 		wesnoth.put_unit(x, y, u)
 	end

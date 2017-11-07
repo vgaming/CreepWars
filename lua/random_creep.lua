@@ -1,11 +1,10 @@
 -- << random_creep.lua  wesnoth preprocessor escape characters
+
+-- This file provides function to generate Creeps with expected cost.
+-- See end of file for the function itself, `creepwars_generate_creep`
+
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
-
-wesnoth.message("Creep Wars", "Hi, this is DEVELOPMENT version of Creep Wars. " ..
-	"Current difference to version 0.3.5: More creeps types. " ..
-	"All units from default era can appear as creeps.")
-wesnoth.message("Creep Wars", "Please write any feedback you have.")
 
 local creep_set = {}
 --wesnoth-1.13:
@@ -22,7 +21,7 @@ local creep_set = {}
 if next(creep_set) == nil then
 	-- wesnoth-1.12 work-around (it gives no access to faction recruits)
 	local creep_array = {
-		"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Walking Corpse", "Vampire Bat", -- lvl0
+		"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Vampire Bat", -- lvl0 without zombie
 		"Drake Burner", "Drake Clasher", "Drake Fighter", "Drake Glider", "Saurian Augur", "Saurian Skirmisher", -- lvl1 drakes
 		"Dwarvish Fighter", "Dwarvish Guardsman", "Dwarvish Thunderer", "Dwarvish Ulfserker", "Gryphon Rider", "Footpad", "Poacher", "Thief", -- lvl1 knalgan
 		"Bowman", "Cavalryman", "Fencer", "Heavy Infantryman", "Horseman", "Mage", "Merman Fighter", "Spearman", -- lvl1 loyal
@@ -127,8 +126,9 @@ end
 local function generate(desired_cost)
 	local function rand_creep() return creep_array[helper.rand(creep_rand_string)] end
 
-	local desired_closeness = helper.rand("1..100") / 300 -- 0 .. 1/3
-	local closeness_step = 1 / 3 / 300 -- widen acceptable range over time
+	local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 1000
+
+	local closeness_step = 1 / 100 -- widen acceptable range over time
 	local iterations = 0
 	local creep_type
 	repeat
@@ -139,18 +139,19 @@ local function generate(desired_cost)
 		local diff = math.abs(creep_cost - desired_cost) / (creep_cost + desired_cost) -- a cost ratio of 1:2 gives diff 0.333333
 	-- print("creep type is: " .. creep_type .. " (" .. creep_cost .. "), diff: " .. diff .. ", desired_closeness: " .. desired_closeness)
 	until diff < desired_closeness
-	local u = wesnoth.create_unit { type = creep_type, upkeep = 0, zoc = false }
+	local u = wesnoth.create_unit { type = creep_type, upkeep = 0 }
 
-	local boost = math.floor((desired_cost - u.__cfg.cost) / 50)
+	local boost = math.floor((desired_cost - u.__cfg.cost) / 9)
 	if boost > 0 then
 		wesnoth.add_modification(u, "object", {
 			{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
 			{ "effect", { apply_to = "attack", increase_attacks = boost } },
-			{ "effect", { apply_to = "movement", increase = boost } }
+			{ "effect", { apply_to = "movement", increase = boost } },
 		})
 	end
+	wesnoth.add_modification(u, "object", { { "effect", { apply_to = "zoc", value = false } } })
 
-	print("Good unit for cost " .. desired_cost ..
+	print("Good unit for cost " .. math.floor(desired_cost + 0.5) ..
 		" is " .. u.__cfg.cost ..
 		"g:\"" .. creep_type ..
 		"\", boost: " .. boost .. ". Iterations spent: " .. iterations)

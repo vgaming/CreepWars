@@ -63,20 +63,19 @@ local function split_comma(str)
 end
 
 
-local function recursive_enrich_creeps(creep_name)
+local function add_advances_recursive(creep_name)
 	local advances_string = wesnoth.unit_types[creep_name].__cfg.advances_to
 	if advances_string ~= "null" and advances_string ~= creep_name then
 		for _, adv in pairs(split_comma(advances_string)) do
-			if creep_set[adv] == nil then
+			if creep_set[adv] == nil and wesnoth.unit_types[adv].level < 4 then
 				-- print("adding creep advance " .. adv)
 				creep_set[adv] = true
-				recursive_enrich_creeps(adv)
+				add_advances_recursive(adv)
 			end
 		end
 	end
 end
-
-do
+do -- add advances
 	-- we can't iterate over mutable set, so we need to copy it
 	local arr = {}
 	local n = 1
@@ -85,10 +84,10 @@ do
 		n = n + 1
 	end
 	for _, creep_name in ipairs(arr) do
-		recursive_enrich_creeps(creep_name)
+		add_advances_recursive(creep_name)
 	end
 end
-if not creep_set["Elvish Sylph"] then error("Sylph not found") end
+if not creep_set["Highwayman"] then error("Highwayman not found") end
 if not creep_set["Cavalier"] then error("Cavalier not found") end
 
 

@@ -104,24 +104,6 @@ end
 table.sort(creep_array)
 local creep_rand_string = "1.." .. #creep_array
 
-local function generate_closest_creep(desired_cost)
-	local function metric(unit_type) return math.abs(wesnoth.unit_types[unit_type].cost - desired_cost) end
-
-	local best_unit_type = "Peasant"
-	local best_diff = 100000000
-	for _, unit_type in ipairs(creep_array) do
-		if metric(unit_type) < best_diff then
-			best_unit_type = unit_type
-			best_diff = metric(best_unit_type)
-		end
-	end
-	local u = wesnoth.create_unit { type = best_unit_type, upkeep = 0, zoc = false }
-	print("Best unit for cost " .. desired_cost ..
-		" is \"" .. best_unit_type ..
-		"\" (cost " .. wesnoth.unit_types[best_unit_type].cost .. ")")
-	return u
-end
-
 
 local function generate(desired_cost)
 	local function rand_creep() return creep_array[helper.rand(creep_rand_string)] end

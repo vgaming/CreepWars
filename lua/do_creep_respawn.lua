@@ -17,7 +17,7 @@ if memoize_ai_side_set[side_number] then
 	print("current creeps: " .. creeps_count_before .. ", max: " .. creeps_max)
 
 	for i = creeps_count_before + 1, creeps_max do
-		local unit = gen_creep(5 + kills * 0.5) -- 0->5  35->20+  60->35  93->50  100->60
+		local unit = gen_creep(5 + kills * 0.55) -- 0->5  35->20+  60->35  93->50  100->60
 		unit.side = side_number
 		local x, y = wesnoth.find_vacant_tile(
 			memoize_starting_positions[side_number].x,

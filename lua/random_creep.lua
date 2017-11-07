@@ -106,41 +106,48 @@ local creep_rand_string = "1.." .. #creep_array
 
 local function generate(desired_cost)
 	local function rand_creep() return creep_array[helper.rand(creep_rand_string)] end
-
-	local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 1000
-
-	local closeness_step = 1 / 1500 -- widen acceptable range over time
-	local iterations = 0
 	local creep_type
-	repeat
-		iterations = iterations + 1
-		desired_closeness = desired_closeness + closeness_step
-		 creep_type = rand_creep()
-		local creep_cost = wesnoth.unit_types[creep_type].cost
-		-- ratio 0.3333 means cost 1 : 2
-		-- ration 0.048 means cost 1 : 1.1
-		local absolute_diff = math.abs(creep_cost - desired_cost)
-		local ratio = absolute_diff / (creep_cost + desired_cost)
-		local diff = ratio + absolute_diff * 0.048 / 3 -- 10% diff is the same as 3gold diff
-	-- print("creep type is: " .. creep_type .. " (" .. creep_cost .. "), diff: " .. diff .. ", desired_closeness: " .. desired_closeness)
-	until diff < desired_closeness
-	local u = wesnoth.create_unit { type = creep_type, upkeep = 0 }
+	local unit
+	local iterations = 0
+	if desired_cost < 50 then
+		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 1000
+		local closeness_step = 1 / 1500 -- widen acceptable range over time
+		repeat
+			iterations = iterations + 1
+			desired_closeness = desired_closeness + closeness_step
+			 creep_type = rand_creep()
+			local creep_cost = wesnoth.unit_types[creep_type].cost
+			-- ratio 0.3333 means cost 1 : 2
+			-- ration 0.048 means cost 1 : 1.1
+			local absolute_diff = math.abs(creep_cost - desired_cost)
+			local ratio = absolute_diff / (creep_cost + desired_cost)
+			local diff = ratio + absolute_diff * 0.048 / 3 -- 10% diff is the same as 3gold diff
+		-- print("creep type is: " .. creep_type .. " (" .. creep_cost .. "), diff: " .. diff .. ", desired_closeness: " .. desired_closeness)
+		until diff < desired_closeness
+		unit = wesnoth.create_unit { type = creep_type, upkeep = 0 }
+	else
+		repeat
+			iterations = iterations + 1
+			creep_type = rand_creep()
+		until wesnoth.unit_types[creep_type].level >= 3
+		unit = wesnoth.create_unit { type = creep_type, upkeep = 0 }
+	end
 
-	local boost = math.floor((desired_cost - u.__cfg.cost) / 9)
+	local boost = math.floor((desired_cost - unit.__cfg.cost) / 9)
 	if boost > 0 then
-		wesnoth.add_modification(u, "object", {
+		wesnoth.add_modification(unit, "object", {
 			{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
 			{ "effect", { apply_to = "attack", increase_attacks = boost } },
 			{ "effect", { apply_to = "movement", increase = boost } },
 		})
 	end
-	wesnoth.add_modification(u, "object", { { "effect", { apply_to = "zoc", value = false } } })
+	wesnoth.add_modification(unit, "object", { { "effect", { apply_to = "zoc", value = false } } })
 
 	print("Good unit for cost " .. math.floor(desired_cost + 0.5) ..
-		" is " .. u.__cfg.cost ..
-		"g:\"" .. creep_type ..
-		"\", boost: " .. boost .. ". Iterations spent: " .. iterations)
-	return u
+		" is " .. unit.__cfg.cost ..
+		"g '" .. creep_type ..
+		"', boost: " .. boost .. ". Iterations spent: " .. iterations)
+	return unit
 end
 
 

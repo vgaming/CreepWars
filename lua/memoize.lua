@@ -2,7 +2,7 @@
 local wesnoth = wesnoth
 local isWesnoth13 = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.0")
 
-wesnoth.message("Development Creep Wars", "Changelog: 1. Add more creep types 2. Increase creep strength. 3. Decreased lvl3+ boosting decreased, added visual ability.")
+wesnoth.message("Development Creep Wars", "Changelog: 1. Add more creep types 2. Increase creep strength. 3. Add visual indication for lvl3+ units. 4. Leader is auto-selected at turn start.")
 wesnoth.message("Development Creep Wars", "Please write feedback & ideas you have.")
 
 --local human_side_set = {}
@@ -32,12 +32,12 @@ end
 local starting_positions = {}
 do
 	local best_unit_for_side = {}
-	for _, v in ipairs(wesnoth.get_units { canrecruit = true }) do
-		local previous = best_unit_for_side[v.side]
-		if not (previous and previous.__cfg.level >= v.__cfg.level and previous.__cfg.cost >= v.__cfg.cost) then
-			best_unit_for_side[v.side] = v
-			print("Starting position for side " .. v.side .. " is " .. v.x .. "," .. v.y)
-			starting_positions[v.side] = { x = v.x, y = v.y }
+	for _, u in ipairs(wesnoth.get_units { canrecruit = true }) do
+		local previous = best_unit_for_side[u.side]
+		if not (previous and #previous.extra_recruit >= #u.extra_recruit) then
+			best_unit_for_side[u.side] = u
+			print("Starting position for side " .. u.side .. " is " .. u.x .. "," .. u.y)
+			starting_positions[u.side] = { x = u.x, y = u.y }
 		end
 	end
 	-- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:

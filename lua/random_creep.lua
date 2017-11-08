@@ -137,12 +137,17 @@ local function generate(desired_cost)
 	end
 
 	unit = wesnoth.create_unit { type = creep_type }
-	local boost = math.max(math.floor((desired_cost - unit.__cfg.cost) / 8), 0)
-	wesnoth.add_modification(unit, "object", {
-		{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
-		{ "effect", { apply_to = "attack", increase_attacks = boost } },
-		{ "effect", { apply_to = "movement", increase = boost } },
-	})
+	local boost = math.floor((desired_cost - unit.__cfg.cost) / 14)
+
+	if boost > 0 then
+		local ability = { "dummy", { name = "boost +" .. boost, id = "boost" .. boost } }
+		wesnoth.add_modification(unit, "object", {
+			{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
+			{ "effect", { apply_to = "attack", increase_attacks = boost } },
+			{ "effect", { apply_to = "movement", increase = boost } },
+			{ "effect", { apply_to = "new_ability", { "abilities", { ability } } } },
+		})
+	end
 	wesnoth.add_modification(unit, "object", {
 		{ "effect", { apply_to = "zoc", value = false } },
 		{ "effect", { apply_to = "loyal" } },

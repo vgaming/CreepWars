@@ -2,7 +2,7 @@
 local wesnoth = wesnoth
 local isWesnoth13 = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.0")
 
-wesnoth.message("Development Creep Wars", "Changelog: 1. Add more creep types 2. Increase creep strength.")
+wesnoth.message("Development Creep Wars", "Changelog: 1. Add more creep types 2. Increase creep strength. 3. lvl3+ boosting decreased 4. Visual ability added for lvl3+ boost.")
 wesnoth.message("Development Creep Wars", "Please write feedback & ideas you have.")
 
 --local human_side_set = {}

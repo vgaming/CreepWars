@@ -101,7 +101,7 @@ do
 	creep_set = nil
 end
 table.sort(creep_array)
-local creep_rand_string = "1.." .. #creep_array
+local creep_rand_string = "1.." .. #creep_array  -- 1..154
 
 
 local function generate(desired_cost)
@@ -113,10 +113,11 @@ local function generate(desired_cost)
 		repeat
 			iterations = iterations + 1
 			creep_type = rand_creep()
-		until wesnoth.unit_types[creep_type].level == 0 -- find any lvl0
+			local u = wesnoth.unit_types[creep_type]
+		until u.level == 0 and u.__cfg.cost < 12
 	elseif desired_cost < 50 then
 		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 200
-		local closeness_step = 1 / 300 -- widen acceptable range over time
+		local closeness_step = 1 / #creep_array / 5 -- widen acceptable range over time
 		repeat
 			iterations = iterations + 1
 			desired_closeness = desired_closeness + closeness_step
@@ -127,7 +128,6 @@ local function generate(desired_cost)
 			-- cost 1 : 1.1 => ratio 0.1/2.1 = 0.047619
 			local ratio = math.abs(creep_cost - desired_cost) / (creep_cost + desired_cost)
 			local diff = math.min(absolute_diff / 3, ratio / 0.047619) -- 3 gold diff or 10% diff
-		-- print("creep type is: " .. creep_type .. " (" .. creep_cost .. "), diff: " .. diff .. ", desired_closeness: " .. desired_closeness)
 		until diff < desired_closeness
 	else
 		repeat
@@ -137,23 +137,21 @@ local function generate(desired_cost)
 	end
 
 	unit = wesnoth.create_unit { type = creep_type }
-	local boost = math.floor((desired_cost - unit.__cfg.cost) / 9)
-	if boost > 0 then
-		wesnoth.add_modification(unit, "object", {
-			{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
-			{ "effect", { apply_to = "attack", increase_attacks = boost } },
-			{ "effect", { apply_to = "movement", increase = boost } },
-		})
-	end
+	local boost = math.max(math.floor((desired_cost - unit.__cfg.cost) / 8), 0)
+	wesnoth.add_modification(unit, "object", {
+		{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
+		{ "effect", { apply_to = "attack", increase_attacks = boost } },
+		{ "effect", { apply_to = "movement", increase = boost } },
+	})
 	wesnoth.add_modification(unit, "object", {
 		{ "effect", { apply_to = "zoc", value = false } },
 		{ "effect", { apply_to = "loyal" } },
 	})
 
-	print("Good unit for cost " .. math.floor(desired_cost + 0.5) ..
-		" is " .. unit.__cfg.cost ..
-		"g '" .. creep_type ..
-		"', boost: " .. boost .. ". Iterations spent: " .. iterations)
+	print("Good unit for cost " .. math.floor(desired_cost + 0.5) .. " is " ..
+		unit.__cfg.cost .. "gold " ..
+		"lvl" .. unit.level .. " " ..
+		"'" .. creep_type .. "', boost: " .. boost .. ". Iterations spent: " .. iterations)
 	return unit
 end
 

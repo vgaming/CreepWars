@@ -109,30 +109,34 @@ local function generate(desired_cost)
 	local creep_type
 	local unit
 	local iterations = 0
-	if desired_cost < 50 then
-		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 1000
-		local closeness_step = 1 / 1500 -- widen acceptable range over time
+	if desired_cost < 12 then
+		repeat
+			iterations = iterations + 1
+			creep_type = rand_creep()
+		until wesnoth.unit_types[creep_type].level == 0 -- find any lvl0
+	elseif desired_cost < 50 then
+		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 200
+		local closeness_step = 1 / 300 -- widen acceptable range over time
 		repeat
 			iterations = iterations + 1
 			desired_closeness = desired_closeness + closeness_step
-			 creep_type = rand_creep()
+			creep_type = rand_creep()
 			local creep_cost = wesnoth.unit_types[creep_type].cost
-			-- ratio 0.3333 means cost 1 : 2
-			-- ration 0.048 means cost 1 : 1.1
 			local absolute_diff = math.abs(creep_cost - desired_cost)
-			local ratio = absolute_diff / (creep_cost + desired_cost)
-			local diff = ratio + absolute_diff * 0.048 / 3 -- 10% diff is the same as 3gold diff
+			-- cost 1 : 2  => ratio 1/3 = 0.3333
+			-- cost 1 : 1.1 => ratio 0.1/2.1 = 0.047619
+			local ratio = math.abs(creep_cost - desired_cost) / (creep_cost + desired_cost)
+			local diff = math.min(absolute_diff / 3, ratio / 0.047619) -- 3 gold diff or 10% diff
 		-- print("creep type is: " .. creep_type .. " (" .. creep_cost .. "), diff: " .. diff .. ", desired_closeness: " .. desired_closeness)
 		until diff < desired_closeness
-		unit = wesnoth.create_unit { type = creep_type, upkeep = 0 }
 	else
 		repeat
 			iterations = iterations + 1
 			creep_type = rand_creep()
 		until wesnoth.unit_types[creep_type].level >= 3
-		unit = wesnoth.create_unit { type = creep_type, upkeep = 0 }
 	end
 
+	unit = wesnoth.create_unit { type = creep_type }
 	local boost = math.floor((desired_cost - unit.__cfg.cost) / 9)
 	if boost > 0 then
 		wesnoth.add_modification(unit, "object", {
@@ -141,7 +145,10 @@ local function generate(desired_cost)
 			{ "effect", { apply_to = "movement", increase = boost } },
 		})
 	end
-	wesnoth.add_modification(unit, "object", { { "effect", { apply_to = "zoc", value = false } } })
+	wesnoth.add_modification(unit, "object", {
+		{ "effect", { apply_to = "zoc", value = false } },
+		{ "effect", { apply_to = "loyal" } },
+	})
 
 	print("Good unit for cost " .. math.floor(desired_cost + 0.5) ..
 		" is " .. unit.__cfg.cost ..

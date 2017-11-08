@@ -1,4 +1,5 @@
--- << do_creep_respawn.lua  wesnoth preprocessor escape characters
+-- << select_leader.lua
+
 local wesnoth = wesnoth
 local memoize_ai_side_set = creepwars_memoize_ai_side_set
 

@@ -1,4 +1,5 @@
--- << memoize.lua  wesnoth preprocessor escape characters
+-- << memoize.lua
+
 local wesnoth = wesnoth
 local isWesnoth13 = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.0")
 

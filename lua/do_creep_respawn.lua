@@ -1,4 +1,5 @@
--- << do_creep_respawn.lua  wesnoth preprocessor escape characters
+-- << do_creep_respawn.lua
+
 local wesnoth = wesnoth
 local gen_creep = creepwars_generate_creep
 local memoize_ai_side_set = creepwars_memoize_ai_side_set
@@ -9,7 +10,6 @@ local side_number = wesnoth.get_variable("side_number")
 if memoize_ai_side_set[side_number] then
 
 	local kills = wesnoth.get_variable("cw_score.kills." .. wesnoth.sides[side_number].team_name)
-	--local helper = wesnoth.require "lua/helper.lua"
 
 	local creeps_max = 10
 	local creeps_count_before = #wesnoth.get_units { side = side_number } -- wesnoth-1.13+ wesnoth.sides[side].num_units
@@ -26,4 +26,5 @@ if memoize_ai_side_set[side_number] then
 		wesnoth.put_unit(x, y, unit)
 	end
 end
+
 -- >>

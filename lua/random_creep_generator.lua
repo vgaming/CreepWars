@@ -1,4 +1,4 @@
--- << random_creep.lua
+-- << random_creep_generator.lua
 
 -- This file provides function to generate Creeps with expected cost.
 -- See end of file for the function itself, `creepwars_generate_creep`

@@ -114,7 +114,7 @@ local function generate(desired_cost)
 			iterations = iterations + 1
 			creep_type = rand_creep()
 			local u = wesnoth.unit_types[creep_type]
-		until u.level == 0 and u.__cfg.cost < 12
+		until u.__cfg.level == 0 and u.__cfg.cost < 12
 	elseif desired_cost < 50 then
 		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 200
 		local closeness_step = 1 / #creep_array / 5 -- widen acceptable range over time
@@ -150,7 +150,7 @@ local function generate(desired_cost)
 
 	print("Good unit for cost " .. math.floor(desired_cost + 0.5) .. " is " ..
 		unit.__cfg.cost .. "gold " ..
-		"lvl" .. unit.level .. " " ..
+		"lvl" .. unit.__cfg.level .. " " ..
 		"'" .. creep_type .. "', boost: " .. boost .. ". Iterations spent: " .. iterations)
 	return unit
 end

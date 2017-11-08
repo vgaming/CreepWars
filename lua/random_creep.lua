@@ -140,7 +140,7 @@ local function generate(desired_cost)
 	local boost = math.floor((desired_cost - unit.__cfg.cost) / 14)
 
 	if boost > 0 then
-		local ability = { "dummy", { name = "boost +" .. boost, id = "boost" .. boost } }
+		local ability = { "dummy", { name = "boost +" .. boost } }
 		wesnoth.add_modification(unit, "object", {
 			{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
 			{ "effect", { apply_to = "attack", increase_attacks = boost } },

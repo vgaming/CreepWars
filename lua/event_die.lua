@@ -1,20 +1,20 @@
 -- << select_leader.lua
 
 local wesnoth = wesnoth
-local memoize_ai_side_set = creepwars_memoize_ai_side_set
+local creepwars_display_kills = creepwars_display_kills
+local creepwars_get_team_id = creepwars_get_team_id
 
-local side_number = wesnoth.get_variable("side_number")
-if memoize_ai_side_set[side_number] then
---	local x1 = wesnoth.get_variable("x1")
---	local y1 = wesnoth.get_variable("y1")
---	local x2 = wesnoth.get_variable("x2")
---	local y2 = wesnoth.get_variable("y2")
---	local defender = wesnoth.get_unit(x1, y1)
---	local attacker = wesnoth.get_unit(x2, y2)
---	print("die event occured " .. attacker.id .. " killed " .. defender.id)
-	-- AI
+local defender = wesnoth.get_unit(wesnoth.get_variable("x1"), wesnoth.get_variable("y1"))
+local attacker = wesnoth.get_unit(wesnoth.get_variable("x2"), wesnoth.get_variable("y2"))
+if attacker then
+	local team = creepwars_get_team_id[wesnoth.sides[attacker.side].team_name]
+	local kills_previous = wesnoth.get_variable("creepwars_kills_" .. team)
+	local kills_new = kills_previous + defender.__cfg.cost
+	wesnoth.set_variable("creepwars_kills_" .. team, kills_new)
+	creepwars_display_kills()
+	--print("die event occured " .. attacker.id .. " killed " .. defender.id)
 else
-	-- human
+	error("Unit died without attacker! This is bad! Maybe it's the latest guard kill that is untested?")
 end
 
 -- >>

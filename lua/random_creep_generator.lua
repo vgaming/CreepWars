@@ -140,7 +140,12 @@ local function generate(desired_cost)
 	local boost = math.floor((desired_cost - unit.__cfg.cost) / 14)
 
 	if boost > 0 then
-		local ability = { "dummy", { name = "boost +" .. boost } }
+		local ability = {
+			"dummy", {
+				name = "boost +" .. boost,
+				description = "damage +" .. boost * 2 .. " strikes +" .. boost .. " movement +" .. boost
+			}
+		}
 		wesnoth.add_modification(unit, "object", {
 			{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
 			{ "effect", { apply_to = "attack", increase_attacks = boost } },
@@ -161,6 +166,7 @@ local function generate(desired_cost)
 end
 
 
+creepwars_kills_to_cost = function(kills) return 7 + kills * 0.047 end
 creepwars_generate_creep = generate
 
 -- >>

@@ -3,9 +3,7 @@
 local wesnoth = wesnoth
 local creepwars_kills_to_cost = creepwars_kills_to_cost
 
-wesnoth.message("Creep Wars", "Changelog:")
-wesnoth.message("Creep Wars", "1. Game reload possible! Finally. Creep score is preserved.")
-wesnoth.message("Creep Wars", "2. Leader is auto-selected at turn start. 3. Add visual indication for lvl3+ units. 4. Increase creep strength. 5. Add more creep types.")
+wesnoth.message("Creep Wars", "Latest changes: 1. Game reload possible! 2. Add more creep types. 3. Leader is auto-selected at turn start.")
 wesnoth.message("Creep Wars", "Addon name is 'Creep War Dev'. Please write feedback & ideas you have.:)")
 
 --local isWesnoth13 = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.0")

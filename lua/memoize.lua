@@ -39,8 +39,15 @@ for _, team_id in pairs(team_name_to_team_id) do
 end
 
 
+local ugly_y_pos
+if wesnoth.get_terrain(18, 5) == "Qxua^Xo" then
+	ugly_y_pos = 5
+else
+	ugly_y_pos = 10
+end
+
 local display_kills
-wesnoth.wml_actions.label { x = 18, y = 4, text = "Creep strength:", color = "255,230,128" }
+wesnoth.wml_actions.label { x = 18, y = ugly_y_pos - 1, text = "Creep strength:", color = "255,230,128" }
 do
 	local label_positions = {}
 	label_positions[side_to_team[1]] = {x = 17, y = 5 } -- UGLY inline HACK
@@ -52,7 +59,7 @@ do
 			local cost = creepwars_kills_to_cost(kills)
 			wesnoth.wml_actions.label {
 				x = pos.x,
-				y = pos.y,
+				y = ugly_y_pos,
 				text = math.floor(cost * 100) / 100,
 				color = "255,230,128"
 			}
@@ -63,7 +70,7 @@ display_kills()
 
 
 local display_gold
-wesnoth.wml_actions.label { x = 18, y = 5, text = "Leader gold:", color = "255,128,128" }
+wesnoth.wml_actions.label { x = 18, y = ugly_y_pos, text = "Leader gold:", color = "255,128,128" }
 do
 	local label_positions = {}
 	label_positions[side_to_team[1]] = {x = 17, y = 6 } -- UGLY inline HACK
@@ -71,7 +78,7 @@ do
 	display_gold = function()
 		for team, pos in pairs(label_positions) do
 			local gold = wesnoth.get_variable("creepwars_gold_" .. team)
-			wesnoth.wml_actions.label { x = pos.x, y = pos.y, text = gold, color = "255,128,128" }
+			wesnoth.wml_actions.label { x = pos.x, y = ugly_y_pos + 1, text = gold, color = "255,128,128" }
 		end
 	end
 end

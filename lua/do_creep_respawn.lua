@@ -5,13 +5,13 @@ local gen_creep = creepwars_generate_creep
 local memoize_ai_side_set = creepwars_memoize_ai_side_set
 local memoize_starting_positions = creepwars_memoize_starting_positions
 local creepwars_kills_to_cost = creepwars_kills_to_cost
-local creepwars_get_team_id = creepwars_get_team_id
+local creepwars_side_to_team = creepwars_side_to_team
 
 local side_number = wesnoth.get_variable("side_number")
 
 if memoize_ai_side_set[side_number] and not wesnoth.sides[side_number].lost then
 
-	local team = creepwars_get_team_id[wesnoth.sides[side_number].team_name]
+	local team = creepwars_side_to_team[side_number]
 	local kills = wesnoth.get_variable("creepwars_kills_" .. team)
 
 	local creeps_max = 10

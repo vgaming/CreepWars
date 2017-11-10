@@ -166,7 +166,7 @@ local function generate(desired_cost)
 end
 
 
-creepwars_kills_to_cost = function(kills) return 7 + kills * 0.047 end
+creepwars_kills_to_cost = function(kills) return 9 + kills * 0.057 end
 creepwars_generate_creep = generate
 
 -- >>

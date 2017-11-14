@@ -60,7 +60,7 @@ do
 			wesnoth.wml_actions.label {
 				x = pos.x,
 				y = ugly_y_pos,
-				text = math.floor(cost * 100) / 100,
+				text = math.ceil(cost * 100) / 100,
 				color = "255,230,128"
 			}
 		end
@@ -85,12 +85,17 @@ end
 display_gold()
 
 
-local function creep_kill_event(attacker_side, defender)
-	local team = side_to_team[attacker_side]
+local function creep_kill_event(attacker, defender)
+	local team = side_to_team[attacker.side]
 
 	do -- kills
 		local kills_previous = wesnoth.get_variable("creepwars_kills_" .. team)
-		local kills_new = kills_previous + math.pow(defender.__cfg.cost, 0.6)
+		local strength_previous = math.ceil(creepwars_kills_to_cost(kills_previous) * 100) / 100
+		local kill_bonus = math.pow(defender.__cfg.cost, 0.6)
+		local kills_new = kills_previous + kill_bonus
+		local strength_new = math.ceil(creepwars_kills_to_cost(kills_new) * 100) / 100
+		local strength_diff = strength_new - strength_previous
+		wesnoth.float_label(attacker.x, attacker.y, "<span color='#FFE680'>" .. strength_diff .. "</span>" )
 		wesnoth.set_variable("creepwars_kills_" .. team, kills_new)
 	end
 

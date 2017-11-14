@@ -102,10 +102,17 @@ local function creep_kill_event(attacker_side, defender)
 			give_gold = 3
 		end
 
+		local give_guard_hitpoints = math.ceil(give_gold / 3)
 		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do -- guard
 			if side_to_team[unit.side] == team and unit.max_moves == 0 then
 				wesnoth.add_modification(unit, "object", {
-					{ "effect", { apply_to = "hitpoints", increase_total = give_gold, increase = give_gold } },
+					{
+						"effect", {
+						apply_to = "hitpoints",
+						increase_total = give_guard_hitpoints,
+						increase = give_guard_hitpoints
+					}
+					},
 				})
 			end
 		end

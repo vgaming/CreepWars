@@ -92,6 +92,7 @@ local function creep_kill_event(attacker, defender)
 		local kills_previous = wesnoth.get_variable("creepwars_kills_" .. team)
 		local strength_previous = math.ceil(creepwars_kills_to_cost(kills_previous) * 100) / 100
 		local kill_bonus = math.pow(defender.__cfg.cost, 0.6)
+		if defender.canrecruit then kill_bonus = kill_bonus * 2 end
 		local kills_new = kills_previous + kill_bonus
 		local strength_new = math.ceil(creepwars_kills_to_cost(kills_new) * 100) / 100
 		local strength_diff = strength_new - strength_previous
@@ -101,11 +102,7 @@ local function creep_kill_event(attacker, defender)
 
 	do -- gold
 		local give_gold
-		if defender.canrecruit then
-			give_gold = 23
-		else
-			give_gold = 3
-		end
+		if defender.canrecruit then give_gold = 23 else give_gold = 3 end
 
 		local give_guard_hitpoints = math.ceil(give_gold / 3)
 		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do -- guard

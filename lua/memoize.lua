@@ -1,7 +1,7 @@
 -- << memoize.lua
 
 local wesnoth = wesnoth
-local creepwars_kills_to_cost = creepwars_kills_to_cost
+local creepwars_score_for_kill = creepwars_score_for_kill
 
 wesnoth.message("Creep Wars", "Latest changes: 1. Game reload possible! Finally. 2. Add more creep types. 3. Leader is auto-selected at turn start.")
 wesnoth.message("Creep Wars", "Addon name is 'Creep War Dev'. Please write feedback & ideas you have.:)")
@@ -27,11 +27,11 @@ end
 
 
 for _, team_id in pairs(team_name_to_team_id) do
-	local kills = wesnoth.get_variable("creepwars_kills_" .. team_id)
+	local kills = wesnoth.get_variable("creepwars_creep_score_" .. team_id)
 	local gold = wesnoth.get_variable("creepwars_gold_" .. team_id)
 	print("loading/creating team " .. team_id .. ", kills: " .. (kills or "nil") .. ", gold: " .. (gold or "nil"))
 	if not kills then
-		wesnoth.set_variable("creepwars_kills_" .. team_id, 0)
+		wesnoth.set_variable("creepwars_creep_score_" .. team_id, creepwars_score_start)
 	end
 	if not gold then
 		wesnoth.set_variable("creepwars_gold_" .. team_id, 0)
@@ -50,17 +50,16 @@ local display_kills
 wesnoth.wml_actions.label { x = 18, y = ugly_y_pos - 1, text = "Creep strength:", color = "255,230,128" }
 do
 	local label_positions = {}
-	label_positions[side_to_team[1]] = {x = 17, y = 5 } -- UGLY inline HACK
-	label_positions[side_to_team[2]] = {x = 19, y = 5 } -- UGLY inline HACK
+	label_positions[side_to_team[1]] = { x = 17, y = 5 } -- UGLY inline HACK
+	label_positions[side_to_team[2]] = { x = 19, y = 5 } -- UGLY inline HACK
 
 	display_kills = function()
 		for team, pos in pairs(label_positions) do
-			local kills = wesnoth.get_variable("creepwars_kills_" .. team)
-			local cost = creepwars_kills_to_cost(kills)
+			local creep_score = wesnoth.get_variable("creepwars_creep_score_" .. team)
 			wesnoth.wml_actions.label {
 				x = pos.x,
 				y = ugly_y_pos,
-				text = math.ceil(cost * 100) / 100,
+				text = math.ceil(creep_score * 100) / 100,
 				color = "255,230,128"
 			}
 		end
@@ -73,8 +72,8 @@ local display_gold
 wesnoth.wml_actions.label { x = 18, y = ugly_y_pos, text = "Leader gold:", color = "255,128,128" }
 do
 	local label_positions = {}
-	label_positions[side_to_team[1]] = {x = 17, y = 6 } -- UGLY inline HACK
-	label_positions[side_to_team[2]] = {x = 19, y = 6 } -- UGLY inline HACK
+	label_positions[side_to_team[1]] = { x = 17, y = 6 } -- UGLY inline HACK
+	label_positions[side_to_team[2]] = { x = 19, y = 6 } -- UGLY inline HACK
 	display_gold = function()
 		for team, pos in pairs(label_positions) do
 			local gold = wesnoth.get_variable("creepwars_gold_" .. team)
@@ -89,15 +88,12 @@ local function creep_kill_event(attacker, defender)
 	local team = side_to_team[attacker.side]
 
 	do -- kills
-		local kills_previous = wesnoth.get_variable("creepwars_kills_" .. team)
-		local strength_previous = math.ceil(creepwars_kills_to_cost(kills_previous) * 100) / 100
-		local kill_bonus = math.pow(defender.__cfg.cost, 0.6)
-		if defender.canrecruit then kill_bonus = kill_bonus * 2 end
-		local kills_new = kills_previous + kill_bonus
-		local strength_new = math.ceil(creepwars_kills_to_cost(kills_new) * 100) / 100
-		local strength_diff = strength_new - strength_previous
-		wesnoth.float_label(attacker.x, attacker.y, "<span color='#FFE680'>" .. strength_diff .. "</span>" )
-		wesnoth.set_variable("creepwars_kills_" .. team, kills_new)
+		local score_previous = wesnoth.get_variable("creepwars_creep_score_" .. team)
+		local score_add = creepwars_score_for_kill(defender)
+		if defender.canrecruit then score_add = score_add * 2 end
+		local score_new = score_previous + score_add
+		wesnoth.float_label(attacker.x, attacker.y, "<span color='#FFE680'>" .. score_add .. "</span>")
+		wesnoth.set_variable("creepwars_creep_score_" .. team, score_new)
 	end
 
 	do -- gold
@@ -145,8 +141,8 @@ do
 		end
 	end
 	-- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:
-	starting_positions[4] = {x = 32, y = 10}
-	starting_positions[8] = {x = 4, y = 10}
+	starting_positions[4] = { x = 32, y = 10 }
+	starting_positions[8] = { x = 4, y = 10 }
 	-- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 end
 

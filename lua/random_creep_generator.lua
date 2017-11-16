@@ -35,14 +35,12 @@ if next(creep_set) == nil then
 		if wesnoth.unit_types[v] == nil then error("Unit name typo: " .. v) end -- check typos
 	end
 else
-	-- add lvl 0 creeps (downgrades)
+	-- add downgrades
 	--[[ poor performance
 	for unit_name, _ in pairs(wesnoth.unit_types) do
-		if wesnoth.unit_types[unit_name].level == 0 then
-			for _, adv in pairs(split_comma(wesnoth.unit_types[unit_name].__cfg.advances_to)) do
-				if creep_set[adv] then
-					creep_set[unit_name] = true
-				end
+		for _, adv in pairs(split_comma(wesnoth.unit_types[unit_name].__cfg.advances_to)) do
+			if creep_set[adv] then
+				creep_set[unit_name] = true
 			end
 		end
 	end
@@ -109,13 +107,13 @@ local function generate(desired_cost)
 	local creep_type
 	local unit
 	local iterations = 0
-	if desired_cost < 12 then
+	if desired_cost < creepwars_lvl0_barrier then
 		repeat
 			iterations = iterations + 1
 			creep_type = rand_creep()
 			local u = wesnoth.unit_types[creep_type]
 		until u.__cfg.level == 0 and u.__cfg.cost < 12
-	elseif desired_cost < 50 then
+	elseif desired_cost < creepwars_lvl3plus_barrier then
 		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 200
 		local closeness_step = 1 / #creep_array / 5 -- widen acceptable range over time
 		repeat
@@ -166,7 +164,7 @@ local function generate(desired_cost)
 end
 
 
-creepwars_kills_to_cost = function(kills) return 9 + kills * 0.057 end
 creepwars_generate_creep = generate
+
 
 -- >>

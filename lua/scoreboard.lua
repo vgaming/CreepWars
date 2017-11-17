@@ -2,6 +2,7 @@
 
 local wesnoth = wesnoth
 local creepwars_side_to_team = creepwars_side_to_team
+local creepwars_score_for_kill = creepwars_score_for_kill
 
 local ugly_y_pos
 if wesnoth.get_terrain(18, 5) == "Qxua^Xo" then
@@ -10,14 +11,14 @@ else
 	ugly_y_pos = 10
 end
 
-local display_kills
+local display_creep_score
 wesnoth.wml_actions.label { x = 18, y = ugly_y_pos - 1, text = "Creep strength:", color = "255,230,128" }
 do
 	local label_positions = {}
 	label_positions[creepwars_side_to_team[1]] = { x = 17, y = 5 } -- UGLY inline HACK
 	label_positions[creepwars_side_to_team[2]] = { x = 19, y = 5 } -- UGLY inline HACK
 
-	display_kills = function()
+	display_creep_score = function()
 		for team, pos in pairs(label_positions) do
 			local creep_score = wesnoth.get_variable("creepwars_creep_score_" .. team)
 			wesnoth.wml_actions.label {
@@ -29,7 +30,7 @@ do
 		end
 	end
 end
-display_kills()
+display_creep_score()
 
 
 local display_gold
@@ -51,7 +52,7 @@ display_gold()
 local function creep_kill_event(attacker, defender)
 	local team = creepwars_side_to_team[attacker.side]
 
-	do -- kills
+	do -- creep score
 		local score_previous = wesnoth.get_variable("creepwars_creep_score_" .. team)
 		local score_add = creepwars_score_for_kill(defender)
 		if defender.canrecruit then score_add = score_add * 2 end
@@ -89,7 +90,7 @@ local function creep_kill_event(attacker, defender)
 		end
 	end
 
-	display_kills()
+	display_creep_score()
 	display_gold()
 end
 

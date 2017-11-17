@@ -27,10 +27,10 @@ end
 
 
 for _, team_id in pairs(team_name_to_team_id) do
-	local kills = wesnoth.get_variable("creepwars_creep_score_" .. team_id)
+	local score = wesnoth.get_variable("creepwars_creep_score_" .. team_id)
 	local gold = wesnoth.get_variable("creepwars_gold_" .. team_id)
-	print("loading/creating team " .. team_id .. ", kills: " .. (kills or "nil") .. ", gold: " .. (gold or "nil"))
-	if not kills then
+	print("loading/creating team " .. team_id .. ", creep score: " .. (score or "nil") .. ", gold: " .. (gold or "nil"))
+	if not score then
 		wesnoth.set_variable("creepwars_creep_score_" .. team_id, creepwars_score_start)
 	end
 	if not gold then

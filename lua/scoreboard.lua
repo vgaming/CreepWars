@@ -5,11 +5,7 @@ local creepwars_side_to_team = creepwars_side_to_team
 local creepwars_score_for_kill = creepwars_score_for_kill
 
 
-wesnoth.message("Creep Wars", "Recent changes:")
-wesnoth.message("Creep Wars", "1. Game reload possible. Finally!")
-wesnoth.message("Creep Wars", "2. Creep spawning changed. More creep types will appear.")
---wesnoth.message("Creep Wars", "2. Creep spawning changed. See game objectives (Ctrl J) for details.")
-wesnoth.message("Creep Wars", "3. Your Leader is auto-selected at turn start")
+wesnoth.message("Creep Wars", "Recent changes: creep kill gives 5g + 2g*lvl, leader kill gives 2x gold, grown-up leader (lvl2+) gives x3 gold.")
 wesnoth.message("Creep Wars", "Addon name is 'Creep War Dev'. Please write feedback & ideas you have.:)")
 --wesnoth.message("Creep Wars", "Please read Scenario Objectives (ctrj+j) for more details!")
 

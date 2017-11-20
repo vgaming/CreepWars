@@ -23,6 +23,7 @@ do
 		wesnoth.set_variable("creepwars_ai_sides", set_concat(ai_sides, ","))
 	end
 end
+print("AI sides: " .. wesnoth.get_variable("creepwars_ai_sides"))
 
 
 local team_name_to_team_id = {}

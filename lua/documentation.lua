@@ -15,7 +15,7 @@ note, _ = string.gsub(note, "#creepwars_lvl3plus_barrier", creepwars_lvl3plus_ba
 wesnoth.set_variable("creepwars_objectives_note", note)
 
 
-wesnoth.message("Creep Wars", "Recent changes: more gold for creep kills, creep strength scaling +20%. Please read Scenario Objectives (ctrj+j) for more details.")
+wesnoth.message("Creep Wars", "Recent changes: gold bonus re-designed, creep strength scaling +20%. Please read Scenario Objectives ( Ctrj+J ) !")
 
 --do
 --	--wesnoth.wml_actions.label { x = 18, y = 3, text = "Game rules are explained in 'objectives' (Ctrl J)", color = "0,0,255" }

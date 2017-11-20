@@ -9,5 +9,14 @@ creepwars_score_start = 9
 
 creepwars_score_for_kill = function(unit) return math.pow(unit.__cfg.cost, 0.6) * creepwars_score_scale end
 
+creepwars_gold_per_kill = function(unit)
+	if unit.canrecruit then
+		return 20 + unit.__cfg.level * 5
+	elseif unit.variables["creepwars_creep"] == true then
+		return 5 + unit.__cfg.level * 2
+	else
+		return 0
+	end
+end
 
 -- >>

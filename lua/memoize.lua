@@ -2,18 +2,27 @@
 
 local wesnoth = wesnoth
 local creepwars_score_for_kill = creepwars_score_for_kill
-
-wesnoth.message("Creep Wars", "Latest changes: 1. Game reload possible! Finally. 2. Add more creep types. 3. Leader is auto-selected at turn start.")
-wesnoth.message("Creep Wars", "Addon name is 'Creep War Dev'. Please write feedback & ideas you have.:)")
+local split_comma = creepwars_split_comma
+local set_concat = creepwars_set_concat
 
 
 local ai_sides = {}
-for _, side in ipairs(wesnoth.sides) do
-	if side.controller == "ai" or side.controller == "network_ai" then
-		ai_sides[side.side] = true
+do
+	local var = wesnoth.get_variable("creepwars_ai_sides")
+	if var ~= nil then
+		for _, v in ipairs(split_comma(var)) do
+			ai_sides[v] = true
+		end
+	else
+		for _, side in ipairs(wesnoth.sides) do
+			if side.controller == "ai" or side.controller == "network_ai" then
+				ai_sides[side.side] = true
+			end
+		end
+		ai_sides = { [4] = true, [8] = true }
+		wesnoth.set_variable("creepwars_ai_sides", set_concat(ai_sides, ","))
 	end
 end
-ai_sides = { [4] = true, [8] = true }
 
 
 local team_name_to_team_id = {}

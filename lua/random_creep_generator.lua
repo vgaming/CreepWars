@@ -5,6 +5,7 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
+local split_comma = creepwars_split_comma
 
 local creep_set = {}
 --wesnoth-1.13:
@@ -49,18 +50,6 @@ else
 end
 
 
--- helper
-local function split_comma(str)
-	local result = {}
-	local n = 1
-	for s in string.gmatch(str, "[^,]+") do
-		result[n] = s
-		n = n + 1
-	end
-	return result
-end
-
-
 local function add_advances_recursive(creep_name)
 	local advances_string = wesnoth.unit_types[creep_name].__cfg.advances_to
 	if advances_string ~= "null" and advances_string ~= creep_name then
@@ -85,8 +74,6 @@ do -- add advances
 		add_advances_recursive(creep_name)
 	end
 end
-if not creep_set["Highwayman"] then error("Highwayman not found") end
-if not creep_set["Cavalier"] then error("Cavalier not found") end
 
 
 local creep_array = {}
@@ -155,6 +142,7 @@ local function generate(desired_cost)
 		{ "effect", { apply_to = "zoc", value = false } },
 		{ "effect", { apply_to = "loyal" } },
 	})
+	unit.variables["creepwars_creep"] = true
 
 	print("Good unit for cost " .. math.floor(desired_cost + 0.5) .. " is " ..
 		unit.__cfg.cost .. "gold " ..

@@ -1,0 +1,40 @@
+<span size='large'>Upgrade your leader and fight for victory.</span>
+
+<span size='large'>Get started</span>
+Go to Shop, upgrade your unit (it is advised to spend at least 50 gold on Hitpoints for beginners).
+After you've upgraded your hero, move to the center and fight.
+
+Each kill will increase <b>gold</b> and <b>creep strength</b> for your team.
+Human leaders cannot fully die, but if they get 'killed', they are teloperted home and spend 1 turn to restore.
+Killing enemy leaders is usually hard, but more rewarding (more on that below).
+
+To win the game, you must kill one of the enemy guards.
+
+<span size='large'>Gold</span>
+Each kill gives you <b>3 + 2*lvl</b> gold:
+lvl0	lvl1	lvl2	lvl3	lvl4
+3	5	7	9	11	gold you get for creep kill, depending on its level
+If you kill enemy leader, you get as much gold as your current <b>creep score</b> (rounded down).
+
+<span size='large'>Creep generation</span>
+Each team generates <b>8</b> creeps at the beginning of AI turn.
+If your <b>creep score</b> is below <b>#creepwars_lvl0_barrier</b>, only lvl0 units will be generated (randomly).
+If your <b>creep score</b> is <b>#creepwars_lvl0_barrier..#creepwars_lvl3plus_barrier</b>, you get units that cost as much as your <b>creep score</b>.
+If your <b>creep score</b> is <b>#creepwars_lvl3plus_barrier+</b>, a random lvl3 creep will be generated. If your <b>creep score</b> is more than 12.0 above this unit-s cost, the creep will be 'boosted' (+2 dmg, +1 strikes, +1 MP).
+
+<span size='large'>Creep score</span>
+Each kill gives your team some <b>creep score</b>. You can see the amount by hovering a unit (not implemented yet).
+Formula: <b>(creep_cost ^ #creepwars_score_power) * #creepwars_score_scale</b>. Killing enemy leader gives <b>x2</b> of that amount.
+
+<span size='large'>Development warning</span>
+This is Development version, expect balancing breakage. Please report if you spot anything.
+
+<span size='large'>Latest changes</span>
+Features:
+1. Game reload possible! Finally. Creep score is preserved.
+2. Add more creep types.
+3. Leader is auto-selected at turn start.
+Balancing:
+* gold bonus for leader kill == your current creep score (2017-11-20)
+* creep kills give more gold (2017-11-20)
+* creep score scaling +20%. (2017-11-19)

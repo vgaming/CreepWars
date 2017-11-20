@@ -5,24 +5,6 @@ local creepwars_side_to_team = creepwars_side_to_team
 local creepwars_score_for_kill = creepwars_score_for_kill
 
 
-wesnoth.message("Creep Wars", "Recent changes: creep kill gives 5g + 2g*lvl, leader kill gives 2x gold, grown-up leader (lvl2+) gives x3 gold.")
-wesnoth.message("Creep Wars", "Addon name is 'Creep War Dev'. Please write feedback & ideas you have.:)")
---wesnoth.message("Creep Wars", "Please read Scenario Objectives (ctrj+j) for more details!")
-
---do
---	--wesnoth.wml_actions.label { x = 18, y = 3, text = "Game rules are explained in 'objectives' (Ctrl J)", color = "0,0,255" }
---	local print = { size = 50, duration = 200, text = "To see Game Rules, see objectives (Ctrl J)" }
---	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.0") then
---		print.color = "255,255,255"
---	else
---		print.red = 255
---		print.green = 255
---		print.blue = 255
---	end
---	wesnoth.wml_actions.print(print)
---end
-
-
 local ugly_y_pos
 if wesnoth.get_terrain(18, 5) == "Qxua^Xo" then
 	ugly_y_pos = 5
@@ -71,8 +53,8 @@ display_gold()
 local function creep_kill_event(attacker, defender)
 	local team = creepwars_side_to_team[attacker.side]
 
+	local score_previous = wesnoth.get_variable("creepwars_creep_score_" .. team)
 	do -- creep score
-		local score_previous = wesnoth.get_variable("creepwars_creep_score_" .. team)
 		local score_add = creepwars_score_for_kill(defender)
 		if defender.canrecruit then score_add = score_add * 2 end
 		local score_new = score_previous + score_add
@@ -82,7 +64,7 @@ local function creep_kill_event(attacker, defender)
 	end
 
 	do -- gold
-		local give_gold = creepwars_gold_per_kill(defender)
+		local give_gold = creepwars_gold_per_kill(score_previous, defender)
 		local give_guard_hitpoints = math.ceil(give_gold / 3)
 		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do -- guard
 			if creepwars_side_to_team[unit.side] == team and unit.max_moves == 0 then

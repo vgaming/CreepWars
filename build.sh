@@ -15,12 +15,14 @@ mkdir -p target
 echo -n "$version" > target/version.txt
 
 
+# strip out html tags and save
+description="$(sed -e 's/<[^>]*>//g' doc/objectives_note.html)"
 # update _server.pbl description
 sed -i '/email/,$!d' _server.pbl
 printf '%s%s\n"\n%s' '
 # THIS FILE IS EDITED by build.sh
 
 author="Vasya Novikov, Blitzmerker, piezocuttlefish"
-description="' "$(cat doc/objectives_note.html)" "$(cat _server.pbl)" > _server.pbl
+description="' "$description" "$(cat _server.pbl)" > _server.pbl
 
 }; exit 0

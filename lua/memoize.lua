@@ -11,14 +11,14 @@ do
 	local var = wesnoth.get_variable("creepwars_ai_sides")
 	if var ~= nil then
 		for _, v in ipairs(split_comma(var)) do
-			ai_sides[v] = true
+			ai_sides[tonumber(v)] = true
 		end
 	else
-		for _, side in ipairs(wesnoth.sides) do
-			if side.controller == "ai" or side.controller == "network_ai" then
-				ai_sides[side.side] = true
-			end
-		end
+		--for _, side in ipairs(wesnoth.sides) do
+		--	if side.controller == "ai" or side.controller == "network_ai" then
+		--		ai_sides[side.side] = true
+		--	end
+		--end
 		ai_sides = { [4] = true, [8] = true }
 		wesnoth.set_variable("creepwars_ai_sides", set_concat(ai_sides, ","))
 	end
@@ -56,7 +56,7 @@ do
 		local previous = best_unit_for_side[u.side]
 		if not (previous and #previous.extra_recruit >= #u.extra_recruit) then
 			best_unit_for_side[u.side] = u
-			print("Starting position for side " .. u.side .. " is " .. u.x .. "," .. u.y)
+			-- print("Starting position for side " .. u.side .. " is " .. u.x .. "," .. u.y)
 			starting_positions[u.side] = { x = u.x, y = u.y }
 		end
 	end

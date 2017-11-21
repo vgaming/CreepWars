@@ -8,6 +8,7 @@ local creepwars_gold_for_lvl0 = creepwars_gold_for_lvl0
 local creepwars_gold_per_creep_level = creepwars_gold_per_creep_level
 local creepwars_guard_hp_initial = creepwars_guard_hp_initial
 local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
+local creepwars_creep_count = creepwars_creep_count
 
 local note
 if wesnoth then
@@ -16,6 +17,7 @@ else
 	note = external_documentation_note
 end
 
+note, _ = string.gsub(note, "#creepwars_creep_count", creepwars_creep_count)
 note, _ = string.gsub(note, "#creepwars_score_scale", creepwars_score_scale)
 note, _ = string.gsub(note, "#creepwars_score_power", creepwars_score_power)
 note, _ = string.gsub(note, "#creepwars_lvl0_barrier", creepwars_lvl0_barrier)

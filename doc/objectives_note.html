@@ -15,7 +15,7 @@ lvl0	lvl1	lvl2	lvl3	lvl4
 If you kill enemy leader, you get gold equal to your current <b>creep score</b> (rounded down).
 
 <span size='large'>Creep generation</span>
-Each team generates <b>8</b> creeps at the beginning of AI turn.
+Each team generates <b>#creepwars_creep_count</b> creeps at the beginning of AI turn.
 If your <b>creep score</b> is below <b>#creepwars_lvl0_barrier</b>, only lvl0 units will be generated (randomly).
 If your <b>creep score</b> is <b>#creepwars_lvl0_barrier..#creepwars_lvl3plus_barrier</b>, you get units that cost as much as your <b>creep score</b>.
 If your <b>creep score</b> is <b>#creepwars_lvl3plus_barrier+</b>, random lvl3 creeps will be generated. If your <b>creep score</b> is ahead of this unit cost by more than 12.0, the creep will receive 'boost' (+2 dmg, +1 strikes, +1 MP).
@@ -32,11 +32,11 @@ It is permanently decreased when the guard is attacked (legacy feature, might be
 This is Development version, expect balancing breakage. Please report if you spot anything.
 
 <span size='large'>Latest changes</span>
-Features:
-1. Game reload possible! Finally. Creep score is preserved.
-2. Add more creep types.
-3. Leader is auto-selected at turn start.
 Balancing:
 * gold bonus for leader kill == your current creep score (2017-11-20)
 * creep kills give more gold (2017-11-20)
 * creep score scaling +20%. (2017-11-19)
+Features:
+1. Game reload possible! Finally. Creep score is preserved.
+2. Add more creep types.
+3. Leader is auto-selected at turn start.

@@ -3,6 +3,8 @@
 creepwars_lvl0_barrier = 12 -- creep score lower than this value will generate lvl0 creeps
 creepwars_lvl3plus_barrier = 50
 
+creepwars_creep_count = 8
+
 creepwars_guard_hp_initial = 50 -- cannot be changed, yet
 creepwars_guard_hp_for_kill = function(is_leader) if is_leader then return 3 else return 1 end end
 

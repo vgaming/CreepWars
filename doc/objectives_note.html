@@ -14,15 +14,14 @@ lvl0	lvl1	lvl2	lvl3	lvl4
 #lvl0g	#lvl1g	#lvl2g	#lvl3g	#lvl4g	gold you get for creep kill, depending on its level
 If you kill enemy leader, you get gold equal to your current <b>creep score</b> (rounded down).
 
-<span size='large'>Creep generation</span>
-Each team generates <b>#creepwars_creep_count</b> creeps at the beginning of AI turn.
-If your <b>creep score</b> is below <b>#creepwars_lvl0_barrier</b>, only lvl0 units will be generated (randomly).
-If your <b>creep score</b> is <b>#creepwars_lvl0_barrier..#creepwars_lvl3plus_barrier</b>, you get units that cost as much as your <b>creep score</b>.
-If your <b>creep score</b> is <b>#creepwars_lvl3plus_barrier+</b>, random lvl3 creeps will be generated. If your <b>creep score</b> is ahead of this unit cost by more than 12.0, the creep will receive 'boost' (+2 dmg, +1 strikes, +1 MP).
-
 <span size='large'>Creep score</span>
 Each kill gives your team some <b>creep score</b>. You can see the amount by hovering a unit (not implemented yet).
 Formula: <b>(creep_cost ^ #creepwars_score_power) * #creepwars_score_scale</b>. Killing enemy leader gives <b>x2</b> of that amount.
+
+<span size='large'>Creep generation</span>
+Each team always generates <b>#creepwars_creep_count</b> creeps at the beginning of AI turn.
+The cost of chosen creeps is equal to your <b>creep score</b>.
+However, if your <b>creep score</b> is below <b>#creepwars_lvl0_barrier</b>, then only lvl0 units will be generated, and if your <b>creep score</b> is above <b>#creepwars_lvl3plus_barrier+</b>, you get random lvl3+ unit. If your score is much higher than unit cost, the unit will have additional 'boost'.
 
 <span size='large'>Guard health</span>
 Your guard health starts with #creepwars_guard_hp_initial and increases by #guard_creep_hp when killing a creep and by #guard_leader_hp when killing enemy leader.

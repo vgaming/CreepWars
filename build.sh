@@ -15,6 +15,10 @@ mkdir -p target
 echo -n "$version" > target/version.txt
 
 
+# export git log
+#git log --date=short -10 --pretty='%ad %cn %d %s' > doc/git_changelog.txt
+
+
 # strip out html tags
 description="$(lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g')"
 # delete _server.pbl description

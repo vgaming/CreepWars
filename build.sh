@@ -20,7 +20,7 @@ description="$(lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g')"
 # delete _server.pbl description
 sed -i '/email/,$!d' _server.pbl
 # compose _server.pbl back
-printf '%s\n\n%s\n"\n%s' '
+printf '%s\n%s\n"\n%s' '
 # THIS FILE IS EDITED by build.sh
 
 author="Vasya Novikov, Blitzmerker, piezocuttlefish"

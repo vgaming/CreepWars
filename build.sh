@@ -15,14 +15,15 @@ mkdir -p target
 echo -n "$version" > target/version.txt
 
 
-# strip out html tags and save
-description="$(sed -e 's/<[^>]*>//g' doc/objectives_note.html)"
-# update _server.pbl description
+# strip out html tags
+description="$(lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g')"
+# delete _server.pbl description
 sed -i '/email/,$!d' _server.pbl
-printf '%s%s\n"\n%s' '
+# compose _server.pbl back
+printf '%s\n\n%s\n"\n%s' '
 # THIS FILE IS EDITED by build.sh
 
 author="Vasya Novikov, Blitzmerker, piezocuttlefish"
-description="' "$description" "$(cat _server.pbl)" > _server.pbl
+description="Upgrade your leader and fight for victory.' "$description" "$(cat _server.pbl)" > _server.pbl
 
 }; exit 0

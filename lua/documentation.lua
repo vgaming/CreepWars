@@ -37,23 +37,10 @@ note, _ = string.gsub(note, "#guard_leader_hp", creepwars_guard_hp_for_kill(true
 
 if wesnoth then
 	wesnoth.set_variable("creepwars_objectives_note", note)
-	wesnoth.message("Creep Wars", "Recent changes: gold bonus re-designed, creep strength scaling +20%. Please read Scenario Objectives ( Ctrj+J ) !")
+	wesnoth.message("Creep Wars", "Recent changes: gold bonus re-designed. Please read Scenario Objectives ( Ctrj+J ) !")
 else
 	external_documentation_note = note
 end
-
---do
---	--wesnoth.wml_actions.label { x = 18, y = 3, text = "Game rules are explained in 'objectives' (Ctrl J)", color = "0,0,255" }
---	local print = { size = 40, duration = 200, text = "To see Game Rules, see objectives (Ctrl J)" }
---	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.0") then
---		print.color = "255,255,255"
---	else
---		print.red = 255
---		print.green = 255
---		print.blue = 255
---	end
---	wesnoth.wml_actions.print(print)
---end
 
 
 -- >>

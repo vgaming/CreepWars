@@ -15,9 +15,10 @@ creepwars_score_for_kill = function(unit) return math.pow(unit.__cfg.cost, 0.6) 
 
 creepwars_gold_for_lvl0 = 3
 creepwars_gold_per_creep_level = 2
+creepwars_gold_for_leaderkill_max = 30
 creepwars_gold_for_kill = function(team_creep_score, unit)
 	if unit.canrecruit == true then
-		return math.floor(team_creep_score)
+		return math.min(math.floor(team_creep_score), creepwars_gold_for_leaderkill_max)
 	else
 		return creepwars_gold_for_lvl0 + unit.__cfg.level * creepwars_gold_per_creep_level
 	end

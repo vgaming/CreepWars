@@ -23,6 +23,10 @@ If your <b>creep score</b> is <b>#creepwars_lvl3plus_barrier+</b>, random lvl3 c
 Each kill gives your team some <b>creep score</b>. You can see the amount by hovering a unit (not implemented yet).
 Formula: <b>(creep_cost ^ #creepwars_score_power) * #creepwars_score_scale</b>. Killing enemy leader gives <b>x2</b> of that amount.
 
+<span size='large'>Guard health</span>
+Your guard health starts with #creepwars_guard_hp_initial and increases by #guard_creep_hp when killing a creep and by #guard_leader_hp when killing enemy leader.
+It is permanently decreased when the guard is attacked (legacy feature, might be removed).
+
 <span size='large'>Development warning</span>
 This is Development version, expect balancing breakage. Please report if you spot anything.
 

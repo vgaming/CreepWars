@@ -4,6 +4,8 @@ local wesnoth = wesnoth
 local creepwars_side_to_team = creepwars_side_to_team
 local creepwars_score_for_kill = creepwars_score_for_kill
 local creepwars_gold_for_kill = creepwars_gold_for_kill
+local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
+local creepwars_gold_for_kill = creepwars_gold_for_kill
 
 local ugly_y_pos
 if wesnoth.get_terrain(18, 5) == "Qxua^Xo" then
@@ -65,7 +67,7 @@ local function creep_kill_event(attacker, defender)
 
 	do -- gold
 		local give_gold = creepwars_gold_for_kill(score_previous, defender)
-		local give_guard_hitpoints = math.ceil(give_gold / 3)
+		local give_guard_hitpoints = creepwars_guard_hp_for_kill(defender.canrecruit)
 		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do -- guard
 			if creepwars_side_to_team[unit.side] == team and unit.max_moves == 0 then
 				wesnoth.add_modification(unit, "object", {

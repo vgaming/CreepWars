@@ -16,7 +16,7 @@ elseif defender.canrecruit or defender.variables["creepwars_creep"] then
 	creepwars_creep_kill_event(attacker, defender)
 else
 	local turn_number = wesnoth.get_variable("turn_number")
-	local msg = "Info: " .. defender.type .. " died and it is neither Leader nor Creep. Probably a plagued unit. No gold/creep bonus will be generated. Turn " .. turn_number
+	local msg = "Turn " .. turn_number .. ": " .. defender.type .. " died and it is neither Leader nor Creep. Probably a plagued unit. No gold/creep bonus will be generated."
 	print(msg)
 	wesnoth.message("Creep Wars", msg)
 end

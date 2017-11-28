@@ -29,7 +29,6 @@ for _, unit in ipairs(all_units) do
 			print("Lifting fog around leader home " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
 			lift_fog(home_x, home_y)
 			msg_arr[#msg_arr + 1] = wesnoth.sides[unit.side].team_name .. unit.side .. ": " .. unit.type
---			msg_arr[#msg_arr + 1] = "side " .. unit.side .. " (" .. wesnoth.sides[unit.side].team_name .. "): " .. unit.type
 		end
 	end
 end

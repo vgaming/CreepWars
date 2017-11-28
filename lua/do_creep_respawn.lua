@@ -25,7 +25,11 @@ if memoize_ai_side_set[side_number] and not wesnoth.sides[side_number].lost then
 			memoize_starting_positions[side_number].x,
 			memoize_starting_positions[side_number].y, unit
 		)
-		wesnoth.put_unit(x, y, unit)
+		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+			wesnoth.put_unit(unit, x, y)
+		else
+			wesnoth.put_unit(x, y, unit)
+		end
 	end
 end
 

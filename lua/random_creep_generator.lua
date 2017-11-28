@@ -6,6 +6,8 @@
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
 local split_comma = creepwars_split_comma
+local creepwars_lvl0_barrier = creepwars_lvl0_barrier
+local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
 
 local creep_set = {}
 --wesnoth-1.13:

@@ -33,8 +33,10 @@ for _, unit in ipairs(all_units) do
 		end
 	end
 end
-local msg = table.concat(msg_arr, ", ")
-wesnoth.message("Creep Wars", '"Show enemy leaders" setting is enabled. ' .. msg)
+if wesnoth.get_variable("creepwars_lift_fog_limbo") == true then
+	local msg = table.concat(msg_arr, ", ")
+	wesnoth.message("Creep Wars", '"Show enemy leaders" setting is enabled. ' .. msg)
+end
 
 
 -- >>

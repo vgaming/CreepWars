@@ -14,12 +14,11 @@ do
 			ai_sides[tonumber(v)] = true
 		end
 	else
-		--for _, side in ipairs(wesnoth.sides) do
-		--	if side.controller == "ai" or side.controller == "network_ai" then
-		--		ai_sides[side.side] = true
-		--	end
-		--end
-		ai_sides = { [4] = true, [8] = true }
+		for _, side in ipairs(wesnoth.sides) do
+			if side.controller == "ai" or side.controller == "network_ai" then
+				ai_sides[side.side] = true
+			end
+		end
 		wesnoth.set_variable("creepwars_ai_sides", set_concat(ai_sides, ","))
 	end
 end

@@ -37,7 +37,7 @@ note, _ = string.gsub(note, "#guard_leader_hp", creepwars_guard_hp_for_kill(true
 
 if wesnoth then
 	wesnoth.set_variable("creepwars_objectives_note", note)
-	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. Recent changes: gold bonus refactorings.")
+	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules.")
 else
 	external_documentation_note = note
 end

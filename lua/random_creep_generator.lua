@@ -8,22 +8,12 @@ local helper = wesnoth.require "lua/helper.lua"
 local split_comma = creepwars_split_comma
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
+local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 
 local creep_set = {}
---wesnoth-1.13:
---for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
---	local recruits = multiplayer_side.recruit
---	if recruits then
---		for recr in string.gmatch(recruits, "[^,]+") do
---			--print("importing era unit " .. recr)
---			creep_set[recr] = true
---		end
---	end
---end
-
-if next(creep_set) == nil then
-	-- wesnoth-1.12 work-around (it gives no access to faction recruits)
-	local creep_array = {
+local creep_array = {}
+if wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10") then
+	creep_array = {
 		"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Vampire Bat", -- lvl0 without zombie
 		"Drake Burner", "Drake Clasher", "Drake Fighter", "Drake Glider", "Saurian Augur", "Saurian Skirmisher", -- lvl1 drakes
 		"Dwarvish Fighter", "Dwarvish Guardsman", "Dwarvish Thunderer", "Dwarvish Ulfserker", "Gryphon Rider", "Footpad", "Poacher", "Thief", -- lvl1 knalgan
@@ -34,61 +24,54 @@ if next(creep_set) == nil then
 	}
 	for _, v in ipairs(creep_array) do
 		creep_set[v] = true
-		--print("importing default unit " .. v)
-		if wesnoth.unit_types[v] == nil then error("Unit name typo: " .. v) end -- check typos
 	end
 else
-	-- add downgrades
-	--[[ poor performance
-	for unit_name, _ in pairs(wesnoth.unit_types) do
-		for _, adv in pairs(split_comma(wesnoth.unit_types[unit_name].__cfg.advances_to)) do
-			if creep_set[adv] then
-				creep_set[unit_name] = true
+	-- recruitables
+	for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
+		local recruit_str = multiplayer_side.recruit or ""
+		local leader_str = multiplayer_side.leader or ""
+		local all_units_string = recruit_str .. "," .. leader_str
+		print("iterating over multiplayer_side, units: " .. all_units_string)
+		for unit in string.gmatch(all_units_string, "%s*[^,]+%s*") do
+			if unit ~= "null" and unit ~= "" and creep_set[unit] == nil then
+				print("importing era unit " .. unit)
+				creep_set[unit] = true
+				creep_array[#creep_array + 1] = unit
 			end
 		end
 	end
-	if not creep_set["Woodsman"] then error("Woodsman not found.") end
-	--]]
+
+	-- add downgrades
+	for _, unit in ipairs(creep_array) do
+		for _, down in ipairs(wesnoth.unit_types[unit].advances_from) do
+			if creep_set[down] == nil then
+				-- print("adding creep downgrade " .. down)
+				creep_set[down] = true
+				creep_array[#creep_array + 1] = down
+			end
+		end
+	end
+
+	if #creep_array == 0 then error("fail to start game, no creeps found") end
 end
 
 
-local function add_advances_recursive(creep_name)
-	local advances_string = wesnoth.unit_types[creep_name].__cfg.advances_to
-	if advances_string ~= "null" and advances_string ~= creep_name then
-		for _, adv in pairs(split_comma(advances_string)) do
-			if creep_set[adv] == nil and wesnoth.unit_types[adv].level < 4 then
+-- add advances
+for _, unit in ipairs(creep_array) do
+	local advances_string = wesnoth.unit_types[unit].__cfg.advances_to
+	if advances_string ~= "null" then
+		for _, adv in ipairs(split_comma(advances_string)) do
+			if creep_set[adv] == nil and wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max then
 				-- print("adding creep advance " .. adv)
 				creep_set[adv] = true
-				add_advances_recursive(adv)
+				creep_array[#creep_array + 1] = adv
 			end
 		end
 	end
 end
-do -- add advances
-	-- we can't iterate over mutable set, so we need to copy it
-	local arr = {}
-	local n = 1
-	for creep_name, _ in pairs(creep_set) do
-		arr[n] = creep_name
-		n = n + 1
-	end
-	for _, creep_name in ipairs(arr) do
-		add_advances_recursive(creep_name)
-	end
-end
 
 
-local creep_array = {}
-do
-	local n = 1
-	for creep_name, _ in pairs(creep_set) do
-		creep_array[n] = creep_name
-		n = n + 1
-	end
-	creep_set = nil
-end
-table.sort(creep_array)
-local creep_rand_string = "1.." .. #creep_array  -- 1..154
+local creep_rand_string = "1.." .. #creep_array
 
 
 local function generate(desired_cost)

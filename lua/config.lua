@@ -2,6 +2,7 @@
 
 creepwars_lvl0_barrier = 12 -- creep score lower than this value will generate lvl0 creeps
 creepwars_lvl3plus_barrier = 50
+creepwars_creep_lvl_max = 3
 
 creepwars_creep_count = 8
 

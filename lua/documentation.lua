@@ -1,6 +1,6 @@
 -- << documentation
 
-local creepwars_score_scale = creepwars_score_scale
+local creepwars_score_multiplier = creepwars_score_multiplier
 local creepwars_score_power = creepwars_score_power
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
@@ -10,6 +10,7 @@ local creepwars_guard_hp_initial = creepwars_guard_hp_initial
 local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local creepwars_creep_count = creepwars_creep_count
 local creepwars_gold_for_leaderkill_max = creepwars_gold_for_leaderkill_max
+local creepwars_score_multiplier_percent = creepwars_score_multiplier_percent
 
 local note
 if wesnoth then
@@ -19,7 +20,7 @@ else
 end
 
 note, _ = string.gsub(note, "#creepwars_creep_count", creepwars_creep_count)
-note, _ = string.gsub(note, "#creepwars_score_scale", creepwars_score_scale)
+note, _ = string.gsub(note, "#creepwars_score_multiplier", creepwars_score_multiplier)
 note, _ = string.gsub(note, "#creepwars_score_power", creepwars_score_power)
 note, _ = string.gsub(note, "#creepwars_lvl0_barrier", creepwars_lvl0_barrier)
 note, _ = string.gsub(note, "#creepwars_lvl3plus_barrier", creepwars_lvl3plus_barrier)
@@ -37,7 +38,29 @@ note, _ = string.gsub(note, "#guard_leader_hp", creepwars_guard_hp_for_kill(true
 
 if wesnoth then
 	wesnoth.set_variable("creepwars_objectives_note", note)
-	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules.")
+
+	local non_standard = {}
+	local guard_hp = creepwars_guard_hp_for_kill(false)
+	if guard_hp ~= 1 then non_standard[#non_standard + 1] = "guard HP scaling: " .. guard_hp .. " (default 1)" end
+	if wesnoth.get_variable("creepwars_lift_fog_limbo") then
+		non_standard[#non_standard + 1] = "enemy leaders revealed"
+	end
+	if creepwars_gold_for_lvl0 ~= 3 then
+		non_standard[#non_standard + 1] = "gold for lvl0 creep: " .. creepwars_gold_for_lvl0
+	end
+	if creepwars_gold_per_creep_level ~= 2 then
+		non_standard[#non_standard + 1] = "gold per creep level: " .. creepwars_gold_per_creep_level
+	end
+	if creepwars_score_multiplier_percent ~= 50 then
+		non_standard[#non_standard + 1] = "creep score multiplier: " .. creepwars_score_multiplier_percent
+	end
+	--if  ~=  then
+	--	non_standard[#non_standard + 1] =
+	--end
+
+	local non_standard_msg = (#non_standard == 0) and " (All options are stadard)" or " Beware, non-standard options are used: " .. table.concat(non_standard, ", ")
+
+	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg)
 else
 	external_documentation_note = note
 end

@@ -2,6 +2,7 @@
 
 local wesnoth = wesnoth
 local creepwars_memoize_ai_side_set = creepwars_memoize_ai_side_set
+local creepwars_leaders_force_revealed = creepwars_leaders_force_revealed
 local creepwars_reveal_leaders = creepwars_reveal_leaders
 
 -- wesnoth-1.12 seems to be a bit buggy, we'll clear fog with multiturn = true AND false.
@@ -20,20 +21,22 @@ for _, unit in ipairs(all_units) do
 			lift_fog(unit.x, unit.y)
 		end
 	else
-		if wesnoth.get_variable("creepwars_lift_fog_limbo") == true then
+		if creepwars_reveal_leaders then
 			local limbo_x = unit.variables.limbo_x
 			local limbo_y = unit.variables.limbo_y
-			local home_x = unit.variables.home_x
-			local home_y = unit.variables.home_y
 			print("Lifting fog around leader limbo " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
 			lift_fog(limbo_x, limbo_y)
-			print("Lifting fog around leader home " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
-			lift_fog(home_x, home_y)
+
+			--local home_x = unit.variables.home_x
+			--local home_y = unit.variables.home_y
+			--print("Lifting fog around leader home " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
+			--lift_fog(home_x, home_y)
+
 			msg_arr[#msg_arr + 1] = wesnoth.sides[unit.side].team_name .. unit.side .. ": " .. unit.type
 		end
 	end
 end
-if creepwars_reveal_leaders == true then
+if creepwars_leaders_force_revealed then
 	local msg = table.concat(msg_arr, ", ")
 	wesnoth.message("Creep Wars", 'Enemy leaders: ' .. msg)
 end

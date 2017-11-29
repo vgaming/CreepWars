@@ -11,6 +11,8 @@ local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local creepwars_creep_count = creepwars_creep_count
 local creepwars_gold_for_leaderkill_max = creepwars_gold_for_leaderkill_max
 local creepwars_score_multiplier_percent = creepwars_score_multiplier_percent
+local creepwars_leaders_force_revealed = creepwars_leaders_force_revealed
+local creepwars_mirror_style = creepwars_mirror_style
 
 local note
 if wesnoth then
@@ -42,7 +44,7 @@ if wesnoth then
 	local non_standard = {}
 	local guard_hp = creepwars_guard_hp_for_kill(false)
 	if guard_hp ~= 1 then non_standard[#non_standard + 1] = "guard HP scaling: " .. guard_hp .. " (default 1)" end
-	if wesnoth.get_variable("creepwars_lift_fog_limbo") then
+	if creepwars_leaders_force_revealed then
 		non_standard[#non_standard + 1] = "enemy leaders revealed"
 	end
 	if creepwars_gold_for_lvl0 ~= 3 then
@@ -58,9 +60,19 @@ if wesnoth then
 	--	non_standard[#non_standard + 1] =
 	--end
 
-	local non_standard_msg = (#non_standard == 0) and " (All options are stadard)" or " Beware, non-standard options are used: " .. table.concat(non_standard, ", ")
+	local non_standard_msg
+	if #non_standard ~= 0 then
+		non_standard_msg = " Beware, non-standard options are used: " .. table.concat(non_standard, ", ") .. "."
+	elseif wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10") then
+		non_standard_msg = ""
+	else
+		non_standard_msg = " All options are stadard."
+	end
 
-	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg)
+	local show_mirror_style = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10")
+		and creepwars_mirror_style ~= "mirror"
+	local mirror_msg = show_mirror_style and " Mirror style: " .. creepwars_mirror_style or ""
+	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg .. mirror_msg)
 else
 	external_documentation_note = note
 end

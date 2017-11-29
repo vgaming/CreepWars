@@ -6,7 +6,11 @@ creepwars_creep_lvl_max = 3
 
 creepwars_creep_count = 8
 
-creepwars_reveal_leaders = wesnoth and wesnoth.get_variable("creepwars_reveal_leaders") or false
+creepwars_mirror_style = wesnoth and wesnoth.get_variable("creepwars_mirror_style") or "mirror"
+creepwars_reveal_leaders = wesnoth and wesnoth.get_variable("creepwars_reveal_leaders")
+	or creepwars_mirror_style == "mirror"
+creepwars_leaders_force_revealed = creepwars_reveal_leaders and (creepwars_mirror_style ~= "mirror")
+
 creepwars_guard_hp_for_creep = wesnoth and wesnoth.get_variable("creepwars_guard_hp_for_creep") or 1
 
 creepwars_guard_hp_initial = 50 -- cannot be changed, yet

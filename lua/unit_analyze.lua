@@ -145,7 +145,7 @@ for _, unit in ipairs(recruitable_array) do
 	end
 
 	local result = math.pow(base_leader_strength(unit), 1 / 3) * math.pow(maximum, 2 / 3)
-	print(unit .. " strength: " .. result)
+	-- print(unit .. " strength: " .. result)
 	leader_strength[unit] = result
 end
 --for _, unit in ipairs(creep_array) do

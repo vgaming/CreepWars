@@ -11,8 +11,8 @@ local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local creepwars_creep_count = creepwars_creep_count
 local creepwars_gold_for_leaderkill_max = creepwars_gold_for_leaderkill_max
 local creepwars_score_multiplier_percent = creepwars_score_multiplier_percent
-local creepwars_leaders_force_revealed = creepwars_leaders_force_revealed
 local creepwars_mirror_style = creepwars_mirror_style
+local creepwars_hide_leaders = creepwars_hide_leaders
 
 local note
 if wesnoth then
@@ -44,8 +44,8 @@ if wesnoth then
 	local non_standard = {}
 	local guard_hp = creepwars_guard_hp_for_kill(false)
 	if guard_hp ~= 1 then non_standard[#non_standard + 1] = "guard HP scaling: " .. guard_hp .. " (default 1)" end
-	if creepwars_leaders_force_revealed then
-		non_standard[#non_standard + 1] = "enemy leaders revealed"
+	if creepwars_hide_leaders then
+		non_standard[#non_standard + 1] = "enemy leaders hidden"
 	end
 	if creepwars_gold_for_lvl0 ~= 3 then
 		non_standard[#non_standard + 1] = "gold for lvl0 creep: " .. creepwars_gold_for_lvl0

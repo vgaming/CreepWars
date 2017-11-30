@@ -2,8 +2,7 @@
 
 local wesnoth = wesnoth
 local creepwars_memoize_ai_side_set = creepwars_memoize_ai_side_set
-local creepwars_leaders_force_revealed = creepwars_leaders_force_revealed
-local creepwars_reveal_leaders = creepwars_reveal_leaders
+local creepwars_hide_leaders = creepwars_hide_leaders
 
 -- wesnoth-1.12 seems to be a bit buggy, we'll clear fog with multiturn = true AND false.
 local function lift_fog(x, y)
@@ -21,7 +20,7 @@ for _, unit in ipairs(all_units) do
 			lift_fog(unit.x, unit.y)
 		end
 	else
-		if creepwars_reveal_leaders then
+		if not creepwars_hide_leaders then
 			local limbo_x = unit.variables.limbo_x
 			local limbo_y = unit.variables.limbo_y
 			print("Lifting fog around leader limbo " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
@@ -36,7 +35,7 @@ for _, unit in ipairs(all_units) do
 		end
 	end
 end
-if creepwars_leaders_force_revealed then
+if not creepwars_hide_leaders and creepwars_mirror_style ~= "mirror" then
 	local msg = table.concat(msg_arr, ", ")
 	wesnoth.message("Creep Wars", 'Enemy leaders: ' .. msg)
 end

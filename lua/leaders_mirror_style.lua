@@ -1,9 +1,11 @@
 -- << leaders_mirror_style
 
 local wesnoth = wesnoth
+local helper = wesnoth.require "lua/helper.lua"
 local creepwars_memoize_ai_side_set = creepwars_memoize_ai_side_set
 local creepwars_mirror_style = creepwars_mirror_style
-local creepwars_side_to_team = creepwars_side_to_team
+local creepwars_recruitable_array = creepwars_recruitable_array
+local creepwars_leader_strength = creepwars_leader_strength
 
 local function downgrade()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
@@ -17,43 +19,75 @@ local function downgrade()
 	end
 end
 
-local function force_mirror()
-	-- map team to sides
-	local team_sides = {}
+
+local function set_all_leaders(unit_array_function)
+	local team_units = {}
+	local team_index = {}
 	for _, side in ipairs(wesnoth.sides) do
 		local has_leaders = #wesnoth.get_units { canrecruit = true, side = side.side } > 0
 		local is_human = creepwars_memoize_ai_side_set[side.side] ~= true
 		if has_leaders and is_human then
-			local team = creepwars_side_to_team[side.side]
-			team_sides[team] = team_sides[team] or {}
-			local arr = team_sides[team]
-			arr[#arr + 1] = side.side
-		end
-	end
-
-	-- find biggest side array
-	local biggest_array = {}
-	for _, side in ipairs(wesnoth.sides) do
-		local team = creepwars_side_to_team[side.side]
-		local side_array = team_sides[team]
-		if #side_array > #biggest_array then biggest_array = side_array end
-	end
-	-- unit array
-	local unit_types = {}
-	for i, side_number in ipairs(biggest_array) do
-		unit_types[i] = wesnoth.get_units { canrecruit = true, side = side_number }[1].type
-		assert(unit_types[i] ~= nil, "Side " .. side_number .. " has no leaders")
-	end
-	-- set the leaders
-	for _, side_array in pairs(team_sides) do
-		for side_number_in_team, side_number in ipairs(side_array) do
-			print("side number: " .. side_number)
-			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side_number }) do
-				wesnoth.transform_unit(unit, unit_types[side_number_in_team])
+			team_units[side.team_name] = team_units[side.team_name] or unit_array_function()
+			team_index[side.team_name] = team_index[side.team_name] or 1
+			local type = team_units[side.team_name][team_index[side.team_name]]
+			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side.side }) do
+				wesnoth.transform_unit(unit, type)
+				unit.hitpoints = unit.max_hitpoints
 			end
+			team_index[side.team_name] = team_index[side.team_name] + 1
 		end
 	end
 end
+
+
+local leader_rand_string = "1.." .. #creepwars_recruitable_array
+local function random_leader() return creepwars_recruitable_array[helper.rand(leader_rand_string)] end
+
+
+local function force_mirror()
+	local units = {}
+	local team
+	for _, side in ipairs(wesnoth.sides) do
+		local has_leaders = #wesnoth.get_units { canrecruit = true, side = side.side } > 0
+		local is_human = creepwars_memoize_ai_side_set[side.side] ~= true
+		if has_leaders and is_human then
+			if team == nil then team = side.team_name end
+			if team == side.team_name then
+				units[#units + 1] = wesnoth.get_units { canrecruit = true, side = side.side }[1].type
+			end
+		end
+	end
+	if #units < 4 then units[#units + 1] = random_leader() end
+	if #units < 4 then units[#units + 1] = random_leader() end
+	if #units < 4 then units[#units + 1] = random_leader() end
+	set_all_leaders(function() return units end)
+end
+
+local function force_same_strength()
+
+	local function rnd_array() return { random_leader(), random_leader(), random_leader(), random_leader() } end
+
+	local function array_cost(arr)
+		local result = 0
+		for _, u in ipairs(arr) do result = result + creepwars_leader_strength[u] end
+		return result
+	end
+
+	local reference = rnd_array()
+	local reference_cost = array_cost(reference)
+
+	local function generate_similar()
+		local result
+		repeat
+			result = rnd_array()
+			local cost = array_cost(result)
+		until cost > 0.93 * reference_cost and cost < 1.07 * reference_cost
+		return result
+	end
+
+	return set_all_leaders(generate_similar)
+end
+
 
 if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 	print("creepwars_mirror_style is " .. creepwars_mirror_style)
@@ -64,6 +98,8 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 	elseif creepwars_mirror_style == "mirror" then
 		force_mirror()
 		downgrade()
+	elseif creepwars_mirror_style == "same_strength" then
+		force_same_strength()
 	else
 		error("Unknown leader mirror style: " .. creepwars_mirror_style)
 	end

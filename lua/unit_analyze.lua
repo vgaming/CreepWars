@@ -18,7 +18,11 @@ local function count_specials(unit)
 	for _, attack in ipairs(wesnoth.unit_types[unit].attacks) do
 		for _, special in ipairs(attack.specials) do
 			local name = special[1]
-			result[name] = (result[name] or 0) + 1
+			if name == "chance_to_hit" then
+				result[name] = special[2]["value"]
+			else
+				result[name] = (result[name] or 0) + 1
+			end
 		end
 	end
 	return result
@@ -37,8 +41,8 @@ local function super_leader_strength(unit_name)
 	if specials["slow"] then result = result * 1.25 end
 	if specials["poison"] then result = result * 0.70 end
 	if specials["firststrike"] then result = result * 0.90 end
-	if specials["chance_to_hit"] then result = result * 1.20 end
-	if specials["damage"] then result = result * 1.35 end
+	if specials["chance_to_hit"] then result = result * (0.5 + specials["chance_to_hit"] / 100) end
+	if specials["damage"] then result = result * 1.30 end
 	if specials["plague"] then result = result * 1.05 end
 	if abilities["skirmisher"] then result = result * 1.15 end
 	if abilities["heals"] then result = result * 0.7 end
@@ -96,9 +100,11 @@ end
 
 local creep_array = creepwars_copy_array(recruitable_array)
 local creep_set = creepwars_copy_table(recruitable_set)
-recruitable_array = creepwars_array_filter(recruitable_array,
-	function(unit) return count_specials(unit)["plague"] == nil and count_specials(unit)["berserk"] == nil end)
-recruitable_set = creepwars_array_to_set(recruitable_array)
+if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+	recruitable_array = creepwars_array_filter(recruitable_array,
+		function(unit) return count_specials(unit)["plague"] == nil and count_specials(unit)["berserk"] == nil end)
+	recruitable_set = creepwars_array_to_set(recruitable_array)
+end
 
 -- add downgrades
 if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
@@ -112,8 +118,10 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		end
 	end
 end
-creep_array = filter_plague_array(creep_array)
-creep_set = creepwars_array_to_set(creep_array)
+if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+	creep_array = filter_plague_array(creep_array)
+	creep_set = creepwars_array_to_set(creep_array)
+end
 
 
 -- add advances
@@ -129,28 +137,30 @@ end
 
 
 local leader_strength = {}
-for _, unit in ipairs(recruitable_array) do
-	local arr = { unit }
-	local set = { unit = true }
-	local maximum = 0
-	for _, candidate in ipairs(arr) do
-		local candidate_strength = super_leader_strength(candidate)
-		if candidate_strength > maximum then maximum = candidate_strength end
-		for _, adv in ipairs(split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
-			if set[adv] == nil then
-				set[adv] = true
-				arr[#arr + 1] = adv
+if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+	for _, unit in ipairs(recruitable_array) do
+		local arr = { unit }
+		local set = { unit = true }
+		local maximum = 0
+		for _, candidate in ipairs(arr) do
+			local candidate_strength = super_leader_strength(candidate)
+			if candidate_strength > maximum then maximum = candidate_strength end
+			for _, adv in ipairs(split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
+				if set[adv] == nil then
+					set[adv] = true
+					arr[#arr + 1] = adv
+				end
 			end
 		end
-	end
 
-	local result = math.pow(base_leader_strength(unit), 1 / 3) * math.pow(maximum, 2 / 3)
-	-- print(unit .. " strength: " .. result)
-	leader_strength[unit] = result
+		local result = math.pow(base_leader_strength(unit), 1 / 2) * math.pow(maximum, 1 / 2)
+		print("leader " .. unit .. ": " .. result)
+		leader_strength[unit] = result
+	end
+	for _, unit in ipairs(creep_array) do
+		print("super-leader " .. unit .. ": " .. super_leader_strength(unit))
+	end
 end
---for _, unit in ipairs(creep_array) do
---	print(unit .. " strength: " .. super_leader_strength(unit))
---end
 
 
 creepwars_creep_array = creep_array

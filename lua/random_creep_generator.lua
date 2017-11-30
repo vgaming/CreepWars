@@ -1,75 +1,14 @@
--- << random_creep_generator.lua
+-- << random_creep_generator
 
 -- This file provides function to generate Creeps with expected cost.
 -- See end of file for the function itself, `creepwars_generate_creep`
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
-local split_comma = creepwars_split_comma
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
-local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 
-local creep_set = {}
-local creep_array = {}
-if wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10") then
-	creep_array = {
-		"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Vampire Bat", -- lvl0 without zombie
-		"Drake Burner", "Drake Clasher", "Drake Fighter", "Drake Glider", "Saurian Augur", "Saurian Skirmisher", -- lvl1 drakes
-		"Dwarvish Fighter", "Dwarvish Guardsman", "Dwarvish Thunderer", "Dwarvish Ulfserker", "Gryphon Rider", "Footpad", "Poacher", "Thief", -- lvl1 knalgan
-		"Bowman", "Cavalryman", "Fencer", "Heavy Infantryman", "Horseman", "Mage", "Merman Fighter", "Spearman", -- lvl1 loyal
-		"Naga Fighter", "Orcish Archer", "Orcish Assassin", "Orcish Grunt", "Troll Whelp", "Wolf Rider", -- lvl1 orc
-		"Elvish Archer", "Elvish Fighter", "Elvish Scout", "Elvish Shaman", "Mage", "Merman Hunter", "Wose", -- lvl1 rebels
-		"Dark Adept", "Ghost", "Ghoul", "Skeleton Archer", "Skeleton" -- lvl1 undead
-	}
-	for _, v in ipairs(creep_array) do
-		creep_set[v] = true
-	end
-else
-	-- recruitables
-	for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
-		local recruit_str = multiplayer_side.recruit or ""
-		local leader_str = multiplayer_side.leader or ""
-		local all_units_string = recruit_str .. "," .. leader_str
-		print("iterating over multiplayer_side, units: " .. all_units_string)
-		for unit in string.gmatch(all_units_string, "%s*[^,]+%s*") do
-			if unit ~= "null" and unit ~= "" and creep_set[unit] == nil then
-				print("importing era unit " .. unit)
-				creep_set[unit] = true
-				creep_array[#creep_array + 1] = unit
-			end
-		end
-	end
-
-	-- add downgrades
-	for _, unit in ipairs(creep_array) do
-		for _, down in ipairs(wesnoth.unit_types[unit].advances_from) do
-			if creep_set[down] == nil then
-				-- print("adding creep downgrade " .. down)
-				creep_set[down] = true
-				creep_array[#creep_array + 1] = down
-			end
-		end
-	end
-
-	if #creep_array == 0 then error("fail to start game, no creeps found") end
-end
-
-
--- add advances
-for _, unit in ipairs(creep_array) do
-	local advances_string = wesnoth.unit_types[unit].__cfg.advances_to
-	if advances_string ~= "null" then
-		for _, adv in ipairs(split_comma(advances_string)) do
-			if creep_set[adv] == nil and wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max then
-				-- print("adding creep advance " .. adv)
-				creep_set[adv] = true
-				creep_array[#creep_array + 1] = adv
-			end
-		end
-	end
-end
-
+local creep_array = creepwars_creep_array
 
 local creep_rand_string = "1.." .. #creep_array
 

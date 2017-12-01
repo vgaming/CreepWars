@@ -1,6 +1,7 @@
 -- << scoreboard
 
 local wesnoth = wesnoth
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_side_to_team = creepwars_side_to_team
 local creepwars_score_for_kill = creepwars_score_for_kill
 local creepwars_gold_for_kill = creepwars_gold_for_kill
@@ -71,12 +72,10 @@ local function creep_kill_event(attacker, defender)
 		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do -- guard
 			if creepwars_side_to_team[unit.side] == team and unit.max_moves == 0 then
 				wesnoth.add_modification(unit, "object", {
-					{
-						"effect", {
+					T.effect {
 						apply_to = "hitpoints",
 						increase_total = give_guard_hitpoints,
 						increase = give_guard_hitpoints
-					}
 					},
 				})
 			end

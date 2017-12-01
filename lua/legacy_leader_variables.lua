@@ -3,7 +3,6 @@
 local wesnoth = wesnoth
 
 local function setup(side_number, limbo_x, limbo_y, home_x, home_y)
-	-- print("setting up leader: ", side_number, limbo_x, limbo_y, home_x, home_y)
 	for _, unit in ipairs(wesnoth.get_units { side = side_number, canrecruit = true }) do
 		unit.variables["location"] = "limbo"
 		unit.variables.limbo_x = limbo_x

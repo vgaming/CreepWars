@@ -5,6 +5,7 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
 
@@ -49,22 +50,20 @@ local function generate(desired_cost)
 	local boost = math.floor((desired_cost - unit.__cfg.cost) / 14)
 
 	if boost > 0 then
-		local ability = {
-			"dummy", {
-				name = "boost +" .. boost,
-				description = "damage +" .. boost * 2 .. " strikes +" .. boost .. " movement +" .. boost
-			}
+		local ability = T.name_only {
+			name = "boost +" .. boost,
+			description = "damage +" .. boost * 2 .. " strikes +" .. boost .. " movement +" .. boost
 		}
 		wesnoth.add_modification(unit, "object", {
-			{ "effect", { apply_to = "attack", increase_damage = boost * 2 } },
-			{ "effect", { apply_to = "attack", increase_attacks = boost } },
-			{ "effect", { apply_to = "movement", increase = boost } },
-			{ "effect", { apply_to = "new_ability", { "abilities", { ability } } } },
+			T.effect { apply_to = "attack", increase_damage = boost * 2 },
+			T.effect { apply_to = "attack", increase_attacks = boost },
+			T.effect { apply_to = "movement", increase = boost },
+			T.effect { apply_to = "new_ability", T.abilities { ability } },
 		})
 	end
 	wesnoth.add_modification(unit, "object", {
-		{ "effect", { apply_to = "zoc", value = false } },
-		{ "effect", { apply_to = "loyal" } },
+		T.effect { apply_to = "zoc", value = false },
+		T.effect { apply_to = "loyal" },
 	})
 	unit.variables["creepwars_creep"] = true
 

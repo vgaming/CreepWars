@@ -144,8 +144,8 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		for _, candidate in ipairs(arr) do
 			local candidate_strength = super_leader_strength(candidate)
 			if candidate_strength > maximum then maximum = candidate_strength end
-			for _, adv in ipairs(split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
-				if set[adv] == nil and wesnoth.unit_types[adv] then
+			for _, adv in ipairs(wesnoth.unit_types[unit].advances_to) do
+				if set[adv] == nil then
 					set[adv] = true
 					arr[#arr + 1] = adv
 				end

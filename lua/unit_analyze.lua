@@ -10,7 +10,6 @@ local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 local creepwars_copy_array = creepwars_copy_array
 local creepwars_copy_table = creepwars_copy_table
 local creepwars_array_to_set = creepwars_array_to_set
-local creepwars_set_concat = creepwars_set_concat
 local creepwars_array_filter = creepwars_array_filter
 
 local function count_specials(unit)
@@ -36,7 +35,7 @@ local function super_leader_strength(unit_name)
 	local result = type.cost * 10
 	--result = result / math.sqrt(type.max_hitpoints)
 	result = result / (4 + type.max_moves)
-	--if #type.advances_to == 0 then result = result * (0.1 + type.level) end
+	result = result * (1 + type.level)
 	if specials["heal_on_hit"] then result = result * 1.20 end
 	if specials["slow"] then result = result * 1.25 end
 	if specials["poison"] then result = result * 0.70 end
@@ -87,7 +86,7 @@ else
 		local all_units_string = recruit_str .. "," .. leader_str
 		-- print("iterating over multiplayer_side, units: " .. all_units_string)
 		for _, unit in ipairs(split_comma(all_units_string)) do
-			if recruitable_set[unit] == nil then
+			if recruitable_set[unit] == nil and wesnoth.unit_types[unit] then
 				-- print("importing era unit " .. unit)
 				recruitable_set[unit] = true
 				recruitable_array[#recruitable_array + 1] = unit
@@ -108,9 +107,9 @@ end
 
 -- add downgrades
 if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-	for _, unit in ipairs(creep_array) do
-		for _, down in ipairs(wesnoth.unit_types[unit].advances_from) do
-			if creep_set[down] == nil then
+	for _, orig_unit in ipairs(creep_array) do
+		for _, down in ipairs(wesnoth.unit_types[orig_unit].advances_from) do
+			if creep_set[down] == nil and wesnoth.unit_types[down] then
 				-- print("adding creep downgrade " .. down)
 				creep_set[down] = true
 				creep_array[#creep_array + 1] = down
@@ -127,7 +126,7 @@ end
 -- add advances
 for _, unit in ipairs(creep_array) do
 	for _, adv in ipairs(split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
-		if creep_set[adv] == nil and wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max then
+		if creep_set[adv] == nil and wesnoth.unit_types[adv] and wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max then
 			-- print("adding creep advance " .. adv)
 			creep_set[adv] = true
 			creep_array[#creep_array + 1] = adv
@@ -146,7 +145,7 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 			local candidate_strength = super_leader_strength(candidate)
 			if candidate_strength > maximum then maximum = candidate_strength end
 			for _, adv in ipairs(split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
-				if set[adv] == nil then
+				if set[adv] == nil and wesnoth.unit_types[adv] then
 					set[adv] = true
 					arr[#arr + 1] = adv
 				end

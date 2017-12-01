@@ -3,7 +3,7 @@
 local function split_comma(str)
 	local result = {}
 	local n = 1
-	for s in string.gmatch(str, "%s*[^,]+%s*") do
+	for s in string.gmatch(str or "", "%s*[^,]+%s*") do
 		if s ~= "" and s ~= "null" then
 			result[n] = s
 			n = n + 1

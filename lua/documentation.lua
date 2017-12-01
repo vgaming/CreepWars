@@ -1,5 +1,6 @@
 -- << documentation
 
+local wesnoth = wesnoth
 local creepwars_score_multiplier = creepwars_score_multiplier
 local creepwars_score_power = creepwars_score_power
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
@@ -61,10 +62,10 @@ if wesnoth then
 	--end
 
 	local non_standard_msg
-	if #non_standard ~= 0 then
-		non_standard_msg = " Beware, non-standard options are used: " .. table.concat(non_standard, ", ") .. "."
-	elseif wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10") then
+	if wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10") then
 		non_standard_msg = ""
+	elseif #non_standard ~= 0 then
+		non_standard_msg = " Beware, non-standard options are used: " .. table.concat(non_standard, ", ") .. "."
 	else
 		non_standard_msg = " All options are stadard."
 	end

@@ -10,10 +10,7 @@ local function lift_fog(x, y)
 	wesnoth.wml_actions.lift_fog { x = x, y = y, multiturn = false }
 end
 
-local msg_arr = {}
-local all_units = wesnoth.get_units {}
-table.sort(all_units, function(a, b) return wesnoth.sides[a.side].team_name < wesnoth.sides[b.side].team_name end)
-for _, unit in ipairs(all_units) do
+for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 	if creepwars_memoize_ai_side_set[unit.side] == true then
 		if wesnoth.get_variable("creepwars_lift_fog_guard") ~= false then
 			print("Lifting fog around guard " .. unit.type .. " [" .. unit.x .. "," .. unit.y .. "]")
@@ -30,14 +27,8 @@ for _, unit in ipairs(all_units) do
 			--local home_y = unit.variables.home_y
 			--print("Lifting fog around leader home " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
 			--lift_fog(home_x, home_y)
-
-			msg_arr[#msg_arr + 1] = wesnoth.sides[unit.side].team_name .. unit.side .. ": " .. unit.type
 		end
 	end
-end
-if not creepwars_hide_leaders and creepwars_mirror_style ~= "mirror" then
-	local msg = table.concat(msg_arr, ", ")
-	wesnoth.message("Creep Wars", 'Enemy leaders: ' .. msg)
 end
 
 

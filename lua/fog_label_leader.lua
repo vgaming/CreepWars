@@ -11,7 +11,7 @@ if not creepwars_hide_leaders and creepwars_mirror_style ~= "mirror" then
 		if not creepwars_memoize_ai_side_set[unit.side] then
 			local limbo_x = unit.variables.limbo_x
 			local limbo_y = unit.variables.limbo_y
-			local text = is_first_turn and unit.type or ""
+			local text = is_first_turn and wesnoth.unit_types[unit.type].name or ""
 			wesnoth.wml_actions.label { x = limbo_x, y = limbo_y, text = text }
 		end
 	end

@@ -7,7 +7,7 @@ echo "$version"
 
 
 # find-replace in _server.pbl
-sed -i -e "s/version=.*$/version=\"$version\"/" _server.pbl
+sed -i -e "s/version=.*$/version=\"$version\"/" .server.pbl
 
 
 # update /target/version.txt
@@ -19,12 +19,14 @@ echo -n "$version" > target/version.txt
 #git log --date=short -10 --pretty='%ad %cn %d %s' > doc/git_changelog.txt
 
 
-# delete _server.pbl description
-sed -i '/description=/,//d' _server.pbl
-# compose description by stripping out html tags
-description="$(lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g')"
-# compose _server.pbl back
-printf 'description="%s"' "$description" >> _server.pbl
-#printf '%s%s\n"\n%s' 'description="' "$description" "$(cat _server.pbl)" > _server.pbl
+# create server.pbl files
+cp .server.pbl target/.server12.pbl
+cp .server.pbl target/.server13.pbl
+
+lua doc/documentation_os_extractor.lua >> target/.server13.pbl
+lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g' >> target/.server12.pbl
+
+echo '"' >> target/.server12.pbl
+echo '"' >> target/.server13.pbl
 
 }; exit 0

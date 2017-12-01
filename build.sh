@@ -21,10 +21,9 @@ echo -n "$version" > target/version.txt
 
 # delete _server.pbl description
 sed -i '/description=/,//d' _server.pbl
-# compose description by stripping out html tags
-description="$(lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g')"
-# compose _server.pbl back
-printf 'description="%s"' "$description" >> _server.pbl
-#printf '%s%s\n"\n%s' 'description="' "$description" "$(cat _server.pbl)" > _server.pbl
+# add it back
+echo -n 'description="' >> _server.pbl
+lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g' >> _server.pbl
+echo '"' >> _server.pbl
 
 }; exit 0

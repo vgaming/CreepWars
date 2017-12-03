@@ -29,28 +29,32 @@ end
 
 
 local function super_leader_strength(unit_name)
-	local specials = count_specials(unit_name)
 	local type = wesnoth.unit_types[unit_name]
-	local abilities = creepwars_array_to_set(type.abilities)
-	local result = type.cost * 10
-	--result = result / math.sqrt(type.max_hitpoints)
-	result = result / (4 + type.max_moves)
-	result = result * (1 + type.level)
-	if specials["heal_on_hit"] then result = result * 1.20 end
-	if specials["slow"] then result = result * 1.25 end
-	if specials["poison"] then result = result * 0.70 end
-	if specials["firststrike"] then result = result * 0.90 end
-	if specials["chance_to_hit"] then result = result * (0.5 + specials["chance_to_hit"] / 100) end
-	if specials["damage"] then result = result * 1.30 end
-	if specials["plague"] then result = result * 1.05 end
-	if abilities["skirmisher"] then result = result * 1.15 end
-	if abilities["heals"] then result = result * 0.7 end
-	if abilities["regenerate"] then result = result * 0.80 end
-	if abilities["leadership"] then result = result * 0.9 end
-	if abilities["illuminates"] then result = result * 0.90 end
-	if abilities["teleport"] then result = result * 0.85 end
-	if abilities["hides"] then result = result * 0.95 end
-	return result
+	if #type.advances_to > 0 then
+		return 0.00001
+	else
+		local specials = count_specials(unit_name)
+		local abilities = creepwars_array_to_set(type.abilities)
+		local result = type.cost
+		--result = result / math.sqrt(type.max_hitpoints)
+		result = result / (6 + type.max_moves)
+		result = result * (1 + type.level)
+		if specials["heal_on_hit"] then result = result * 1.20 end
+		if specials["slow"] then result = result * 1.25 end
+		if specials["poison"] then result = result * 0.80 end
+		if specials["firststrike"] then result = result * 0.90 end
+		if specials["chance_to_hit"] then result = result * (0.5 + specials["chance_to_hit"] / 100) end
+		if specials["damage"] then result = result * 1.40 end
+		if specials["plague"] then result = result * 1.00 end
+		if abilities["skirmisher"] then result = result * 1.10 end
+		if abilities["heals"] then result = result * 0.7 end
+		if abilities["regenerate"] then result = result * 0.80 end
+		if abilities["leadership"] then result = result * 0.9 end
+		if abilities["illuminates"] then result = result * 0.90 end
+		if abilities["teleport"] then result = result * 0.85 end
+		if abilities["hides"] then result = result * 0.95 end
+		return result
+	end
 end
 
 
@@ -140,11 +144,11 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 	for _, unit in ipairs(recruitable_array) do
 		local arr = { unit }
 		local set = { unit = true }
-		local maximum = 0
+		local maximum = -1
 		for _, candidate in ipairs(arr) do
 			local candidate_strength = super_leader_strength(candidate)
 			if candidate_strength > maximum then maximum = candidate_strength end
-			for _, adv in ipairs(wesnoth.unit_types[unit].advances_to) do
+			for _, adv in ipairs(wesnoth.unit_types[candidate].advances_to) do
 				if set[adv] == nil then
 					set[adv] = true
 					arr[#arr + 1] = adv

@@ -15,6 +15,7 @@ local creepwars_color_span_gold = creepwars_color_span_gold
 local creepwars_color_span_score = creepwars_color_span_score
 local creep_array = creepwars_creep_array
 local creep_rand_string = "1.." .. #creep_array
+local string = string
 
 
 local function generate(desired_cost)
@@ -64,13 +65,14 @@ local function generate(desired_cost)
 			T.effect { apply_to = "new_ability", T.abilities { boost_ability } },
 		})
 	end
-	local kill_score = string.format("%.2f", creepwars_score_for_creep_kill(unit))
+	local kill_score = creepwars_score_for_creep_kill(unit)
+	local kill_score_str = string.format("%.2f", kill_score)
 	local kill_gold = creepwars_gold_for_creep_kill(unit)
 	local creep_ability = T.name_only {
-		name = "<span color='" .. creepwars_color_score_hex .. "'>creep</span>",
+		name = "<b>creep(" .. kill_score_str .. ")</b>",
 		description = "This is a creep unit. It has no ZoC and you get \n"
 			.. creepwars_color_span_gold(kill_gold .. " gold") .. ", "
-			.. creepwars_color_span_score(kill_score .. " creep score") .. " for killing it.\n"
+			.. creepwars_color_span_score(kill_score_str .. " creep score") .. " for killing it.\n"
 			.. "Creeps are very aggressive, they only care about inflicting damage."
 	}
 	wesnoth.add_modification(unit, "object", {

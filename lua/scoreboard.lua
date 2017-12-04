@@ -7,10 +7,9 @@ local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local creepwars_score_for_leader_kill = creepwars_score_for_leader_kill
 local string = string
 local creepwars_color_gold_rgb = creepwars_color_gold_rgb
-local creepwars_color_gold_hex = creepwars_color_gold_hex
 local creepwars_color_score_rgb = creepwars_color_score_rgb
-local creepwars_color_score_hex = creepwars_color_score_hex
 local creepwars_color_span_score = creepwars_color_span_score
+local creepwars_gold_for_leaderkill_max = creepwars_gold_for_leaderkill_max
 
 local ugly_y_pos
 if wesnoth.get_terrain(18, 5) == "Qxua^Xo" then
@@ -72,7 +71,7 @@ local function creep_kill_event(attacker, defender)
 
 	do -- gold
 		local give_gold = defender.variables["creepwars_gold"]
-			or math.min(math.floor(team_creep_score), creepwars_gold_for_leaderkill_max)
+			or math.min(math.floor(score_previous), creepwars_gold_for_leaderkill_max)
 		local give_guard_hitpoints = creepwars_guard_hp_for_kill(defender.canrecruit)
 		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do -- guard
 			if creepwars_side_to_team[unit.side] == team and unit.max_moves == 0 then

@@ -23,6 +23,30 @@ local function set_concat(set, separator)
 end
 
 
+local function _format_any_value(obj, buffer)
+	if type(obj) == "table" then
+		buffer[#buffer + 1] = "{"
+		for key, value in next, obj, nil do
+			buffer[#buffer + 1] = tostring(key) .. ":"
+			_format_any_value(value, buffer)
+			buffer[#buffer + 1] = ","
+		end
+		buffer[#buffer] = "}" -- note the overwrite
+	elseif type(obj) == "string" then
+		buffer[#buffer + 1] = '"' .. tostring(obj) .. '"'
+	else
+		buffer[#buffer + 1] = '"???' .. type(obj) .. '???"'
+	end
+end
+
+
+function creepwars_format(obj)
+	local buffer = {}
+	_format_any_value(obj or "nil", buffer)
+	return table.concat(buffer)
+end
+
+
 function creepwars_array_filter(arr, func)
 	local result = {}
 	for _, elem in ipairs(arr) do

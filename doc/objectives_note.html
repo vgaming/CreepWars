@@ -2,29 +2,28 @@
 This is a Human-vs-Human map, each team consists of 1-3 human leaders (2-3 recommended), and a minor AI side.
 
 Each AI side always generates units so that the total number of them is <b>#creepwars_creep_count</b>.
-Humans cannot recruit additional units, but they can spend their gold in Shop to buy upgrades.
+Humans cannot recruit additional units, but they can spend their <span color='#FFE680'>gold</span> in Shop to buy upgrades.
 
 To start the game, go to Shop, choose how you want to upgrade your Leader, then move to the center and fight.
 
-Each kill will increase <b>gold</b> and <b>creep strength</b> for your team.
+Each kill will increase <span color='#FFE680'>gold</span> and <span color='#FF8080'>creep score</span> for your team.
 Human leaders cannot fully die: if they get 'killed', they are teloperted home and spend 1 turn to restore.
 
 To win the game, you must kill one of the enemy guards.
 
 <span size='x-large' underline='low'>Gold</span>
-Each kill gives you <b>#creepwars_gold_for_lvl0 + #creepwars_gold_per_creep_level*lvl</b> gold:
-lvl0	lvl1	lvl2	lvl3	lvl4
-#lvl0g	#lvl1g	#lvl2g	#lvl3g	#lvl4g	gold you get for creep kill, depending on its level
-If you kill enemy leader, you get the value of your current <b>creep score</b> in gold, never above <b>#creepwars_gold_for_leaderkill_max</b>, rounded down.
+Each creep kill gives <span color='#FFE680'>gold</span>. Hover a creep to see how much gold you'll get for killing it.
+Killing enemy leader gives you the value of your current <span color='#FF8080'>creep score</span>, in gold.
 
 <span size='x-large' underline='low'>Creep score</span>
-Each kill gives your team some <b>creep score</b>. You can see the amount by hovering a unit (not implemented yet).
+Each kill gives your team some <span color='#FF8080'>creep score</span>.
 Formula: <b>(creep_cost ^ #creepwars_score_power) * #creepwars_score_multiplier</b>. Killing enemy leader gives <b>x2</b> of that amount.
+Check the amount by hovering a creep.
 
 <span size='x-large' underline='low'>Creep generation</span>
-As said earlier, each AI side generates creeps for a total of <b>#creepwars_creep_count</b> at the beginning of its turn.
-The cost of chosen creeps is equal to your <b>creep score</b>.
-However, if your <b>creep score</b> is below <b>#creepwars_lvl0_barrier</b>, then only lvl0 units will be generated, and if your <b>creep score</b> is above <b>#creepwars_lvl3plus_barrier</b>, you get random lvl3 unit. If your score is much higher than unit cost, the unit will have additional 'boost'.
+Each AI side generates creeps for a total of <b>#creepwars_creep_count</b> at the beginning of its turn.
+The cost of chosen creeps is equal to your <span color='#FF8080'>creep score</span>.
+However, if your <span color='#FF8080'>creep score</span> is below <b>#creepwars_lvl0_barrier</b>, then only lvl0 units will be generated, and if your <span color='#FF8080'>creep score</span> is above <b>#creepwars_lvl3plus_barrier</b>, you get random lvl3 unit. If your score is much higher than unit cost, the unit will have additional 'boost'.
 
 <span size='x-large' underline='low'>Guard health</span>
 Your guard health starts with #creepwars_guard_hp_initial and increases by #guard_creep_hp (configurable, default 1) when killing a creep and by <b>3x</b> of that value when killing enemy leader.
@@ -36,12 +35,12 @@ Contacts: vn971 on irc.freenode.net (I often visit #wesnoth-dev), JID:novikov971
 
 <span size='x-large' underline='low'>Latest changes</span>
 Balancing:
+* Leveled-up creeps do not increase gold/creep score bonus for killing them anymore, which makes fighting those creeps harder. (Previously, you'd get more gold, more XP and more creep score because of the lvl-up.)
 * leaderkill gold is limited to lvl3 creep gold * 3 (2017-11-29)
 * leaderkill gold limited to 30 (2017-11-21)
 * gold bonus for leader kill == your current creep score (2017-11-20)
-* creep kills give more gold (2017-11-20)
-* creep score scaling +20%. (2017-11-19)
 Features:
+* Hover mouse on creeps to see their details
 * On development wesnoth-1.13+, many constants are configurable per-game.
 * Game reload possible! Finally. Creep score is preserved.
 * Add more creep types.

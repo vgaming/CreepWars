@@ -1,7 +1,6 @@
 -- << memoize.lua
 
 local wesnoth = wesnoth
-local creepwars_score_for_kill = creepwars_score_for_kill
 local split_comma = creepwars_split_comma
 local set_concat = creepwars_set_concat
 

@@ -98,7 +98,6 @@ else
 		end
 	end
 
-	if #recruitable_array == 0 then error("fail to start game, no creeps found") end
 end
 
 local creep_array = creepwars_copy_array(recruitable_array)
@@ -134,6 +133,24 @@ for _, unit in ipairs(creep_array) do
 			-- print("adding creep advance " .. adv)
 			creep_set[adv] = true
 			creep_array[#creep_array + 1] = adv
+		end
+	end
+end
+
+
+-- make sure lvl0 exists
+do
+	local lvl0_exists = false
+	for k,v in ipairs(creep_array) do
+		lvl0_exists = true
+		break
+	end
+	if not lvl0_exists then
+		wesnoth.message("Creep Wars", "Could not find any lvl0 units in your era, using default lvl0 creeps instead")
+		local add_array = { "Peasant", "Woodsman", "Ruffian", "Goblin Spearman" }
+		for _, add in ipairs(add_array) do
+			creep_set[add] = true
+			creep_array[#creep_array + 1] = add
 		end
 	end
 end

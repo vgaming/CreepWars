@@ -1,11 +1,12 @@
 -- << scoreboard
 
 local wesnoth = wesnoth
+local string = string
+local math = math
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_side_to_team = creepwars_side_to_team
 local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local creepwars_score_for_leader_kill = creepwars_score_for_leader_kill
-local string = string
 local creepwars_color_gold_rgb = creepwars_color_gold_rgb
 local creepwars_color_score_rgb = creepwars_color_score_rgb
 local creepwars_color_span_score = creepwars_color_span_score

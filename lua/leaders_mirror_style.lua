@@ -10,8 +10,9 @@ local creepwars_leader_strength = creepwars_leader_strength
 local function downgrade()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if creepwars_memoize_ai_side_set[unit.side] ~= true then
-			local downgrade = wesnoth.unit_types[unit.type].advances_from[1]
-			if downgrade then
+			local downgrade_array = wesnoth.unit_types[unit.type].advances_from
+			if #downgrade_array > 0 then
+				local downgrade = downgrade_array[helper.rand("1.." .. #downgrade_array + 1)]
 				wesnoth.transform_unit(unit, downgrade)
 				unit.hitpoints = unit.max_hitpoints
 			end

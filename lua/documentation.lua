@@ -73,7 +73,7 @@ if wesnoth then
 	local show_mirror_style = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10")
 		and creepwars_mirror_style ~= "mirror"
 	local mirror_msg = show_mirror_style and " Mirror style: " .. creepwars_mirror_style or ""
-	local recent = " Recent changes: Hover mouse on creeps to see their details."
+	local recent = " Recent changes: basic support for foreign Eras -- downgrade leaders by default."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg .. mirror_msg .. recent)
 else
 	external_documentation_note = note

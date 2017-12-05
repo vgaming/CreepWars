@@ -39,12 +39,13 @@ local function _format_any_value(obj, buffer)
 	end
 end
 
-
 function creepwars_format(obj)
 	local buffer = {}
 	_format_any_value(obj or "nil", buffer)
 	return table.concat(buffer)
 end
+
+function creepwars_print(obj) print(creepwars_format(obj)) end
 
 
 function creepwars_array_filter(arr, func)

@@ -136,8 +136,9 @@ else
 	end
 
 	if lvl2_exists then
-		print('Level 2 unit found. Downgrading all leaders. (In future, we may provide more intelligent options, but for now that\'s all.)')
-		wesnoth.message("Creep Wars", 'Non-"Creep Wars" Era detected, with all leaders being lvl2+. Downgrading all leaders. (In future, we may provide more intelligent options, but for now that\'s all.)')
+		local msg = 'Level 2 leader found. Downgrading all leaders. (In future, we may provide more intelligent options, but for now that\'s all.)'
+		print(msg)
+		wesnoth.message("Creep Wars", msg)
 		downgrade_wesnoth112()
 	end
 end

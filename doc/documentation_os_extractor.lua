@@ -11,7 +11,7 @@ io_file.close()
 
 dofile("lua/documentation.lua")
 local note = external_documentation_note
-note, _ = string.gsub(note, "<span size=[^>]*>", "==== ") -- headers
+note, _ = string.gsub(note, "<span size=[^>]*>", "== ") -- headers
 note, _ = string.gsub(note, "</span>\n", "\n") -- headers (end of line)
 note, _ = string.gsub(note, "</*span[^>]*>", "_") -- span
 note, _ = string.gsub(note, "<[^>]+>", "") -- all other tags

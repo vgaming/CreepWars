@@ -1,6 +1,7 @@
 -- << lift_fog
 
 local wesnoth = wesnoth
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_memoize_ai_side_set = creepwars_memoize_ai_side_set
 local creepwars_hide_leaders = creepwars_hide_leaders
 
@@ -12,6 +13,14 @@ end
 
 for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 	if creepwars_memoize_ai_side_set[unit.side] == true then
+		local ability = T.name_only {
+			name = "guard",
+			description = "All team members lose if this unit dies. \n"
+				.. "You can heal and unpoison your guard at the Shop."
+		}
+		wesnoth.add_modification(unit, "object", {
+			T.effect { apply_to = "new_ability", T.abilities { ability } }
+		})
 		if wesnoth.get_variable("creepwars_lift_fog_guard") ~= false then
 			print("Lifting fog around guard " .. unit.type .. " [" .. unit.x .. "," .. unit.y .. "]")
 			lift_fog(unit.x, unit.y)

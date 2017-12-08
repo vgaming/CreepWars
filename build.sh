@@ -23,7 +23,8 @@ echo -n "$version" > target/version.txt
 sed -i '/description=/,//d' _server.pbl
 # add it back
 echo -n 'description="' >> _server.pbl
-lua doc/documentation_os_extractor.lua | sed -e 's/<[^>]*>//g' >> _server.pbl
+lua doc/documentation_os_extractor.lua > target/about.html
+lua doc/documentation_os_extractor.lua >> _server.pbl
 echo '"' >> _server.pbl
 
 }; exit 0

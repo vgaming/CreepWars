@@ -1,13 +1,13 @@
 <span size='x-large' underline='low'>About</span>
 This is a Human-vs-Human map, each team consists of 1-3 human leaders (2-3 recommended), and a minor AI side.
 
-Each AI side always generates units so that the total number of them is <b>#creepwars_creep_count</b>.
-Humans cannot recruit additional units, but they can spend their <span color='#FFE680'>gold</span> in Shop to buy upgrades.
-
 To start the game, go to Shop, choose how you want to upgrade your Leader, then move to the center and fight.
 
 Each kill will increase <span color='#FFE680'>gold</span> and <span color='#FF8080'>creep score</span> for your team.
 Human leaders cannot fully die: if they get 'killed', they are teloperted home and spend 1 turn to restore.
+
+Each AI side always generates units so that the total number of them is <b>#creepwars_creep_count</b>.
+Humans cannot recruit additional units, but they can spend their <span color='#FFE680'>gold</span> in Shop to buy upgrades.
 
 To win the game, you must kill one of the enemy guards.
 
@@ -17,7 +17,7 @@ Killing enemy leader gives you the value of your current <span color='#FF8080'>c
 
 <span size='x-large' underline='low'>Creep score</span>
 Each kill gives your team some <span color='#FF8080'>creep score</span>.
-Formula: <b>(creep_cost ^ #creepwars_score_power) * #creepwars_score_multiplier</b>. Killing enemy leader gives <b>x2</b> of that amount.
+Formula: <b>(creep_cost ⌃ #creepwars_score_power) * #creepwars_score_multiplier</b>. Killing enemy leader gives <b>x2</b> of that amount.
 Check the amount by hovering a creep.
 
 <span size='x-large' underline='low'>Creep generation</span>

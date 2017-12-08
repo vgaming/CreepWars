@@ -128,16 +128,15 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		error("Unknown leader mirror style: " .. creepwars_mirror_style)
 	end
 else
-	local all_lvl2 = true
+	local lvl2_exists = false
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 --		if not creepwars_memoize_ai_side_set[unit.side] then
 --		end
-		all_lvl2 = all_lvl2 and wesnoth.unit_types[unit.type].level > 1
+		lvl2_exists = lvl2_exists or wesnoth.unit_types[unit.type].level > 1
 	end
 
-	local era = wesnoth.game_config.era.id
-	if all_lvl2 and not string.find(era, "Creep") and not string.find(era, "War") then
-		print('Non-"Creep Wars" Era detected, with all leaders being lvl2+. Downgrading all leaders. (In future, we may provide more intelligent options, but for now that\'s all.)')
+	if lvl2_exists then
+		print('Level 2 unit found. Downgrading all leaders. (In future, we may provide more intelligent options, but for now that\'s all.)')
 		wesnoth.message("Creep Wars", 'Non-"Creep Wars" Era detected, with all leaders being lvl2+. Downgrading all leaders. (In future, we may provide more intelligent options, but for now that\'s all.)')
 		downgrade_wesnoth112()
 	end

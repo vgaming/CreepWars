@@ -19,7 +19,7 @@ local note
 if wesnoth then
 	note = wesnoth.get_variable("creepwars_objectives_note")
 else
-	note = external_documentation_note
+	note = ... -- lua arguments
 end
 
 note, _ = string.gsub(note, "#creepwars_creep_count", creepwars_creep_count)
@@ -76,7 +76,7 @@ if wesnoth then
 	local recent = " Recent changes: basic support for foreign Eras -- downgrade leaders by default."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg .. mirror_msg .. recent)
 else
-	external_documentation_note = note
+	return note
 end
 
 

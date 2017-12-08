@@ -2,15 +2,11 @@ dofile("lua/config.lua")
 
 
 local io_file = assert(io.open("doc/objectives_note.html"))
-
--- global
-external_documentation_note = io_file:read("*all")
-
+local note = io_file:read("*all")
 io_file.close()
 
 
-dofile("lua/documentation.lua")
-local note = external_documentation_note
+note = loadfile("lua/documentation.lua")(note)
 note, _ = string.gsub(note, "<span size=[^>]*>", "== ") -- headers
 note, _ = string.gsub(note, "</span>\n", "\n") -- headers (end of line)
 note, _ = string.gsub(note, "</*span[^>]*>", "_") -- span

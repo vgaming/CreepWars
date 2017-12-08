@@ -16,7 +16,7 @@ echo -n "$version" > target/version.txt
 
 
 # export git log
-#git log --date=short -10 --pretty='%ad %cn %d %s' > doc/git_changelog.txt
+#git log --date=short -10 --pretty='%ad %cn %d %s' > target/git_changelog.txt
 
 
 # delete _server.pbl description

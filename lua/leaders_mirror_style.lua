@@ -136,7 +136,7 @@ else
 	end
 
 	if lvl2_exists then
-		local msg = 'Level 2 leader found. Downgrading all leaders. (In future, we may provide more intelligent options, but for now that\'s all.)'
+		local msg = 'Level 2 leader found. Downgrading all leaders.'
 		print(msg)
 		wesnoth.message("Creep Wars", msg)
 		downgrade_wesnoth112()

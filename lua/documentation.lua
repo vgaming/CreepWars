@@ -57,9 +57,6 @@ if wesnoth then
 	if creepwars_score_multiplier_percent ~= 50 then
 		non_standard[#non_standard + 1] = "creep score multiplier: " .. creepwars_score_multiplier_percent
 	end
-	--if  ~=  then
-	--	non_standard[#non_standard + 1] =
-	--end
 
 	local non_standard_msg
 	if wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10") then

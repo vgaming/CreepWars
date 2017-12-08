@@ -32,7 +32,7 @@ local function _format_any_value(obj, buffer)
 			buffer[#buffer + 1] = ","
 		end
 		buffer[#buffer] = "}" -- note the overwrite
-	elseif type(obj) == "string" then
+	elseif type(obj) == "string" or type(obj) == "number" or type(obj) == "boolean" then
 		buffer[#buffer + 1] = '"' .. tostring(obj) .. '"'
 	else
 		buffer[#buffer + 1] = '"???' .. type(obj) .. '???"'

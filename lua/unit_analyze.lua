@@ -174,11 +174,11 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		end
 
 		local result = math.pow(base_leader_strength(unit), 1 / 2) * math.pow(maximum, 1 / 2)
-		print("leader " .. unit .. ": " .. result)
+		-- print("leader " .. unit .. ": " .. result)
 		leader_strength[unit] = result
 	end
 	for _, unit in ipairs(creep_array) do
-		print("super-leader " .. unit .. ": " .. super_leader_strength(unit))
+		-- print("super-leader " .. unit .. ": " .. super_leader_strength(unit))
 	end
 end
 

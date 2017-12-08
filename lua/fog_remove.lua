@@ -22,14 +22,14 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 			T.effect { apply_to = "new_ability", T.abilities { ability } }
 		})
 		if wesnoth.get_variable("creepwars_lift_fog_guard") ~= false then
-			print("Lifting fog around guard " .. unit.type .. " [" .. unit.x .. "," .. unit.y .. "]")
+			-- print("Lifting fog around guard " .. unit.type .. " [" .. unit.x .. "," .. unit.y .. "]")
 			lift_fog(unit.x, unit.y)
 		end
 	else
 		if not creepwars_hide_leaders then
 			local limbo_x = unit.variables.limbo_x
 			local limbo_y = unit.variables.limbo_y
-			print("Lifting fog around leader limbo " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
+			-- print("Lifting fog around leader limbo " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
 			lift_fog(limbo_x, limbo_y)
 
 			--local home_x = unit.variables.home_x

@@ -13,15 +13,19 @@ do
 			ai_sides[tonumber(v)] = true
 		end
 	else
+		local human_sides = {}
 		for _, side in ipairs(wesnoth.sides) do
 			if side.controller == "ai" or side.controller == "network_ai" then
 				ai_sides[side.side] = true
+			else
+				human_sides[side.side] = true
 			end
 		end
 		wesnoth.set_variable("creepwars_ai_sides", set_concat(ai_sides, ","))
+		wesnoth.set_variable("creepwars_human_sides", set_concat(human_sides, ","))
 	end
 end
-print("AI sides: " .. wesnoth.get_variable("creepwars_ai_sides"))
+-- print("AI sides: " .. wesnoth.get_variable("creepwars_ai_sides"))
 
 
 local team_name_to_team_id = {}
@@ -37,7 +41,7 @@ end
 for _, team_id in pairs(team_name_to_team_id) do
 	local score = wesnoth.get_variable("creepwars_creep_score_" .. team_id)
 	local gold = wesnoth.get_variable("creepwars_gold_" .. team_id)
-	print("loading/creating team " .. team_id .. ", creep score: " .. (score or "nil") .. ", gold: " .. (gold or "nil"))
+	-- print("loading/creating team " .. team_id .. ", creep score: " .. (score or "nil") .. ", gold: " .. (gold or "nil"))
 	if not score then
 		wesnoth.set_variable("creepwars_creep_score_" .. team_id, creepwars_score_start)
 	end

@@ -4,10 +4,9 @@ local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
 
 local side = wesnoth.get_variable("side_number")
---local side = wesnoth.get_variable("creepwars_human_sides") -- all sides
 for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side }) do
-	local inventory = wesnoth.get_variable("cw_inventory")[side][2]
-	local items = inventory[3][2] -- wesnoth-1.13: helper.child_array(inventory, "item")[1]
+	local inventory = helper.get_child(wesnoth.get_variable("cw_inventory"), tostring(side))
+	local items = helper.get_child(inventory, "item")
 	local msg = {}
 	if items.lhu > 0 then msg[#msg + 1] = items.lhu .. " HP bottle" end
 	if items.shu > 0 then msg[#msg + 1] = items.shu .. " hp bottle" end

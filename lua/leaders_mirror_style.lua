@@ -106,7 +106,7 @@ local function force_same_strength()
 		repeat
 			result = rnd_array()
 			local cost = array_cost(result)
-		until cost > 0.93 * reference_cost and cost < 1.07 * reference_cost
+		until cost > 0.90 * reference_cost and cost < 1.10 * reference_cost
 		return result
 	end
 

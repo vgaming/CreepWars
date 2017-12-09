@@ -1,5 +1,13 @@
 -- << utils
 
+local ipairs = ipairs
+local next = next
+local pairs = pairs
+local string = string
+local table = table
+local tostring = tostring
+local type = type
+
 local function split_comma(str)
 	local result = {}
 	local n = 1

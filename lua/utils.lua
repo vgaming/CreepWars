@@ -25,11 +25,11 @@ end
 
 local function _format_any_value(obj, buffer)
 	if type(obj) == "table" then
-		buffer[#buffer + 1] = "{"
+		buffer[#buffer + 1] = '{"'
 		for key, value in next, obj, nil do
-			buffer[#buffer + 1] = tostring(key) .. ":"
+			buffer[#buffer + 1] = tostring(key) .. '":'
 			_format_any_value(value, buffer)
-			buffer[#buffer + 1] = ","
+			buffer[#buffer + 1] = ',"'
 		end
 		buffer[#buffer] = "}" -- note the overwrite
 	elseif type(obj) == "string" or type(obj) == "number" or type(obj) == "boolean" then

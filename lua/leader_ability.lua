@@ -2,6 +2,8 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local table = table
 
 local side = wesnoth.get_variable("side_number")
 for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side }) do

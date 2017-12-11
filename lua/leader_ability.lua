@@ -38,6 +38,7 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side }) do
 		description = "<b>Upgrades:</b> " .. table.concat(msg, ", ")
 	}
 	wesnoth.add_modification(unit, "object", {
+		T.effect { apply_to = "remove_ability", T.abilities { ability } },
 		T.effect { apply_to = "new_ability", T.abilities { ability } }
 	})
 end

@@ -33,7 +33,8 @@ end
 
 local function _format_any_value(obj, buffer)
 	if type(obj) == "table" then
-		buffer[#buffer + 1] = '{"'
+		buffer[#buffer + 1] = '{'
+		buffer[#buffer + 1] = '"' -- needs to be separate for empty tables {}
 		for key, value in next, obj, nil do
 			buffer[#buffer + 1] = tostring(key) .. '":'
 			_format_any_value(value, buffer)

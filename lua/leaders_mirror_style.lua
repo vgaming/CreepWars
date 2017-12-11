@@ -36,7 +36,7 @@ local function downgrade_wesnoth112(max_leader_level)
 		local downgrade_array = downgrade_map[unit.type]
 		if creepwars_memoize_ai_side_set[unit.side] ~= true
 			and downgrade_array and #downgrade_array > 0
-			and unit.level == max_leader_level then
+			and wesnoth.unit_types[unit.type].level == max_leader_level then
 
 			local downgrade = downgrade_array[1] -- need the same for true mirror
 			wesnoth.transform_unit(unit, downgrade)

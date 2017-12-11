@@ -1,3 +1,7 @@
 *~
-_server.pbl
+
+#### wesnoth files
+*.pbl
+
+#### build output
 /target/

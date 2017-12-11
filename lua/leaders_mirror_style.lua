@@ -137,7 +137,7 @@ else
 	end
 
 	if max_leader_level > 1 then
-		local msg = 'Level ' .. max_leader_level .. ' leader found. Downgrading all leaders.'
+		local msg = 'Level ' .. max_leader_level .. ' leaders found. Downgrading.'
 		print(msg)
 		wesnoth.message("Creep Wars", msg)
 		downgrade_wesnoth112(max_leader_level)

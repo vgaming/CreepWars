@@ -2,10 +2,10 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
+local creepwars_leader_strength = creepwars_leader_strength
 local creepwars_memoize_ai_side_set = creepwars_memoize_ai_side_set
 local creepwars_mirror_style = creepwars_mirror_style
 local creepwars_recruitable_array = creepwars_recruitable_array
-local creepwars_leader_strength = creepwars_leader_strength
 local split_comma = creepwars_split_comma
 
 local function downgrade()
@@ -22,7 +22,7 @@ local function downgrade()
 	end
 end
 
-local function downgrade_wesnoth112()
+local function downgrade_wesnoth112(max_leader_level)
 	local downgrade_map = {} -- map unit -> downgrades
 	for unit_name, unit_data in pairs(wesnoth.unit_types) do
 		for _, adv in ipairs(split_comma(unit_data.__cfg.advances_to)) do
@@ -33,13 +33,14 @@ local function downgrade_wesnoth112()
 	end
 
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if creepwars_memoize_ai_side_set[unit.side] ~= true then
-			local downgrade_array = downgrade_map[unit.type]
-			if downgrade_array and #downgrade_array > 0 then
-				local downgrade = downgrade_array[1] -- need the same for true mirror
-				wesnoth.transform_unit(unit, downgrade)
-				unit.hitpoints = unit.max_hitpoints
-			end
+		local downgrade_array = downgrade_map[unit.type]
+		if creepwars_memoize_ai_side_set[unit.side] ~= true
+			and downgrade_array and #downgrade_array > 0
+			and unit.level == max_leader_level then
+
+			local downgrade = downgrade_array[1] -- need the same for true mirror
+			wesnoth.transform_unit(unit, downgrade)
+			unit.hitpoints = unit.max_hitpoints
 		end
 	end
 end
@@ -128,18 +129,18 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		error("Unknown leader mirror style: " .. creepwars_mirror_style)
 	end
 else
-	local lvl2_exists = false
+	local max_leader_level = -1
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
---		if not creepwars_memoize_ai_side_set[unit.side] then
---		end
-		lvl2_exists = lvl2_exists or wesnoth.unit_types[unit.type].level > 1
+		if not creepwars_memoize_ai_side_set[unit.side] then
+			max_leader_level = math.max(max_leader_level, wesnoth.unit_types[unit.type].level)
+		end
 	end
 
-	if lvl2_exists then
-		local msg = 'Level 2 leader found. Downgrading all leaders.'
+	if max_leader_level > 1 then
+		local msg = 'Level ' .. max_leader_level .. ' leader found. Downgrading all leaders.'
 		print(msg)
 		wesnoth.message("Creep Wars", msg)
-		downgrade_wesnoth112()
+		downgrade_wesnoth112(max_leader_level)
 	end
 end
 

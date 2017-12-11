@@ -83,6 +83,15 @@ function creepwars_copy_array(orig)
 end
 
 
+function creepwars_array_merge(first, second)
+	local i = 1
+	local result = {}
+	for _, v in ipairs(first) do result[i] = v; i = i + 1 end
+	for _, v in ipairs(second) do result[i] = v; i = i + 1 end
+	return result
+end
+
+
 function creepwars_copy_table(orig)
 	local result = {}
 	for k, v in pairs(orig) do

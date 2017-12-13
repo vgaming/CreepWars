@@ -6,12 +6,13 @@ creepwars_creep_lvl_max = 3
 
 creepwars_creep_count = 8
 
+creepwars_default_era_creeps = wesnoth and wesnoth.get_variable("creepwars_default_era_creeps") or false
+
 creepwars_mirror_style = wesnoth and wesnoth.get_variable("creepwars_mirror_style")
 	or wesnoth and wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") and "same_strength"
 	or "manual"
 creepwars_hide_leaders = wesnoth and wesnoth.get_variable("creepwars_hide_leaders") and creepwars_mirror_style ~= "mirror"
 	or wesnoth and wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10")
-creepwars_default_era_creeps = wesnoth and wesnoth.get_variable("creepwars_default_era_creeps")
 
 creepwars_guard_hp_for_creep = wesnoth and wesnoth.get_variable("creepwars_guard_hp_for_creep") or 1
 

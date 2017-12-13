@@ -11,6 +11,7 @@ creepwars_mirror_style = wesnoth and wesnoth.get_variable("creepwars_mirror_styl
 	or "manual"
 creepwars_hide_leaders = wesnoth and wesnoth.get_variable("creepwars_hide_leaders") and creepwars_mirror_style ~= "mirror"
 	or wesnoth and wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10")
+creepwars_default_era_creeps = wesnoth and wesnoth.get_variable("creepwars_default_era_creeps")
 
 creepwars_guard_hp_for_creep = wesnoth and wesnoth.get_variable("creepwars_guard_hp_for_creep") or 1
 

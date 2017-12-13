@@ -7,12 +7,11 @@ local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
 local creepwars_array_filter = creepwars_array_filter
 local creepwars_array_to_set = creepwars_array_to_set
-local creepwars_copy_array = creepwars_copy_array
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 local creepwars_default_era_creeps = creepwars_default_era_creeps
 local split_comma = creepwars_split_comma
-local creepwars_array_merge = creepwars_array_merge
 local ipairs = ipairs
+local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 
 
 local function count_specials(unit)

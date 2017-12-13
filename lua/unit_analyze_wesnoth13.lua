@@ -70,7 +70,10 @@ end
 add_downgrades(era_array, era_set)
 local leader_array = creepwars_array_filter(era_array,
 	function(unit)
-		return wesnoth.unit_types[unit].level <= 1 and count_specials(unit)["plague"] == nil and count_specials(unit)["berserk"] == nil
+		return wesnoth.unit_types[unit].level <= 1
+			and count_specials(unit)["plague"] == nil
+			and count_specials(unit)["berserk"] == nil
+			and wesnoth.unit_types[unit].cost >= creepwars_lvl0_barrier
 	end)
 
 

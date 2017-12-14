@@ -11,7 +11,6 @@ local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 local creepwars_default_era_creeps = creepwars_default_era_creeps
 local split_comma = creepwars_split_comma
 local ipairs = ipairs
-local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 
 
 local function count_specials(unit)
@@ -70,10 +69,9 @@ end
 add_downgrades(era_array, era_set)
 local leader_array = creepwars_array_filter(era_array,
 	function(unit)
-		return wesnoth.unit_types[unit].level <= 1
+		return wesnoth.unit_types[unit].level == 1
 			and count_specials(unit)["plague"] == nil
 			and count_specials(unit)["berserk"] == nil
-			and (wesnoth.unit_types[unit].level > 0 or wesnoth.unit_types[unit].cost >= creepwars_lvl0_barrier)
 	end)
 
 

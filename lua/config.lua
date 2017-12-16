@@ -30,7 +30,7 @@ local gold_per_kill_start = 3
 local gold_kills_to_increase = 15
 local function gold_per_kill(kills) return gold_per_kill_start + math.floor(kills / gold_kills_to_increase) end
 
-local creepwars_score_scale = 4
+local creepwars_score_scale = 3
 creepwars_score_start = 9
 -- derived values:
 creepwars_score_per_kill_min = 2 * (creepwars_lvl3plus_barrier - creepwars_score_start)

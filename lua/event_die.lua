@@ -16,7 +16,7 @@ elseif attacker == nil then
 		"If the host has no modifications, please report the issue."
 	print(msg)
 	wesnoth.message("Creep Wars", msg)
-elseif defender.canrecruit or defender.variables["creepwars_score"] then
+elseif defender.canrecruit or defender.variables["creepwars_creep"] then
 	creepwars_creep_kill_event(attacker, defender)
 else
 	local msg = "Turn " .. wesnoth.get_variable("turn_number") .. ": " .. defender.type

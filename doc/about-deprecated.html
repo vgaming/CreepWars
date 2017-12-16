@@ -1,0 +1,54 @@
+<span size='x-large' underline='low'>Gold</span>
+Your <span color='#FFE680'>gold</span> increases with each kill. First <b>#gold_kills_to_increase kills</b> will give <span color='#FFE680'>#gold_start_p0 gold</span> each, next <b>#gold_kills_to_increase kills</b> give <span color='#FFE680'>#gold_start_p1 gold</span> each, next <b>#gold_kills_to_increase kills</b> give <span color='#FFE680'>#gold_start_p2 gold</span> each, etc. Leader kill counts as <b>4</b> creep kills (4 times more gold, 4 kill count).
+
+creep kills + 4 * leader kills    	0	10	20	30	40	50	60	70	80
+gold						<span fgcolor='#FFE680'>#g0	#g10	#g20	#g30	#g40	#g50	#g60	#g70	#g80</span>
+increase per kill				<span fgcolor='#FFE680'>#dg0	#dg10	#dg20	#dg30	#dg40	#dg50	#dg60	#dg70	#dg80</span>
+
+<span size='x-large' underline='low'>Creep score</span>
+Your <span color='#FF8080'>creep score</span> starts with #creepwars_score_start and increases with each kill. Leader kill counts equally to creep kill.
+
+creep kills + leader kills		0	10	20	30	40	50	60	70	80
+creep score				<span fgcolor='#FF8080'>#s0	#s10	#s20	#s30	#s40	#s50	#s60	#s70	#s80</span>
+increase per kill				<span fgcolor='#FF8080'>#ds0	#ds10	#ds20	#ds30	#ds40	#ds50	#ds60	#ds70	#ds80</span>
+
+
+
+
+
+replaceWidth(0, "#s0", string.format("%.1f", score_sum(0)))
+replaceWidth(0, "#s10", string.format("%.1f", score_sum(10)))
+replaceWidth(0, "#s20", string.format("%.1f", score_sum(20)))
+replaceWidth(0, "#s30", string.format("%.1f", score_sum(30)))
+replaceWidth(0, "#s40", string.format("%.1f", score_sum(40)))
+replaceWidth(0, "#s50", string.format("%.1f", score_sum(50)))
+replaceWidth(0, "#s60", string.format("%.1f", score_sum(60)))
+replaceWidth(0, "#s70", string.format("%.1f", score_sum(70)))
+replaceWidth(0, "#s80", string.format("%.1f", score_sum(80)))
+replaceWidth(0, "#ds0", string.format("%.2f", score_per_kill(0)))
+replaceWidth(0, "#ds10", string.format("%.2f", score_per_kill(10)))
+replaceWidth(0, "#ds20", string.format("%.2f", score_per_kill(20)))
+replaceWidth(0, "#ds30", string.format("%.2f", score_per_kill(30)))
+replaceWidth(0, "#ds40", string.format("%.2f", score_per_kill(40)))
+replaceWidth(0, "#ds50", string.format("%.2f", score_per_kill(50)))
+replaceWidth(0, "#ds60", string.format("%.2f", score_per_kill(60)))
+replaceWidth(0, "#ds70", string.format("%.2f", score_per_kill(70)))
+replaceWidth(0, "#ds80", string.format("%.2f", score_per_kill(80)))
+replaceWidth(5, "#g0", gold_sum(0))
+replaceWidth(5, "#g10", gold_sum(10))
+replaceWidth(5, "#g20", gold_sum(20))
+replaceWidth(5, "#g30", gold_sum(30))
+replaceWidth(5, "#g40", gold_sum(40))
+replaceWidth(5, "#g50", gold_sum(50))
+replaceWidth(5, "#g60", gold_sum(60))
+replaceWidth(5, "#g70", gold_sum(70))
+replaceWidth(5, "#g80", gold_sum(80))
+replaceWidth(6, "#dg0", gold_per_kill(0))
+replaceWidth(6, "#dg10", gold_per_kill(10))
+replaceWidth(6, "#dg20", gold_per_kill(20))
+replaceWidth(6, "#dg30", gold_per_kill(30))
+replaceWidth(6, "#dg40", gold_per_kill(40))
+replaceWidth(6, "#dg50", gold_per_kill(50))
+replaceWidth(6, "#dg60", gold_per_kill(60))
+replaceWidth(6, "#dg70", gold_per_kill(70))
+replaceWidth(6, "#dg80", gold_per_kill(80))

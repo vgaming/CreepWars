@@ -1,102 +1,88 @@
 -- << scoreboard
 
 local wesnoth = wesnoth
+local creepwars = creepwars
+local ipairs = ipairs
 local string = string
-local math = math
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-local creepwars_side_to_team = creepwars_side_to_team
 local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
-local creepwars_score_for_leader_kill = creepwars_score_for_leader_kill
-local creepwars_color_gold_rgb = creepwars_color_gold_rgb
-local creepwars_color_score_rgb = creepwars_color_score_rgb
-local creepwars_color_span_score = creepwars_color_span_score
-local creepwars_gold_for_leaderkill_max = creepwars_gold_for_leaderkill_max
+local creepwars_spawn_pos = creepwars_spawn_pos
+local gold_per_kill = creepwars.gold_per_kill
+local score_per_kill = creepwars.score_per_kill
+local side_to_team = creepwars.side_to_team
+local team_array = creepwars.team_array
 
-local ugly_y_pos
-if wesnoth.get_terrain(18, 5) == "Qxua^Xo" then
-	ugly_y_pos = 5
-else
-	ugly_y_pos = 10
-end
-
-local display_creep_score
-wesnoth.wml_actions.label { x = 18, y = ugly_y_pos - 1, text = "Creep strength:", color = creepwars_color_score_rgb }
-do
-	local label_positions = {}
-	label_positions[creepwars_side_to_team[1]] = { x = 17, y = 5 } -- UGLY inline HACK
-	label_positions[creepwars_side_to_team[2]] = { x = 19, y = 5 } -- UGLY inline HACK
-
-	display_creep_score = function()
-		for team, pos in pairs(label_positions) do
-			local creep_score = wesnoth.get_variable("creepwars_creep_score_" .. team)
-			wesnoth.wml_actions.label {
-				x = pos.x,
-				y = ugly_y_pos,
-				text = string.format("%.2f", creep_score),
-				color = creepwars_color_score_rgb
-			}
-		end
+local function display_stats()
+	for team, _ in ipairs(team_array) do
+		local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
+		local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
+		local gold = wesnoth.get_variable("creepwars_gold_" .. team)
+		local score = string.format("%.2f", wesnoth.get_variable("creepwars_score_" .. team))
+		local text = "<span color='#FFFFFF'>"
+			.. creepkills .. " x, "
+			.. leaderkills .. " X, \n"
+			.. "</span><span color='#FF8080'>" .. score .. " s, "
+			.. "</span><span color='#FFE680'>" .. gold .. " g"
+			.. "</span>"
+		wesnoth.wml_actions.label {
+			x = creepwars_spawn_pos[team].x,
+			y = creepwars_spawn_pos[team].y,
+			text = text
+		}
 	end
 end
-display_creep_score()
-
-
-local display_gold
-wesnoth.wml_actions.label { x = 18, y = ugly_y_pos, text = "Leader gold:", color = creepwars_color_gold_rgb }
-do
-	local label_positions = {}
-	label_positions[creepwars_side_to_team[1]] = { x = 17, y = 6 } -- UGLY inline HACK
-	label_positions[creepwars_side_to_team[2]] = { x = 19, y = 6 } -- UGLY inline HACK
-	display_gold = function()
-		for team, pos in pairs(label_positions) do
-			local gold = wesnoth.get_variable("creepwars_gold_" .. team)
-			wesnoth.wml_actions.label { x = pos.x, y = ugly_y_pos + 1, text = gold, color = creepwars_color_gold_rgb }
-		end
-	end
-end
-display_gold()
+display_stats()
 
 
 local function creep_kill_event(attacker, defender)
-	local team = creepwars_side_to_team[attacker.side]
+	local team = side_to_team[attacker.side]
 
-	local score_previous = wesnoth.get_variable("creepwars_creep_score_" .. team)
-	do -- creep score
-		local score_add = defender.variables["creepwars_score"]
-			or creepwars_score_for_leader_kill(defender)
-		local score_new = score_previous + score_add
-		local score_add_text = string.format("%.2f", score_add)
-		wesnoth.float_label(attacker.x, attacker.y, creepwars_color_span_score(score_add_text))
-		wesnoth.set_variable("creepwars_creep_score_" .. team, score_new)
-	end
+	local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
+	local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
 
-	do -- gold
-		local give_gold = defender.variables["creepwars_gold"]
-			or math.min(math.floor(score_previous), creepwars_gold_for_leaderkill_max)
-		local give_guard_hitpoints = creepwars_guard_hp_for_kill(defender.canrecruit)
-		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do -- guard
-			if creepwars_side_to_team[unit.side] == team and unit.max_moves == 0 then
-				wesnoth.add_modification(unit, "object", {
-					T.effect {
-						apply_to = "hitpoints",
-						increase_total = give_guard_hitpoints,
-						increase = give_guard_hitpoints
-					},
-				})
-			end
-		end
 
-		local gold_previous = wesnoth.get_variable("creepwars_gold_" .. team)
-		wesnoth.set_variable("creepwars_gold_" .. team, gold_previous + give_gold)
-		for _, side in ipairs(wesnoth.sides) do
-			if creepwars_side_to_team[side.side] == team then
-				side.gold = side.gold + give_gold
-			end
+	-- score
+	local score = wesnoth.get_variable("creepwars_score_" .. team)
+	score = score + score_per_kill(creepkills + leaderkills)
+	wesnoth.set_variable("creepwars_score_" .. team, score)
+
+	-- guard
+	local guard_give_hp = creepwars_guard_hp_for_kill(defender.canrecruit)
+	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
+		if side_to_team[unit.side] == team and unit.max_moves == 0 then
+			wesnoth.add_modification(unit, "object", {
+				T.effect {
+					apply_to = "hitpoints",
+					increase_total = guard_give_hp,
+					increase = guard_give_hp
+				},
+			})
 		end
 	end
 
-	display_creep_score()
-	display_gold()
+	-- gold
+	local gold_orig = wesnoth.get_variable("creepwars_gold_" .. team)
+	local gold_kills = creepkills + 4 * leaderkills
+	local gold = gold_orig + gold_per_kill(gold_kills)
+	if defender.canrecruit then
+		gold = gold + gold_per_kill(gold_kills + 1)
+		gold = gold + gold_per_kill(gold_kills + 2)
+		gold = gold + gold_per_kill(gold_kills + 3)
+	end
+	wesnoth.set_variable("creepwars_gold_" .. team, gold)
+	for _, side in ipairs(wesnoth.sides) do
+		if side_to_team[side.side] == team then
+			side.gold = side.gold + gold - gold_orig
+		end
+	end
+
+	if defender.canrecruit then
+		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + 1)
+	else
+		wesnoth.set_variable("creepwars_creepkills_" .. team, creepkills + 1)
+	end
+
+	display_stats()
 end
 
 

@@ -2,7 +2,7 @@
 
 local wesnoth = wesnoth
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-local creepwars_memoize_ai_side_set = creepwars_memoize_ai_side_set
+local creepwars_ai_side_set = creepwars_ai_side_set
 local creepwars_hide_leaders = creepwars_hide_leaders
 
 -- wesnoth-1.12 seems to be a bit buggy, we'll clear fog with multiturn = true AND false.
@@ -12,7 +12,7 @@ local function lift_fog(x, y)
 end
 
 for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-	if creepwars_memoize_ai_side_set[unit.side] == true then
+	if creepwars_ai_side_set[unit.side] == true then
 		local ability = T.name_only {
 			name = "guard",
 			description = "All team members lose if this unit dies. \n"

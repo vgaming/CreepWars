@@ -2,7 +2,6 @@
 
 local ipairs = ipairs
 local next = next
-local pairs = pairs
 local string = string
 local table = table
 local tostring = tostring
@@ -18,16 +17,6 @@ local function split_comma(str)
 		end
 	end
 	return result
-end
-
-
-local function set_concat(set, separator)
-	separator = separator or ","
-	local s = ""
-	for k, _ in pairs(set) do
-		s = s .. "," .. k
-	end
-	return string.sub(s, 2, string.len(s))
 end
 
 
@@ -93,16 +82,9 @@ function creepwars_array_merge(first, second)
 end
 
 
-function creepwars_copy_table(orig)
-	local result = {}
-	for k, v in pairs(orig) do
-		result[k] = v
-	end
-	return result
-end
-
+creepwars = {}
+creepwars.split_comma = split_comma
 
 creepwars_split_comma = split_comma
-creepwars_set_concat = set_concat
 
 -- >>

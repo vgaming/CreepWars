@@ -8,15 +8,10 @@ local helper = wesnoth.require "lua/helper.lua"
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
-local creepwars_score_for_creep_kill = creepwars_score_for_creep_kill
-local creepwars_gold_for_creep_kill = creepwars_gold_for_creep_kill
-local creepwars_color_score_hex = creepwars_color_score_hex
-local creepwars_color_span_gold = creepwars_color_span_gold
-local creepwars_color_span_score = creepwars_color_span_score
 local creep_array = creepwars_creep_array
-local creep_rand_string = "1.." .. #creep_array
-local string = string
 
+
+local creep_rand_string = "1.." .. #creep_array
 
 local function generate(desired_cost)
 	local function rand_creep() return creep_array[helper.rand(creep_rand_string)] end
@@ -65,14 +60,9 @@ local function generate(desired_cost)
 			T.effect { apply_to = "new_ability", T.abilities { boost_ability } },
 		})
 	end
-	local kill_score = creepwars_score_for_creep_kill(unit)
-	local kill_score_str = string.format("%.2f", kill_score)
-	local kill_gold = creepwars_gold_for_creep_kill(unit)
 	local creep_ability = T.name_only {
-		name = "<b>creep(" .. kill_score_str .. ")</b>",
-		description = "This is a creep unit. It has no ZoC and you get \n"
-			.. creepwars_color_span_gold(kill_gold .. " gold") .. ", "
-			.. creepwars_color_span_score(kill_score_str .. " creep score") .. " for killing it.\n"
+		name = "<b>creep</b>",
+		description = "This is a creep unit. It has no ZoC."
 			.. "Creeps are very aggressive, they only care about inflicting damage."
 	}
 	wesnoth.add_modification(unit, "object", {
@@ -80,8 +70,7 @@ local function generate(desired_cost)
 		T.effect { apply_to = "loyal" },
 		T.effect { apply_to = "new_ability", T.abilities { creep_ability } },
 	})
-	unit.variables["creepwars_score"] = kill_score
-	unit.variables["creepwars_gold"] = kill_gold
+	unit.variables["creepwars_creep"] = true
 
 	print("Good unit for cost " .. math.floor(desired_cost + 0.5) .. " is " ..
 		unit.__cfg.cost .. "gold " ..

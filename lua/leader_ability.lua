@@ -34,7 +34,7 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side }) do
 	local ability = T.name_only {
 		id = "creepwars_leader",
 		cumulative = false,
-		name = "leader",
+		name = "<b>leader</b>",
 		description = "<b>Upgrades:</b> " .. table.concat(msg, ", ")
 	}
 	wesnoth.add_modification(unit, "object", {

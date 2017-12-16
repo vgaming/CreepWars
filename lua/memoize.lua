@@ -1,76 +1,53 @@
 -- << memoize.lua
 
 local wesnoth = wesnoth
-local split_comma = creepwars_split_comma
-local set_concat = creepwars_set_concat
+local ipairs = ipairs
+local creepwars_score_start = creepwars_score_start
 
-
-local ai_sides = {}
-do
-	local var = wesnoth.get_variable("creepwars_ai_sides")
-	if var ~= nil then
-		for _, v in ipairs(split_comma(var)) do
-			ai_sides[tonumber(v)] = true
-		end
-	else
-		local human_sides = {}
-		for _, side in ipairs(wesnoth.sides) do
-			if side.controller == "ai" or side.controller == "network_ai" then
-				ai_sides[side.side] = true
-			else
-				human_sides[side.side] = true
-			end
-		end
-		wesnoth.set_variable("creepwars_ai_sides", set_concat(ai_sides, ","))
-		wesnoth.set_variable("creepwars_human_sides", set_concat(human_sides, ","))
-	end
-end
--- print("AI sides: " .. wesnoth.get_variable("creepwars_ai_sides"))
-
-
-local team_name_to_team_id = {}
+local is_ai_array = {}
 for _, side in ipairs(wesnoth.sides) do
-	team_name_to_team_id[side.team_name] = side.side -- we take last side number as team "ID", to persistent it on game reloads
+	local is_ai = wesnoth.get_variable("creepwars_is_ai_" .. side.side)
+	if is_ai == nil then is_ai = side.controller == "ai" or side.controller == "network_ai" end
+	wesnoth.set_variable("creepwars_is_ai_" .. side.side, is_ai)
+	is_ai_array[side.side] = is_ai
 end
+
 local side_to_team = {}
+local team_name_to_id = {}
+local team_array = {}
 for _, side in ipairs(wesnoth.sides) do
-	side_to_team[side.side] = team_name_to_team_id[side.team_name]
+	local team_id = team_name_to_id[side.team_name] or #team_array + 1
+	team_name_to_id[side.team_name] = team_id
+	side_to_team[side.side] = team_id
+	team_array[team_id] = team_array[team_id] or {}
+	team_array[team_id][#team_array[team_id] + 1] = side.side
 end
 
 
-for _, team_id in pairs(team_name_to_team_id) do
-	local score = wesnoth.get_variable("creepwars_creep_score_" .. team_id)
-	local gold = wesnoth.get_variable("creepwars_gold_" .. team_id)
-	-- print("loading/creating team " .. team_id .. ", creep score: " .. (score or "nil") .. ", gold: " .. (gold or "nil"))
-	if not score then
-		wesnoth.set_variable("creepwars_creep_score_" .. team_id, creepwars_score_start)
-	end
-	if not gold then
-		wesnoth.set_variable("creepwars_gold_" .. team_id, 0)
-	end
+for team_id, _ in ipairs(team_array) do
+	wesnoth.set_variable("creepwars_gold_" .. team_id,
+		wesnoth.get_variable("creepwars_gold_" .. team_id) or 0)
+	wesnoth.set_variable("creepwars_score_" .. team_id,
+		wesnoth.get_variable("creepwars_score_" .. team_id) or creepwars_score_start)
+	wesnoth.set_variable("creepwars_creepkills_" .. team_id,
+		wesnoth.get_variable("creepwars_creepkills_" .. team_id) or 0)
+	wesnoth.set_variable("creepwars_leaderkills_" .. team_id,
+		wesnoth.get_variable("creepwars_leaderkills_" .. team_id) or 0)
 end
 
 
-local starting_positions = {}
-do
-	local best_unit_for_side = {}
-	for _, u in ipairs(wesnoth.get_units { canrecruit = true }) do
-		local previous = best_unit_for_side[u.side]
-		if not (previous and #previous.extra_recruit >= #u.extra_recruit) then
-			best_unit_for_side[u.side] = u
-			-- print("Starting position for side " .. u.side .. " is " .. u.x .. "," .. u.y)
-			starting_positions[u.side] = { x = u.x, y = u.y }
-		end
-	end
-	-- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:
-	starting_positions[4] = { x = 32, y = 10 }
-	starting_positions[8] = { x = 4, y = 10 }
-	-- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-end
+local spawn_pos = {}
+-- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:
+spawn_pos[1] = { x = 4, y = 10 }
+spawn_pos[2] = { x = 32, y = 10 }
+-- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-creepwars_memoize_starting_positions = starting_positions
-creepwars_memoize_ai_side_set = ai_sides
+creepwars_spawn_pos = spawn_pos
+creepwars_ai_side_set = is_ai_array
 creepwars_side_to_team = side_to_team
+
+creepwars.side_to_team = side_to_team
+creepwars.team_array = team_array
 
 -- >>

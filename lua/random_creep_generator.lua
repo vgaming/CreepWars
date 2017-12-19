@@ -61,7 +61,7 @@ local function generate(desired_cost)
 		})
 	end
 	local creep_ability = T.name_only {
-		name = "<b>creep</b>",
+		name = "creep",
 		description = "This is a creep unit. It has no ZoC."
 			.. "Creeps are very aggressive, they only care about inflicting damage."
 	}

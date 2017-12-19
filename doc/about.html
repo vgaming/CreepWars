@@ -4,23 +4,22 @@ This is a Human-vs-Human map, each team consists of 1-3 human leaders (2-3 recom
 To start the game, go to Shop, choose how you want to upgrade your Leader, then move to the center and fight. To win the game, kill one of the enemy guards.
 
 <span size='x-large' underline='low'>Gold</span>
-You get <span color='#FFE680'>gold</span> for each kill. First <b>#gold_kills_to_increase kills</b> give <span color='#FFE680'>#gold_start_p0 gold</span>, next <b>#gold_kills_to_increase kills</b> give <span color='#FFE680'>#gold_start_p1 gold</span>, next <b>#gold_kills_to_increase kills</b> kills give <span color='#FFE680'>#gold_start_p2 gold</span>, etc. Leader kill counts as <b>4</b> creep kills (4 times more gold, 4 kill count).
+You get <span color='#FFE680'>gold</span> for each kill. First <b>#gold_kills_to_increase kills</b> give <span color='#FFE680'>#gold_start_p0 gold</span>, next <b>#gold_kills_to_increase kills</b> give <span color='#FFE680'>#gold_start_p1 gold</span>, next <b>#gold_kills_to_increase kills</b> kills give <span color='#FFE680'>#gold_start_p2 gold</span>, etc. Leader kill gives 4 times more gold, 4 kill count.
 
 <span size='x-large' underline='low'>Shop</span>
-You cannot spend gold to recruit, but you can spend gold in Shop to buy upgrades. Also, visiting Shop will heal your leader.
-<span color='#9F9F9F'>If you healed at the Shop in a previous turn, you'll only get partial healing. The effect disappears if you spend 1 turn outside the Shop.</span> (This is a legacy feature, it might be removed in later versions.)
+You Leader cannot recruit, but you can spend gold in Shop to buy upgrades. Visiting Shop will also heal your leader.
+<span color='#9F9F9F'>If you healed at the Shop in a previous turn, you'll only get partial healing. The effect disappears if you spend 1 turn outside the Shop.</span> (This is a legacy feature, it might be removed in future versions.)
 
 <span size='x-large' underline='low'>Creep score</span>
 Your <span color='#FF8080'>creep score</span> determines the cost of recruited AI creeps.
 You increase <span color='#FF8080'>creep score</span> with each kill. Only the number of killed units counts. Leader kill counts equally to creep kill.
 
 <span size='x-large' underline='low'>Creep generation</span>
-There are always <b>#creepwars_creep_count</b> creeps at the beginning of AI turn. The cost of new creeps is equal to your <span color='#FF8080'>creep score</span>.
+The cost of new creeps is equal to your <span color='#FF8080'>creep score</span>.
 However, if your <span color='#FF8080'>creep score</span> is below <b>#creepwars_lvl0_barrier</b>, then only lvl0 units will be generated, and if your <span color='#FF8080'>creep score</span> is above <b>#creepwars_lvl3plus_barrier</b>, you get random lvl3 unit. If your score is much higher than unit cost, the unit will have additional 'boost'.
 
 <span size='x-large' underline='low'>Guard health</span>
-Your guard health starts with #creepwars_guard_hp_initial and increases by #guard_creep_hp (configurable, default 1) when killing a creep and by <b>3x</b> of that value when killing enemy leader.
-It is permanently decreased when the guard is attacked (legacy feature, might be removed).
+Guard health increases by #guard_creep_hp (configurable, default 1) when killing a creep and by <b>3x</b> of that value when killing enemy leader.
 
 <span size='x-large' underline='low'>Development warning</span>
 This is Development version, expect balancing breakage. Please report if you spot anything.

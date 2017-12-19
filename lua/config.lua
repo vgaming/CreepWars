@@ -3,6 +3,7 @@
 local wesnoth = wesnoth
 local math = math
 local creepwars = creepwars
+local array_forall = creepwars.array_forall
 
 creepwars_lvl0_barrier = 12 -- creep score lower than this value will generate lvl0 creeps
 creepwars_lvl3plus_barrier = 50
@@ -15,8 +16,19 @@ creepwars_default_era_creeps = wesnoth and wesnoth.get_variable("creepwars_defau
 local mirror_style = wesnoth and wesnoth.get_variable("creepwars_mirror_style")
 	or wesnoth and wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") and "same_strength"
 	or "manual"
-creepwars_hide_leaders = wesnoth and wesnoth.get_variable("creepwars_hide_leaders") and mirror_style ~= "mirror"
-	or wesnoth and wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10")
+
+
+local hide_leaders
+if mirror_style == "mirror" then
+	hide_leaders = false
+elseif wesnoth and wesnoth.get_variable("creepwars_hide_leaders") ~= nil then
+	hide_leaders = wesnoth.get_variable("creepwars_hide_leaders")
+else
+	array_forall(wesnoth.sides, function(side)
+		return side.controller == "human" or side.controller == "ai" or side.controller == "null"
+	end)
+end
+
 
 local guard_hp_for_creep = wesnoth and wesnoth.get_variable("creepwars_guard_hp_for_creep") or 1
 
@@ -43,6 +55,7 @@ local function score_per_kill(kills) return creepwars_score_per_kill_min + creep
 creepwars.gold_kills_to_increase = gold_kills_to_increase
 creepwars.gold_per_kill = gold_per_kill
 creepwars.gold_per_kill_start = gold_per_kill_start
+creepwars.hide_leaders = hide_leaders
 creepwars.mirror_style = mirror_style
 creepwars.score_per_kill = score_per_kill
 

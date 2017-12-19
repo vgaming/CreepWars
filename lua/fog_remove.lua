@@ -3,7 +3,7 @@
 local wesnoth = wesnoth
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_ai_side_set = creepwars_ai_side_set
-local creepwars_hide_leaders = creepwars_hide_leaders
+local hide_leaders = creepwars.hide_leaders
 
 -- wesnoth-1.12 seems to be a bit buggy, we'll clear fog with multiturn = true AND false.
 local function lift_fog(x, y)
@@ -26,7 +26,7 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 			lift_fog(unit.x, unit.y)
 		end
 	else
-		if not creepwars_hide_leaders then
+		if not hide_leaders then
 			local limbo_x = unit.variables.limbo_x
 			local limbo_y = unit.variables.limbo_y
 			-- print("Lifting fog around leader limbo " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")

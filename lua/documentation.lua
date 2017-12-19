@@ -7,7 +7,7 @@ local string = string
 local creepwars_creep_count = creepwars_creep_count
 local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local creepwars_guard_hp_initial = creepwars_guard_hp_initial
-local creepwars_hide_leaders = creepwars_hide_leaders
+local hide_leaders = creepwars.hide_leaders
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
 local mirror_style = creepwars.mirror_style
@@ -63,7 +63,7 @@ if wesnoth then
 	local non_standard = {}
 	local guard_hp = creepwars_guard_hp_for_kill(false)
 	if guard_hp ~= 1 then non_standard[#non_standard + 1] = "guard HP scaling: " .. guard_hp .. " (default 1)" end
-	if creepwars_hide_leaders then
+	if hide_leaders then
 		non_standard[#non_standard + 1] = "enemy leaders hidden"
 	end
 

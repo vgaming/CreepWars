@@ -1,11 +1,11 @@
 --<< fog_label_leader
 
 local wesnoth = wesnoth
-local creepwars_hide_leaders = creepwars_hide_leaders
+local hide_leaders = creepwars.hide_leaders
 local mirror_style = creepwars.mirror_style
 local creepwars_ai_side_set = creepwars_ai_side_set
 
-if not creepwars_hide_leaders and mirror_style ~= "mirror" then
+if not hide_leaders and mirror_style ~= "mirror" then
 	local is_first_turn = wesnoth.get_variable("turn_number") == 1
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if not creepwars_ai_side_set[unit.side] then

@@ -82,9 +82,20 @@ function creepwars_array_merge(first, second)
 end
 
 
+local function array_forall(arr, func)
+	for _, v in ipairs(arr) do
+		if not func(v) then
+			return false
+		end
+	end
+	return true
+end
+
+
 creepwars = {}
-creepwars.split_comma = split_comma
 creepwars.array_filter = array_filter
+creepwars.array_forall = array_forall
+creepwars.split_comma = split_comma
 
 creepwars_split_comma = split_comma
 

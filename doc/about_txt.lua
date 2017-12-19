@@ -1,4 +1,5 @@
 creepwars = {}
+dofile("lua/utils.lua")
 dofile("lua/config.lua")
 
 

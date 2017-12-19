@@ -24,7 +24,7 @@ if mirror_style == "mirror" then
 elseif wesnoth and wesnoth.get_variable("creepwars_hide_leaders") ~= nil then
 	hide_leaders = wesnoth.get_variable("creepwars_hide_leaders")
 else
-	array_forall(wesnoth.sides, function(side)
+	array_forall(wesnoth and wesnoth.sides or {}, function(side)
 		return side.controller == "human" or side.controller == "ai" or side.controller == "null"
 	end)
 end

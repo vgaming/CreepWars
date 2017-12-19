@@ -30,10 +30,8 @@ else
 end
 
 
-local guard_hp_for_creep = wesnoth and wesnoth.get_variable("creepwars_guard_hp_for_creep") or 1
-
 creepwars_guard_hp_initial = 50
-creepwars_guard_hp_for_kill = function(is_leader) return guard_hp_for_creep * (is_leader and 3 or 1) end
+creepwars_guard_hp_for_kill = function(is_leader) return is_leader and 3 or 1 end
 
 
 local creepwars_expected_total_kills = 80

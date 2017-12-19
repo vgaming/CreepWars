@@ -20,12 +20,13 @@ local function display_stats()
 		local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
 		local gold = wesnoth.get_variable("creepwars_gold_" .. team)
 		local score = string.format("%.2f", wesnoth.get_variable("creepwars_score_" .. team))
-		local text = "<span color='#FFFFFF'>"
-			.. creepkills .. " x, "
-			.. leaderkills .. " X, \n"
-			.. "</span><span color='#FF8080'>" .. score .. " s, "
-			.. "</span><span color='#FFE680'>" .. gold .. " g"
-			.. "</span>"
+		local text = ""
+				.. "<span color='#FF8080'>" .. score .. "  " .. "</span>"
+				.. "<span color='#FFE680'>" .. gold .. "</span>\n"
+				.. "<span color='#FFFFFF'>"
+				.. "(" .. creepkills .. "  "
+				.. leaderkills .. ")"
+				.. "</span>"
 		wesnoth.wml_actions.label {
 			x = statistics_pos[team].x,
 			y = statistics_pos[team].y,

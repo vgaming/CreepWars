@@ -9,8 +9,6 @@ local function setup(side_number, limbo_x, limbo_y, home_x, home_y)
 		unit.variables.limbo_y = limbo_y
 		unit.variables.home_x = home_x
 		unit.variables.home_y = home_y
-		unit.variables.healed_this_turn = false
-		unit.variables.healed_last_turn = false
 	end
 end
 

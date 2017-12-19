@@ -4,7 +4,7 @@ local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
 local creepwars_leader_strength = creepwars_leader_strength
 local creepwars_ai_side_set = creepwars_ai_side_set
-local creepwars_mirror_style = creepwars_mirror_style
+local mirror_style = creepwars.mirror_style
 local creepwars_recruitable_array = creepwars_recruitable_array
 local split_comma = creepwars_split_comma
 
@@ -115,18 +115,18 @@ local function force_same_strength()
 end
 
 if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-	print("creepwars_mirror_style is " .. creepwars_mirror_style)
-	if creepwars_mirror_style == "manual_no_downgrade" then
+	print("creepwars mirror_style is " .. mirror_style)
+	if mirror_style == "manual_no_downgrade" then
 		-- done
-	elseif creepwars_mirror_style == "manual" then
+	elseif mirror_style == "manual" then
 		downgrade()
-	elseif creepwars_mirror_style == "mirror" then
+	elseif mirror_style == "mirror" then
 		downgrade()
 		force_mirror()
-	elseif creepwars_mirror_style == "same_strength" then
+	elseif mirror_style == "same_strength" then
 		force_same_strength()
 	else
-		error("Unknown leader mirror style: " .. creepwars_mirror_style)
+		error("Unknown leader mirror style: " .. mirror_style)
 	end
 else
 	local max_leader_level = -1

@@ -5,7 +5,7 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
-local creepwars_array_filter = creepwars_array_filter
+local array_filter = creepwars.array_filter
 local creepwars_array_to_set = creepwars_array_to_set
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 local creepwars_default_era_creeps = creepwars_default_era_creeps
@@ -67,7 +67,7 @@ for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer
 	end
 end
 add_downgrades(era_array, era_set)
-local leader_array = creepwars_array_filter(era_array,
+local leader_array = array_filter(era_array,
 	function(unit)
 		return wesnoth.unit_types[unit].level == 1
 			and count_specials(unit)["plague"] == nil
@@ -114,7 +114,7 @@ do
 end
 
 
-creep_array = creepwars_array_filter(creep_array, function(unit)
+creep_array = array_filter(creep_array, function(unit)
 	return wesnoth.unit_types[unit].level > 0 or count_specials(unit)["plague"] == nil
 end)
 

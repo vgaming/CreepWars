@@ -46,7 +46,7 @@ end
 function creepwars_print(obj) print(creepwars_format(obj)) end
 
 
-function creepwars_array_filter(arr, func)
+local function array_filter(arr, func)
 	local result = {}
 	for _, elem in ipairs(arr) do
 		if func(elem) then result[#result + 1] = elem end
@@ -84,6 +84,7 @@ end
 
 creepwars = {}
 creepwars.split_comma = split_comma
+creepwars.array_filter = array_filter
 
 creepwars_split_comma = split_comma
 

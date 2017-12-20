@@ -3,7 +3,7 @@ dofile("lua/utils.lua")
 dofile("lua/config.lua")
 
 
-local io_file = assert(io.open("doc/about.html"))
+local io_file = assert(io.open("lua/doc/about.html"))
 local note = io_file:read("*all")
 io_file.close()
 

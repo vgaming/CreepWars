@@ -55,6 +55,15 @@ local function array_filter(arr, func)
 end
 
 
+local function array_map(arr, func)
+	local result = {}
+	for index, elem in ipairs(arr) do
+		result[#result + 1] = func(elem, index)
+	end
+	return result
+end
+
+
 function creepwars_array_to_set(arr)
 	local result = {}
 	for _, v in ipairs(arr) do
@@ -95,6 +104,7 @@ end
 creepwars = {}
 creepwars.array_filter = array_filter
 creepwars.array_forall = array_forall
+creepwars.array_map = array_map
 creepwars.split_comma = split_comma
 
 creepwars_split_comma = split_comma

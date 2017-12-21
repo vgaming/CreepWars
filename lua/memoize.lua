@@ -49,5 +49,6 @@ creepwars_side_to_team = side_to_team
 
 creepwars.side_to_team = side_to_team
 creepwars.team_array = team_array
+creepwars.is_ai_array = is_ai_array
 
 -- >>

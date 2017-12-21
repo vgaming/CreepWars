@@ -51,7 +51,7 @@ local function generate(desired_cost)
 	if boost > 0 then
 		local boost_ability = T.name_only {
 			name = "boost +" .. boost,
-			description = "damage +" .. boost * 2 .. " strikes +" .. boost .. " movement +" .. boost
+			description = "+" .. boost .. " strikes, +" .. boost .. " movement, +" .. boost * 2 .. " damage"
 		}
 		wesnoth.add_modification(unit, "object", {
 			T.effect { apply_to = "attack", increase_damage = boost * 2 },

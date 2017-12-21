@@ -3,12 +3,12 @@ dofile("lua/utils.lua")
 dofile("lua/config.lua")
 
 
-local io_file = assert(io.open("lua/doc/about.html"))
+local io_file = assert(io.open("doc/about.html"))
 local note = io_file:read("*all")
 io_file.close()
 
 
-note = loadfile("lua/documentation.lua")(note)
+note = loadfile("doc/documentation.lua")(note)
 note, _ = string.gsub(note, "<span size=[^>]*>", "== ") -- headers
 note, _ = string.gsub(note, "</span>\n", "\n") -- headers (end of line)
 note, _ = string.gsub(note, "</span>", "_") -- span

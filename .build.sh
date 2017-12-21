@@ -13,10 +13,10 @@ echo -n "$version" > target/version.txt
 
 
 # calculate text description
-lua doc/about_txt.lua > target/about.txt
+lua doc/docs_to_txt.lua > target/about.txt
 # delete _server.pbl description
 sed -i '/description=/,//d' _server.pbl
 # add it back
-(echo -n 'description="'; lua doc/about_txt.lua; echo '"') >> _server.pbl
+(echo -n 'description="'; cat target/about.txt; echo '"') >> _server.pbl
 
 }; exit 0

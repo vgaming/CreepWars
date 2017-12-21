@@ -15,9 +15,7 @@ local creepwars_score_per_kill_increase = creepwars_score_per_kill_increase
 local creepwars_score_per_kill_min = creepwars_score_per_kill_min
 local creepwars_score_start = creepwars_score_start
 local gold_kills_to_increase = creepwars.gold_kills_to_increase
-local gold_per_kill = creepwars.gold_per_kill
 local gold_per_kill_start = creepwars.gold_per_kill_start
-local score_per_kill = creepwars.score_per_kill
 
 local note
 if wesnoth then

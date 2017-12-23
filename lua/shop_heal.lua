@@ -9,31 +9,66 @@ local side_to_team = creepwars.side_to_team
 
 -- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!
 local team_shop_pos = { { ["8,9"] = true, ["8,11"] = true }, { ["28,9"] = true, ["28,11"] = true } }
+local function is_at_shop(side, x,y)
+	return team_shop_pos[side_to_team[side]][x .. "," .. y]
+end
 
 
-local function heal_moveto()
+local function full_heal(unit)
+	unit.hitpoints = math.max(unit.hitpoints, unit.max_hitpoints)
+	unit.status.poisoned = false
+	unit.status.slowed = false
+	unit.status.petrified = false
+end
+
+
+local translate = wesnoth.textdomain("wesnoth-Creep_Wars")
+
+
+local function moveto_event()
 	local x1 = wesnoth.get_variable("x1") or 0
 	local y1 = wesnoth.get_variable("y1") or 0
 	local unit = wesnoth.get_unit(x1, y1)
-	local team = unit and side_to_team[unit.side]
-	if unit and is_ai_array[wesnoth.current.side] == false and team_shop_pos[team][x1 .. "," .. y1] then
-		unit.hitpoints = math.max(unit.hitpoints, unit.max_hitpoints)
+	if unit and is_ai_array[wesnoth.current.side] == false then
+		if is_at_shop(unit.side, x1, y1) then
+			full_heal(unit)
+		end
+
+		local function get_color()
+			if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+				return wesnoth.sides[wesnoth.current.side].color
+			else
+				return 'white'
+			end
+		end
+
+		local x2 = wesnoth.get_variable("x2") or 0
+		local y2 = wesnoth.get_variable("y2") or 0
+		if is_at_shop(unit.side, x1, y1) then
+			local text = "<span color='" .. get_color() .. "'>" .. unit.name .. " " .. translate("is at the shop") .. "</span>"
+			wesnoth.wml_actions.print { size = 24, duration = 200, text = text }
+		end
+
+		if is_at_shop(unit.side, x2, y2) then
+			local text = "<span color='" .. get_color() .. "'>" .. unit.name .. " " .. translate("has left the shop") .. "</span>"
+			wesnoth.wml_actions.print { size = 24, duration = 100, text = text }
+		end
+
 	end
 end
 
 
 local function heal_static()
 	local side = wesnoth.current.side
-	local team = side_to_team[side]
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side }) do
-		if is_ai_array[side] == false and team_shop_pos[team][unit.x .. "," .. unit.y] then
-			unit.hitpoints = math.max(unit.hitpoints, unit.max_hitpoints)
+		if is_ai_array[side] == false and is_at_shop(unit.side, unit.x, unit.y) then
+			full_heal(unit)
 		end
 	end
 end
 
 
-creepwars.heal_moveto = heal_moveto
+creepwars.moveto_event = moveto_event
 creepwars.heal_static = heal_static
 
 -- >>

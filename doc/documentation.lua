@@ -77,7 +77,7 @@ if wesnoth then
 	local show_mirror_style = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10")
 		and mirror_style ~= "mirror"
 	local mirror_msg = show_mirror_style and " Mirror style: " .. mirror_style .. "." or ""
-	local recent = " Recent changes: HUGE changes to gold&score, complete re-balancing."
+	local recent = " Recent changes: COMPLETE re-balancing of gold&score."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg .. mirror_msg .. recent)
 else
 	return note

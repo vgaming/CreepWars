@@ -8,15 +8,23 @@ local mirror_style = creepwars.mirror_style
 local creepwars_recruitable_array = creepwars_recruitable_array
 local split_comma = creepwars_split_comma
 
-local function downgrade()
+
+local function set_type(unit, type)
+	wesnoth.transform_unit(unit, type)
+	unit.attacks_left = unit.max_attacks
+	unit.hitpoints = unit.max_hitpoints
+	unit.moves = unit.max_moves
+end
+
+
+local function downgrade_wesnoth113()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if creepwars_ai_side_set[unit.side] ~= true then
 			local downgrade_array = wesnoth.unit_types[unit.type].advances_from
 			if downgrade_array and #downgrade_array > 0 then
 				-- local downgrade = downgrade_array[helper.rand("1.." .. #downgrade_array + 1)]
 				local downgrade = downgrade_array[1] -- need the same for true mirror
-				wesnoth.transform_unit(unit, downgrade)
-				unit.hitpoints = unit.max_hitpoints
+				set_type(unit, downgrade)
 			end
 		end
 	end
@@ -39,8 +47,7 @@ local function downgrade_wesnoth112(max_leader_level)
 			and wesnoth.unit_types[unit.type].level == max_leader_level then
 
 			local downgrade = downgrade_array[1] -- need the same for true mirror
-			wesnoth.transform_unit(unit, downgrade)
-			unit.hitpoints = unit.max_hitpoints
+			set_type(unit, downgrade)
 		end
 	end
 end
@@ -57,8 +64,7 @@ local function set_all_leaders(unit_array_function)
 			team_index[side.team_name] = team_index[side.team_name] or 1
 			local type = team_units[side.team_name][team_index[side.team_name]]
 			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side.side }) do
-				wesnoth.transform_unit(unit, type)
-				unit.hitpoints = unit.max_hitpoints
+				set_type(unit, type)
 			end
 			team_index[side.team_name] = team_index[side.team_name] + 1
 		end
@@ -119,9 +125,9 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 	if mirror_style == "manual_no_downgrade" then
 		-- done
 	elseif mirror_style == "manual" then
-		downgrade()
+		downgrade_wesnoth113()
 	elseif mirror_style == "mirror" then
-		downgrade()
+		downgrade_wesnoth113()
 		force_mirror()
 	elseif mirror_style == "same_strength" then
 		force_same_strength()

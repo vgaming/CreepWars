@@ -3,8 +3,8 @@
 local wesnoth = wesnoth
 local creepwars_creep_kill_event = creepwars_creep_kill_event
 
-local defender = wesnoth.get_unit(wesnoth.get_variable("x1"), wesnoth.get_variable("y1"))
-local attacker = wesnoth.get_unit(wesnoth.get_variable("x2"), wesnoth.get_variable("y2"))
+local defender = wesnoth.get_unit(wesnoth.get_variable("x1") or 0, wesnoth.get_variable("y1") or 0)
+local attacker = wesnoth.get_unit(wesnoth.get_variable("x2") or 0, wesnoth.get_variable("y2") or 0)
 if defender == nil then
 	local msg = "Warning: cannot find killed unit. No gold/creep bonus was generated."
 	print(msg)

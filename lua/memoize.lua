@@ -2,6 +2,7 @@
 
 local wesnoth = wesnoth
 local ipairs = ipairs
+local creepwars = creepwars
 local creepwars_score_start = creepwars_score_start
 
 local is_ai_array = {}
@@ -43,11 +44,11 @@ spawn_pos[2] = { x = 32, y = 10 }
 -- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-creepwars_spawn_pos = spawn_pos
 creepwars_ai_side_set = is_ai_array
 creepwars_side_to_team = side_to_team
 
 creepwars.side_to_team = side_to_team
+creepwars.spawn_pos = spawn_pos
 creepwars.team_array = team_array
 creepwars.is_ai_array = is_ai_array
 

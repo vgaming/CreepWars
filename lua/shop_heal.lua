@@ -25,26 +25,25 @@ end
 local translate = wesnoth.textdomain("wesnoth-Creep_Wars")
 
 
+local function get_color()
+	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+		return wesnoth.sides[wesnoth.current.side].color
+	else
+		return 'white'
+	end
+end
+
+
 local function moveto_event()
 	local x1 = wesnoth.get_variable("x1") or 0
 	local y1 = wesnoth.get_variable("y1") or 0
 	local unit = wesnoth.get_unit(x1, y1)
 	if unit and is_ai_array[wesnoth.current.side] == false then
-		if is_at_shop(unit.side, x1, y1) then
-			full_heal(unit)
-		end
-
-		local function get_color()
-			if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-				return wesnoth.sides[wesnoth.current.side].color
-			else
-				return 'white'
-			end
-		end
 
 		local x2 = wesnoth.get_variable("x2") or 0
 		local y2 = wesnoth.get_variable("y2") or 0
 		if is_at_shop(unit.side, x1, y1) then
+			full_heal(unit)
 			local text = "<span color='" .. get_color() .. "'>" .. unit.name .. " " .. translate("is at the shop") .. "</span>"
 			wesnoth.wml_actions.print { size = 24, duration = 200, text = text }
 		end

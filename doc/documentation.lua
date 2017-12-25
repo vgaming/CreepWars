@@ -10,7 +10,6 @@ local creepwars_guard_hp_initial = creepwars_guard_hp_initial
 local hide_leaders = creepwars.hide_leaders
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
-local mirror_style = creepwars.mirror_style
 local creepwars_score_per_kill_increase = creepwars_score_per_kill_increase
 local creepwars_score_per_kill_min = creepwars_score_per_kill_min
 local creepwars_score_start = creepwars_score_start
@@ -74,11 +73,8 @@ if wesnoth then
 		non_standard_msg = " All options are stadard."
 	end
 
-	local show_mirror_style = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10")
-		and mirror_style ~= "mirror"
-	local mirror_msg = show_mirror_style and " Mirror style: " .. mirror_style .. "." or ""
 	local recent = " Recent changes: COMPLETE re-balancing of gold&score."
-	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg .. mirror_msg .. recent)
+	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg .. recent)
 else
 	return note
 end

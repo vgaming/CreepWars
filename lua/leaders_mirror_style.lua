@@ -3,12 +3,17 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local helper = wesnoth.require "lua/helper.lua"
-local is_ai_array = creepwars.is_ai_array
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_leader_strength = creepwars_leader_strength
 local creepwars_recruitable_array = creepwars_recruitable_array
+local array_map = creepwars.array_map
+local format = creepwars.format
+local is_ai_array = creepwars.is_ai_array
 local mirror_style = creepwars.mirror_style
 local split_comma = creepwars.split_comma
-local array_map = creepwars.array_map
+
+local args = ...
+local event_name = args.event_name
 
 
 local function set_type(unit, type)
@@ -16,6 +21,23 @@ local function set_type(unit, type)
 	unit.attacks_left = unit.max_attacks
 	unit.hitpoints = unit.max_hitpoints
 	unit.moves = unit.max_moves
+end
+
+
+if event_name == "prestart" then
+	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
+		if unit.max_moves > 0 then
+			unit.variables.creepwars_init_type = unit.type
+			set_type(unit, "Peasant")
+		end
+	end
+	return
+else
+	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
+		if unit.max_moves > 0 then
+			set_type(unit, unit.variables.creepwars_init_type)
+		end
+	end
 end
 
 
@@ -149,7 +171,7 @@ local function force_same_cost()
 	return set_all_leaders(generate_array)
 end
 
-print("creepwars mirror_style is " .. mirror_style)
+print("creepwars mirror_style is ", mirror_style)
 if mirror_style == "manual_no_downgrade" then
 	-- done
 elseif mirror_style == "manual" then
@@ -162,7 +184,7 @@ elseif mirror_style == "same_cost" then
 elseif mirror_style == "same_strength" then
 	force_same_strength()
 else
-	error("Unknown leader mirror style: " .. mirror_style)
+	error("Unknown leader mirror style: " .. format(mirror_style))
 end
 
 

@@ -5,12 +5,12 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
-local array_filter = creepwars.array_filter
-local creepwars_array_to_set = creepwars_array_to_set
+local ipairs = ipairs
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 local creepwars_default_era_creeps = creepwars_default_era_creeps
-local split_comma = creepwars_split_comma
-local ipairs = ipairs
+local array_filter = creepwars.array_filter
+local array_to_set = creepwars.array_to_set
+local split_comma = creepwars.split_comma
 
 
 local function count_specials(unit)
@@ -93,7 +93,7 @@ end
 
 
 -- add advances
-local creep_set = creepwars_array_to_set(creep_array)
+local creep_set = array_to_set(creep_array)
 add_advances(creep_array, creep_set, function(adv) return wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max end)
 
 
@@ -122,7 +122,7 @@ end)
 local function super_leader_strength(unit_name)
 	local type = wesnoth.unit_types[unit_name]
 	local specials = count_specials(unit_name)
-	local abilities = creepwars_array_to_set(type.abilities)
+	local abilities = array_to_set(type.abilities)
 	local result = type.cost
 	if #type.advances_to > 0 then result = result * 0.001 end
 	--result = result / math.sqrt(type.max_hitpoints)

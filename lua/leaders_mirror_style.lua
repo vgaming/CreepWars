@@ -2,11 +2,11 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
-local creepwars_leader_strength = creepwars_leader_strength
 local creepwars_ai_side_set = creepwars_ai_side_set
-local mirror_style = creepwars.mirror_style
+local creepwars_leader_strength = creepwars_leader_strength
 local creepwars_recruitable_array = creepwars_recruitable_array
-local split_comma = creepwars_split_comma
+local mirror_style = creepwars.mirror_style
+local split_comma = creepwars.split_comma
 
 
 local function set_type(unit, type)

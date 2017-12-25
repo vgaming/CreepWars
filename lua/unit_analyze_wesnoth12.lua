@@ -5,10 +5,10 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
-local creepwars_array_merge = creepwars_array_merge
-local creepwars_array_to_set = creepwars_array_to_set
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
-local split_comma = creepwars_split_comma
+local array_merge = creepwars.array_merge
+local array_to_set = creepwars.array_to_set
+local split_comma = creepwars.split_comma
 
 
 local leader_array = {
@@ -21,7 +21,7 @@ local leader_array = {
 	"Elvish Archer", "Elvish Fighter", "Elvish Scout", "Elvish Shaman", "Mage", "Merman Hunter", "Wose", -- lvl1 rebels
 	"Dark Adept", "Ghost", "Ghoul", "Skeleton Archer", "Skeleton" -- lvl1 undead
 }
-local creep_array = creepwars_array_merge(leader_array,
+local creep_array = array_merge(leader_array,
 	{ "Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Dwarvish Ulfserker" })
 
 
@@ -37,7 +37,7 @@ local function add_advances(arr, set)
 	end
 end
 
-add_advances(creep_array, creepwars_array_to_set(creep_array))
+add_advances(creep_array, array_to_set(creep_array))
 
 
 local leader_strength = {}

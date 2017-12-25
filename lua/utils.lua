@@ -68,7 +68,7 @@ local function array_map(arr, func)
 end
 
 
-function creepwars_array_to_set(arr)
+local function array_to_set(arr)
 	local result = {}
 	for _, v in ipairs(arr) do
 		result[v] = true
@@ -77,16 +77,7 @@ function creepwars_array_to_set(arr)
 end
 
 
-function creepwars_copy_array(orig)
-	local result = {}
-	for k, v in ipairs(orig) do
-		result[k] = v
-	end
-	return result
-end
-
-
-function creepwars_array_merge(first, second)
+local function array_merge(first, second)
 	local i = 1
 	local result = {}
 	for _, v in ipairs(first) do result[i] = v; i = i + 1 end
@@ -109,8 +100,9 @@ creepwars = {}
 creepwars.array_filter = array_filter
 creepwars.array_forall = array_forall
 creepwars.array_map = array_map
+creepwars.array_merge = array_merge
+creepwars.array_to_set = array_to_set
 creepwars.split_comma = split_comma
 
-creepwars_split_comma = split_comma
 
 -- >>

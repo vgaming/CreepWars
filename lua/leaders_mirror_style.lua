@@ -12,32 +12,12 @@ local is_ai_array = creepwars.is_ai_array
 local mirror_style = creepwars.mirror_style
 local split_comma = creepwars.split_comma
 
-local args = ...
-local event_name = args.event_name
-
 
 local function set_type(unit, type)
 	wesnoth.transform_unit(unit, type)
 	unit.attacks_left = unit.max_attacks
 	unit.hitpoints = unit.max_hitpoints
 	unit.moves = unit.max_moves
-end
-
-
-if event_name == "prestart" then
-	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if unit.max_moves > 0 then
-			unit.variables.creepwars_init_type = unit.type
-			set_type(unit, "Peasant")
-		end
-	end
-	return
-else
-	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if unit.max_moves > 0 then
-			set_type(unit, unit.variables.creepwars_init_type)
-		end
-	end
 end
 
 

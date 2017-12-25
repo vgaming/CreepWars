@@ -4,6 +4,7 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local array_forall = creepwars.array_forall
 local show_dialog = creepwars.show_dialog
+local show_dialog_early = creepwars.show_dialog_early
 
 
 local offline_game = not wesnoth or array_forall(wesnoth.sides, function(side)
@@ -24,7 +25,8 @@ local function ask_mirror_style()
 			id = "same_strength"
 		}
 	end
-	local result = show_dialog {
+	local result = show_dialog_early {
+		id = "mirror_style",
 		label = "\nCreep Wars: Leaders style\n\n",
 		options = options
 	}

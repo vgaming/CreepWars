@@ -1,11 +1,22 @@
 -- << dialog
 
 local wesnoth = wesnoth
-local creepwars = creepwars
 local ipairs = ipairs
-
 local T = wesnoth and wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local translate = wesnoth and wesnoth.textdomain "wesnoth"
+local creepwars = creepwars
+local is_ai_array = creepwars.is_ai_array
+local sync_choice = creepwars.sync_choice
+
+
+local human_side
+for k,v in ipairs(is_ai_array) do
+	if not v then
+		human_side = k
+		break
+	end
+end
+
 
 --- shows a wesnoth "list" dialog and returns the result.
 -- Example:
@@ -80,6 +91,12 @@ end
 local function show_dialog(settings)
 	local func = function() return show_dialog_unsynchronized(settings) end
 	return wesnoth.synchronize_choice(func)
+end
+
+
+local function show_dialog_early(settings)
+	local func = function() return show_dialog_unsynchronized(settings) end
+	return sync_choice(func, func, { human_side }, settings.id)[human_side]
 end
 
 
@@ -163,5 +180,6 @@ end
 
 
 creepwars.show_dialog = show_dialog
+creepwars.show_dialog_early = show_dialog_early
 
 -- >>

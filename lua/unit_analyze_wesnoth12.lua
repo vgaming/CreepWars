@@ -4,7 +4,6 @@
 -- See end of file for the function itself, `creepwars_generate_creep`
 
 local wesnoth = wesnoth
-local helper = wesnoth.require "lua/helper.lua"
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
 local array_merge = creepwars.array_merge
 local array_to_set = creepwars.array_to_set

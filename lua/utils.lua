@@ -34,8 +34,10 @@ local function _format_any_value(obj, buffer)
 		buffer[#buffer + 1] = '"' .. tostring(obj) .. '"'
 	elseif type(obj) == "number" or type(obj) == "boolean" then
 		buffer[#buffer + 1] = tostring(obj)
+	elseif type(obj) == "function" then
+		buffer[#buffer + 1] = '"???function???"'
 	else
-		buffer[#buffer + 1] = '"???' .. type(obj) .. '???"'
+		buffer[#buffer + 1] = '"' .. tostring(obj) .. '"'
 	end
 end
 

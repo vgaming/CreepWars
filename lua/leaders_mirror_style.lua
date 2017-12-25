@@ -2,7 +2,7 @@
 
 local wesnoth = wesnoth
 local helper = wesnoth.require "lua/helper.lua"
-local ai_side_set = creepwars.ai_side_set
+local is_ai_array = creepwars.is_ai_array
 local creepwars_leader_strength = creepwars_leader_strength
 local creepwars_recruitable_array = creepwars_recruitable_array
 local mirror_style = creepwars.mirror_style
@@ -19,7 +19,7 @@ end
 
 local function downgrade_wesnoth113()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if ai_side_set[unit.side] ~= true then
+		if is_ai_array[unit.side] ~= true then
 			local downgrade_array = wesnoth.unit_types[unit.type].advances_from
 			if downgrade_array and #downgrade_array > 0 then
 				-- local downgrade = downgrade_array[helper.rand("1.." .. #downgrade_array + 1)]
@@ -42,7 +42,7 @@ local function downgrade_wesnoth112(max_leader_level)
 
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		local downgrade_array = downgrade_map[unit.type]
-		if ai_side_set[unit.side] ~= true
+		if is_ai_array[unit.side] ~= true
 			and downgrade_array and #downgrade_array > 0
 			and wesnoth.unit_types[unit.type].level == max_leader_level then
 
@@ -58,7 +58,7 @@ local function set_all_leaders(unit_array_function)
 	local team_index = {}
 	for _, side in ipairs(wesnoth.sides) do
 		local has_leaders = #wesnoth.get_units { canrecruit = true, side = side.side } > 0
-		local is_human = ai_side_set[side.side] ~= true
+		local is_human = is_ai_array[side.side] ~= true
 		if has_leaders and is_human then
 			team_units[side.team_name] = team_units[side.team_name] or unit_array_function()
 			team_index[side.team_name] = team_index[side.team_name] or 1
@@ -81,7 +81,7 @@ local function force_mirror()
 	local team
 	for _, side in ipairs(wesnoth.sides) do
 		local has_leaders = #wesnoth.get_units { canrecruit = true, side = side.side } > 0
-		local is_human = ai_side_set[side.side] ~= true
+		local is_human = is_ai_array[side.side] ~= true
 		if has_leaders and is_human then
 			if team == nil then team = side.team_name end
 			if team == side.team_name then
@@ -137,7 +137,7 @@ if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 else
 	local max_leader_level = -1
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if not ai_side_set[unit.side] then
+		if not is_ai_array[unit.side] then
 			max_leader_level = math.max(max_leader_level, wesnoth.unit_types[unit.type].level)
 		end
 	end

@@ -3,12 +3,12 @@
 local wesnoth = wesnoth
 local hide_leaders = creepwars.hide_leaders
 local mirror_style = creepwars.mirror_style
-local ai_side_set = creepwars.ai_side_set
+local is_ai_array = creepwars.is_ai_array
 
 if not hide_leaders and mirror_style ~= "mirror" then
 	local is_first_turn = wesnoth.get_variable("turn_number") == 1
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if not ai_side_set[unit.side] then
+		if not is_ai_array[unit.side] then
 			local limbo_x = unit.variables.limbo_x
 			local limbo_y = unit.variables.limbo_y
 			local text = is_first_turn and wesnoth.unit_types[unit.type].name or ""

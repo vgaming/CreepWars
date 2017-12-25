@@ -1,12 +1,14 @@
 -- << leaders_mirror_style
 
 local wesnoth = wesnoth
+local creepwars = creepwars
 local helper = wesnoth.require "lua/helper.lua"
 local is_ai_array = creepwars.is_ai_array
 local creepwars_leader_strength = creepwars_leader_strength
 local creepwars_recruitable_array = creepwars_recruitable_array
 local mirror_style = creepwars.mirror_style
 local split_comma = creepwars.split_comma
+local array_map = creepwars.array_map
 
 
 local function set_type(unit, type)
@@ -49,6 +51,15 @@ local function downgrade_wesnoth112(max_leader_level)
 			local downgrade = downgrade_array[1] -- need the same for true mirror
 			set_type(unit, downgrade)
 		end
+	end
+end
+
+
+local function downgrade_wesnoth_any()
+	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+		downgrade_wesnoth113()
+	else
+		downgrade_wesnoth112(2)
 	end
 end
 
@@ -120,34 +131,38 @@ local function force_same_strength()
 	return set_all_leaders(generate_similar)
 end
 
-if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-	print("creepwars mirror_style is " .. mirror_style)
-	if mirror_style == "manual_no_downgrade" then
-		-- done
-	elseif mirror_style == "manual" then
-		downgrade_wesnoth113()
-	elseif mirror_style == "mirror" then
-		downgrade_wesnoth113()
-		force_mirror()
-	elseif mirror_style == "same_strength" then
-		force_same_strength()
-	else
-		error("Unknown leader mirror style: " .. mirror_style)
-	end
-else
-	local max_leader_level = -1
-	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if not is_ai_array[unit.side] then
-			max_leader_level = math.max(max_leader_level, wesnoth.unit_types[unit.type].level)
-		end
+local function force_same_cost()
+
+	local reference = { random_leader(), random_leader(), random_leader(), random_leader() }
+
+	local function generate_array()
+		local result_array = array_map(reference, function(ref_unit)
+			local unit
+			repeat
+				unit = random_leader()
+			until wesnoth.unit_types[unit].__cfg.cost == wesnoth.unit_types[ref_unit].__cfg.cost
+			return unit
+		end)
+		return result_array
 	end
 
-	if max_leader_level > 1 then
-		local msg = 'Level ' .. max_leader_level .. ' leaders found. Downgrading.'
-		print(msg)
-		-- wesnoth.message("Creep Wars", msg)
-		downgrade_wesnoth112(max_leader_level)
-	end
+	return set_all_leaders(generate_array)
+end
+
+print("creepwars mirror_style is " .. mirror_style)
+if mirror_style == "manual_no_downgrade" then
+	-- done
+elseif mirror_style == "manual" then
+	downgrade_wesnoth_any()
+elseif mirror_style == "mirror" then
+	downgrade_wesnoth_any()
+	force_mirror()
+elseif mirror_style == "same_cost" then
+	force_same_cost()
+elseif mirror_style == "same_strength" then
+	force_same_strength()
+else
+	error("Unknown leader mirror style: " .. mirror_style)
 end
 
 

@@ -44,9 +44,6 @@ spawn_pos[2] = { x = 32, y = 10 }
 -- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-creepwars_ai_side_set = is_ai_array
-creepwars_side_to_team = side_to_team
-
 creepwars.side_to_team = side_to_team
 creepwars.spawn_pos = spawn_pos
 creepwars.team_array = team_array

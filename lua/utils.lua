@@ -41,13 +41,13 @@ local function _format_any_value(obj, buffer)
 	end
 end
 
-function creepwars_format(obj)
+local function format(obj)
 	local buffer = {}
 	_format_any_value(obj or "nil", buffer)
 	return table.concat(buffer)
 end
 
-function creepwars_print(obj) print(creepwars_format(obj)) end
+local function _print(obj) print(format(obj)) end
 
 
 local function array_filter(arr, func)
@@ -102,7 +102,11 @@ creepwars.array_forall = array_forall
 creepwars.array_map = array_map
 creepwars.array_merge = array_merge
 creepwars.array_to_set = array_to_set
+creepwars.format = format
+creepwars.print = _print
 creepwars.split_comma = split_comma
 
+creepwars_format = format
+creepwars_print = _print
 
 -- >>

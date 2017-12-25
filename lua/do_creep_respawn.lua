@@ -3,17 +3,17 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local gen_creep = creepwars_generate_creep
-local memoize_ai_side_set = creepwars_ai_side_set
-local creepwars_side_to_team = creepwars_side_to_team
+local ai_side_set = creepwars.ai_side_set
+local side_to_team = creepwars.side_to_team
 local creepwars_creep_count = creepwars_creep_count
 local array_filter = creepwars.array_filter
 local spawn_pos = creepwars.spawn_pos
 
 local side_number = wesnoth.get_variable("side_number")
 
-if memoize_ai_side_set[side_number] and not wesnoth.sides[side_number].lost then
+if ai_side_set[side_number] and not wesnoth.sides[side_number].lost then
 
-	local team = creepwars_side_to_team[side_number]
+	local team = side_to_team[side_number]
 	local creep_score = wesnoth.get_variable("creepwars_score_" .. team)
 
 	local side_units = wesnoth.get_units { side = side_number, canrecruit = false }

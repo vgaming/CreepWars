@@ -41,8 +41,8 @@ local function show_dialog(settings)
 
 	local ok_cancel_buttons = T.grid {
 		T.row {
-			T.column { T.button { id = "ok", label = translate "OK" } },
-			T.column { T.button { id = "cancel", label = translate "Cancel" } }
+			T.column { T.button { id = "ok", label = "\n" .. translate "OK" .. "\n" } },
+			T.column { T.button { id = "cancel", label = "\n" .. translate "Cancel" .. "\n"} }
 		}
 	}
 

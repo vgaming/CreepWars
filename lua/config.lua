@@ -36,7 +36,7 @@ local function ask_mirror_style()
 		label = "\nCreep Wars: Leaders style\n\n",
 		options = options
 	}
-	return options[result].id
+	return options[result.index].id
 end
 
 local mirror_style = wesnoth and wesnoth.get_variable("creepwars_mirror_style")

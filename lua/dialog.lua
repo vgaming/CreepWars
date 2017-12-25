@@ -7,12 +7,11 @@ local ipairs = ipairs
 local T = wesnoth and wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local translate = wesnoth and wesnoth.textdomain "wesnoth"
 
-
 --- shows a wesnoth "list" dialog and returns the result.
 -- Example:
 --   item = {text = "", image = ""}
 --   show_dialog { label = "Choose from this list", options = {item, item, item} }
-local function show_dialog(settings)
+local function show_dialog_unsynchronized(settings)
 	local label = settings.label
 	local options = settings.options
 	local show_images = options[1].image and true or false
@@ -66,14 +65,21 @@ local function show_dialog(settings)
 		wesnoth.set_dialog_value(1, "the_list")
 	end
 
-	local result_item
+	local item_result
 	local function postshow()
-		result_item = wesnoth.get_dialog_value "the_list"
+		item_result = wesnoth.get_dialog_value "the_list"
 	end
 
 	local dialog_exit_code = wesnoth.show_dialog(dialog, preshow, postshow)
+	local is_ok = dialog_exit_code == -1
 	-- wesnoth.message(string.format("Button %d pressed. Item %d selected.", dialog_exit_code, result_item))
-	return result_item, dialog_exit_code == -1
+	return {is_ok = is_ok, index = item_result}
+end
+
+
+local function show_dialog(settings)
+	local func = function() return show_dialog_unsynchronized(settings) end
+	return wesnoth.synchronize_choice(func)
 end
 
 

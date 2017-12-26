@@ -52,13 +52,12 @@ local function sync_version1_11_13(func_human, func_ai, sides, id)
 		set_global_variable("creepwars_1_12", "side_local_test" .. tostring(v), v, ir)
 		local ircheck = get_global_variable("creepwars_1_12", "side_local_test" .. tostring(v), v)
 		if ir == tostring(ircheck) then
-			table.insert(local_sides, v)
+			local_sides[v] = true
 		end
 	end
-	for _, v in pairs(local_sides) do
-		local sideobj = wesnoth.sides[v]
+	for v, _ in pairs(local_sides) do
 		local r_side
-		if sideobj.controller == "human" or func_ai == nil then
+		if wesnoth.sides[v].controller == "human" or func_ai == nil then
 			r_side = func_human(v)
 		else
 			r_side = func_ai(v)
@@ -66,9 +65,13 @@ local function sync_version1_11_13(func_human, func_ai, sides, id)
 		set_global_variable("creepwars_1_12", id .. tostring(v), v, r_side)
 	end
 	for _, v in pairs(sides) do
-		print("Creep Wars", "Waiting for input from side " .. tostring(v))
+		if not local_sides[v] then
+			print("Creep Wars", "Waiting for input from side " .. tostring(v))
+		end
 		r[v] = get_global_variable("creepwars_1_12", id .. tostring(v), v)
-		print("Creep Wars", "Received input from side " .. tostring(v))
+		if not local_sides[v] then
+			print("Creep Wars", "Received input from side " .. tostring(v))
+		end
 	end
 	return r
 end

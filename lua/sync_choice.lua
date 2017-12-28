@@ -7,7 +7,6 @@ local wesnoth = wesnoth
 local math = math
 local os = os
 local pairs = pairs
-local table = table
 local tostring = tostring
 
 local function get_global_variable(namespace, name, side)

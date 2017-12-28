@@ -176,7 +176,7 @@ end
 
 
 creepwars_creep_array = creep_array
-creepwars_recruitable_array = leader_array
-creepwars_leader_strength = leader_strength
+creepwars.recruitable_array = leader_array
+creepwars.leader_strength = leader_strength
 
 -- >>

@@ -96,7 +96,17 @@ local function array_forall(arr, func)
 end
 
 
+local function generate_until(gen_func, until_func)
+	local result
+	repeat
+		result = gen_func()
+	until until_func(result)
+	return result
+end
+
+
 creepwars = {}
+local creepwars = creepwars
 creepwars.array_filter = array_filter
 creepwars.array_forall = array_forall
 creepwars.array_map = array_map
@@ -105,8 +115,6 @@ creepwars.array_to_set = array_to_set
 creepwars.format = format
 creepwars.print = _print
 creepwars.split_comma = split_comma
-
-creepwars_format = format
-creepwars_print = _print
+creepwars.generate_until = generate_until
 
 -- >>

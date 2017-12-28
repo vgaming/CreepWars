@@ -14,6 +14,7 @@ end
 for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 	if is_ai_array[unit.side] == true then
 		local ability = T.name_only {
+			id = "creepwars_guard",
 			name = "guard",
 			description = "All team members lose if this unit dies. \n"
 				.. "You can heal and unpoison your guard at the Shop."

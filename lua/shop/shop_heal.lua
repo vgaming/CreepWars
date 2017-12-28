@@ -9,8 +9,12 @@ local side_to_team = creepwars.side_to_team
 
 -- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!
 local team_shop_pos = { { ["8,9"] = true, ["8,11"] = true }, { ["28,9"] = true, ["28,11"] = true } }
-local function is_at_shop(side, x,y)
+local function is_at_shop(side, x, y)
 	return team_shop_pos[side_to_team[side]][x .. "," .. y]
+end
+
+local unit_at_shop = function(unit)
+	return team_shop_pos[side_to_team[unit.side]][unit.x .. "," .. unit.y]
 end
 
 
@@ -69,5 +73,7 @@ end
 
 creepwars.moveto_event = moveto_event
 creepwars.heal_static = heal_static
+
+creepwars_unit_at_shop = unit_at_shop
 
 -- >>

@@ -4,12 +4,12 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local helper = wesnoth.require "lua/helper.lua"
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-local creepwars_leader_strength = creepwars_leader_strength
-local creepwars_recruitable_array = creepwars_recruitable_array
 local array_map = creepwars.array_map
 local format = creepwars.format
 local is_ai_array = creepwars.is_ai_array
+local leader_strength = creepwars.leader_strength
 local mirror_style = creepwars.mirror_style
+local recruitable_array = creepwars.recruitable_array
 local split_comma = creepwars.split_comma
 
 
@@ -85,8 +85,8 @@ local function set_all_leaders(unit_array_function)
 end
 
 
-local leader_rand_string = "1.." .. #creepwars_recruitable_array
-local function random_leader() return creepwars_recruitable_array[helper.rand(leader_rand_string)] end
+local leader_rand_string = "1.." .. #recruitable_array
+local function random_leader() return recruitable_array[helper.rand(leader_rand_string)] end
 
 
 local function force_mirror()
@@ -114,7 +114,7 @@ local function force_same_strength()
 
 	local function array_cost(arr)
 		local result = 0
-		for _, u in ipairs(arr) do result = result + creepwars_leader_strength[u] end
+		for _, u in ipairs(arr) do result = result + leader_strength[u] end
 		return result
 	end
 

@@ -4,6 +4,7 @@
 -- See end of file for the function itself, `creepwars_generate_creep`
 
 local wesnoth = wesnoth
+local creepwars = creepwars
 local helper = wesnoth.require "lua/helper.lua"
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier

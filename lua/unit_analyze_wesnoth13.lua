@@ -67,12 +67,18 @@ for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer
 	end
 end
 add_downgrades(era_array, era_set)
-local leader_array = array_filter(era_array,
-	function(unit)
-		return wesnoth.unit_types[unit].level == 1
-			and count_specials(unit)["plague"] == nil
-			and count_specials(unit)["berserk"] == nil
-	end)
+
+-- only lvl1, no "plague", cannot advance to "berserk"
+local leader_array = array_filter(era_array, function(base_unit)
+	local arr = { base_unit }
+	add_advances(arr, { base_unit = true })
+	for _, adv in ipairs(arr) do
+		if count_specials(adv)["berserk"] ~= nil then
+			return false
+		end
+	end
+	return wesnoth.unit_types[base_unit].level == 1 and count_specials(base_unit)["plague"] == nil
+end)
 
 
 local creep_array

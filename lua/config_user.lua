@@ -68,11 +68,11 @@ local function ask_mirror_style()
 	local options = {
 		{
 			id = "mirror",
-			text = "Same leaders. Works on any Era. \n<--- example",
+			text = "Same leaders. Works on any Era. \n&lt;--- example",
 			image = mirror_image
 		}, {
 			id = "same_cost",
-			text = "Same cost. May be unbalanced.\n<--- example",
+			text = "Same cost. May be unbalanced.\n&lt;--- example",
 			image = samecost_image
 		},
 	}

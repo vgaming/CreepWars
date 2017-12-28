@@ -18,6 +18,13 @@ for k,v in ipairs(is_ai_array) do
 end
 
 
+local function pango_escape(str)
+	str = string.gsub(str, "<[^>]+>", "") -- html tags
+	str = string.gsub(str, "&lt;", "<")
+	str = string.gsub(str, "&gt;", ">")
+	return str
+end
+
 --- shows a wesnoth "list" dialog and returns the result.
 -- Example:
 --   item = {text = "", image = ""}
@@ -29,7 +36,7 @@ local function show_dialog_unsynchronized(settings)
 	local show_images = options[1].image and true or false
 
 	local description_row = T.row {
-		T.column { T.label { use_markup = true, label = spacer .. label .. spacer } },
+		T.column { T.label { use_markup = true, label = spacer .. pango_escape(label) .. spacer } },
 	}
 
 	local list_sub_row
@@ -72,7 +79,7 @@ local function show_dialog_unsynchronized(settings)
 	local function preshow()
 
 		for i, v in ipairs(options) do
-			wesnoth.set_dialog_value(spacer .. v.text .. spacer, "the_list", i, "the_label")
+			wesnoth.set_dialog_value(spacer .. pango_escape(v.text) .. spacer, "the_list", i, "the_label")
 			if show_images then
 				local img = v.image
 				if type(img) == "function" then img = img() end

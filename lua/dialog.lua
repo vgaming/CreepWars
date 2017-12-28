@@ -112,7 +112,7 @@ end
 
 local function show_dialog_early(settings)
 	local func = function() return show_dialog_unsynchronized(settings) end
-	return sync_choice(func, func, { human_side }, settings.id)[human_side]
+	return sync_choice(func, nil, { human_side }, settings.id)[human_side]
 end
 
 

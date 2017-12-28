@@ -44,7 +44,7 @@ local function clear_global_variable(namespace, name, side)
 end
 
 local function sync_version1_11_13(func_human, func_ai, sides, id)
-	local r = {}
+	local result = {}
 	local local_sides = {}
 	for _, v in pairs(sides) do
 		local ir = tostring(math.random(1000000000)) .. "_" .. tostring(os.time()) .. "_" .. tostring(os.clock()) .. "_" .. tostring(wesnoth.get_time_stamp())
@@ -67,12 +67,12 @@ local function sync_version1_11_13(func_human, func_ai, sides, id)
 		if not local_sides[v] then
 			print("Creep Wars", "Waiting for input from side " .. tostring(v))
 		end
-		r[v] = get_global_variable("creepwars_1_12", id .. tostring(v), v)
+		result[v] = get_global_variable("creepwars_1_12", id .. tostring(v), v)
 		if not local_sides[v] then
 			print("Creep Wars", "Received input from side " .. tostring(v))
 		end
 	end
-	return r
+	return result
 end
 
 

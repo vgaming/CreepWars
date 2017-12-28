@@ -106,14 +106,14 @@ local function ask_mirror_style()
 	return options[result.index].id
 end
 
-local mirror_style = wesnoth and wesnoth.get_variable("creepwars_mirror_style")
-	or (wesnoth and ask_mirror_style() or "manual")
+local mirror_style = wesnoth.get_variable("creepwars_mirror_style")
+	or ask_mirror_style()
 
 
 local hide_leaders
 if mirror_style == "mirror" then
 	hide_leaders = false
-elseif wesnoth and wesnoth.get_variable("creepwars_hide_leaders") ~= nil then
+elseif wesnoth.get_variable("creepwars_hide_leaders") ~= nil then
 	hide_leaders = wesnoth.get_variable("creepwars_hide_leaders")
 else
 	hide_leaders = true

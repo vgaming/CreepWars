@@ -175,8 +175,8 @@ for _, unit in ipairs(creep_array) do
 end
 
 
-creepwars_creep_array = creep_array
-creepwars.recruitable_array = leader_array
+creepwars.creep_array = creep_array
 creepwars.leader_strength = leader_strength
+creepwars.recruitable_array = leader_array
 
 -- >>

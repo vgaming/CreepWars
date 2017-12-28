@@ -8,7 +8,7 @@ local helper = wesnoth.require "lua/helper.lua"
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
-local creep_array = creepwars_creep_array
+local creep_array = creepwars.creep_array
 
 
 local creep_rand_string = "1.." .. #creep_array

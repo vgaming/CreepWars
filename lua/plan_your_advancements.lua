@@ -19,7 +19,7 @@ local function choose_upgrades()
 	local advances_to = split_comma(wesnoth.unit_types[unit.type].__cfg.advances_to)
 	local options = array_map(advances_to, function(adv)
 		local ut = wesnoth.unit_types[adv]
-		return { text = ut.name, image = ut.__cfg.image }
+		return { text = tostring(ut.name), image = ut.__cfg.image }
 	end)
 	local result = show_dialog { label = "Choose advancement \n(OK=confirm, Cancel=reset to default)\n", options = options }
 	if result.is_ok then

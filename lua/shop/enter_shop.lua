@@ -14,15 +14,18 @@ local event_unit
 
 
 local function err(message)
-	show_dialog {
-		T.tooltip { id = "tooltip_large" },
-		T.helptip { id = "tooltip_large" },
-		T.grid {
-			T.row { T.column { T.image { label = "misc/red-x.png" } } },
-			T.row { T.column { T.label { label = message .. "\n" } } },
-			T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
+	wesnoth.synchronize_choice(function()
+		wesnoth.show_dialog {
+			T.tooltip { id = "tooltip_large" },
+			T.helptip { id = "tooltip_large" },
+			T.grid {
+				T.row { T.column { T.image { label = "misc/red-x.png" } } },
+				T.row { T.column { T.label { label = message .. "\n" } } },
+				T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
+			}
 		}
-	}
+		return {} -- strange obligatory "table" result
+	end)
 end
 
 local function loop(label)
@@ -65,20 +68,20 @@ local hero_loop = function()
 		local big_hp = math.floor(14 + event_unit.variables.base_hp * 50 / 100)
 		local options = {
 			{
-				text = "Small Hitpoint Boost +" .. small_hp .. " HP \ncost 22",
-				image = "icons/potion_red_small.png",
-				func = give_effect(22, "health_small", T.effect {
-					apply_to = "hitpoints",
-					increase = small_hp,
-					increase_total = small_hp,
-				})
-			}, {
 				text = "Large Hitpoint Boost +" .. big_hp .. " HP \ncost 50", -- \n(formula 50% orig + 14)
 				image = "icons/potion_red_medium.png",
 				func = give_effect(50, "health_big", T.effect {
 					apply_to = "hitpoints",
 					increase = big_hp,
 					increase_total = big_hp,
+				})
+			}, {
+				text = "Small Hitpoint Boost +" .. small_hp .. " HP \ncost 22",
+				image = "icons/potion_red_small.png",
+				func = give_effect(22, "health_small", T.effect {
+					apply_to = "hitpoints",
+					increase = small_hp,
+					increase_total = small_hp,
 				})
 			}, {
 				text = "Movement +1 \ncost 28",
@@ -309,7 +312,7 @@ local weapon_loop = function()
 					damage = 4,
 					number = 2,
 					T.specials {
-						wesnoth.macros.WEAPON_SPECIAL_SLOWS
+						wesnoth.macros.WEAPON_SPECIAL_SLOW
 					}
 				}
 			},

@@ -60,8 +60,8 @@ local function show_dialog_unsynchronized(settings)
 
 	local ok_cancel_buttons = T.grid {
 		T.row {
-			T.column { T.button { id = "cancel", label = "\n" .. translate "Cancel" .. "\n"} },
-			T.column { T.button { id = "ok", label = "\n" .. translate "OK" .. "\n" } },
+			T.column { T.button { id = "cancel", return_value = -2, label = "\n" .. translate "Cancel" .. "\n"} },
+			T.column { T.button { id = "ok", return_value = -1, label = "\n" .. translate "OK" .. "\n" } },
 		}
 	}
 
@@ -106,7 +106,7 @@ local function show_dialog_unsynchronized(settings)
 
 	local dialog_exit_code = wesnoth.show_dialog(dialog, preshow, postshow)
 	local is_ok = dialog_exit_code == -1
-	-- wesnoth.message(string.format("Button %d pressed. Item %d selected.", dialog_exit_code, result_item))
+	print(string.format("Button %s pressed. Item %s selected.", dialog_exit_code, item_result))
 	return {is_ok = is_ok, index = item_result}
 end
 

@@ -81,13 +81,15 @@ local function show_dialog_unsynchronized(settings)
 		end
 		wesnoth.set_dialog_value(1, "the_list")
 
-		local function select()
-			local i = wesnoth.get_dialog_value "the_list"
-			local img = options[i].image
-			if type(img) == "function" then img = img() end
-			wesnoth.set_dialog_value(img or "misc/blank-hex.png", "the_list", i, "the_icon")
+		if show_images then
+			local function select()
+				local i = wesnoth.get_dialog_value "the_list"
+				local img = options[i].image
+				if type(img) == "function" then img = img() end
+				wesnoth.set_dialog_value(img or "misc/blank-hex.png", "the_list", i, "the_icon")
+			end
+			wesnoth.set_dialog_callback(select, "the_list")
 		end
-		wesnoth.set_dialog_callback(select, "the_list")
 	end
 
 	local item_result

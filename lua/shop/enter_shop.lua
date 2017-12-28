@@ -1,4 +1,4 @@
--- << shop
+-- << enter_shop
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -429,7 +429,7 @@ local armor_loop = function()
 end
 
 
-local function res(sum, weap)
+local function resistance_item(sum, weap)
 	local have = event_unit.variables["creepwars_res_" .. weap]
 	local func = function()
 		if sum >= 10 then
@@ -463,12 +463,12 @@ local resistance_loop = function()
 		label = label .. "(Hower unit HP on the right to see current resistances)\n"
 		label = label .. "\nYour gold: " .. event_side.gold
 		local options = {
-			res(sum, "arcane"),
-			res(sum, "blade"),
-			res(sum, "cold"),
-			res(sum, "fire"),
-			res(sum, "impact"),
-			res(sum, "pierce"),
+			resistance_item(sum, "arcane"),
+			resistance_item(sum, "blade"),
+			resistance_item(sum, "cold"),
+			resistance_item(sum, "fire"),
+			resistance_item(sum, "impact"),
+			resistance_item(sum, "pierce"),
 		}
 		local result = show_dialog { label = label, options = options }
 		if result.is_ok and options[result.index].func then options[result.index].func() end

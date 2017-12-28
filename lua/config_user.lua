@@ -25,8 +25,7 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 end
 
 
-local leader_rand_string = "1.." .. #recruitable_array
-local function random_leader() return recruitable_array[helper.rand(leader_rand_string)] end
+local function random_leader() return recruitable_array[math.random(#recruitable_array)] end
 
 local mirror_image = function()
 	local up = random_leader()

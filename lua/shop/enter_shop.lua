@@ -14,7 +14,7 @@ local event_unit
 
 
 local function err(message)
-	wesnoth.show_dialog {
+	show_dialog {
 		T.tooltip { id = "tooltip_large" },
 		T.helptip { id = "tooltip_large" },
 		T.grid {

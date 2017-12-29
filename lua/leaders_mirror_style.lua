@@ -21,11 +21,11 @@ local function set_type(unit, type)
 end
 
 
-local function downgrade_wesnoth113()
+local function downgrade_wesnoth113(max_leader_level)
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if is_ai_array[unit.side] ~= true then
 			local downgrade_array = wesnoth.unit_types[unit.type].advances_from
-			if downgrade_array and #downgrade_array > 0 then
+			if downgrade_array and #downgrade_array > 0 and wesnoth.unit_types[unit.type].level == max_leader_level then
 				-- local downgrade = downgrade_array[helper.rand("1.." .. #downgrade_array + 1)]
 				local downgrade = downgrade_array[1] -- need the same for true mirror
 				set_type(unit, downgrade)
@@ -59,7 +59,7 @@ end
 
 local function downgrade_wesnoth_any()
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-		downgrade_wesnoth113()
+		downgrade_wesnoth113(2)
 	else
 		downgrade_wesnoth112(2)
 	end

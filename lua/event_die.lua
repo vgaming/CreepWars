@@ -30,7 +30,7 @@ else
 	local msg = "Turn " .. wesnoth.get_variable("turn_number") .. ": " .. defender.type
 		.. " died, neither Leader nor Creep. Probably plagued. No gold/creep bonus was generated."
 	print(msg)
-	wesnoth.message("Creep Wars", msg)
+	-- wesnoth.message("Creep Wars", msg)
 end
 
 -- >>

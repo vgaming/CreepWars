@@ -480,22 +480,25 @@ local resistance_loop = function()
 end
 
 
+local heal_guard_cost = 5
 local heal_guards = function()
 	local this_turn = wesnoth.current.turn .. "," .. wesnoth.current.side
 	local variable_name = "creepwars_last_heal"
-	if event_side.gold < 10 then
+	if event_side.gold < heal_guard_cost then
 		err("Not enough gold")
 	elseif wesnoth.get_variable(variable_name) == this_turn then
 		err("Can only heal once per turn")
 	else
 		local healed = false
 		for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
-			local was_hp = unit.hitpoints
-			unit.hitpoints = math.min(unit.hitpoints + unit.max_hitpoints / 5, unit.max_hitpoints)
-			healed = healed or (unit.hitpoints ~= was_hp)
+			if unit.hitpoints < unit.max_hitpoints then
+				healed = true
+				unit.hitpoints = math.min(unit.hitpoints + unit.max_hitpoints / 5, unit.max_hitpoints)
+				break
+			end
 		end
 		if healed then
-			event_side.gold = event_side.gold - 10
+			event_side.gold = event_side.gold - heal_guard_cost
 			wesnoth.set_variable(variable_name, this_turn)
 		else
 			err("Cannot heal: all guards healthy.")
@@ -504,17 +507,21 @@ local heal_guards = function()
 	end
 end
 
+local unpoison_guard_cost = 10
 local unpoison_guards = function()
-	if event_side.gold < 10 then
+	if event_side.gold < unpoison_guard_cost then
 		err("Not enough gold")
 	else
 		local cured = false
 		for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
-			if unit.status.poisoned then cured = true end
-			unit.status.poisoned = false
+			if unit.status.poisoned then
+				cured = true
+				unit.status.poisoned = false
+				break
+			end
 		end
 		if cured then
-			event_side.gold = event_side.gold - 10
+			event_side.gold = event_side.gold - unpoison_guard_cost
 			wesnoth.wml_actions.redraw {}
 		else
 			err("No poisoned guards found")
@@ -524,12 +531,12 @@ end
 
 local guard_loop = loop("Guard.") {
 	{
-		text = "Heal guards 20% HP \ncost 10",
+		text = "Heal most damaged guard 20% HP \ncost " .. heal_guard_cost,
 		image = "icons/potion_red_small.png",
 		func = heal_guards
 	},
 	{
-		text = "Unpoison guards \ncost 10",
+		text = "Unpoison guard \ncost " .. unpoison_guard_cost,
 		image = "icons/potion_green_small.png",
 		func = unpoison_guards
 	},

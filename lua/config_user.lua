@@ -68,7 +68,7 @@ local function ask_mirror_style()
 	local options = {
 		{
 			id = "mirror",
-			text = "Same leaders. Works on any Era. \n&lt;--- example",
+			text = "Same leaders. \n&lt;--- example",
 			image = mirror_image
 		}, {
 			id = "same_cost",
@@ -79,13 +79,13 @@ local function ask_mirror_style()
 	if max_leader_level > 1 then
 		options[#options + 1] = {
 			id = "manual",
-			text = 'Random (but downgrade for this map). May be unbalanced.',
+			text = 'Manual (leave user choice, but downgrade for this map). May be unbalanced.',
 			image = "units/random-dice.png"
 		}
 	else
 		options[#options + 1] = {
 			id = "manual_no_downgrade",
-			text = "Random. May be unbalanced.",
+			text = "Manual (leave user choice). May be unbalanced.",
 			image = "units/random-dice.png"
 		}
 	end
@@ -105,8 +105,11 @@ local function ask_mirror_style()
 	return options[result.index].id
 end
 
-local mirror_style = wesnoth.get_variable("creepwars_mirror_style")
-	or ask_mirror_style()
+local mirror_style
+do
+	local conf = wesnoth.get_variable("creepwars_mirror_style")
+	mirror_style = conf ~= nil and conf ~= "decide_later" and conf or ask_mirror_style()
+end
 
 
 local hide_leaders

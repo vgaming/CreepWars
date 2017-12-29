@@ -1,7 +1,12 @@
 -- << event_die.lua
 
 local wesnoth = wesnoth
+local creepwars = creepwars
+local ipairs = ipairs
 local creepwars_creep_kill_event = creepwars_creep_kill_event
+local side_to_team = creepwars.side_to_team
+local team_array = creepwars.team_array
+local is_ai_array = creepwars.is_ai_array
 
 local defender = wesnoth.get_unit(wesnoth.get_variable("x1") or 0, wesnoth.get_variable("y1") or 0)
 local attacker = wesnoth.get_unit(wesnoth.get_variable("x2") or 0, wesnoth.get_variable("y2") or 0)
@@ -16,6 +21,9 @@ elseif attacker == nil then
 		"If the host has no modifications, please report the issue."
 	print(msg)
 	wesnoth.message("Creep Wars", msg)
+elseif defender.canrecruit and is_ai_array[defender.side] then
+	-- kill AI side => kill team
+	wesnoth.wml_actions.kill { side = defender.side, canrecruit = true }
 elseif defender.canrecruit or defender.variables["creepwars_creep"] then
 	creepwars_creep_kill_event(attacker, defender)
 else

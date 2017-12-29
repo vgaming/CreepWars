@@ -1,4 +1,4 @@
--- << legacy_leader_variables
+-- << init_leader_variables
 
 local wesnoth = wesnoth
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}

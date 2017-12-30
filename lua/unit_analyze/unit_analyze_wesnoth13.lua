@@ -12,7 +12,22 @@ local creepwars_default_era_creeps = creepwars_default_era_creeps
 local array_filter = creepwars.array_filter
 local array_to_set = creepwars.array_to_set
 local split_comma = creepwars.split_comma
-local unit_count_specials = creepwars.unit_count_specials
+
+
+local function count_specials(unit)
+	local result = {}
+	for _, attack in ipairs(wesnoth.unit_types[unit].attacks) do
+		for _, special in ipairs(attack.specials) do
+			local name = special[1]
+			if name == "chance_to_hit" then
+				result[name] = special[2]["value"]
+			else
+				result[name] = (result[name] or 0) + 1
+			end
+		end
+	end
+	return result
+end
 
 
 local function add_downgrades(arr, set, filter)
@@ -48,11 +63,11 @@ local function can_be_a_leader(base_unit)
 	local arr = { base_unit }
 	creepwars.add_advances(arr)
 	for _, adv in ipairs(arr) do
-		if unit_count_specials(adv)["berserk"] ~= nil then
+		if count_specials(adv)["berserk"] ~= nil then
 			return false
 		end
 	end
-	return wesnoth.unit_types[base_unit].level == 1 and unit_count_specials(base_unit)["plague"] == nil
+	return wesnoth.unit_types[base_unit].level == 1 and count_specials(base_unit)["plague"] == nil
 end
 
 
@@ -90,13 +105,13 @@ end
 
 
 creep_array = array_filter(creep_array, function(unit)
-	return wesnoth.unit_types[unit].level > 0 or unit_count_specials(unit)["plague"] == nil
+	return wesnoth.unit_types[unit].level > 0 or count_specials(unit)["plague"] == nil
 end)
 
 
 local function super_leader_strength(unit_name)
 	local type = wesnoth.unit_types[unit_name]
-	local specials = unit_count_specials(unit_name)
+	local specials = count_specials(unit_name)
 	local abilities = array_to_set(type.abilities)
 	local result = type.cost
 	if #type.advances_to > 0 then result = result * 0.001 end

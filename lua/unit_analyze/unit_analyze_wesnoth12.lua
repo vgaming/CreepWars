@@ -6,7 +6,6 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
-local unit_count_specials = creepwars.unit_count_specials
 
 
 local leader_array = creepwars.default_era_leaders
@@ -26,16 +25,11 @@ for _, unit in ipairs(leader_array) do
 end
 
 
--- lvl1, no "plague", cannot advance to "berserk"
 local function can_be_a_leader(base_unit)
-	local arr = { base_unit }
-	creepwars.add_advances(arr)
-	for _, adv in ipairs(arr) do
-		if unit_count_specials(adv)["berserk"] ~= nil then
-			return false
-		end
-	end
-	return wesnoth.unit_types[base_unit].level == 1 and unit_count_specials(base_unit)["plague"] == nil
+	-- accessing "count_specials" causes OOS, I don't know why
+	-- it seems that the code that was previosly located in unit_analyze_common.lua behaves
+	-- differently on different 1.12 clients.
+	return true
 end
 
 

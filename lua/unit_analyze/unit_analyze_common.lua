@@ -35,25 +35,6 @@ local function add_advances(arr, set, filter)
 end
 
 
-local function unit_count_specials(unit)
-	local result = {}
-	for attack in helper.child_range(wesnoth.unit_types[unit].__cfg, "attack") do
-		for specials in helper.child_range(attack, "specials") do
-			for _, special in ipairs(specials) do
-				local name = special[1]
-				if name == "chance_to_hit" then
-					result[name] = special[2]["value"]
-				else
-					result[name] = (result[name] or 0) + 1
-				end
-			end
-		end
-	end
-	return result
-end
-
-
-creepwars.unit_count_specials = unit_count_specials
 creepwars.add_advances = add_advances
 creepwars.default_era_leaders = default_era_leaders
 creepwars.default_era_creep_base = default_era_creep_base

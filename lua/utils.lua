@@ -42,9 +42,11 @@ local function _format_any_value(obj, buffer)
 end
 
 local function format(obj)
-	local buffer = {}
-	_format_any_value(obj or "nil", buffer)
-	return table.concat(buffer)
+	if obj == nil then return "null" else
+		local buffer = {}
+		_format_any_value(obj, buffer)
+		return table.concat(buffer)
+	end
 end
 
 local function _print(obj) print(format(obj)) end

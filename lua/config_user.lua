@@ -17,14 +17,6 @@ local offline_game = not wesnoth or array_forall(wesnoth.sides, function(side)
 end)
 
 
-local max_leader_level = -1
-for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-	if not is_ai_array[unit.side] then
-		max_leader_level = math.max(max_leader_level, wesnoth.unit_types[unit.type].level)
-	end
-end
-
-
 local function random_leader() return recruitable_array[math.random(#recruitable_array)] end
 
 local mirror_image = function()
@@ -74,21 +66,11 @@ local function ask_mirror_style()
 			id = "same_cost",
 			text = "Same cost. May be unbalanced.\n&lt;--- example",
 			image = samecost_image
-		},
-	}
-	if max_leader_level > 1 then
-		options[#options + 1] = {
+		}, {
 			id = "manual",
-			text = 'Manual (leave user choice, but downgrade for this map). May be unbalanced.',
-			image = "units/random-dice.png"
+			text = "Manual. May be unbalanced.",
 		}
-	else
-		options[#options + 1] = {
-			id = "manual_no_downgrade",
-			text = "Manual (leave user choice). May be unbalanced.",
-			image = "units/random-dice.png"
-		}
-	end
+	}
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		options[#options + 1] = {
 			id = "same_strength",

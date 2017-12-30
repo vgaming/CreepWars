@@ -1,4 +1,4 @@
--- << sync_choice_alt
+-- << sync_by_first_side
 
 
 local wesnoth = wesnoth
@@ -25,13 +25,13 @@ local function sync_by_first_side(func, id)
 			break
 		end
 	end
-	print("first side", first_side) -- todo clean up
-	print("I am first", am_i_first)
+	-- print("first side", first_side) -- todo clean up
+	-- print("I am first", am_i_first)
 	if am_i_first == nil then
 		error("No human sides found!")
 	elseif am_i_first == true then
 		local res = func()
-		print("got local result from user", creepwars.format(res))
+		-- print("got local result from user", creepwars.format(res))
 		wesnoth.set_variable("creepwars_global_variable", res)
 		wesnoth.wml_actions.set_global_variable {
 			namespace = "creepwars",

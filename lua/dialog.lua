@@ -1,12 +1,11 @@
 -- << dialog
 
 local wesnoth = wesnoth
+local creepwars = creepwars
 local ipairs = ipairs
 local T = wesnoth and wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local translate = wesnoth and wesnoth.textdomain "wesnoth"
-local creepwars = creepwars
 local is_ai_array = creepwars.is_ai_array
-local sync_choice = creepwars.sync_choice
 
 
 local human_side
@@ -124,12 +123,6 @@ end
 local function show_dialog_to_first_side(settings)
 	local func = function() return show_dialog_unsynchronized(settings) end
 	return creepwars.sync_by_first_side(func)
-end
-
-
-local function show_dialog_early_deprecated(settings)
-	local func = function() return show_dialog_unsynchronized(settings) end
-	return sync_choice(func, nil, { human_side }, settings.id)[human_side]
 end
 
 

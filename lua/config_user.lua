@@ -8,7 +8,6 @@ local helper = wesnoth.require "lua/helper.lua"
 local array_forall = creepwars.array_forall
 local is_ai_array = creepwars.is_ai_array
 local recruitable_array = creepwars.recruitable_array
-local show_dialog_early = creepwars.show_dialog_early
 local generate_until = creepwars.generate_until
 
 
@@ -96,7 +95,7 @@ local function ask_mirror_style()
 					.. "May still be unbalanced (for example with custom unit abilities).",
 		}
 	end
-	local result = show_dialog_early {
+	local result = creepwars.show_dialog_to_first_side {
 		id = "mirror_style",
 		label = "Creep Wars: Leader mirroring\n",
 		options = options

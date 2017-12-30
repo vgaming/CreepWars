@@ -410,7 +410,7 @@ end
 local armor_loop = function()
 	repeat
 		local label = "Armor is a cheaper alternative to Resistances, \nbut it affects many resistances at once.\n"
-		label = label .. "\nYour gold: " .. event_side.gold
+		label = label .. "\nYour gold: " .. event_side.gold .. "\n"
 		local options = {
 			armor_item(100, "hhc", "Heavy Human Cuirass", "icons/breastplate.png",
 				0, 35, -10, -10, 20, 35),

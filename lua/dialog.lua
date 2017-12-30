@@ -121,13 +121,20 @@ local function show_dialog(settings)
 end
 
 
-local function show_dialog_early(settings)
+local function show_dialog_to_first_side(settings)
+	local func = function() return show_dialog_unsynchronized(settings) end
+	return creepwars.sync_by_first_side(func)
+end
+
+
+local function show_dialog_early_deprecated(settings)
 	local func = function() return show_dialog_unsynchronized(settings) end
 	return sync_choice(func, nil, { human_side }, settings.id)[human_side]
 end
 
 
 creepwars.show_dialog = show_dialog
-creepwars.show_dialog_early = show_dialog_early
+creepwars.show_dialog_to_first_side = show_dialog_to_first_side
+creepwars.show_dialog_unsynchronized = show_dialog_unsynchronized
 
 -- >>

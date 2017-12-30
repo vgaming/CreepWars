@@ -10,11 +10,6 @@ local recruitable_array = creepwars.recruitable_array
 local generate_until = creepwars.generate_until
 
 
-local offline_game = not wesnoth or array_forall(wesnoth.sides, function(side)
-	return side.controller == "human" or side.controller == "ai" or side.controller == "null"
-end)
-
-
 local function random_leader() return recruitable_array[math.random(#recruitable_array)] end
 
 local mirror_image = function()

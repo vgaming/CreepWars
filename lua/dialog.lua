@@ -1,10 +1,10 @@
 -- << dialog
 
 local wesnoth = wesnoth
-local ipairs = ipairs
-local T = wesnoth and wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-local translate = wesnoth and wesnoth.textdomain "wesnoth"
 local creepwars = creepwars
+local ipairs = ipairs
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local translate = wesnoth.textdomain "wesnoth"
 local is_ai_array = creepwars.is_ai_array
 local sync_choice = creepwars.sync_choice
 

@@ -6,6 +6,7 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
+local unit_count_specials = creepwars.unit_count_specials
 
 
 local leader_array = creepwars.default_era_leaders
@@ -30,11 +31,11 @@ local function can_be_a_leader(base_unit)
 	local arr = { base_unit }
 	creepwars.add_advances(arr)
 	for _, adv in ipairs(arr) do
-		if creepwars.unit_count_specials(adv)["berserk"] ~= nil then
+		if unit_count_specials(adv)["berserk"] ~= nil then
 			return false
 		end
 	end
-	return wesnoth.unit_types[base_unit].level == 1 and count_specials(base_unit)["plague"] == nil
+	return wesnoth.unit_types[base_unit].level == 1 and unit_count_specials(base_unit)["plague"] == nil
 end
 
 

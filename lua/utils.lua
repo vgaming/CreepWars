@@ -68,6 +68,9 @@ local function array_map(arr, func)
 end
 
 
+local function array_copy(arr) return array_map(arr, function(e) return e end) end
+
+
 local function array_to_set(arr)
 	local result = {}
 	for _, v in ipairs(arr) do
@@ -110,6 +113,7 @@ local creepwars = creepwars
 creepwars.array_filter = array_filter
 creepwars.array_forall = array_forall
 creepwars.array_map = array_map
+creepwars.array_copy = array_copy
 creepwars.array_merge = array_merge
 creepwars.array_to_set = array_to_set
 creepwars.format = format

@@ -4,6 +4,7 @@
 -- See end of file for the function itself, `creepwars_generate_creep`
 
 local wesnoth = wesnoth
+local creepwars = creepwars
 local helper = wesnoth.require "lua/helper.lua"
 local ipairs = ipairs
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max
@@ -11,35 +12,8 @@ local creepwars_default_era_creeps = creepwars_default_era_creeps
 local array_filter = creepwars.array_filter
 local array_to_set = creepwars.array_to_set
 local split_comma = creepwars.split_comma
+local unit_count_specials = creepwars.unit_count_specials
 
-
-local function count_specials(unit)
-	local result = {}
-	for _, attack in ipairs(wesnoth.unit_types[unit].attacks) do
-		for _, special in ipairs(attack.specials) do
-			local name = special[1]
-			if name == "chance_to_hit" then
-				result[name] = special[2]["value"]
-			else
-				result[name] = (result[name] or 0) + 1
-			end
-		end
-	end
-	return result
-end
-
-
-local function add_advances(arr, set, filter)
-	filter = filter or function(adv) return true end
-	for _, unit in ipairs(arr) do
-		for _, adv in ipairs(wesnoth.unit_types[unit].advances_to) do
-			if set[adv] == nil and wesnoth.unit_types[adv] and filter(adv) then
-				set[adv] = true
-				arr[#arr + 1] = adv
-			end
-		end
-	end
-end
 
 local function add_downgrades(arr, set, filter)
 	filter = filter or function(adv) return true end
@@ -68,31 +42,26 @@ for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer
 end
 add_downgrades(era_array, era_set)
 
--- only lvl1, no "plague", cannot advance to "berserk"
-local leader_array = array_filter(era_array, function(base_unit)
+
+-- lvl1, no "plague", cannot advance to "berserk"
+local function can_be_a_leader(base_unit)
 	local arr = { base_unit }
-	add_advances(arr, { base_unit = true })
+	creepwars.add_advances(arr)
 	for _, adv in ipairs(arr) do
-		if count_specials(adv)["berserk"] ~= nil then
+		if unit_count_specials(adv)["berserk"] ~= nil then
 			return false
 		end
 	end
-	return wesnoth.unit_types[base_unit].level == 1 and count_specials(base_unit)["plague"] == nil
-end)
+	return wesnoth.unit_types[base_unit].level == 1 and unit_count_specials(base_unit)["plague"] == nil
+end
+
+
+local leader_array = array_filter(era_array, can_be_a_leader)
 
 
 local creep_array
 if creepwars_default_era_creeps then
-	creep_array = {
-		"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", -- lvl0
-		"Vampire Bat", -- costy lvl0
-		"Drake Burner", "Drake Clasher", "Drake Fighter", "Drake Glider", "Saurian Augur", "Saurian Skirmisher", -- lvl1 drakes
-		"Dwarvish Fighter", "Dwarvish Guardsman", "Dwarvish Thunderer", "Dwarvish Ulfserker", "Gryphon Rider", "Footpad", "Poacher", "Thief", -- lvl1 knalgan
-		"Bowman", "Cavalryman", "Fencer", "Heavy Infantryman", "Horseman", "Mage", "Merman Fighter", "Spearman", -- lvl1 loyal
-		"Naga Fighter", "Orcish Archer", "Orcish Assassin", "Orcish Grunt", "Troll Whelp", "Wolf Rider", -- lvl1 orc
-		"Elvish Archer", "Elvish Fighter", "Elvish Scout", "Elvish Shaman", "Mage", "Merman Hunter", "Wose", -- lvl1 rebels
-		"Dark Adept", "Ghost", "Ghoul", "Skeleton Archer", "Skeleton" -- lvl1 undead
-	}
+	creep_array = creepwars.array_copy(creepwars.default_era_creep_base)
 else
 	creep_array = era_array
 end
@@ -100,7 +69,7 @@ end
 
 -- add advances
 local creep_set = array_to_set(creep_array)
-add_advances(creep_array, creep_set, function(adv) return wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max end)
+creepwars.add_advances(creep_array, creep_set, function(adv) return wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max end)
 
 
 -- make sure lvl0 exists
@@ -121,13 +90,13 @@ end
 
 
 creep_array = array_filter(creep_array, function(unit)
-	return wesnoth.unit_types[unit].level > 0 or count_specials(unit)["plague"] == nil
+	return wesnoth.unit_types[unit].level > 0 or unit_count_specials(unit)["plague"] == nil
 end)
 
 
 local function super_leader_strength(unit_name)
 	local type = wesnoth.unit_types[unit_name]
-	local specials = count_specials(unit_name)
+	local specials = unit_count_specials(unit_name)
 	local abilities = array_to_set(type.abilities)
 	local result = type.cost
 	if #type.advances_to > 0 then result = result * 0.001 end
@@ -161,7 +130,7 @@ end
 local leader_strength = {}
 for _, unit in ipairs(leader_array) do
 	local arr = { unit }
-	add_advances(arr, { unit = true })
+	creepwars.add_advances(arr)
 	local maximum = -1
 	for _, candidate in ipairs(arr) do
 		local candidate_strength = super_leader_strength(candidate)
@@ -184,5 +153,6 @@ end
 creepwars.creep_array = creep_array
 creepwars.leader_strength = leader_strength
 creepwars.recruitable_array = leader_array
+creepwars.can_be_a_leader = can_be_a_leader
 
 -- >>

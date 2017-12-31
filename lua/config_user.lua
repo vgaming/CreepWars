@@ -69,7 +69,7 @@ local function ask_mirror_style()
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		options[#options + 1] = {
 			id = "same_strength",
-			text = "Same Strength -- Same team strength.\n"
+			text = "Same strength -- Try to guess team strength. Experimental.\n"
 					.. "May still be unbalanced (for example with custom unit abilities).",
 		}
 	end

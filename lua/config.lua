@@ -18,7 +18,7 @@ creepwars_guard_hp_for_kill = function(is_leader) return is_leader and 3 or 1 en
 
 local creepwars_expected_total_kills = 80
 
-local gold_per_kill_start = 3
+local gold_per_kill_start = 4
 local gold_kills_to_increase = 20
 local function gold_per_kill(kills) return gold_per_kill_start + math.floor(kills / gold_kills_to_increase) end
 

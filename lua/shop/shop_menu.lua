@@ -40,12 +40,13 @@ local function show_shop_dialog(dialog_config)
 			speaker = "narrator",
 			message = dialog_config.label,
 		}
+		local spacer = dialog_config.spacer or "\n"
 		msg[#msg + 1] = T.option { message = "\nCancel\n" }
 		for index, e in ipairs(dialog_config.options) do
 			local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
 			local image_msg = e.image and "&" .. e.image .. "=" or ""
 			msg[#msg + 1] = T.option {
-				message = image_msg .. e.text .. gold_msg,
+				message = image_msg .. spacer ..  e.text .. gold_msg .. spacer,
 				T.command { T.lua { code = "creepwars_shop_result = " .. index } },
 			}
 		end

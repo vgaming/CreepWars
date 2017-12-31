@@ -6,7 +6,6 @@ local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local ipairs = ipairs
 local string = string
 local math = math
-local show_dialog = creepwars.show_dialog
 
 
 local event_side
@@ -28,16 +27,51 @@ local function err(message)
 	end)
 end
 
+local function show_shop_dialog(dialog_config)
+	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+		dialog_config.options = creepwars.array_map(dialog_config.options, function(e)
+			local gold_msg = e.gold and "\n<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
+			e.text = e.text .. gold_msg
+			return e
+		end)
+		return creepwars.show_dialog(dialog_config)
+	else
+		local msg = {
+			speaker = "narrator",
+			message = dialog_config.label,
+		}
+		msg[#msg + 1] = T.option { message = "\nCancel\n" }
+		for index, e in ipairs(dialog_config.options) do
+			local gold_msg = e.gold and "\n<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
+			local image_msg = e.image and "&" .. e.image .. "=" or ""
+			msg[#msg + 1] = T.option {
+				message = image_msg .. e.text .. gold_msg,
+				T.command { T.lua { code = "creepwars_shop_result = " .. index } },
+			}
+		end
+
+		wesnoth.wml_actions.message(msg)
+
+		local result = creepwars_shop_result
+		creepwars_shop_result = nil
+
+		print("result", creepwars.format(result))
+		if result == null then
+			return { is_ok = false, index = -2 }
+		else
+			return { is_ok = true, index = result }
+		end
+	end
+end
+
+
 local function loop(label)
 	return function(options)
 		return function()
 			repeat
 				local label = label .. "\nYour gold: " .. event_side.gold
-				local result = show_dialog { label = label, options = options }
-				if result.is_ok and options[result.index].func then
-					options[result.index].func()
-				end
-				wesnoth.wml_actions.redraw {}
+				local result = show_shop_dialog { label = label, options = options }
+				if result.is_ok then options[result.index].func() end
 			until not result.is_ok
 		end
 	end
@@ -151,8 +185,8 @@ local hero_loop = function()
 					})
 			},
 		}
-		local result = show_dialog { label = label, spacer = "", options = options }
-		if result.is_ok and options[result.index].func then options[result.index].func() end
+		local result = show_shop_dialog { label = label, spacer = "", options = options }
+		if result.is_ok then options[result.index].func() end
 	until not result.is_ok
 end
 
@@ -365,8 +399,8 @@ local weapon_loop = function()
 				}
 			},
 		}
-		local result = show_dialog { label = label, spacer = "", options = options }
-		if result.is_ok and options[result.index].func then options[result.index].func() end
+		local result = show_shop_dialog { label = label, spacer = "", options = options }
+		if result.is_ok then options[result.index].func() end
 	until not result.is_ok
 end
 
@@ -425,9 +459,8 @@ local armor_loop = function()
 			armor_item(25, "pg", "Plate Greaves", "icons/greaves.png",
 				0, 8, 0, -10, 8, 8),
 		}
-		local result = show_dialog { label = label, spacer = "", options = options }
-		if result.is_ok and options[result.index].func then options[result.index].func() end
-		wesnoth.wml_actions.redraw {}
+		local result = show_shop_dialog { label = label, spacer = "", options = options }
+		if result.is_ok then options[result.index].func() end
 	until not result.is_ok
 end
 
@@ -473,9 +506,8 @@ local resistance_loop = function()
 			resistance_item(sum, "impact"),
 			resistance_item(sum, "pierce"),
 		}
-		local result = show_dialog { label = label, options = options }
-		if result.is_ok and options[result.index].func then options[result.index].func() end
-		wesnoth.wml_actions.redraw {}
+		local result = show_shop_dialog { label = label, options = options }
+		if result.is_ok then options[result.index].func() end
 	until not result.is_ok
 end
 
@@ -503,7 +535,6 @@ local heal_guards = function()
 		else
 			err("Cannot heal: all guards healthy.")
 		end
-		wesnoth.wml_actions.redraw {}
 	end
 end
 
@@ -522,7 +553,6 @@ local unpoison_guards = function()
 		end
 		if cured then
 			event_side.gold = event_side.gold - unpoison_guard_cost
-			wesnoth.wml_actions.redraw {}
 		else
 			err("No poisoned guards found")
 		end

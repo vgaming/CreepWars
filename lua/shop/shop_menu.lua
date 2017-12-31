@@ -101,10 +101,13 @@ local hero_loop = function()
 		label = label .. "\nYour gold: " .. event_side.gold
 		local small_hp = math.floor(5 + event_unit.variables.base_hp * 22 / 100)
 		local big_hp = math.floor(14 + event_unit.variables.base_hp * 50 / 100)
+		local hex = "misc/blank-hex.png"
+		local sword = "items/sword.png~CROP(20,24,32,32)"
+		local bow = "items/bow-crystal.png~CROP(19,21,33,31)~ROTATE(90)"
 		local options = {
 			{
 				text = "Large Hitpoint Boost +" .. big_hp .. " HP \n", -- \n(formula 50% orig + 14)
-				image = "icons/potion_red_medium.png",
+				image = hex .. "~BLIT(icons/potion_red_medium.png,5,5)",
 				gold = 50,
 				func = give_effect(50, "health_big", T.effect {
 					apply_to = "hitpoints",
@@ -113,7 +116,7 @@ local hero_loop = function()
 				})
 			}, {
 				text = "Small Hitpoint Boost +" .. small_hp .. " HP \n",
-				image = "icons/potion_red_small.png",
+				image = hex .. "~BLIT(icons/potion_red_small.png,5,5)",
 				gold = 22,
 				func = give_effect(22, "health_small", T.effect {
 					apply_to = "hitpoints",
@@ -122,7 +125,7 @@ local hero_loop = function()
 				})
 			}, {
 				text = "Movement +1 \n",
-				image = "icons/jewelry_butterfly_pin.png",
+				image = hex .. "~BLIT(icons/jewelry_butterfly_pin.png,5,5)",
 				gold = 28,
 				func = give_effect(28, "mp", T.effect {
 					apply_to = "movement",
@@ -131,7 +134,7 @@ local hero_loop = function()
 			}, {
 				text = "Melee Damage +1 \n",
 --				image = "items/anvil.png",
-				image = "items/flame-sword.png",
+				image = string.format("%s~BLIT(%s~SCALE(64,64),5,5)", hex, sword),
 				gold = 14,
 				func = give_effect(14, "melee_damage", T.effect {
 					apply_to = "attack",
@@ -140,7 +143,7 @@ local hero_loop = function()
 				})
 			}, {
 				text = "Melee Strikes +1 \n",
-				image = "misc/blank-hex.png~BLIT(items/sword.png~CROP(0,0,60,60),6,2)~BLIT(items/sword.png~CROP(8,2,50,50))",
+				image = string.format("%s~BLIT(%s,10,18)~BLIT(%s,27,21)", hex, sword, sword),
 				gold = 42,
 				func = give_effect(42, "melee_strikes", T.effect {
 					apply_to = "attack",
@@ -149,7 +152,7 @@ local hero_loop = function()
 				})
 			}, {
 				text = "Ranged Damage +1 \n",
-				image = "projectiles/missile-fire-ne.png~FL(vert,horiz)",
+				image = string.format("%s~BLIT(%s~SCALE(64,64))", hex, bow),
 				gold = 14,
 				func = give_effect(14, "ranged_damage", T.effect {
 					apply_to = "attack",
@@ -159,7 +162,7 @@ local hero_loop = function()
 			}, {
 				text = "Ranged Strikes +1 \n",
 				gold = 42,
-				image = "misc/blank-hex.png~BLIT(projectiles/missile-ne.png~CROP(0,0,60,60),6,2)~BLIT(projectiles/missile-ne.png~CROP(6,2,60,60))",
+				image = string.format("%s~BLIT(%s,8,26)~BLIT(%s,27,21)", hex, bow, bow),
 				func = give_effect(42, "ranged_strikes", T.effect {
 					apply_to = "attack",
 					range = "ranged",
@@ -170,7 +173,7 @@ local hero_loop = function()
 				gold = math.max(16, 24 - event_unit.variables.creepwars_damage) .. ", "
 					.. math.max(16, 23 - event_unit.variables.creepwars_damage)
 					.. ", ..., 16, 16, 16",
-				image = "items/dummy.png",
+				image = string.format("%s~BLIT(%s~SCALE(64,64))~BLIT(%s~SCALE(64,64),5,5)", hex, bow, sword),
 				func = give_effect(math.max(16, 24 - event_unit.variables.creepwars_damage),
 					"damage",
 					T.effect {
@@ -182,7 +185,7 @@ local hero_loop = function()
 				gold = math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes) .. ", "
 					.. math.max(48, 66 - 6 * event_unit.variables.creepwars_strikes)
 					.. ", ..., 48, 48, 48",
-				image = "items/bonestack.png",
+				image = string.format("%s~BLIT(%s~BLIT(%s,0,0)~BLIT(%s,36,0)~BLIT(%s,0,30)~BLIT(%s,36,30)~SCALE(50,50),10,20)", hex, hex, bow, sword, bow, sword),
 				func = give_effect(math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes),
 					"strikes",
 					T.effect {

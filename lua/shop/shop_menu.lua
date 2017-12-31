@@ -27,22 +27,26 @@ local function err(message)
 	end)
 end
 
-local function show_shop_dialog(dialog_config)
+local function show_shop_dialog(conf)
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-		dialog_config.options = creepwars.array_map(dialog_config.options, function(e)
+		local options = {}
+		for _, e in ipairs(conf.options) do
 			local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
-			e.text = e.text .. gold_msg
-			return e
-		end)
-		return creepwars.show_dialog(dialog_config)
+			options[#options + 1] = {
+				text = e.text .. gold_msg,
+				image = e.image,
+				func = e.func
+			}
+		end
+		return creepwars.show_dialog { label = conf.label, spacer = conf.spacer, options = options }
 	else
 		local msg = {
 			speaker = "narrator",
-			message = dialog_config.label,
+			message = conf.label,
 		}
-		local spacer = dialog_config.spacer or "\n"
+		local spacer = conf.spacer or "\n"
 		msg[#msg + 1] = T.option { message = "\nCancel\n" }
-		for index, e in ipairs(dialog_config.options) do
+		for index, e in ipairs(conf.options) do
 			local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
 			local image_msg = e.image and "&" .. e.image .. "=" or ""
 			msg[#msg + 1] = T.option {

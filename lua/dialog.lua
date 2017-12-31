@@ -92,6 +92,10 @@ local function show_dialog_unsynchronized(settings)
 		end
 		wesnoth.set_dialog_value(1, "the_list")
 
+		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+			wesnoth.set_dialog_focus("the_list")
+		end
+
 		if show_images then
 			local function select()
 				local i = wesnoth.get_dialog_value "the_list"

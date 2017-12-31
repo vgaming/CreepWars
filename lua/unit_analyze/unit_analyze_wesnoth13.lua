@@ -1,8 +1,5 @@
 -- << unit_analyze_wesnoth13
 
--- This file provides function to generate Creeps with expected cost.
--- See end of file for the function itself, `creepwars_generate_creep`
-
 local wesnoth = wesnoth
 local creepwars = creepwars
 local helper = wesnoth.require "lua/helper.lua"

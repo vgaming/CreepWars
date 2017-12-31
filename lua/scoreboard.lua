@@ -24,7 +24,7 @@ local function display_stats()
 				.. "<span color='#FF8080'>" .. score .. "  " .. "</span>"
 				.. "<span color='#FFE680'>" .. gold .. "</span>\n"
 				.. "<span color='#FFFFFF'>"
-				.. "(" .. creepkills .. "  "
+				.. "(" .. creepkills + leaderkills .. "  "
 				.. leaderkills .. ")"
 				.. "</span>"
 		wesnoth.wml_actions.label {

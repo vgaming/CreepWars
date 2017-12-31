@@ -1,8 +1,5 @@
 -- << unit_analyze_wesnoth12
 
--- This file provides function to generate Creeps with expected cost.
--- See end of file for the function itself, `creepwars_generate_creep`
-
 local wesnoth = wesnoth
 local creepwars = creepwars
 local creepwars_creep_lvl_max = creepwars_creep_lvl_max

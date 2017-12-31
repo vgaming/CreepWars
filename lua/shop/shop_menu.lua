@@ -30,7 +30,7 @@ end
 local function show_shop_dialog(dialog_config)
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 		dialog_config.options = creepwars.array_map(dialog_config.options, function(e)
-			local gold_msg = e.gold and "\n<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
+			local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
 			e.text = e.text .. gold_msg
 			return e
 		end)
@@ -42,7 +42,7 @@ local function show_shop_dialog(dialog_config)
 		}
 		msg[#msg + 1] = T.option { message = "\nCancel\n" }
 		for index, e in ipairs(dialog_config.options) do
-			local gold_msg = e.gold and "\n<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
+			local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
 			local image_msg = e.image and "&" .. e.image .. "=" or ""
 			msg[#msg + 1] = T.option {
 				message = image_msg .. e.text .. gold_msg,
@@ -102,57 +102,62 @@ local hero_loop = function()
 		local big_hp = math.floor(14 + event_unit.variables.base_hp * 50 / 100)
 		local options = {
 			{
-				text = "Large Hitpoint Boost +" .. big_hp .. " HP \ncost 50", -- \n(formula 50% orig + 14)
+				text = "Large Hitpoint Boost +" .. big_hp .. " HP \n", -- \n(formula 50% orig + 14)
 				image = "icons/potion_red_medium.png",
+				gold = 50,
 				func = give_effect(50, "health_big", T.effect {
 					apply_to = "hitpoints",
 					increase = big_hp,
 					increase_total = big_hp,
 				})
 			}, {
-				text = "Small Hitpoint Boost +" .. small_hp .. " HP \ncost 22",
+				text = "Small Hitpoint Boost +" .. small_hp .. " HP \n",
 				image = "icons/potion_red_small.png",
+				gold = 22,
 				func = give_effect(22, "health_small", T.effect {
 					apply_to = "hitpoints",
 					increase = small_hp,
 					increase_total = small_hp,
 				})
 			}, {
-				text = "Movement +1 \ncost 28",
+				text = "Movement +1 \n",
 				image = "icons/jewelry_butterfly_pin.png",
+				gold = 28,
 				func = give_effect(28, "mp", T.effect {
 					apply_to = "movement",
 					increase = 1
 				})
 			}, {
-				text = "Melee Damage +1 \ncost 14",
+				text = "Melee Damage +1 \n",
 --				image = "items/anvil.png",
 				image = "items/flame-sword.png",
+				gold = 14,
 				func = give_effect(14, "melee_damage", T.effect {
 					apply_to = "attack",
 					range = "melee",
 					increase_damage = 1
 				})
 			}, {
-				text = "Melee Strikes +1 \ncost 42",
+				text = "Melee Strikes +1 \n",
 				image = "misc/blank-hex.png~BLIT(items/sword.png~CROP(0,0,60,60),6,2)~BLIT(items/sword.png~CROP(8,2,50,50))",
+				gold = 42,
 				func = give_effect(42, "melee_strikes", T.effect {
 					apply_to = "attack",
 					range = "melee",
 					increase_attacks = 1
 				})
 			}, {
-				text = "Ranged Damage +1 \ncost 14",
---				image = "items/archery-target-right.png",
+				text = "Ranged Damage +1 \n",
 				image = "projectiles/missile-fire-ne.png~FL(vert,horiz)",
+				gold = 14,
 				func = give_effect(14, "ranged_damage", T.effect {
 					apply_to = "attack",
 					range = "ranged",
 					increase_damage = 1
 				})
 			}, {
-				text = "Ranged Strikes +1 \ncost 42",
---				image = "items/bow-crystal.png",
+				text = "Ranged Strikes +1 \n",
+				gold = 42,
 				image = "misc/blank-hex.png~BLIT(projectiles/missile-ne.png~CROP(0,0,60,60),6,2)~BLIT(projectiles/missile-ne.png~CROP(6,2,60,60))",
 				func = give_effect(42, "ranged_strikes", T.effect {
 					apply_to = "attack",
@@ -160,10 +165,10 @@ local hero_loop = function()
 					increase_attacks = 1
 				})
 			}, {
-				text = "Combo Damage +1 \n(discounts per buy)\ncost "
-						.. math.max(16, 24 - event_unit.variables.creepwars_damage) .. ", "
-						.. math.max(16, 23 - event_unit.variables.creepwars_damage)
-						.. ", ..., 16, 16, 16",
+				text = "Combo Damage +1 \n(discounts per buy)\n",
+				gold = math.max(16, 24 - event_unit.variables.creepwars_damage) .. ", "
+					.. math.max(16, 23 - event_unit.variables.creepwars_damage)
+					.. ", ..., 16, 16, 16",
 				image = "items/dummy.png",
 				func = give_effect(math.max(16, 24 - event_unit.variables.creepwars_damage),
 					"damage",
@@ -172,10 +177,10 @@ local hero_loop = function()
 						increase_damage = 1
 					})
 			}, {
-				text = "Combo Strikes +1 \n(discounts per buy)\ncost "
-						.. math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes) .. ", "
-						.. math.max(48, 66 - 6 * event_unit.variables.creepwars_strikes)
-						.. ", ..., 48, 48, 48",
+				text = "Combo Strikes +1 \n(discounts per buy)\n",
+				gold = math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes) .. ", "
+					.. math.max(48, 66 - 6 * event_unit.variables.creepwars_strikes)
+					.. ", ..., 48, 48, 48",
 				image = "items/bonestack.png",
 				func = give_effect(math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes),
 					"strikes",
@@ -193,14 +198,13 @@ end
 
 local function weapon_item(settings)
 	local effect = settings.effect
-	local text = string.format("%s-%s %s\n%s %s %s\ncost %s",
+	local text = string.format("%s-%s %s\n%s %s %s\n",
 		effect.damage,
 		effect.number,
 		effect.name,
 		effect.range,
 		effect.type,
-		settings.specials or "",
-		settings.gold)
+		settings.specials or "")
 	effect.damage = effect.damage + event_unit.variables.creepwars_damage
 	effect.number = effect.number + event_unit.variables.creepwars_strikes
 	if effect.range == "melee" then
@@ -213,6 +217,7 @@ local function weapon_item(settings)
 	return {
 		text = text,
 		image = effect.icon,
+		gold = settings.gold,
 		func = give_effect(settings.gold, nil, T.effect(effect))
 	}
 end
@@ -406,8 +411,7 @@ end
 
 
 local function armor_item(gold, id, name, image, a, b, c, f, i, p)
-	name = name .. string.format("\narcane %+d, blade %+d, cold %+d, fire %+d, impact %+d, pierce %+d", a, b, c, f, i, p)
-	name = name .. "\ncost " .. gold
+	name = name .. string.format("\narcane %+d, blade %+d, cold %+d, fire %+d, impact %+d, pierce %+d\n", a, b, c, f, i, p)
 	local total_armor = event_unit.variables.creepwars_armor_ldc +
 			event_unit.variables.creepwars_armor_hdc +
 			event_unit.variables.creepwars_armor_hhc +
@@ -437,13 +441,14 @@ local function armor_item(gold, id, name, image, a, b, c, f, i, p)
 	return {
 		text = name,
 		image = image,
+		gold = gold,
 		func = func
 	}
 end
 
 local armor_loop = function()
 	repeat
-		local label = "Armor is a cheaper alternative to Resistances, \nbut it affects many resistances at once.\n"
+		local label = "Armor is a cheaper alternative to Resistances, \nyet it affects many resistances at once.\n"
 		label = label .. "\nYour gold: " .. event_side.gold
 		local options = {
 			armor_item(100, "hhc", "Heavy Human Cuirass", "icons/breastplate.png",
@@ -482,7 +487,8 @@ local function resistance_item(sum, weap)
 	end
 	local have_string = have > 0 and " (" .. have .. ")" or ""
 	return {
-		text = "+10% " .. string.gsub(weap, "^%l", string.upper) .. " Resistance" .. have_string .. ". Cost 22.",
+		text = "+10% " .. string.gsub(weap, "^%l", string.upper) .. " Resistance" .. have_string .. "  ",
+		gold = 22,
 		func = func
 	}
 end
@@ -561,13 +567,15 @@ end
 
 local guard_loop = loop("Guard.") {
 	{
-		text = "Heal most damaged guard 20% HP \ncost " .. heal_guard_cost,
+		text = "Heal most damaged guard 20% HP \n",
 		image = "icons/potion_red_small.png",
+		gold = heal_guard_cost,
 		func = heal_guards
 	},
 	{
-		text = "Unpoison guard \ncost " .. unpoison_guard_cost,
+		text = "Unpoison guard \n",
 		image = "icons/potion_green_small.png",
+		gold = unpoison_guard_cost,
 		func = unpoison_guards
 	},
 }

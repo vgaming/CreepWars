@@ -52,7 +52,7 @@ local function show_dialog_unsynchronized(settings)
 		}
 	else
 		list_sub_row = T.row {
-			T.column { horizontal_alignment = "left", T.label { id = "the_label" } }
+			T.column { horizontal_alignment = "left", T.label { use_markup = true, id = "the_label" } }
 		}
 	end
 

@@ -1,4 +1,4 @@
--- << enter_shop
+-- << shop_menu
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -569,7 +569,7 @@ local shop_loop = loop("Shop.") {
 }
 
 
-local function enter_shop()
+local function show_shop_menu()
 	local x1 = wesnoth.get_variable("x1") or 0
 	local y1 = wesnoth.get_variable("y1") or 0
 	print("visiting shop")
@@ -581,6 +581,6 @@ local function enter_shop()
 	creepwars.set_leader_ability()
 end
 
-creepwars.enter_shop = enter_shop
+creepwars.show_shop_menu = show_shop_menu
 
 -- >>

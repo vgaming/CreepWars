@@ -1,6 +1,11 @@
 #!/bin/bash -eu
+{
+
+# copy this file to .git/hooks/post-checkout and .git/hooks/post-commit
 
 version="$(git describe --tags)"
 echo "$version"
 sed -i -e "s/version=.*$/version=\"$version\"/" _server.pbl
 echo -n "$version" > target/version.txt
+
+}; exit

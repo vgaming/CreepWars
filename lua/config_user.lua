@@ -2,11 +2,7 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local ipairs = ipairs
 local math = math
-local helper = wesnoth.require "lua/helper.lua"
-local array_forall = creepwars.array_forall
-local is_ai_array = creepwars.is_ai_array
 local recruitable_array = creepwars.recruitable_array
 local show_dialog_early = creepwars.show_dialog_early
 local generate_until = creepwars.generate_until

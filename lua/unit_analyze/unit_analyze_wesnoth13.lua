@@ -41,7 +41,7 @@ add_downgrades(era_array, era_set)
 
 
 -- lvl1, no "plague", cannot advance to "berserk"
-local function can_be_a_leader(base_unit)
+local function can_be_a_leader(base_unit, ignore_level)
 	local arr = { base_unit }
 	creepwars.add_advances(arr)
 	for _, adv in ipairs(arr) do
@@ -49,7 +49,8 @@ local function can_be_a_leader(base_unit)
 			return false
 		end
 	end
-	return wesnoth.unit_types[base_unit].level == 1 and unit_count_specials(base_unit)["plague"] == nil
+	return unit_count_specials(base_unit)["plague"] == nil
+		and (ignore_level or wesnoth.unit_types[base_unit].level == 1)
 end
 
 

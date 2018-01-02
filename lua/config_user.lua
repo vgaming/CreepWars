@@ -51,7 +51,7 @@ local function ask_mirror_style()
 	local options = {
 		{
 			id = "mirror",
-			text = "Same leaders. \n&lt;--- example",
+			text = "Mirror. \n&lt;--- example",
 			image = mirror_image
 		}
 	}

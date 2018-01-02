@@ -60,11 +60,11 @@ local function show_dialog_unsynchronized(settings)
 
 	local list_definition = T.list_definition { T.row { T.column { horizontal_grow = true, toggle_panel } } }
 
-	local listbox = T.listbox { id = "the_list", list_definition }
+	local listbox = T.listbox { id = "the_list", list_definition } -- has_minimum = false
 
 	local ok_cancel_buttons = T.grid {
 		T.row {
-			T.column { T.button { id = "cancel", return_value = -2, label = "\n" .. translate "Cancel" .. "\n"} },
+			T.column { T.button { id = "cancel", return_value = -2, label = "\n" .. translate "Cancel" .. "\n" } },
 			T.column { T.button { id = "ok", return_value = -1, label = "\n" .. translate "OK" .. "\n" } },
 		}
 	}
@@ -74,7 +74,7 @@ local function show_dialog_unsynchronized(settings)
 		T.helptip { id = "tooltip_large" },
 		T.grid {
 			T.row { T.column { T.spacer { width = 250 } } },
-			description_row ,
+			description_row,
 			T.row { T.column { horizontal_grow = true, listbox } },
 			T.row { T.column { ok_cancel_buttons } }
 		}
@@ -99,9 +99,11 @@ local function show_dialog_unsynchronized(settings)
 		if show_images then
 			local function select()
 				local i = wesnoth.get_dialog_value "the_list"
-				local img = options[i].image
-				if type(img) == "function" then img = img() end
-				wesnoth.set_dialog_value(img or "misc/blank-hex.png", "the_list", i, "the_icon")
+				if i > 0 then
+					local img = options[i].image
+					if type(img) == "function" then img = img() end
+					wesnoth.set_dialog_value(img or "misc/blank-hex.png", "the_list", i, "the_icon")
+				end
 			end
 			wesnoth.set_dialog_callback(select, "the_list")
 		end
@@ -113,9 +115,9 @@ local function show_dialog_unsynchronized(settings)
 	end
 
 	local dialog_exit_code = wesnoth.show_dialog(dialog, preshow, postshow)
-	local is_ok = dialog_exit_code == -1
+	local is_ok = dialog_exit_code == -1 and item_result >= 1
 	print(string.format("Button %s pressed. Item %s selected.", dialog_exit_code, item_result))
-	return {is_ok = is_ok, index = item_result}
+	return { is_ok = is_ok, index = item_result }
 end
 
 

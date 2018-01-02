@@ -21,47 +21,15 @@ local function set_type(unit, type)
 end
 
 
-local function downgrade_wesnoth113(max_leader_level)
+local function downgrade_leaders()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if is_ai_array[unit.side] ~= true then
-			local downgrade_array = wesnoth.unit_types[unit.type].advances_from
-			if downgrade_array and #downgrade_array > 0 and wesnoth.unit_types[unit.type].level == max_leader_level then
-				-- local downgrade = downgrade_array[helper.rand("1.." .. #downgrade_array + 1)]
-				local downgrade = downgrade_array[1] -- need the same for true mirror
-				set_type(unit, downgrade)
-			end
-		end
-	end
-end
-
-local function downgrade_wesnoth112(max_leader_level)
-	local downgrade_map = {} -- map unit -> downgrades
-	for unit_name, unit_data in pairs(wesnoth.unit_types) do
-		for _, adv in ipairs(split_comma(unit_data.__cfg.advances_to)) do
-			downgrade_map[adv] = downgrade_map[adv] or {}
-			local arr = downgrade_map[adv]
-			arr[#arr + 1] = unit_name
-		end
-	end
-
-	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		local downgrade_array = downgrade_map[unit.type]
+		local downgrade_array = creepwars.unit_downgrades(unit.type)
 		if is_ai_array[unit.side] ~= true
 			and downgrade_array and #downgrade_array > 0
-			and wesnoth.unit_types[unit.type].level == max_leader_level then
-
+			and wesnoth.unit_types[unit.type].level == 2 then
 			local downgrade = downgrade_array[1] -- need the same for true mirror
 			set_type(unit, downgrade)
 		end
-	end
-end
-
-
-local function downgrade_wesnoth_any()
-	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-		downgrade_wesnoth113(2)
-	else
-		downgrade_wesnoth112(2)
 	end
 end
 
@@ -119,7 +87,7 @@ local function force_same_strength()
 
 	local function array_cost(arr)
 		local result = 0
-		for _, u in ipairs(arr) do result = result + leader_strength[u] end
+		for _, u in ipairs(arr) do result = result + leader_strength(u) end
 		return result
 	end
 
@@ -160,9 +128,9 @@ print("creepwars mirror_style is ", mirror_style)
 if mirror_style == "manual_no_downgrade" then
 	-- done
 elseif mirror_style == "manual" then
-	downgrade_wesnoth_any()
+	downgrade_leaders()
 elseif mirror_style == "mirror" then
-	downgrade_wesnoth_any()
+	downgrade_leaders()
 	force_mirror()
 elseif mirror_style == "same_cost" then
 	force_same_cost()

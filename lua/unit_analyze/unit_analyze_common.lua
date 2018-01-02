@@ -53,10 +53,56 @@ local function unit_count_specials(unit)
 end
 
 
-creepwars.unit_count_specials = unit_count_specials
+local function unit_count_abilities(unit)
+	local result = {}
+	for abilities_tag in helper.child_range(wesnoth.unit_types[unit].__cfg, "abilities") do
+		for _, ability in ipairs(abilities_tag) do
+			result[ability[1]] = true
+		end
+	end
+	return result
+end
+
+
+local downgrade_map = {}
+local function unit_downgrades(unit)
+	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+		return wesnoth.unit_types[unit].advances_from
+	else
+		if not next(downgrade_map) then -- init map
+			for unit_name, unit_data in pairs(wesnoth.unit_types) do
+				for _, adv in ipairs(creepwars.split_comma(unit_data.__cfg.advances_to)) do
+					downgrade_map[adv] = downgrade_map[adv] or {}
+					local arr = downgrade_map[adv]
+					arr[#arr + 1] = unit_name
+				end
+			end
+		end
+		return downgrade_map[unit] or {}
+	end
+end
+
+
+local function add_downgrades(arr, set, filter)
+	filter = filter or function(adv) return true end
+	for _, unit in ipairs(arr) do
+		for _, downgrade in ipairs(unit_downgrades(unit)) do
+			if set[downgrade] == nil and wesnoth.unit_types[downgrade] and filter(downgrade) then
+				set[downgrade] = true
+				arr[#arr + 1] = downgrade
+			end
+		end
+	end
+end
+
+
 creepwars.add_advances = add_advances
-creepwars.default_era_leaders = default_era_leaders
+creepwars.add_downgrades = add_downgrades
 creepwars.default_era_creep_base = default_era_creep_base
+creepwars.default_era_leaders = default_era_leaders
+creepwars.unit_count_abilities = unit_count_abilities
+creepwars.unit_count_specials = unit_count_specials
+creepwars.unit_downgrades = unit_downgrades
 
 
 -- >>

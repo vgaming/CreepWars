@@ -48,28 +48,23 @@ end
 
 
 local function ask_mirror_style()
-	local is_13 = wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10")
 	local options = {
 		{
 			id = "mirror",
-			text = "Same leaders." .. (is_13 and " \n&lt;--- example" or ""),
-			image = is_13 and mirror_image or nil
+			text = "Same leaders. \n&lt;--- example",
+			image = mirror_image
 		}
 	}
-	if is_13 then
-		options[#options + 1] = {
-			id = "same_strength",
-			text = "Same strength -- Try to guess team strength. Experimental.\n"
-					.. "May still be unbalanced (for example with custom unit abilities).",
-		}
-	end
-	if is_13 or wesnoth.game_config.era.id == "era_default" then
-		options[#options + 1] = {
-			id = "same_cost",
-			text = "Same cost. May be unbalanced.\n&lt;--- example",
-			image = samecost_image
-		}
-	end
+	options[#options + 1] = {
+		id = "same_cost",
+		text = "Same cost. May be unbalanced.\n&lt;--- example",
+		image = samecost_image
+	}
+	--options[#options + 1] = {
+	--	id = "same_strength",
+	--	text = "Same strength -- Try to guess leader strength better than cost. Experimental.\n"
+	--			.. "May still be unbalanced.",
+	--}
 	options[#options + 1] = {
 			id = "manual",
 			text = "Manual. May be unbalanced.",

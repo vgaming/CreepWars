@@ -12,19 +12,6 @@ local split_comma = creepwars.split_comma
 local unit_count_specials = creepwars.unit_count_specials
 
 
-local function add_downgrades(arr, set, filter)
-	filter = filter or function(adv) return true end
-	for _, unit in ipairs(arr) do
-		for _, downgrade in ipairs(wesnoth.unit_types[unit].advances_from) do
-			if set[downgrade] == nil and wesnoth.unit_types[downgrade] and filter(downgrade) then
-				set[downgrade] = true
-				arr[#arr + 1] = downgrade
-			end
-		end
-	end
-end
-
-
 local era_array = {}
 local era_set = {}
 for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
@@ -37,7 +24,7 @@ for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer
 		end
 	end
 end
-add_downgrades(era_array, era_set)
+creepwars.add_downgrades(era_array, era_set)
 
 
 -- lvl1, no "plague", cannot advance to "berserk"
@@ -95,9 +82,9 @@ end)
 local function super_leader_strength(unit_name)
 	local type = wesnoth.unit_types[unit_name]
 	local specials = unit_count_specials(unit_name)
-	local abilities = array_to_set(type.abilities)
+	local abilities = creepwars.unit_count_abilities(unit_name)
 	local result = type.cost
-	if #type.advances_to > 0 then result = result * 0.001 end
+	if #creepwars.split_comma(type.__cfg.advances_to) > 0 then result = result * 0.001 end
 	--result = result / math.sqrt(type.max_hitpoints)
 	result = result / (6 + type.max_moves)
 	result = result * (1 + type.level)
@@ -125,31 +112,36 @@ local function base_leader_strength(unit_name)
 end
 
 
-local leader_strength = {}
-for _, unit in ipairs(leader_array) do
-	local arr = { unit }
-	creepwars.add_advances(arr)
-	local maximum = -1
-	for _, candidate in ipairs(arr) do
-		local candidate_strength = super_leader_strength(candidate)
-		if candidate_strength > maximum then maximum = candidate_strength end
-	end
+local leader_strength_map = {}
+local function leader_strength(unit)
+	if not next(leader_strength_map) then
+		for _, unit in ipairs(leader_array) do
+			local arr = { unit }
+			creepwars.add_advances(arr)
+			local maximum = -1
+			for _, candidate in ipairs(arr) do
+				local candidate_strength = super_leader_strength(candidate)
+				if candidate_strength > maximum then maximum = candidate_strength end
+			end
 
-	local type = wesnoth.unit_types[unit]
-	local hitpoints_multiplier = (14 + type.max_hitpoints / 2) / type.max_hitpoints
-	local result = math.pow(hitpoints_multiplier, 1 / 4)
-		* math.pow(base_leader_strength(unit), 1 / 4)
-		* math.pow(maximum, 1 / 2)
-	leader_strength[unit] = result
-	-- print("leader " .. unit .. ": " .. result)
-end
-for _, unit in ipairs(creep_array) do
-	-- print("super-leader " .. unit .. ": " .. super_leader_strength(unit))
+			local type = wesnoth.unit_types[unit]
+			local hitpoints_multiplier = (14 + type.max_hitpoints / 2) / type.max_hitpoints
+			local result = math.pow(hitpoints_multiplier, 1 / 4)
+				* math.pow(base_leader_strength(unit), 1 / 4)
+				* math.pow(maximum, 1 / 2)
+			leader_strength_map[unit] = result
+			-- print("leader " .. unit .. ": " .. result)
+		end
+		for _, unit in ipairs(creep_array) do
+			-- print("super-leader " .. unit .. ": " .. super_leader_strength(unit))
+		end
+	end
+	return leader_strength_map[unit]
 end
 
 
 creepwars.creep_array = creep_array
-creepwars.leader_strength = leader_strength
+creepwars.leader_strength = leader_strength_map
 creepwars.recruitable_array = leader_array
 creepwars.can_be_a_leader = can_be_a_leader
 

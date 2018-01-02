@@ -10,7 +10,7 @@ creepwars_creep_lvl_max = 3
 
 creepwars_creep_count = 8
 
-creepwars_default_era_creeps = wesnoth and wesnoth.get_variable("creepwars_default_era_creeps") or false
+creepwars_default_era_creeps = wesnoth and wesnoth.get_variable("creepwars_default_era_creeps") or true
 
 creepwars_guard_hp_initial = 50
 creepwars_guard_hp_for_kill = function(is_leader) return is_leader and 3 or 1 end

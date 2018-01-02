@@ -7,10 +7,8 @@ local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local array_map = creepwars.array_map
 local format = creepwars.format
 local is_ai_array = creepwars.is_ai_array
-local leader_strength = creepwars.leader_strength
 local mirror_style = creepwars.mirror_style
 local recruitable_array = creepwars.recruitable_array
-local split_comma = creepwars.split_comma
 
 
 local function set_type(unit, type)
@@ -81,30 +79,6 @@ local function force_mirror()
 	set_all_leaders(function() return units end)
 end
 
-local function force_same_strength()
-
-	local function rnd_array() return { random_leader(), random_leader(), random_leader(), random_leader() } end
-
-	local function array_cost(arr)
-		local result = 0
-		for _, u in ipairs(arr) do result = result + leader_strength(u) end
-		return result
-	end
-
-	local reference = rnd_array()
-	local reference_cost = array_cost(reference)
-
-	local function generate_similar()
-		local result
-		repeat
-			result = rnd_array()
-			local cost = array_cost(result)
-		until cost > 0.90 * reference_cost and cost < 1.10 * reference_cost
-		return result
-	end
-
-	return set_all_leaders(generate_similar)
-end
 
 local function force_same_cost()
 
@@ -124,6 +98,7 @@ local function force_same_cost()
 	return set_all_leaders(generate_array)
 end
 
+
 print("creepwars mirror_style is ", mirror_style)
 if mirror_style == "manual_no_downgrade" then
 	-- done
@@ -134,8 +109,6 @@ elseif mirror_style == "mirror" then
 	force_mirror()
 elseif mirror_style == "same_cost" then
 	force_same_cost()
-elseif mirror_style == "same_strength" then
-	force_same_strength()
 else
 	error("Unknown leader mirror style: " .. format(mirror_style))
 end

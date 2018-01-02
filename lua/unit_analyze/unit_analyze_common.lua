@@ -53,17 +53,6 @@ local function unit_count_specials(unit)
 end
 
 
-local function unit_count_abilities(unit)
-	local result = {}
-	for abilities_tag in helper.child_range(wesnoth.unit_types[unit].__cfg, "abilities") do
-		for _, ability in ipairs(abilities_tag) do
-			result[ability[1]] = true
-		end
-	end
-	return result
-end
-
-
 local downgrade_map = {}
 local function unit_downgrades(unit)
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then

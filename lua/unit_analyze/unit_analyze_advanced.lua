@@ -1,4 +1,4 @@
--- << unit_analyze_wesnoth13
+-- << unit_analyze_advanced
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -79,69 +79,7 @@ creep_array = array_filter(creep_array, function(unit)
 end)
 
 
-local function super_leader_strength(unit_name)
-	local type = wesnoth.unit_types[unit_name]
-	local specials = unit_count_specials(unit_name)
-	local abilities = creepwars.unit_count_abilities(unit_name)
-	local result = type.cost
-	if #creepwars.split_comma(type.__cfg.advances_to) > 0 then result = result * 0.001 end
-	--result = result / math.sqrt(type.max_hitpoints)
-	result = result / (6 + type.max_moves)
-	result = result * (1 + type.level)
-	if specials["heal_on_hit"] then result = result * 1.20 end
-	if specials["slow"] then result = result * 1.25 end
-	if specials["poison"] then result = result * 0.80 end
-	if specials["firststrike"] then result = result * 0.90 end
-	if specials["chance_to_hit"] then result = result * (0.5 + specials["chance_to_hit"] / 100) end
-	if specials["damage"] then result = result * 1.40 end
-	if specials["plague"] then result = result * 1.00 end
-	if abilities["skirmisher"] then result = result * 1.10 end
-	if abilities["heals"] then result = result * 0.7 end
-	if abilities["regenerate"] then result = result * 0.80 end
-	if abilities["leadership"] then result = result * 0.9 end
-	if abilities["illuminates"] then result = result * 0.90 end
-	if abilities["teleport"] then result = result * 0.85 end
-	if abilities["hides"] then result = result * 0.95 end
-	return result
-end
-
-
-local function base_leader_strength(unit_name)
-	local type = wesnoth.unit_types[unit_name]
-	return type.cost * (14 + type.max_hitpoints / 2) / type.max_hitpoints
-end
-
-
-local leader_strength_map = {}
-local function leader_strength(unit)
-	if not next(leader_strength_map) then
-		for _, unit in ipairs(leader_array) do
-			local arr = { unit }
-			creepwars.add_advances(arr)
-			local maximum = -1
-			for _, candidate in ipairs(arr) do
-				local candidate_strength = super_leader_strength(candidate)
-				if candidate_strength > maximum then maximum = candidate_strength end
-			end
-
-			local type = wesnoth.unit_types[unit]
-			local hitpoints_multiplier = (14 + type.max_hitpoints / 2) / type.max_hitpoints
-			local result = math.pow(hitpoints_multiplier, 1 / 4)
-				* math.pow(base_leader_strength(unit), 1 / 4)
-				* math.pow(maximum, 1 / 2)
-			leader_strength_map[unit] = result
-			-- print("leader " .. unit .. ": " .. result)
-		end
-		for _, unit in ipairs(creep_array) do
-			-- print("super-leader " .. unit .. ": " .. super_leader_strength(unit))
-		end
-	end
-	return leader_strength_map[unit]
-end
-
-
 creepwars.creep_array = creep_array
-creepwars.leader_strength = leader_strength_map
 creepwars.recruitable_array = leader_array
 creepwars.can_be_a_leader = can_be_a_leader
 

@@ -60,11 +60,6 @@ local function ask_mirror_style()
 		text = "Same cost. May be unbalanced.\n&lt;--- example",
 		image = samecost_image
 	}
-	--options[#options + 1] = {
-	--	id = "same_strength",
-	--	text = "Same strength -- Try to guess leader strength better than cost. Experimental.\n"
-	--			.. "May still be unbalanced.",
-	--}
 	options[#options + 1] = {
 			id = "manual",
 			text = "Manual. May be unbalanced.",

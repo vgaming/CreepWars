@@ -535,15 +535,17 @@ local heal_guards = function()
 	elseif wesnoth.get_variable(variable_name) == this_turn then
 		err("Can only heal once per turn")
 	else
-		local healed = false
+		local max_damage = 0
 		for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
-			if unit.hitpoints < unit.max_hitpoints then
-				healed = true
-				unit.hitpoints = math.min(unit.hitpoints + unit.max_hitpoints / 5, unit.max_hitpoints)
-				break
-			end
+			max_damage = math.max(max_damage, unit.max_hitpoints - unit.hitpoints)
 		end
-		if healed then
+		if max_damage > 0 then
+			for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
+				if unit.max_hitpoints - unit.hitpoints == max_damage then
+					unit.hitpoints = math.min(unit.hitpoints + unit.max_hitpoints / 5, unit.max_hitpoints)
+					break
+				end
+			end
 			event_side.gold = event_side.gold - heal_guard_cost
 			wesnoth.set_variable(variable_name, this_turn)
 		else

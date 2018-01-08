@@ -99,9 +99,7 @@ end
 
 
 print("creepwars mirror_style is ", mirror_style)
-if mirror_style == "manual_no_downgrade" then
-	-- done
-elseif mirror_style == "manual" then
+if mirror_style == "manual" then
 	downgrade_leaders()
 elseif mirror_style == "mirror" then
 	downgrade_leaders()

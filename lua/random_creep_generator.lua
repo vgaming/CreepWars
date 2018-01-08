@@ -24,7 +24,7 @@ local function generate(desired_cost)
 			iterations = iterations + 1
 			creep_type = rand_creep()
 			local u = wesnoth.unit_types[creep_type]
-		until u.__cfg.level == 0 and u.__cfg.cost < 12
+		until u.level == 0 and u.__cfg.cost < 12
 	elseif desired_cost < creepwars_lvl3plus_barrier then
 		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 200
 		local closeness_step = 1 / #creep_array / 5 -- widen acceptable range over time

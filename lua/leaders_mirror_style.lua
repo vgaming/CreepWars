@@ -65,7 +65,7 @@ local function force_mirror()
 			if team == nil then team = side.team_name end
 			if team == side.team_name then
 				local unit_type = wesnoth.get_units { canrecruit = true, side = side.side }[1].type
-				if creepwars.can_be_a_leader(unit_type, true) then
+				if creepwars.can_be_a_leader(unit_type) then
 					units[#units + 1] = unit_type
 				else
 					units[#units + 1] = random_leader()
@@ -81,7 +81,6 @@ end
 
 
 local function force_same_cost()
-
 	local reference = { random_leader(), random_leader(), random_leader(), random_leader() }
 
 	local function generate_array()

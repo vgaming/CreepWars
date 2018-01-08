@@ -4,25 +4,15 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
 local helper = wesnoth.require("lua/helper.lua")
-
-
--- all Default Era units except Ulf
-local default_era_leaders = {
-	"Vampire Bat", -- costy lvl0
-	"Drake Burner", "Drake Clasher", "Drake Fighter", "Drake Glider", "Saurian Augur", "Saurian Skirmisher", -- lvl1 drakes
-	"Dwarvish Fighter", "Dwarvish Guardsman", "Dwarvish Thunderer", "Gryphon Rider", "Footpad", "Poacher", "Thief", -- lvl1 knalgan
-	"Bowman", "Cavalryman", "Fencer", "Heavy Infantryman", "Horseman", "Mage", "Merman Fighter", "Spearman", -- lvl1 loyal
-	"Naga Fighter", "Orcish Archer", "Orcish Assassin", "Orcish Grunt", "Troll Whelp", "Wolf Rider", -- lvl1 orc
-	"Elvish Archer", "Elvish Fighter", "Elvish Scout", "Elvish Shaman", "Mage", "Merman Hunter", "Wose", -- lvl1 rebels
-	"Dark Adept", "Ghost", "Ghoul", "Skeleton Archer", "Skeleton" -- lvl1 undead
-}
-
-local default_era_creep_base = creepwars.array_merge(default_era_leaders,
-	{ "Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Dwarvish Ulfserker" })
+local array_filter = creepwars.array_filter
+local array_to_set = creepwars.array_to_set
+local creepwars_creep_lvl_max = creepwars_creep_lvl_max
+local split_comma = creepwars.split_comma
+local unit_count_specials = creepwars.unit_count_specials
 
 
 local function add_advances(arr, set, filter)
-	set = set or creepwars.array_to_set(arr)
+	set = set or array_to_set(arr)
 	filter = filter or function(adv) return true end
 	for _, unit in ipairs(arr) do
 		for _, adv in ipairs(creepwars.split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
@@ -35,22 +25,61 @@ local function add_advances(arr, set, filter)
 end
 
 
+local creep_array = {
+	"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Dwarvish Ulfserker", -- only creeps
+	"Vampire Bat", -- costy lvl0, can be leader
+	"Drake Burner", "Drake Clasher", "Drake Fighter", "Drake Glider", "Saurian Augur", "Saurian Skirmisher", -- lvl1 drakes
+	"Dwarvish Fighter", "Dwarvish Guardsman", "Dwarvish Thunderer", "Gryphon Rider", "Footpad", "Poacher", "Thief", -- lvl1 knalgan
+	"Bowman", "Cavalryman", "Fencer", "Heavy Infantryman", "Horseman", "Mage", "Merman Fighter", "Spearman", -- lvl1 loyal
+	"Naga Fighter", "Orcish Archer", "Orcish Assassin", "Orcish Grunt", "Troll Whelp", "Wolf Rider", -- lvl1 orc
+	"Elvish Archer", "Elvish Fighter", "Elvish Scout", "Elvish Shaman", "Mage", "Merman Hunter", "Wose", -- lvl1 rebels
+	"Dark Adept", "Ghost", "Ghoul", "Skeleton Archer", "Skeleton" -- lvl1 undead
+}
+add_advances(creep_array, nil, function(adv) return wesnoth.unit_types[adv].level <= creepwars_creep_lvl_max end)
+
+
+local era_array = {}
+local era_set = {}
+for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
+	local units = multiplayer_side.recruit or multiplayer_side.leader or ""
+	for _, unit in ipairs(split_comma(units)) do
+		if era_set[unit] == nil and wesnoth.unit_types[unit] then
+			-- print("importing era unit " .. unit)
+			era_set[unit] = true
+			era_array[#era_array + 1] = unit
+		end
+	end
+end
+
+
 local function unit_count_specials(unit)
 	local result = {}
 	for attack in helper.child_range(wesnoth.unit_types[unit].__cfg, "attack") do
 		for specials in helper.child_range(attack, "specials") do
 			for _, special in ipairs(specials) do
 				local name = special[1]
-				if name == "chance_to_hit" then
-					result[name] = special[2]["value"]
-				else
-					result[name] = (result[name] or 0) + 1
-				end
+				result[name] = (result[name] or 0) + 1
 			end
 		end
 	end
 	return result
 end
+
+
+-- no "plague", cannot advance to "berserk"
+local function can_be_a_leader(base_unit)
+	local upgrades_arr = { base_unit }
+	add_advances(upgrades_arr)
+	for _, adv in ipairs(upgrades_arr) do
+		if unit_count_specials(adv)["berserk"] ~= nil then
+			return false
+		end
+	end
+	return unit_count_specials(base_unit)["plague"] == nil
+end
+
+
+local recruitable_array = array_filter(era_array, can_be_a_leader)
 
 
 local downgrade_map = {}
@@ -72,25 +101,9 @@ local function unit_downgrades(unit)
 end
 
 
-local function add_downgrades(arr, set, filter)
-	filter = filter or function(adv) return true end
-	for _, unit in ipairs(arr) do
-		for _, downgrade in ipairs(unit_downgrades(unit)) do
-			if set[downgrade] == nil and wesnoth.unit_types[downgrade] and filter(downgrade) then
-				set[downgrade] = true
-				arr[#arr + 1] = downgrade
-			end
-		end
-	end
-end
-
-
-creepwars.add_advances = add_advances
-creepwars.add_downgrades = add_downgrades
-creepwars.default_era_creep_base = default_era_creep_base
-creepwars.default_era_leaders = default_era_leaders
-creepwars.unit_count_abilities = unit_count_abilities
-creepwars.unit_count_specials = unit_count_specials
+creepwars.can_be_a_leader = can_be_a_leader
+creepwars.creep_array = creep_array
+creepwars.recruitable_array = recruitable_array
 creepwars.unit_downgrades = unit_downgrades
 
 

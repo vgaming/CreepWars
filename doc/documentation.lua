@@ -58,8 +58,6 @@ if wesnoth then
 	wesnoth.set_variable("creepwars_about", note)
 
 	local non_standard = {}
-	local guard_hp = creepwars_guard_hp_for_kill(false)
-	if guard_hp ~= 1 then non_standard[#non_standard + 1] = "guard HP scaling: " .. guard_hp .. " (default 1)" end
 	if hide_leaders then
 		non_standard[#non_standard + 1] = "enemy leaders hidden"
 	end
@@ -68,13 +66,13 @@ if wesnoth then
 	if wesnoth.compare_versions(wesnoth.game_config.version, "<", "1.13.10") then
 		non_standard_msg = ""
 	elseif #non_standard ~= 0 then
-		non_standard_msg = " Beware, non-standard options are used: " .. table.concat(non_standard, ", ") .. "."
+		non_standard_msg = "Beware, non-standard options are used: " .. table.concat(non_standard, ", ") .. ". "
 	else
-		non_standard_msg = " All options are stadard."
+		non_standard_msg = "All options are stadard. "
 	end
 
-	local recent = ""
-	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules." .. non_standard_msg .. recent)
+	local recent = "Recent changes: BUGFIX for Out-Of-Sync and other errors."
+	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. non_standard_msg .. recent)
 else
 	return note
 end

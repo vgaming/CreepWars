@@ -1,4 +1,4 @@
--- << plan_your_advancements
+-- << pick_your_advancements
 
 local wesnoth = wesnoth
 local creepwars = creepwars

@@ -22,12 +22,23 @@ Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo,
 Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
 "
 [label]
-	color="221,221,221"
+	color="255,255,255"
 	immutable=yes
 	team_name=""
-	text="Scoreboard:"
+	text="Game Rules:
+press Ctrl + J"
 	visible_in_fog=yes
 	visible_in_shroud=yes
-	x=18
-	y=9
+	x=28
+	y=18
+[/label]
+[label]
+	immutable=yes
+	team_name=""
+	text="<span color='#FFFFFF'>Scoreboard: </span><span color='#FF8080'>score</span> <span color='#FFE680'>gold</span>
+<span color='#FFFFFF'>(total_kills leader_kills)</span>"
+	visible_in_fog=yes
+	visible_in_shroud=yes
+	x=28
+	y=19
 [/label]

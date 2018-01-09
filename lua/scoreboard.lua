@@ -11,9 +11,6 @@ local score_per_kill = creepwars.score_per_kill
 local side_to_team = creepwars.side_to_team
 local team_array = creepwars.team_array
 
-local ugly_y = wesnoth.get_terrain(18, 5) == "Qxua^Xo" and 5 or 10
-local statistics_pos = { { x = 17, y = ugly_y }, { x = 19, y = ugly_y } } -- TODO: map-specific
-
 local function display_stats()
 	for team, _ in ipairs(team_array) do
 		local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
@@ -28,8 +25,8 @@ local function display_stats()
 				.. leaderkills .. ")"
 				.. "</span>"
 		wesnoth.wml_actions.label {
-			x = statistics_pos[team].x,
-			y = statistics_pos[team].y,
+			x = creepwars.scoreboard_pos[team].x,
+			y = creepwars.scoreboard_pos[team].y,
 			text = text
 		}
 	end

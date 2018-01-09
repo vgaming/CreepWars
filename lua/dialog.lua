@@ -116,7 +116,7 @@ local function show_dialog_unsynchronized(settings)
 
 	local dialog_exit_code = wesnoth.show_dialog(dialog, preshow, postshow)
 	local is_ok = dialog_exit_code == -1 and item_result >= 1
-	print(string.format("Button %s pressed. Item %s selected.", dialog_exit_code, item_result))
+	-- print(string.format("Button %s pressed. Item %s selected.", dialog_exit_code, item_result))
 	return { is_ok = is_ok, index = item_result }
 end
 

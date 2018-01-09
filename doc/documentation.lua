@@ -57,6 +57,12 @@ assert(check == 0, "Unhandled variable")
 if wesnoth then
 	wesnoth.set_variable("creepwars_about", note)
 
+
+	wesnoth.wml_actions.label {
+		x = creepwars.mirror_style_label_pos.x,
+		y = creepwars.mirror_style_label_pos.y,
+		text = "<span color='#FFFFFF'>Mirror style: " .. creepwars.mirror_style .. "</span>"
+	}
 	local non_standard = {}
 	if hide_leaders then
 		non_standard[#non_standard + 1] = "enemy leaders hidden"

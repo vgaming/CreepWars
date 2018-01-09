@@ -1,8 +1,8 @@
--- << memoize.lua
+-- << memoize_sides
 
 local wesnoth = wesnoth
-local ipairs = ipairs
 local creepwars = creepwars
+local ipairs = ipairs
 local creepwars_score_start = creepwars_score_start
 
 local is_ai_array = {}
@@ -37,15 +37,7 @@ for team_id, _ in ipairs(team_array) do
 end
 
 
-local spawn_pos = {}
--- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:
-spawn_pos[1] = { x = 4, y = 10 }
-spawn_pos[2] = { x = 32, y = 10 }
--- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 creepwars.side_to_team = side_to_team
-creepwars.spawn_pos = spawn_pos
 creepwars.team_array = team_array
 creepwars.is_ai_array = is_ai_array
 

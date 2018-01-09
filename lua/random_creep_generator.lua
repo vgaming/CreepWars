@@ -73,10 +73,10 @@ local function generate(desired_cost)
 	})
 	unit.variables["creepwars_creep"] = true
 
-	print("Good unit for cost " .. math.floor(desired_cost + 0.5) .. " is " ..
-		unit.__cfg.cost .. "gold " ..
-		"lvl" .. unit.__cfg.level .. " " ..
-		"'" .. creep_type .. "', boost: " .. boost .. ". Iterations spent: " .. iterations)
+	--print("Good unit for cost " .. math.floor(desired_cost + 0.5) .. " is " ..
+	--	unit.__cfg.cost .. "gold " ..
+	--	"lvl" .. unit.__cfg.level .. " " ..
+	--	"'" .. creep_type .. "', boost: " .. boost .. ". Iterations spent: " .. iterations)
 	return unit
 end
 

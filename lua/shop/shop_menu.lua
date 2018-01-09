@@ -60,7 +60,7 @@ local function show_shop_dialog(conf)
 		local result = creepwars_shop_result
 		creepwars_shop_result = nil
 
-		print("result", creepwars.format(result))
+		-- print("result", creepwars.format(result))
 		if result == null then
 			return { is_ok = false, index = -2 }
 		else
@@ -620,9 +620,7 @@ local shop_loop = loop("Shop.") {
 local function show_shop_menu()
 	local x1 = wesnoth.get_variable("x1") or 0
 	local y1 = wesnoth.get_variable("y1") or 0
-	print("visiting shop")
 	event_unit = wesnoth.get_unit(x1, y1) or wesnoth.get_units { side = 1 }[1]
-	print("unit", event_unit)
 	event_side = wesnoth.sides[wesnoth.current.side]
 
 	shop_loop()

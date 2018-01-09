@@ -467,7 +467,7 @@ local armor_loop = function()
 				3, 27, 12, 12, 23, 23),
 			armor_item(150, "smr", "Silver Mage Robe", "icons/cloak_leather_brown.png",
 				20, 0, 40, 40, 0, 0),
-			armor_item(70, "eb", "Elven Boots", "icons/boots_elven.png",
+			armor_item(42, "eb", "Elven Boots", "icons/boots_elven.png",
 				0, 8, 8, 8, 8, 8),
 			armor_item(25, "pg", "Plate Greaves", "icons/greaves.png",
 				0, 8, 0, -10, 8, 8),

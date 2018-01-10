@@ -103,8 +103,8 @@ local hero_loop = function()
 	repeat
 		local label = "Hero Upgrade."
 		label = label .. "\nYour gold: " .. event_side.gold
-		local small_hp = math.floor(5 + event_unit.variables.base_hp * 22 / 100)
-		local big_hp = math.floor(14 + event_unit.variables.base_hp * 50 / 100)
+		local small_hp = math.floor(5 + event_unit.variables.creepwars_base_hp * 22 / 100)
+		local big_hp = math.floor(14 + event_unit.variables.creepwars_base_hp * 50 / 100)
 		local hex = "misc/blank-hex.png"
 		local sword = "items/sword.png~CROP(20,24,32,32)"
 		local bow = "items/bow-crystal.png~CROP(19,21,33,31)~ROTATE(90)"

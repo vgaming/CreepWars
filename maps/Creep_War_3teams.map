@@ -33,6 +33,32 @@ Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo,
 Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
 "
 
+
+{./common_side_definitions.cfg}
+
+{CWD_HUMAN West}
+{CWD_HUMAN East}
+{CWD_AI South 13 23 21 23}
+{CWD_HUMAN South}
+{CWD_HUMAN West}
+{CWD_AI East 23 8 27 14}
+{CWD_HUMAN East}
+{CWD_HUMAN South}
+{CWD_AI West 11 8 7 14}
+
+#undef CWD_HUMAN
+#undef CWD_AI
+
+
+[event]
+	name=preload
+	first_time_only=no
+	[lua]
+		code = {./3player_settings.lua}
+	[/lua]
+[/event]
+
+
 [label]
 	category=""
 	color="255,255,255"
@@ -61,188 +87,3 @@ press Ctrl + J"
 	x=29
 	y=21
 [/label]
-
-
-[side]
-	defeat_condition=always
-	fog=yes
-	team_name=West
-	controller=human
-	gold=100
-	income=-2
-	team_lock=yes
-	gold_lock=yes
-	income_lock=yes
-[/side]
-[side]
-	defeat_condition=always
-	fog=yes
-	team_name=East
-	controller=human
-	gold=100
-	income=-2
-	team_lock=yes
-	gold_lock=yes
-	income_lock=yes
-[/side]
-[side]
-	team_name=South
-	controller=ai
-	allow_player=no
-	team_lock=yes
-	share_view=yes
-	fog=yes
-	[ai]
-		aggression=0.90
-		caution=0.10
-		village_value=0.0
-		leader_value=5.0
-	[/ai]
-	[leader]
-		type=Lieutenant
-		name=_"Guard"
-		x=13
-		y=23
-		max_moves=0
-		max_hitpoints=50
-		max_experience=100000
-		random_traits=no
-		canrecruit=yes
-	[/leader]
-	[leader]
-		type=Lieutenant
-		name=_"Guard"
-		x=21
-		y=23
-		max_moves=0
-		max_hitpoints=50
-		max_experience=100000
-		random_traits=no
-		canrecruit=yes
-	[/leader]
-[/side]
-[side]
-	defeat_condition=always
-	fog=yes
-	team_name=South
-	controller=human
-	gold=100
-	income=-2
-	team_lock=yes
-	gold_lock=yes
-	income_lock=yes
-[/side]
-[side]
-	defeat_condition=always
-	fog=yes
-	team_name=West
-	controller=human
-	gold=100
-	income=-2
-	team_lock=yes
-	gold_lock=yes
-	income_lock=yes
-[/side]
-[side]
-	team_name=East
-	controller=ai
-	allow_player=no
-	team_lock=yes
-	share_view=yes
-	fog=yes
-	[ai]
-		aggression=0.90
-		caution=0.10
-		village_value=0.0
-		leader_value=5.0
-	[/ai]
-	[leader]
-		type=Lieutenant
-		name=_"Guard"
-		x=23
-		y=8
-		max_moves=0
-		max_hitpoints=50
-		max_experience=100000
-		random_traits=no
-		canrecruit=yes
-	[/leader]
-	[leader]
-		type=Lieutenant
-		name=_"Guard"
-		x=27
-		y=14
-		max_moves=0
-		max_hitpoints=50
-		max_experience=100000
-		random_traits=no
-		canrecruit=yes
-	[/leader]
-[/side]
-[side]
-	defeat_condition=always
-	fog=yes
-	team_name=East
-	controller=human
-	gold=100
-	income=-2
-	team_lock=yes
-	gold_lock=yes
-	income_lock=yes
-[/side]
-[side]
-	defeat_condition=always
-	fog=yes
-	team_name=South
-	controller=human
-	gold=100
-	income=-2
-	team_lock=yes
-	gold_lock=yes
-	income_lock=yes
-[/side]
-[side]
-	team_name=West
-	controller=ai
-	allow_player=no
-	team_lock=yes
-	share_view=yes
-	fog=yes
-	[ai]
-		aggression=0.90
-		caution=0.10
-		village_value=0.0
-		leader_value=5.0
-	[/ai]
-	[leader]
-		type=Lieutenant
-		name=_"Guard"
-		x=11
-		y=8
-		max_moves=0
-		max_hitpoints=50
-		max_experience=100000
-		random_traits=no
-		canrecruit=yes
-	[/leader]
-	[leader]
-		type=Lieutenant
-		name=_"Guard"
-		x=7
-		y=14
-		max_moves=0
-		max_hitpoints=50
-		max_experience=100000
-		random_traits=no
-		canrecruit=yes
-	[/leader]
-[/side]
-
-
-[event]
-	name=preload
-	first_time_only=no
-	[lua]
-		code = {./3player_settings.lua}
-	[/lua]
-[/event]

@@ -67,7 +67,7 @@ local function unit_kill_event(attacker, defender)
 
 	local gold = gold_orig
 	if defender.canrecruit then
-		local times = is_ai_array[defender.side] and 16 or 4
+		local times = is_ai_array[defender.side] and 20 or 4
 		for i = 0, times - 1 do
 			gold = gold + gold_per_kill(gold_kills + i)
 		end

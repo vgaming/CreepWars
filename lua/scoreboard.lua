@@ -35,15 +35,6 @@ end
 display_stats()
 
 
-local function gold_add_times(times, gold_kills)
-	local result = 0
-	for i = 0, times - 1 do
-		result = result + gold_per_kill(gold_kills + i)
-	end
-	return result
-end
-
-
 local function unit_kill_event(attacker, defender)
 	local team = side_to_team[attacker.side]
 

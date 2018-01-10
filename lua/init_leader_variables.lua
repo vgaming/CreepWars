@@ -5,12 +5,6 @@ local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 
 for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 
-	unit.variables.location = "limbo"
-	unit.variables.limbo_x = unit.x
-	unit.variables.limbo_y = unit.y
-	unit.variables.home_x = unit.x
-	unit.variables.home_y = unit.x
-
 	unit.variables.creepwars_res_arcane = 0
 	unit.variables.creepwars_res_blade = 0
 	unit.variables.creepwars_res_cold = 0

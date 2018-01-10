@@ -28,10 +28,8 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		end
 	else
 		if not hide_leaders then
-			local limbo_x = unit.variables.limbo_x
-			local limbo_y = unit.variables.limbo_y
-			-- print("Lifting fog around leader limbo " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
-			lift_fog(limbo_x, limbo_y)
+			local start_loc = wesnoth.get_starting_location(unit.side)
+			lift_fog(start_loc[1], start_loc[2])
 		end
 	end
 end

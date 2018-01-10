@@ -21,7 +21,7 @@ local function display_stats()
 		local text = ""
 				.. "<span color='#FF8080'>" .. score .. "  " .. "</span>"
 				.. "<span color='#FFE680'>" .. gold .. "</span>\n"
-				.. "<span color='#FFFFFF'>"
+				.. " <span color='#FFFFFF'>"
 				.. "(" .. creepkills + leaderkills .. "  "
 				.. leaderkills .. ")"
 				.. "</span>"

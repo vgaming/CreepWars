@@ -1,0 +1,248 @@
+map_data="Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Xv, Xv, Xv, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Qxua^Xo, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Xv, Xv, Xv, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Kh, Xv, Kh, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Kh, Xv, Kh, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Kh, Xv, Kh, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Qxua^Xo, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Xv, Xv, Xv, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Xv, Qxua^Xo, Xv, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gs^Fp, Gg, Gg, Hh, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Hh, Gg, Gg, Gs^Fp, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ch, Gg, Hh, Dd^Do, Wwf, Wwf, Wwf, Wwf, Wwf, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Wwf, Wwf, Wwf, Wwf, Wwf, Dd^Do, Hh, Gg, Ch, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Ch, Cud, Ch, Wwf, Wwf, Gg, Gg, Gg, Ch, Gg, Ss, Ss, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Ww, Gg, Ch, Gg, Gg, Gg, Wwf, Wwf, Ch, Cud, Ch, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Ch, Ch, Ch, Gg, Wwf, Gg, Xu, Xu, Gg, Gg, Gg, Gs^Ft, Ss, Ss, Qxua^Xo, Hh^Fp, Gs^Fmf, Gg, Ww, Gs^Fmf, Gg, Xu, Xu, Gg, Wwf, Gg, Ch, Ch, Ch, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Hh, Wwf, Wwf, Wwf, Ww, 1 Ch, Xu, Uu, Wwr, Hh, Wwf, Ss, Ss, Qxua^Xo, Gs^Fmf, Gs^Fmf, Gg, Wwf, Ww, Uu, Xu, 2 Ch, Ww, Wwf, Wwf, Wwf, Hh, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Gs^Fp, Dd^Do, Wwf, Gg, Gg, 5 Ch, Xu, Uu, Uu, Wwf, Wwf, Gg, Gs^Ft, Ss, Hd, Gg, Gg, Ha^Fma, Hh, Ww, Uu, Uu, Xu, 7 Ch, Gg, Gg, Wwf, Dd^Do, Gs^Fp, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Gg, Wwf, Gg, Xu, Xu, Xu, Uu, Uu^Uf, Ww, Ai, Gg, Gg, Ss, Gg, Hh^Fp, Gg, Wwf, Hh, Ww, Uu^Uf, Uu, Xu, Xu, Xu, Gg, Wwf, Gg, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Hh, Wwf, Wwf, Gg, Gg, Uu, Ww, Ww, Hh, Ww, Gg, Hh^Fp, Wwr, Mm, Wwf, Wwf, Gg, Ww, Ai, Wwf, Wwr, Uu, Gg, Gg, Wwf, Wwf, Hh, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Wwf, Ch, Gg, Gs^Fmf, Wwf, Hh, Ha^Fma, Wwf, Wwf, Uh, Wwf, Ds, Wwf, Uh, Hh^Fp, Gg, Gg, Wwf, Hh, Gg, Gg, Ch, Wwf, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Wwf, Ww, Ww, Gg, Gg, Gg, Gg, Hh^Fp, Wwf, Ds, Wwf, Ds, Wwr, Ss, Gg, Gs^Ft, Wwf, Gs^Ft, Gg, Ss, Wwf, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Gs^Fmf, Gs^Fmf, Gs^Fmf, Gg, Gg, Mm, Wwr, Wwf, Wwf, Mm, Gg, Ss, Ss, Ss, Ss, Ss, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Hh^Fp, Qxua^Xo, Hd, Ss, Ss, Hh^Fp, Uh, Wwf, Hh^Fp, Gg, Hd, Qxua^Xo, Ss, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ss, Ss, Gs^Ft, Gg, Gg, Gg, Wwf, Gg, Gg, Gs^Fmf, Hh^Fp, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ss, Ss, Wwf, Gg, Ai, Ww, Hh, Ha^Fma, Gg, Gs^Fmf, Gs^Fmf, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ss, Gs^Ft, Hh, Wwf, Wwf, Ww, Ww, Hh, Wwf, Gg, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ss, Gg, Gg, Wwr, Uu, Uu^Uf, Uu, Ww, Gs^Fmf, Ww, Ww, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Wwf, Gg, Gg, Uu, Xu, Uu, Xu, Uu, Gg, Gg, Wwf, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Wwf, Ch, Gg, Xu, 4 Ch, Xu, 8 Ch, Xu, Gg, Ch, Wwf, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Wwf, Gg, Xu, Gg, Ww, Gg, Xu, Gg, Gg, Wwf, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Hh, Wwf, Wwf, Gg, Wwf, Wwf, Wwf, Gg, Wwf, Wwf, Hh, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Gg, Dd^Do, Wwf, Wwf, Gg, Wwf, Wwf, Dd^Do, Gg, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Gs^Fp, Hh, Ch, Ch, Ch, Hh, Gs^Fp, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Ch, Cud, Ch, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ch, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
+"
+
+[label]
+	category=""
+	color="255,255,255"
+	immutable=yes
+	side=0
+	team_name=""
+	text="Game Rules:
+press Ctrl + J"
+	tooltip=""
+	visible_in_fog=yes
+	visible_in_shroud=yes
+	x=29
+	y=20
+[/label]
+[label]
+	category=""
+	color="107,140,255"
+	immutable=yes
+	side=0
+	team_name=""
+	text="<span color='#FFFFFF'>Scoreboard: </span><span color='#FF8080'>score</span> <span color='#FFE680'>gold</span>
+<span color='#FFFFFF'>(total_kills leader_kills)</span>"
+	tooltip=""
+	visible_in_fog=yes
+	visible_in_shroud=yes
+	x=29
+	y=21
+[/label]
+
+
+[side]
+	defeat_condition=always
+	fog=yes
+	team_name=West
+	controller=human
+	gold=100
+	income=-2
+	team_lock=yes
+	gold_lock=yes
+	income_lock=yes
+[/side]
+[side]
+	defeat_condition=always
+	fog=yes
+	team_name=East
+	controller=human
+	gold=100
+	income=-2
+	team_lock=yes
+	gold_lock=yes
+	income_lock=yes
+[/side]
+[side]
+	team_name=South
+	controller=ai
+	allow_player=no
+	team_lock=yes
+	share_view=yes
+	fog=yes
+	[ai]
+		aggression=0.90
+		caution=0.10
+		village_value=0.0
+		leader_value=5.0
+	[/ai]
+	[leader]
+		type=Lieutenant
+		name=_"Guard"
+		x=13
+		y=23
+		max_moves=0
+		max_hitpoints=50
+		max_experience=100000
+		random_traits=no
+		canrecruit=yes
+	[/leader]
+	[leader]
+		type=Lieutenant
+		name=_"Guard"
+		x=21
+		y=23
+		max_moves=0
+		max_hitpoints=50
+		max_experience=100000
+		random_traits=no
+		canrecruit=yes
+	[/leader]
+[/side]
+[side]
+	defeat_condition=always
+	fog=yes
+	team_name=South
+	controller=human
+	gold=100
+	income=-2
+	team_lock=yes
+	gold_lock=yes
+	income_lock=yes
+[/side]
+[side]
+	defeat_condition=always
+	fog=yes
+	team_name=West
+	controller=human
+	gold=100
+	income=-2
+	team_lock=yes
+	gold_lock=yes
+	income_lock=yes
+[/side]
+[side]
+	team_name=East
+	controller=ai
+	allow_player=no
+	team_lock=yes
+	share_view=yes
+	fog=yes
+	[ai]
+		aggression=0.90
+		caution=0.10
+		village_value=0.0
+		leader_value=5.0
+	[/ai]
+	[leader]
+		type=Lieutenant
+		name=_"Guard"
+		x=23
+		y=8
+		max_moves=0
+		max_hitpoints=50
+		max_experience=100000
+		random_traits=no
+		canrecruit=yes
+	[/leader]
+	[leader]
+		type=Lieutenant
+		name=_"Guard"
+		x=27
+		y=14
+		max_moves=0
+		max_hitpoints=50
+		max_experience=100000
+		random_traits=no
+		canrecruit=yes
+	[/leader]
+[/side]
+[side]
+	defeat_condition=always
+	fog=yes
+	team_name=East
+	controller=human
+	gold=100
+	income=-2
+	team_lock=yes
+	gold_lock=yes
+	income_lock=yes
+[/side]
+[side]
+	defeat_condition=always
+	fog=yes
+	team_name=South
+	controller=human
+	gold=100
+	income=-2
+	team_lock=yes
+	gold_lock=yes
+	income_lock=yes
+[/side]
+[side]
+	team_name=West
+	controller=ai
+	allow_player=no
+	team_lock=yes
+	share_view=yes
+	fog=yes
+	[ai]
+		aggression=0.90
+		caution=0.10
+		village_value=0.0
+		leader_value=5.0
+	[/ai]
+	[leader]
+		type=Lieutenant
+		name=_"Guard"
+		x=11
+		y=8
+		max_moves=0
+		max_hitpoints=50
+		max_experience=100000
+		random_traits=no
+		canrecruit=yes
+	[/leader]
+	[leader]
+		type=Lieutenant
+		name=_"Guard"
+		x=7
+		y=14
+		max_moves=0
+		max_hitpoints=50
+		max_experience=100000
+		random_traits=no
+		canrecruit=yes
+	[/leader]
+[/side]
+
+
+[event]
+	name=preload
+	first_time_only=no
+	[lua]
+		code = {./3player_settings.lua}
+	[/lua]
+[/event]

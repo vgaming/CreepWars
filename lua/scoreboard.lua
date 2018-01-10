@@ -7,6 +7,7 @@ local string = string
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local gold_per_kill = creepwars.gold_per_kill
+local is_ai_array = creepwars.is_ai_array
 local score_per_kill = creepwars.score_per_kill
 local side_to_team = creepwars.side_to_team
 local team_array = creepwars.team_array
@@ -34,7 +35,16 @@ end
 display_stats()
 
 
-local function creep_kill_event(attacker, defender)
+local function gold_add_times(times, gold_kills)
+	local result = 0
+	for i = 0, times - 1 do
+		result = result + gold_per_kill(gold_kills + i)
+	end
+	return result
+end
+
+
+local function unit_kill_event(attacker, defender)
 	local team = side_to_team[attacker.side]
 
 	local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
@@ -63,11 +73,15 @@ local function creep_kill_event(attacker, defender)
 	-- gold
 	local gold_orig = wesnoth.get_variable("creepwars_gold_" .. team)
 	local gold_kills = creepkills + 4 * leaderkills
-	local gold = gold_orig + gold_per_kill(gold_kills)
+
+	local gold = gold_orig
 	if defender.canrecruit then
-		gold = gold + gold_per_kill(gold_kills + 1)
-		gold = gold + gold_per_kill(gold_kills + 2)
-		gold = gold + gold_per_kill(gold_kills + 3)
+		local times = is_ai_array[defender.side] and 16 or 4
+		for i = 0, times - 1 do
+			gold = gold + gold_per_kill(gold_kills + i)
+		end
+	else
+		gold = gold + gold_per_kill(gold_kills)
 	end
 	wesnoth.set_variable("creepwars_gold_" .. team, gold)
 	for _, side in ipairs(wesnoth.sides) do
@@ -76,7 +90,9 @@ local function creep_kill_event(attacker, defender)
 		end
 	end
 
-	if defender.canrecruit then
+	if defender.canrecruit and is_ai_array[defender.side] then
+		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + 4)
+	elseif defender.canrecruit then
 		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + 1)
 	else
 		wesnoth.set_variable("creepwars_creepkills_" .. team, creepkills + 1)
@@ -86,6 +102,6 @@ local function creep_kill_event(attacker, defender)
 end
 
 
-creepwars_creep_kill_event = creep_kill_event
+creepwars.unit_kill_event = unit_kill_event
 
 -- >>

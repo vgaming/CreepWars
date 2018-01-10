@@ -32,11 +32,6 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 			local limbo_y = unit.variables.limbo_y
 			-- print("Lifting fog around leader limbo " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
 			lift_fog(limbo_x, limbo_y)
-
-			--local home_x = unit.variables.home_x
-			--local home_y = unit.variables.home_y
-			--print("Lifting fog around leader home " .. unit.type .. " [" .. limbo_x .. "," .. limbo_y .. "]")
-			--lift_fog(home_x, home_y)
 		end
 	end
 end

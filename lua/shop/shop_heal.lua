@@ -1,20 +1,57 @@
 -- << shop_heal
 
 local wesnoth = wesnoth
+local creepwars = creepwars
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local ipairs = ipairs
 local math = math
-local creepwars = creepwars
+local table = table
 local is_ai_array = creepwars.is_ai_array
 local side_to_team = creepwars.side_to_team
 
--- UGLY INLINE HACK!!!!!!!!!!!!!!!!!!!!!!
-local team_shop_pos = { { ["8,9"] = true, ["8,11"] = true }, { ["28,9"] = true, ["28,11"] = true } }
+local team_shop_set = {}
+for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
+	local set = {}
+	local cumulative_x_coords = {}
+	local cumulative_y_coords = {}
+	for _, xy in ipairs(team_arr) do
+		wesnoth.wml_actions.item {
+			x = xy[1],
+			y = xy[2],
+			image = "terrain/castle/encampment/tent.png"
+		}
+		wesnoth.wml_actions.label {
+			x = xy[1],
+			y = xy[2],
+			team_name = wesnoth.sides[creepwars.team_array[team_index][1]].team_name,
+			text = "Shop"
+		}
+		cumulative_x_coords[#cumulative_x_coords + 1] = xy[1]
+		cumulative_y_coords[#cumulative_y_coords + 1] = xy[2]
+		set[xy[1] .. "," .. xy[2]] = true
+	end
+	wesnoth.wml_actions.modify_ai {
+		side = creepwars.team_ai_side[team_index],
+		action = "add",
+		path = "aspect[avoid].facet",
+		T.facet {
+			engine = "cpp",
+			name = "standard_aspect",
+			T.value {
+				x = table.concat(cumulative_x_coords, ","),
+				y = table.concat(cumulative_y_coords, ",")
+			}
+		}
+	}
+	team_shop_set[#team_shop_set + 1] = set
+end
+
 local function is_at_shop(side, x, y)
-	return team_shop_pos[side_to_team[side]][x .. "," .. y]
+	return team_shop_set[side_to_team[side]][x .. "," .. y]
 end
 
 local unit_at_shop = function(unit)
-	return team_shop_pos[side_to_team[unit.side]][unit.x .. "," .. unit.y]
+	return team_shop_set[side_to_team[unit.side]][unit.x .. "," .. unit.y]
 end
 
 

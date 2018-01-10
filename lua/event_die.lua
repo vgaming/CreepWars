@@ -3,7 +3,7 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
-local creepwars_creep_kill_event = creepwars_creep_kill_event
+local unit_kill_event = creepwars.unit_kill_event
 local side_to_team = creepwars.side_to_team
 local team_array = creepwars.team_array
 local is_ai_array = creepwars.is_ai_array
@@ -21,16 +21,18 @@ elseif attacker == nil then
 		"If the host has no modifications, please report the issue."
 	print(msg)
 	wesnoth.message("Creep Wars", msg)
-elseif defender.canrecruit and is_ai_array[defender.side] then
-	-- kill AI side => kill team
-	wesnoth.wml_actions.kill { side = defender.side, canrecruit = true }
-elseif defender.canrecruit or defender.variables["creepwars_creep"] then
-	creepwars_creep_kill_event(attacker, defender)
-else
+elseif not defender.canrecruit and not defender.variables["creepwars_creep"] then
 	local msg = "Turn " .. wesnoth.get_variable("turn_number") .. ": " .. defender.type
 		.. " died, neither Leader nor Creep. Probably plagued. No gold/creep bonus was generated."
 	print(msg)
 	-- wesnoth.message("Creep Wars", msg)
+else
+	unit_kill_event(attacker, defender)
+	if defender.canrecruit and is_ai_array[defender.side] then
+		wesnoth.wml_actions.kill { side = defender.side, canrecruit = true }
+	elseif defender.canrecruit and not is_ai_array[defender.side] then
+		creepwars.leader_died_event(defender)
+	end
 end
 
 -- >>

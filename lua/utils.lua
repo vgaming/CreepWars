@@ -110,7 +110,6 @@ local function generate_until(gen_func, until_func)
 end
 
 
-creepwars = {}
 local creepwars = creepwars
 creepwars.array_filter = array_filter
 creepwars.array_forall = array_forall

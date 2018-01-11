@@ -623,6 +623,30 @@ local function show_shop_menu()
 	event_unit = wesnoth.get_unit(x1, y1) or wesnoth.get_units { side = 1 }[1]
 	event_side = wesnoth.sides[wesnoth.current.side]
 
+	local unit = event_unit
+	unit.variables.creepwars_res_arcane = unit.variables.creepwars_res_arcane or 0
+	unit.variables.creepwars_res_blade = unit.variables.creepwars_res_blade or 0
+	unit.variables.creepwars_res_cold = unit.variables.creepwars_res_cold or 0
+	unit.variables.creepwars_res_fire = unit.variables.creepwars_res_fire or 0
+	unit.variables.creepwars_res_impact = unit.variables.creepwars_res_impact or 0
+	unit.variables.creepwars_res_pierce = unit.variables.creepwars_res_pierce or 0
+	unit.variables.creepwars_base_hp = unit.variables.creepwars_base_hp or unit.max_hitpoints
+	unit.variables.creepwars_health_small = unit.variables.creepwars_health_small or 0
+	unit.variables.creepwars_health_big = unit.variables.creepwars_health_big or 0
+	unit.variables.creepwars_mp = unit.variables.creepwars_mp or 0
+	unit.variables.creepwars_melee_damage = unit.variables.creepwars_melee_damage or 0
+	unit.variables.creepwars_melee_strikes = unit.variables.creepwars_melee_strikes or 0
+	unit.variables.creepwars_ranged_damage = unit.variables.creepwars_ranged_damage or 0
+	unit.variables.creepwars_ranged_strikes = unit.variables.creepwars_ranged_strikes or 0
+	unit.variables.creepwars_damage = unit.variables.creepwars_damage or 0
+	unit.variables.creepwars_strikes = unit.variables.creepwars_strikes or 0
+	unit.variables.creepwars_armor_ldc = unit.variables.creepwars_armor_ldc or 0
+	unit.variables.creepwars_armor_hdc = unit.variables.creepwars_armor_hdc or 0
+	unit.variables.creepwars_armor_hhc = unit.variables.creepwars_armor_hhc or 0
+	unit.variables.creepwars_armor_smr = unit.variables.creepwars_armor_smr or 0
+	unit.variables.creepwars_armor_eb = unit.variables.creepwars_armor_eb or 0
+	unit.variables.creepwars_armor_pg = unit.variables.creepwars_armor_pg or 0
+
 	shop_loop()
 	creepwars.set_leader_ability()
 end

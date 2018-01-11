@@ -1,0 +1,11 @@
+# wesnoth analog to .gitignore
+
+# my files
+.*
+.*/
+build/
+
+# wesnoth files:
+*.pbl
+*.ign
+_info.cfg

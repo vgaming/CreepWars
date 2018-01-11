@@ -29,7 +29,9 @@ elseif not defender.canrecruit and not defender.variables["creepwars_creep"] the
 else
 	unit_kill_event(attacker, defender)
 	if defender.canrecruit and is_ai_array[defender.side] then
-		wesnoth.wml_actions.kill { side = defender.side, canrecruit = true }
+		for _, ally_side in ipairs(team_array[side_to_team[defender.side]]) do
+			wesnoth.wml_actions.kill { side = ally_side }
+		end
 	elseif defender.canrecruit and not is_ai_array[defender.side] then
 		creepwars.leader_died_event(defender)
 	end

@@ -78,7 +78,7 @@ if wesnoth then
 		non_standard_msg = "All options are stadard. "
 	end
 
-	local recent = "Recent changes: BUGFIX for Out-Of-Sync and other errors."
+	local recent = "Recent changes: fix auto-save error (scenario contained newline \\n)."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. non_standard_msg .. recent)
 else
 	return note

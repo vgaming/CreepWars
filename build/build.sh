@@ -5,7 +5,8 @@ set -o pipefail
 mkdir -p target
 
 
-git describe --tags | tr -d '\n' | head -c 11 | tee target/version.txt
+# remove newline, cut out commit hash
+git describe --tags | cut -d '-' -f -2 | tr -d '\n' | tee target/version.txt
 
 
 lua build/docs_to_txt.lua > target/about.txt

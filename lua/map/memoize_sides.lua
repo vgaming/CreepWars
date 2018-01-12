@@ -7,10 +7,7 @@ local creepwars_score_start = creepwars_score_start
 
 local is_ai_array = {}
 for _, side in ipairs(wesnoth.sides) do
-	local is_ai = wesnoth.get_variable("creepwars_is_ai_" .. side.side)
-	if is_ai == nil then is_ai = side.controller == "ai" or side.controller == "network_ai" end
-	wesnoth.set_variable("creepwars_is_ai_" .. side.side, is_ai)
-	is_ai_array[side.side] = is_ai
+	is_ai_array[side.side] = side.defeat_condition == "no_leader_left"
 end
 
 local side_to_team = {}

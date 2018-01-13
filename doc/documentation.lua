@@ -39,6 +39,7 @@ local function replace(str, replacement)
 	note = string.gsub(note, str, replacement)
 end
 
+replace("''", '"')
 replace("#creepwars_creep_count", creepwars_creep_count)
 replace("#creepwars_lvl0_barrier", creepwars_lvl0_barrier)
 replace("#creepwars_lvl3plus_barrier", creepwars_lvl3plus_barrier)
@@ -78,7 +79,7 @@ if wesnoth then
 		non_standard_msg = "All options are stadard. "
 	end
 
-	local recent = "Recent changes: fixes to OOS and auto-save."
+	local recent = "Recent changes: swapped AI sides to make playing East easier."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. non_standard_msg .. recent)
 else
 	return note

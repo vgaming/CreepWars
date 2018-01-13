@@ -87,11 +87,6 @@ local function unit_kill_event(attacker, defender)
 		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + 1)
 	else
 		wesnoth.set_variable("creepwars_creepkills_" .. team, creepkills + 1)
-		--if wesnoth.get_variable("creepwars_kill_limit")
-		--	and creepkills > wesnoth.get_variable("creepwars_kill_limit") then
-		--	print("CREEPWARS_WINNING_TEAM_" .. team)
-		--	wesnoth.wml_actions.endlevel {}
-		--end
 	end
 
 	display_stats()

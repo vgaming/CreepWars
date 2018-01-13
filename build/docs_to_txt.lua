@@ -10,7 +10,6 @@ io_file.close()
 
 note = loadfile("doc/documentation.lua")(note)
 note, _ = string.gsub(note, "<span size=[^>]*>", "== ") -- headers
-note, _ = string.gsub(note, "</span>\n", "\n") -- headers (end of line)
 note, _ = string.gsub(note, "<[^>]+>", "") -- all other tags
 note, _ = string.gsub(note, "&lt;", "<")
 note, _ = string.gsub(note, "&gt;", ">")

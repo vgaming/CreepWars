@@ -39,7 +39,6 @@ local function replace(str, replacement)
 	note = string.gsub(note, str, replacement)
 end
 
-replace("''", '"')
 replace("#creepwars_creep_count", creepwars_creep_count)
 replace("#creepwars_lvl0_barrier", creepwars_lvl0_barrier)
 replace("#creepwars_lvl3plus_barrier", creepwars_lvl3plus_barrier)
@@ -57,8 +56,8 @@ local _, check = string.gsub(note, "[^']#[^w]", "")
 assert(check == 0, "Unhandled variable")
 
 if wesnoth then
+	replace("''", '"')
 	wesnoth.set_variable("creepwars_about", note)
-
 
 	wesnoth.wml_actions.label {
 		x = creepwars.mirror_style_label_pos.x,

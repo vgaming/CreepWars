@@ -3,7 +3,6 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
-local table = table
 local creepwars_score_start = creepwars_score_start
 
 local is_ai_array = {}
@@ -23,9 +22,6 @@ for _, side in ipairs(wesnoth.sides) do
 	team_array[team_id] = team_array[team_id] or {}
 	team_array[team_id][#team_array[team_id] + 1] = side.side
 end
-
-
-wesnoth.set_variable("CWD_PLAYER_SIDES", table.concat(team_ai_side, ","))
 
 
 for team_id, _ in ipairs(team_array) do

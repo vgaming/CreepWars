@@ -11,12 +11,6 @@ creepwars.shop_coordinates = {
 }
 
 
-creepwars.spawn_pos = {
-	{ x = 4, y = 10 },
-	{ x = 32, y = 10 }
-}
-
-
 creepwars.mirror_style_label_pos = { x = 28, y = 17 }
 
 

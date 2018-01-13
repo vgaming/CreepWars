@@ -5,11 +5,6 @@ creepwars = {}
 local creepwars = creepwars
 
 
-creepwars.spawn_pos = {
-	{ x = 4, y = 8 },
-	{ x = 30, y = 8 },
-	{ x = 17, y = 28 },
-}
 creepwars.mirror_style_label_pos = { x = 29, y = 19 }
 creepwars.scoreboard_pos = {
 	{ x = 16, y = 14 },

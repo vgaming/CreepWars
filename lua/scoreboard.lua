@@ -12,6 +12,16 @@ local score_per_kill = creepwars.score_per_kill
 local side_to_team = creepwars.side_to_team
 local team_array = creepwars.team_array
 
+if creepwars.scoreboard_help_label then
+	wesnoth.wml_actions.label {
+		x = creepwars.scoreboard_help_label.x,
+		y = creepwars.scoreboard_help_label.y,
+		text = "<span color='#FFFFFF'>Scoreboard: </span><span color='#FF8080'>score</span> <span color='#FFE680'>gold</span>\n"
+			.. " <span color='#FFFFFF'>(total_kills leader_kills)</span>"
+	}
+end
+
+
 local function display_stats()
 	for team, _ in ipairs(team_array) do
 		local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)

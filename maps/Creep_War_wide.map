@@ -23,3 +23,15 @@ Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo,
 "
 
 {./2player_settings.cfg}
+
+
+[event]
+	name=preload
+	first_time_only=no
+	[lua]
+		code = <<
+			creepwars.scoreboard_pos = { { x = 17, y = 10 }, { x = 19, y = 10 } }
+			creepwars.scoreboard_help_label = { x = 28, y = 19 }
+		 >>
+	[/lua]
+[/event]

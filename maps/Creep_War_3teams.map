@@ -73,17 +73,3 @@ press Ctrl + J"
 	x=29
 	y=20
 [/label]
-[label]
-	category=""
-	color="107,140,255"
-	immutable=yes
-	side=0
-	team_name=""
-	text="<span color='#FFFFFF'>Scoreboard: </span><span color='#FF8080'>score</span> <span color='#FFE680'>gold</span>
-<span color='#FFFFFF'>(total_kills leader_kills)</span>"
-	tooltip=""
-	visible_in_fog=yes
-	visible_in_shroud=yes
-	x=29
-	y=21
-[/label]

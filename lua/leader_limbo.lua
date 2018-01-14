@@ -41,6 +41,7 @@ local function leader_restore_limbo()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side }) do
 		if (unit.variables.limbo_turns or 0) >= 2 then
 			unit.moves = 0
+			unit.status.petrified = true
 			unit.variables.limbo_turns = unit.variables.limbo_turns - 1
 			show_limbo_text(side, "Limbo " .. unit.variables.limbo_turns)
 			wesnoth.wml_actions.end_turn {}

@@ -47,7 +47,7 @@ local function generate(desired_cost)
 	end
 
 	unit = wesnoth.create_unit { type = creep_type }
-	local boost = math.floor((desired_cost - unit.__cfg.cost) / 14)
+	local boost = math.floor((desired_cost + 7 - unit.__cfg.cost) / 14)
 
 	if boost > 0 then
 		local boost_ability = T.name_only {

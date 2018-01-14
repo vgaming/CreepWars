@@ -29,16 +29,6 @@ press Ctrl + J"
 	x=34
 	y=1
 [/label]
-[label]
-	color="255,255,255"
-	immutable=yes
-	team_name=""
-	text="This is my first map, don't be too harsh :)"
-	visible_in_fog=yes
-	visible_in_shroud=yes
-	x=3
-	y=1
-[/label]
 
 
 [event]

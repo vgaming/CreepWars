@@ -39,7 +39,6 @@ name="Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
 
 
 {./common_side_definitions.cfg}
-
 {CWD_HUMAN West}
 {CWD_HUMAN East}
 {CWD_AI South 13 23 21 23}
@@ -49,7 +48,6 @@ name="Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
 {CWD_HUMAN East}
 {CWD_HUMAN South}
 {CWD_AI West 11 8 7 14}
-
 #undef CWD_HUMAN
 #undef CWD_AI
 

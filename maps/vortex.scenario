@@ -1,0 +1,71 @@
+map_data="{./vortex.map}"
+
+
+id="Creep Wars vortex {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
+name="Creep Wars vortex {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
+
+
+{./common_side_definitions.cfg}
+{CWD_HUMAN West}
+{CWD_HUMAN East}
+{CWD_HUMAN West}
+{CWD_AI West 10 3 10 11}
+{CWD_HUMAN East}
+{CWD_HUMAN West}
+{CWD_HUMAN East}
+{CWD_AI East 26 3 26 11}
+#undef CWD_HUMAN
+#undef CWD_AI
+
+
+[label]
+	color="255,255,255"
+	immutable=yes
+	team_name=""
+	text="Game Rules:
+press Ctrl + J"
+	visible_in_fog=yes
+	visible_in_shroud=yes
+	x=34
+	y=1
+[/label]
+[label]
+	color="255,255,255"
+	immutable=yes
+	team_name=""
+	text="This is my first map, don't be too harsh :)"
+	visible_in_fog=yes
+	visible_in_shroud=yes
+	x=3
+	y=1
+[/label]
+
+
+[event]
+	name=preload
+	first_time_only=no
+	[lua]
+		code = {./vortex.lua}
+	[/lua]
+[/event]
+[event]
+	name=start
+	first_time_only=yes
+	[lua]
+		code = << creepwars.vortex_event_start() >>
+	[/lua]
+[/event]
+[event]
+	name=side turn
+	first_time_only=no
+	[lua]
+		code = << creepwars.vortex_side_turn() >>
+	[/lua]
+[/event]
+[event]
+	name=side turn end
+	first_time_only=no
+	[lua]
+		code = << creepwars.vortex_side_turn_end() >>
+	[/lua]
+[/event]

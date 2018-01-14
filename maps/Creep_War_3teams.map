@@ -34,6 +34,10 @@ Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo,
 "
 
 
+id="Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
+name="Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
+
+
 {./common_side_definitions.cfg}
 
 {CWD_HUMAN West}

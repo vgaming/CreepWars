@@ -12,20 +12,7 @@ local event_side
 local event_unit
 
 
-local function err(message)
-	wesnoth.synchronize_choice(function()
-		wesnoth.show_dialog {
-			T.tooltip { id = "tooltip_large" },
-			T.helptip { id = "tooltip_large" },
-			T.grid {
-				T.row { T.column { T.image { label = "misc/red-x.png" } } },
-				T.row { T.column { T.label { label = message .. "\n" } } },
-				T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
-			}
-		}
-		return {} -- strange obligatory "table" result
-	end)
-end
+local err = creepwars.wesnoth_error_message
 
 local function show_shop_dialog(conf)
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then

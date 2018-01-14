@@ -13,6 +13,10 @@ local creep_array = creepwars.default_era_creeps
 
 local era_array = {}
 local era_set = {}
+if not wesnoth.game_config.era then
+	creepwars.wesnoth_error_message("Your wesnoth version does not support listing Era units.\n\n"
+		.. "Please upgrade to wesnoth-1.12.6.")
+end
 for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
 	local units = multiplayer_side.recruit or multiplayer_side.leader or ""
 	for _, unit in ipairs(split_comma(units)) do

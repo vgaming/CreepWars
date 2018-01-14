@@ -110,16 +110,33 @@ local function generate_until(gen_func, until_func)
 end
 
 
+local function wesnoth_error_message(message)
+	wesnoth.synchronize_choice(function()
+		wesnoth.show_dialog {
+			T.tooltip { id = "tooltip_large" },
+			T.helptip { id = "tooltip_large" },
+			T.grid {
+				T.row { T.column { T.image { label = "misc/red-x.png" } } },
+				T.row { T.column { T.label { label = message .. "\n" } } },
+				T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
+			}
+		}
+		return {} -- strange obligatory "table" result
+	end)
+end
+
+
 local creepwars = creepwars
+creepwars.array_copy = array_copy
 creepwars.array_filter = array_filter
 creepwars.array_forall = array_forall
 creepwars.array_map = array_map
-creepwars.array_copy = array_copy
 creepwars.array_merge = array_merge
 creepwars.array_to_set = array_to_set
 creepwars.format = format
+creepwars.generate_until = generate_until
 creepwars.print = _print
 creepwars.split_comma = split_comma
-creepwars.generate_until = generate_until
+creepwars.wesnoth_error_message = wesnoth_error_message
 
 -- >>

@@ -26,6 +26,15 @@ for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
 			team_name = wesnoth.sides[creepwars.team_array[team_index][1]].team_name,
 			text = "Shop"
 		}
+		wesnoth.wml_actions.event {
+			name = "turn 2",
+			T.label {
+				x = xy[1],
+				y = xy[2],
+				text = "",
+				team_name = wesnoth.sides[creepwars.team_array[team_index][1]].team_name,
+			}
+		}
 		cumulative_x_coords[#cumulative_x_coords + 1] = xy[1]
 		cumulative_y_coords[#cumulative_y_coords + 1] = xy[2]
 		set[xy[1] .. "," .. xy[2]] = true

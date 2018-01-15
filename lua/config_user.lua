@@ -74,20 +74,20 @@ local function ask_mirror_style()
 	return options[result.index].id
 end
 
-local mirror_style
-do
-	local conf = wesnoth.get_variable("creepwars_mirror_style")
-	mirror_style = conf ~= nil and conf ~= "decide_later" and conf or ask_mirror_style()
-end
+
+-- ugly hack to support wesnoth-1.12
+-- (it cannot work with multiple scenarios defining same option id-s)
+local scenario_suffix = wesnoth.game_config.mp_settings.mp_scenario
+
+
+local mirror_style = wesnoth.get_variable("creepwars_mirror_style" .. scenario_suffix) or "manual"
 
 
 local hide_leaders
 if mirror_style == "mirror" then
 	hide_leaders = false
-elseif wesnoth.get_variable("creepwars_hide_leaders") ~= nil then
-	hide_leaders = wesnoth.get_variable("creepwars_hide_leaders")
 else
-	hide_leaders = true
+	hide_leaders = wesnoth.get_variable("creepwars_hide_leaders" .. scenario_suffix) or false
 end
 
 

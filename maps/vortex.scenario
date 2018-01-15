@@ -1,8 +1,7 @@
 map_data="{./vortex.map}"
 
-
-id="Creep Wars vortex {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
-name="Creep Wars vortex {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
+#define CREEPWARS_SCENARIO_ID
+Creep Wars vortex {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 
 
 {./common_side_definitions.cfg}

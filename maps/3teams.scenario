@@ -34,8 +34,8 @@ Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo,
 "
 
 
-id="Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
-name="Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
+#define CREEPWARS_SCENARIO_ID
+Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 
 
 {./common_side_definitions.cfg}

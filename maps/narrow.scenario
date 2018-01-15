@@ -22,9 +22,8 @@ Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo,
 Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
 "
 
-
-id="Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
-name="Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}"
+#define CREEPWARS_SCENARIO_ID
+Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 
 
 {./2player_settings.cfg}

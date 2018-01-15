@@ -2,7 +2,9 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local helper = wesnoth.require "lua/helper.lua"
+local ipairs = ipairs
+local math = math
+local helper = wesnoth.require("lua/helper.lua")
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local array_map = creepwars.array_map
 local format = creepwars.format
@@ -32,6 +34,20 @@ local function downgrade_leaders()
 end
 
 
+local function set_all_leaders(unit_array_function)
+	for team_index, side_array in ipairs(creepwars.team_array) do
+		side_array = creepwars.array_filter(side_array, function(s)
+			return not is_ai_array[s] and #wesnoth.get_units { canrecruit = true, side = side.side } > 0
+		end)
+		local unit_array = unit_array_function()
+		for side_in_team_index, side_number in ipairs(side_array) do
+			local unit_type = unit_array[math.fmod(team_index + side_in_team_index, #side_array) + 1]
+			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side_number }) do
+				set_type(unit, unit_type)
+			end
+		end
+	end
+end
 local function set_all_leaders(unit_array_function)
 	local team_units = {}
 	local team_index = {}
@@ -98,7 +114,7 @@ local function force_same_cost()
 end
 
 
-print("creepwars mirror_style is ", mirror_style)
+--print("creepwars mirror_style is ", mirror_style)
 if mirror_style == "manual" then
 	downgrade_leaders()
 elseif mirror_style == "mirror" then
@@ -107,7 +123,7 @@ elseif mirror_style == "mirror" then
 elseif mirror_style == "same_cost" then
 	force_same_cost()
 else
-	error("Unknown leader mirror style: " .. format(mirror_style))
+	error("Unknown mirror style: " .. format(mirror_style))
 end
 
 

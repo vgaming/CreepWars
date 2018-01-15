@@ -14,6 +14,7 @@ for _, assignment in ipairs(creepwars.split_comma(cli_string)) do
 	local right = string.gsub(assignment, "[^=]*=", "")
 	wesnoth.set_variable(left, right)
 end
+wesnoth.sides[1].user_team_name = wesnoth.sides[1].team_name
 
 
 -- >>

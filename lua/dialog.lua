@@ -3,10 +3,11 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
+local string = string
+local type = type
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local translate = wesnoth.textdomain "wesnoth"
 local is_ai_array = creepwars.is_ai_array
-local sync_choice = creepwars.sync_choice
 
 
 local human_side
@@ -127,13 +128,7 @@ local function show_dialog(settings)
 end
 
 
-local function show_dialog_early(settings)
-	local func = function() return show_dialog_unsynchronized(settings) end
-	return sync_choice(func, nil, { human_side }, settings.id)[human_side]
-end
-
-
 creepwars.show_dialog = show_dialog
-creepwars.show_dialog_early = show_dialog_early
+
 
 -- >>

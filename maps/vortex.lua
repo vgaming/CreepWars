@@ -29,10 +29,10 @@ creepwars.vortex_start = function()
 			.. "Holding Vortex gives " .. vortex_chance .. "% chance to double gold bonus for each kill by allied sides.\n"
 			.. "(This is rouhgly equivalent of " .. vortex_chance .. " increase in gold for those kills.)\n\n"
 			.. "The Vortex <b>changes terrain</b> when you stand on it. \n"
-			.. "There is 30% probability to change to Grassland,\n"
-			.. "30% probability to change to Shallow Water,\n"
-			.. "30% probability to change to Sand,\n"
-			.. "and 10% probability to change to Snow.",
+			.. "There is 25% probability to change to Grassland,\n"
+			.. "25% probability to change to Shallow Water,\n"
+			.. "25% probability to change to Sand,\n"
+			.. "and 25% probability to change to Snow.",
 		image = "terrain/sand/crater.png",
 	}
 	wesnoth.wml_actions.label {
@@ -56,15 +56,16 @@ creepwars.vortex_side_turn_end = function()
 	local unit = wesnoth.get_unit(pos.x, pos.y)
 	if unit and wesnoth.current.side == unit.side then
 		local rand = helper.rand("1..100")
-		if rand > 70 then
+		if rand > 75 then
 			wesnoth.set_terrain(pos.x, pos.y, "Gg")
-		elseif rand > 40 then
+		elseif rand > 50 then
 			wesnoth.set_terrain(pos.x, pos.y, "Ww")
-		elseif rand > 10 then
+		elseif rand > 25 then
 			wesnoth.set_terrain(pos.x, pos.y, "Dd")
 		else
 			wesnoth.set_terrain(pos.x, pos.y, "Aa")
 		end
+		wesnoth.wml_actions.remove_item { x = 18, y = 7, image = "items/bones.png" }
 	end
 end
 

@@ -3,7 +3,6 @@
 creepwars = {}
 local creepwars = creepwars
 local wesnoth = wesnoth
-local ipairs = ipairs
 local helper = wesnoth.require "lua/helper.lua"
 
 
@@ -27,12 +26,12 @@ creepwars.vortex_start = function()
 		speaker = "narrator",
 		message = "There is a <b>Vortex</b> on the center of the map.\n\n"
 			.. "Holding Vortex gives " .. vortex_chance .. "% chance to double gold bonus for each kill by allied sides.\n"
-			.. "(This is rouhgly equivalent of " .. vortex_chance .. " increase in gold for those kills.)\n\n"
+			.. "(This is rouhgly equivalent of " .. vortex_chance .. " increase in gold.)\n\n"
 			.. "The Vortex <b>changes terrain</b> when you stand on it. \n"
 			.. "There is 25% probability to change to Grassland,\n"
 			.. "25% probability to change to Shallow Water,\n"
 			.. "25% probability to change to Sand,\n"
-			.. "and 25% probability to change to Snow.",
+			.. "25% probability to change to Snow.",
 		image = "terrain/sand/crater.png",
 	}
 	wesnoth.wml_actions.label {

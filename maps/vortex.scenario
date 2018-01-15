@@ -52,3 +52,6 @@ press Ctrl + J"
 		code = << creepwars.vortex_side_turn_end() >>
 	[/lua]
 [/event]
+
+
+{./first_turn_advantage.cfg}

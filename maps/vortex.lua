@@ -15,51 +15,46 @@ creepwars.shop_coordinates = {
 	{ { 28, 6 }, { 28, 8 }, },
 }
 
-creepwars.vortex_event_start = function()
+
+local vortex_chance = 25
+local pos = { x = 18, y = 7 }
+
+
+creepwars.vortex_start = function()
 	wesnoth.wml_actions.item { x = 18, y = 7, image = "items/bones.png" }
-	--wesnoth.wml_actions.item { x = 18, y = 7, image = "scenery/circle-magic-glow.png~SCALE(72,72)" }
 
 	wesnoth.wml_actions.message {
 		speaker = "narrator",
 		message = "There is a <b>Vortex</b> on the center of the map.\n\n"
-			.. "If you stand on a Vortex at the beginning of your turn, \n"
-			.. "all allied sides will get additional <b>gold</b>.\n"
-			.. "First turn on a Vortex gives 3 gold, next turn 4 gold, next turn 5 gold, etc.\n\n"
+			.. "Holding Vortex gives " .. vortex_chance .. "% chance to double gold bonus for each kill by allied sides.\n"
+			.. "(This is rouhgly equivalent of " .. vortex_chance .. " increase in gold for those kills.)\n\n"
 			.. "The Vortex <b>changes terrain</b> when you stand on it. \n"
 			.. "There is 30% probability to change to Grassland,\n"
 			.. "30% probability to change to Shallow Water,\n"
 			.. "30% probability to change to Sand,\n"
 			.. "and 10% probability to change to Snow.",
-		--		image = "scenery/circle-magic-glow.png",
 		image = "terrain/sand/crater.png",
+	}
+	wesnoth.wml_actions.label {
+		x = pos.x,
+		y = pos.y,
+		text = "Vortex"
 	}
 end
 
 
-local pos = { x = 18, y = 7 }
-local previous_side = 0
-local turns_on_vortex = 0
-creepwars.vortex_side_turn = function()
+creepwars.gold_multiplier_func = function(attacker)
 	local unit = wesnoth.get_unit(pos.x, pos.y)
-	local new_side = unit and unit.side or 0
-	print("new_side", new_side)
-
-	if wesnoth.current.side == new_side and new_side == previous_side and new_side > 0 then
-		for _, ally_side in ipairs(wesnoth.sides) do
-			if ally_side.team_name == wesnoth.sides[new_side].team_name then
-				ally_side.gold = ally_side.gold + 3 + turns_on_vortex
-			end
-		end
-		turns_on_vortex = turns_on_vortex + 1
-	end
+	return unit
+		and wesnoth.sides[unit.side].team_name == wesnoth.sides[attacker.side].team_name
+		and helper.rand("1..100") <= vortex_chance
+		and 2 or 1
 end
+
+
 creepwars.vortex_side_turn_end = function()
 	local unit = wesnoth.get_unit(pos.x, pos.y)
-	local new_side = unit and unit.side or 0
-	if new_side ~= previous_side then
-		turns_on_vortex = 0
-	end
-	if wesnoth.current.side == new_side then
+	if unit and wesnoth.current.side == unit.side then
 		local rand = helper.rand("1..100")
 		if rand > 70 then
 			wesnoth.set_terrain(pos.x, pos.y, "Gg")
@@ -71,12 +66,6 @@ creepwars.vortex_side_turn_end = function()
 			wesnoth.set_terrain(pos.x, pos.y, "Aa")
 		end
 	end
-	wesnoth.wml_actions.label {
-		x = pos.x,
-		y = pos.y,
-		text = "Vortex " .. (turns_on_vortex > 0 and turns_on_vortex or "")
-	}
-	previous_side = new_side
 end
 
 

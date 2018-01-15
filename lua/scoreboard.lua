@@ -57,7 +57,7 @@ local function unit_kill_event(attacker, defender)
 	score = score + score_per_kill(creepkills + leaderkills)
 	wesnoth.set_variable("creepwars_score_" .. team, score)
 
-	-- guard
+	-- guard hp
 	local guard_give_hp = creepwars_guard_hp_for_kill(defender.canrecruit)
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if side_to_team[unit.side] == team and unit.max_moves == 0 then
@@ -75,14 +75,21 @@ local function unit_kill_event(attacker, defender)
 	local gold_orig = wesnoth.get_variable("creepwars_gold_" .. team)
 	local gold_kills = creepkills + 4 * leaderkills
 
+	local leader_multiplier = defender.canrecruit
+		and 4
+		or 1
+
+	local guard_multiplier = defender.canrecruit and is_ai_array[defender.side]
+		and creepwars.guard_gold_multiplier
+		or 1
+
+	local external_multiplier = creepwars.gold_multiplier_func
+		and creepwars.gold_multiplier_func(attacker)
+		or 1
+
 	local gold = gold_orig
-	if defender.canrecruit then
-		local times = is_ai_array[defender.side] and 4 * creepwars.guard_gold_multiplier or 4
-		for i = 0, times - 1 do
-			gold = gold + gold_per_kill(gold_kills + i)
-		end
-	else
-		gold = gold + gold_per_kill(gold_kills)
+	for i = 0, leader_multiplier * guard_multiplier * external_multiplier - 1 do
+		gold = gold + gold_per_kill(gold_kills + i)
 	end
 	wesnoth.set_variable("creepwars_gold_" .. team, gold)
 	for _, side in ipairs(wesnoth.sides) do
@@ -91,12 +98,12 @@ local function unit_kill_event(attacker, defender)
 		end
 	end
 
-	if defender.canrecruit and is_ai_array[defender.side] then
-		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + creepwars.guard_gold_multiplier)
-	elseif defender.canrecruit then
-		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + 1)
+	if defender.canrecruit then
+		wesnoth.set_variable("creepwars_leaderkills_" .. team,
+			leaderkills + guard_multiplier * external_multiplier)
 	else
-		wesnoth.set_variable("creepwars_creepkills_" .. team, creepkills + 1)
+		wesnoth.set_variable("creepwars_creepkills_" .. team,
+			creepkills + external_multiplier)
 	end
 
 	display_stats()

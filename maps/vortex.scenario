@@ -42,14 +42,7 @@ press Ctrl + J"
 	name=start
 	first_time_only=yes
 	[lua]
-		code = << creepwars.vortex_event_start() >>
-	[/lua]
-[/event]
-[event]
-	name=side turn
-	first_time_only=no
-	[lua]
-		code = << creepwars.vortex_side_turn() >>
+		code = << creepwars.vortex_start() >>
 	[/lua]
 [/event]
 [event]

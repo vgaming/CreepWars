@@ -23,6 +23,8 @@ Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo,
 "
 
 #define CREEPWARS_SCENARIO_ID
+Creep_Wars_narrow_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
+#define CREEPWARS_SCENARIO_NAME
 Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 
 

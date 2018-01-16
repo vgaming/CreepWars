@@ -37,31 +37,14 @@ end
 local function set_all_leaders(unit_array_function)
 	for team_index, side_array in ipairs(creepwars.team_array) do
 		side_array = creepwars.array_filter(side_array, function(s)
-			return not is_ai_array[s] and #wesnoth.get_units { canrecruit = true, side = side.side } > 0
+			return not is_ai_array[s] and #wesnoth.get_units { canrecruit = true, side = s } > 0
 		end)
 		local unit_array = unit_array_function()
 		for side_in_team_index, side_number in ipairs(side_array) do
-			local unit_type = unit_array[math.fmod(team_index + side_in_team_index, #side_array) + 1]
+			local unit_type = unit_array[math.fmod(side_in_team_index - team_index + #side_array, #side_array) + 1]
 			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side_number }) do
 				set_type(unit, unit_type)
 			end
-		end
-	end
-end
-local function set_all_leaders(unit_array_function)
-	local team_units = {}
-	local team_index = {}
-	for _, side in ipairs(wesnoth.sides) do
-		local has_leaders = #wesnoth.get_units { canrecruit = true, side = side.side } > 0
-		local is_human = is_ai_array[side.side] ~= true
-		if has_leaders and is_human then
-			team_units[side.team_name] = team_units[side.team_name] or unit_array_function()
-			team_index[side.team_name] = team_index[side.team_name] or 1
-			local type = team_units[side.team_name][team_index[side.team_name]]
-			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side.side }) do
-				set_type(unit, type)
-			end
-			team_index[side.team_name] = team_index[side.team_name] + 1
 		end
 	end
 end

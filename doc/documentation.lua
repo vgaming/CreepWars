@@ -78,7 +78,7 @@ if wesnoth then
 		non_standard_msg = "All options are stadard. "
 	end
 
-	local recent = "Recent changes: Mirror style is chosen at game creation now. This may also fix some of the OOS bugs."
+	local recent = "Recent changes: Mirror mode now has shifted Leader types (thanks to mmmax for suggestion)."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. non_standard_msg .. recent)
 else
 	return note

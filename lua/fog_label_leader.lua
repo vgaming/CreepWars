@@ -1,11 +1,12 @@
 --<< fog_label_leader
 
 local wesnoth = wesnoth
-local hide_leaders = creepwars.hide_leaders
+local creepwars = creepwars
+local ipairs = ipairs
 local mirror_style = creepwars.mirror_style
 local is_ai_array = creepwars.is_ai_array
 
-if not hide_leaders and mirror_style ~= "mirror" then
+if creepwars.reveal_leaders and mirror_style ~= "mirror" then
 	local is_first_turn = wesnoth.get_variable("turn_number") == 1
 
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do

@@ -17,15 +17,15 @@ local mirror_style = wesnoth.get_variable("creepwars_mirror_style" .. scenario_s
 local forbid_berserkers = wesnoth.get_variable("creepwars_forbid_berserkers" .. scenario_suffix) or false
 
 
-local hide_leaders
+local reveal_leaders
 if mirror_style == "mirror" then
-	hide_leaders = false
+	reveal_leaders = true
 else
-	hide_leaders = wesnoth.get_variable("creepwars_hide_leaders" .. scenario_suffix) or false
+	reveal_leaders = wesnoth.get_variable("creepwars_reveal_leaders" .. scenario_suffix) or true
 end
 
 
-creepwars.hide_leaders = hide_leaders
+creepwars.reveal_leaders = reveal_leaders
 creepwars.mirror_style = mirror_style
 creepwars.forbid_berserkers = forbid_berserkers
 

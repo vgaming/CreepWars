@@ -1,9 +1,9 @@
 -- << fog_remove
 
 local wesnoth = wesnoth
+local ipairs = ipairs
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local is_ai_array = creepwars.is_ai_array
-local hide_leaders = creepwars.hide_leaders
 
 -- wesnoth-1.12 seems to be a bit buggy, we'll clear fog with multiturn = true AND false.
 local function lift_fog(x, y)
@@ -23,11 +23,10 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 			T.effect { apply_to = "new_ability", T.abilities { ability } }
 		})
 		if wesnoth.get_variable("creepwars_lift_fog_guard") ~= false then
-			-- print("Lifting fog around guard " .. unit.type .. " [" .. unit.x .. "," .. unit.y .. "]")
 			lift_fog(unit.x, unit.y)
 		end
 	else
-		if not hide_leaders then
+		if creepwars.reveal_leaders then
 			local start_loc = wesnoth.get_starting_location(unit.side)
 			lift_fog(start_loc[1], start_loc[2])
 		end

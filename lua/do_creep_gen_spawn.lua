@@ -1,4 +1,4 @@
--- << do_creep_respawn
+-- << do_creep_gen_spawn
 
 local wesnoth = wesnoth
 local creepwars = creepwars

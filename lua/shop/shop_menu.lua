@@ -45,6 +45,7 @@ local function show_shop_dialog(conf)
 		wesnoth.wml_actions.message(msg)
 
 		local result = creepwars_shop_result
+		--noinspection GlobalCreationOutsideO
 		creepwars_shop_result = nil
 
 		-- print("result", creepwars.format(result))

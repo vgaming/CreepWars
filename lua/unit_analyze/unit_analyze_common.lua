@@ -6,7 +6,6 @@ local ipairs = ipairs
 local helper = wesnoth.require("lua/helper.lua")
 local array_filter = creepwars.array_filter
 local split_comma = creepwars.split_comma
-local unit_count_specials = creepwars.unit_count_specials
 
 
 local creep_array = creepwars.default_era_creeps

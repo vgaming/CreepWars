@@ -1,6 +1,5 @@
 -- << config
 
-local wesnoth = wesnoth
 local math = math
 local creepwars = creepwars
 

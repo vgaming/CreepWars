@@ -2,8 +2,6 @@
 
 local wesnoth = wesnoth
 local ipairs = ipairs
-local table = table
-local array_map = creepwars.array_map
 local is_ai_array = creepwars.is_ai_array
 
 

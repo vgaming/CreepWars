@@ -5,7 +5,6 @@ local creepwars = creepwars
 local ipairs = ipairs
 local math = math
 local helper = wesnoth.require("lua/helper.lua")
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local array_map = creepwars.array_map
 local format = creepwars.format
 local is_ai_array = creepwars.is_ai_array

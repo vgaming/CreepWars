@@ -7,8 +7,7 @@ local string = string
 local creepwars_creep_count = creepwars_creep_count
 local creepwars_guard_hp_for_kill = creepwars_guard_hp_for_kill
 local creepwars_guard_hp_initial = creepwars_guard_hp_initial
-local creepwars_lvl0_barrier = creepwars_lvl0_barrier
-local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
+local lvl0_barrier = creepwars.lvl0_barrier
 local creepwars_score_start = creepwars_score_start
 local gold_kills_to_increase = creepwars.gold_kills_to_increase
 local gold_per_kill_start = creepwars.gold_per_kill_start
@@ -25,8 +24,8 @@ local function replace(str, replacement)
 end
 
 replace("#creepwars_creep_count", creepwars_creep_count)
-replace("#creepwars_lvl0_barrier", creepwars_lvl0_barrier)
-replace("#creepwars_lvl3plus_barrier", creepwars_lvl3plus_barrier)
+replace("#lvl0_barrier", lvl0_barrier)
+replace("#lvl3plus_barrier", creepwars.lvl3plus_barrier)
 replace("#gold_start_p0", gold_per_kill_start)
 replace("#gold_start_p1", gold_per_kill_start + 1)
 replace("#gold_start_p2", gold_per_kill_start + 2)

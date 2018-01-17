@@ -5,10 +5,11 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
+local math = math
 local helper = wesnoth.require("lua/helper.lua")
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-local creepwars_lvl0_barrier = creepwars_lvl0_barrier
-local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier
+local lvl0_barrier = creepwars.lvl0_barrier
+local lvl3plus_barrier = creepwars.lvl3plus_barrier
 local creep_array = creepwars.creep_array
 
 
@@ -19,13 +20,13 @@ local function generate(desired_cost)
 	local creep_type
 	local unit
 	local iterations = 0
-	if desired_cost < creepwars_lvl0_barrier then
+	if desired_cost < lvl0_barrier then
 		repeat
 			iterations = iterations + 1
 			creep_type = rand_creep()
 			local u = wesnoth.unit_types[creep_type]
 		until u.level == 0 and u.__cfg.cost < 12
-	elseif desired_cost < creepwars_lvl3plus_barrier then
+	elseif desired_cost < lvl3plus_barrier then
 		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 200
 		local closeness_step = 1 / #creep_array / 5 -- widen acceptable range over time
 		repeat

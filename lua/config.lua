@@ -3,8 +3,9 @@
 local math = math
 local creepwars = creepwars
 
-creepwars_lvl0_barrier = 12 -- creep score lower than this value will generate lvl0 creeps
-creepwars_lvl3plus_barrier = 50
+creepwars.lvl0_barrier = 12 -- creep score lower than this value will generate lvl0 creeps
+local lvl3plus_barrier = 50
+creepwars.lvl3plus_barrier = lvl3plus_barrier
 creepwars_creep_lvl_max = 3
 
 creepwars_creep_count = 8
@@ -24,11 +25,15 @@ creepwars.guard_gold_multiplier = 5
 local creepwars_score_scale = 3
 creepwars_score_start = 9
 -- derived values:
-creepwars_score_per_kill_min = 2 * (creepwars_lvl3plus_barrier - creepwars_score_start)
+creepwars_score_per_kill_min = 2 * (lvl3plus_barrier - creepwars_score_start)
 	/ (creepwars_score_scale + 1)
 	/ creepwars_expected_total_kills
-creepwars_score_per_kill_increase = creepwars_score_per_kill_min * (creepwars_score_scale - 1) / creepwars_expected_total_kills
-local function score_per_kill(kills) return creepwars_score_per_kill_min + creepwars_score_per_kill_increase * kills end
+creepwars_score_per_kill_increase = creepwars_score_per_kill_min
+	* (creepwars_score_scale - 1)
+	/ creepwars_expected_total_kills
+local function score_per_kill(kills)
+	return creepwars_score_per_kill_min + creepwars_score_per_kill_increase * kills
+end
 
 
 creepwars.gold_kills_to_increase = gold_kills_to_increase

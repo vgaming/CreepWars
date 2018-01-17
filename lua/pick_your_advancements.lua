@@ -21,7 +21,10 @@ local function pick_advancement_menu()
 		local ut = wesnoth.unit_types[adv]
 		return { text = tostring(ut.name), image = ut.__cfg.image }
 	end)
-	local result = show_dialog { label = "Choose advancement \n(OK=confirm, Cancel=reset to default)\n", options = options }
+	local result = show_dialog {
+		label = "Choose advancement \n(OK=confirm, Cancel=reset to default)\n",
+		options = options
+	}
 	if result.is_ok then
 		unit.advances_to = { advances_to[result.index] }
 	else

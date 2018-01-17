@@ -22,7 +22,7 @@ if is_ai_array[side_number] and not wesnoth.sides[side_number].lost then
 	local start_loc = wesnoth.get_starting_location(side_number)
 	-- print("side", side_number, "loc", creepwars.format(start_loc), "current creeps", creeps_count_before)
 
-	for i = creeps_count_before + 1, creepwars_creep_count do
+	for _ = creeps_count_before + 1, creepwars_creep_count do
 		local unit = gen_creep(creep_score)
 		unit.side = side_number
 		local x, y = wesnoth.find_vacant_tile(start_loc[1], start_loc[2], unit)

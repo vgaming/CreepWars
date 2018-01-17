@@ -7,16 +7,6 @@ local string = string
 local type = type
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local translate = wesnoth.textdomain "wesnoth"
-local is_ai_array = creepwars.is_ai_array
-
-
-local human_side
-for k,v in ipairs(is_ai_array) do
-	if not v then
-		human_side = k
-		break
-	end
-end
 
 
 local function pango_escape(str)

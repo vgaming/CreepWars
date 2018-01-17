@@ -16,7 +16,8 @@ if creepwars.scoreboard_help_label then
 	wesnoth.wml_actions.label {
 		x = creepwars.scoreboard_help_label.x,
 		y = creepwars.scoreboard_help_label.y,
-		text = "<span color='#FFFFFF'>Scoreboard: </span><span color='#FF8080'>score</span> <span color='#FFE680'>gold</span>\n"
+		text = "<span color='#FFFFFF'>Scoreboard: </span>"
+			.. "<span color='#FF8080'>score</span> <span color='#FFE680'>gold</span>\n"
 			.. " <span color='#FFFFFF'>(total_kills leader_kills)</span>"
 	}
 end

@@ -12,7 +12,7 @@ local creep_array = creepwars.default_era_creeps
 
 local era_array = {}
 local era_set = {}
-if not pcall(function() return wesnoth.game_config.era end) then
+if not pcall(function() return wesnoth.game_config.era.id end) then
 	creepwars.wesnoth_error_message("Your wesnoth version does not support listing Era units.\n\n"
 		.. "Please upgrade to wesnoth-1.12.6.")
 end

@@ -3,7 +3,7 @@
 creepwars = {}
 local creepwars = creepwars
 local wesnoth = wesnoth
-local helper = wesnoth.require "lua/helper.lua"
+local helper = wesnoth.require("lua/helper.lua")
 
 
 creepwars.scoreboard_pos = { { x = 17, y = 1 }, { x = 19, y = 1 } }

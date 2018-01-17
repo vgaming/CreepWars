@@ -2,7 +2,6 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local helper = wesnoth.require "lua/helper.lua"
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local table = table
 

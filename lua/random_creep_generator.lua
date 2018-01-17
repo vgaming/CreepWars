@@ -5,7 +5,7 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local helper = wesnoth.require "lua/helper.lua"
+local helper = wesnoth.require("lua/helper.lua")
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local creepwars_lvl0_barrier = creepwars_lvl0_barrier
 local creepwars_lvl3plus_barrier = creepwars_lvl3plus_barrier

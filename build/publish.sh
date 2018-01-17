@@ -2,6 +2,8 @@
 set -o pipefail
 {
 
+test -z "$(git status --porcelain)" || (echo "You have local changes. Please publish finished commits or tags only."; exit -1)
+
 build/build.sh
 
 printf 'version="%s"\ndescription="%s"' \

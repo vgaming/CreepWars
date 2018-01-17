@@ -2,6 +2,7 @@
 
 local ipairs = ipairs
 local next = next
+local print = print
 local string = string
 local table = table
 local tostring = tostring
@@ -111,6 +112,8 @@ end
 
 
 local function wesnoth_error_message(message)
+	local wesnoth = wesnoth
+	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 	wesnoth.synchronize_choice(function()
 		wesnoth.show_dialog {
 			T.tooltip { id = "tooltip_large" },

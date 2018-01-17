@@ -21,6 +21,10 @@ local function set_type(unit, type)
 end
 
 
+local leader_rand_string = "1.." .. #recruitable_array
+local function random_leader() return recruitable_array[helper.rand(leader_rand_string)] end
+
+
 local function downgrade_leaders()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		local downgrade_array = creepwars.unit_downgrades(unit.type)
@@ -28,7 +32,11 @@ local function downgrade_leaders()
 			and downgrade_array and #downgrade_array > 0
 			and wesnoth.unit_types[unit.type].level == 2 then
 			local downgrade = downgrade_array[1] -- need the same for true mirror
-			set_type(unit, downgrade)
+			if creepwars.can_be_a_leader(downgrade) then
+				set_type(unit, downgrade)
+			else
+				set_type(unit, random_leader())
+			end
 		end
 	end
 end
@@ -48,10 +56,6 @@ local function set_all_leaders(unit_array_function)
 		end
 	end
 end
-
-
-local leader_rand_string = "1.." .. #recruitable_array
-local function random_leader() return recruitable_array[helper.rand(leader_rand_string)] end
 
 
 local function force_mirror()

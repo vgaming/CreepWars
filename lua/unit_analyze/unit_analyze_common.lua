@@ -44,6 +44,15 @@ end
 
 
 local function can_be_a_leader(unit_name)
+	if creepwars.forbid_berserkers then
+		local advance_array = { unit_name }
+		creepwars.add_advances(advance_array, nil, nil)
+		for _, adv in ipairs(advance_array) do
+			if unit_count_specials(adv)["berserk"] ~= nil then
+				return false
+			end
+		end
+	end
 	return unit_count_specials(unit_name)["plague"] == nil
 		and unit_count_specials(unit_name)["berserk"] == nil
 		and wesnoth.unit_types[unit_name].level <= 1

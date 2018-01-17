@@ -1,5 +1,9 @@
 -- << default_era_creeps
 
+local wesnoth = wesnoth
+local creepwars = creepwars
+local ipairs = ipairs
+
 creepwars.default_era_creeps = {
 	"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", "Dwarvish Ulfserker", -- only creeps
 	"Vampire Bat", -- costy lvl0, can be leader
@@ -15,18 +19,21 @@ creepwars.default_era_creeps = {
 }
 
 
---local function add_advances(arr, set, filter)
---	set = set or array_to_set(arr)
---	filter = filter or function(adv) return true end
---	for _, unit in ipairs(arr) do
---		for _, adv in ipairs(creepwars.split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
---			if set[adv] == nil and wesnoth.unit_types[adv] and filter(adv) then
---				set[adv] = true
---				arr[#arr + 1] = adv
---			end
---		end
---	end
---end
+local function add_advances(arr, set, filter)
+	set = set or creepwars.array_to_set(arr)
+	filter = filter or function(adv) return true end
+	for _, unit in ipairs(arr) do
+		for _, adv in ipairs(creepwars.split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
+			if set[adv] == nil and wesnoth.unit_types[adv] and filter(adv) then
+				set[adv] = true
+				arr[#arr + 1] = adv
+			end
+		end
+	end
+end
+
+
+creepwars.add_advances = add_advances
 
 
 -- >>

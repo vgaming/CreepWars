@@ -10,7 +10,11 @@ local scenario_suffix = wesnoth.compare_versions(wesnoth.game_config.version, ">
 	and ""
 	or wesnoth.game_config.mp_settings.mp_scenario
 
+
 local mirror_style = wesnoth.get_variable("creepwars_mirror_style" .. scenario_suffix) or "manual"
+
+
+local forbid_berserkers = wesnoth.get_variable("creepwars_forbid_berserkers" .. scenario_suffix) or false
 
 
 local hide_leaders
@@ -23,6 +27,7 @@ end
 
 creepwars.hide_leaders = hide_leaders
 creepwars.mirror_style = mirror_style
+creepwars.forbid_berserkers = forbid_berserkers
 
 
 -- >>

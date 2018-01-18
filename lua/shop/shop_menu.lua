@@ -49,7 +49,7 @@ local function show_shop_dialog(conf)
 		creepwars_shop_result = nil
 
 		-- print("result", creepwars.format(result))
-		if result == null then
+		if result == nil then
 			return { is_ok = false, index = -2 }
 		else
 			return { is_ok = true, index = result }
@@ -62,7 +62,7 @@ local function loop(label)
 	return function(options)
 		return function()
 			repeat
-				local label = label .. "\nYour gold: " .. event_side.gold
+				label = label .. "\nYour gold: " .. event_side.gold
 				local result = show_shop_dialog { label = label, options = options }
 				if result.is_ok then options[result.index].func() end
 			until not result.is_ok
@@ -73,8 +73,7 @@ end
 
 local function give_effect(cost, id, effect)
 	return function ()
-		local effect = effect
-		if effect[1] == "effect" then effect = { effect } end -- wrap
+		if effect[1] == "effect" then effect = { effect } end
 		if event_side.gold < cost then
 			err("Not enough gold")
 		else
@@ -177,7 +176,8 @@ local hero_loop = function()
 				gold = math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes) .. ", "
 					.. math.max(48, 66 - 6 * event_unit.variables.creepwars_strikes)
 					.. ", ..., 48, 48, 48",
-				image = string.format("%s~BLIT(%s~BLIT(%s,0,0)~BLIT(%s,36,0)~BLIT(%s,0,30)~BLIT(%s,36,30)~SCALE(50,50),10,20)", hex, hex, bow, sword, bow, sword),
+				image = string.format("%s~BLIT(%s~BLIT(%s,0,0)~BLIT(%s,36,0)~BLIT(%s,0,30)~BLIT(%s,36,30)~SCALE(50,50),10,20)",
+					hex, hex, bow, sword, bow, sword),
 				func = give_effect(math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes),
 					"strikes",
 					T.effect {

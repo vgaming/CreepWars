@@ -58,11 +58,11 @@ local function show_shop_dialog(conf)
 end
 
 
-local function loop(label)
+local function loop(label_orig)
 	return function(options)
 		return function()
 			repeat
-				label = label .. "\nYour gold: " .. event_side.gold
+				local label = label_orig .. "\nYour gold: " .. event_side.gold
 				local result = show_shop_dialog { label = label, options = options }
 				if result.is_ok then options[result.index].func() end
 			until not result.is_ok

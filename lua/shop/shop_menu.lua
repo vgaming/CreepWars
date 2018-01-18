@@ -73,7 +73,7 @@ end
 
 local function give_effect(cost, id, effect)
 	return function ()
-		if effect[1] == "effect" then effect = { effect } end
+		local effect_wml = effect[1] == "effect" and effect or { effect }
 		if event_side.gold < cost then
 			err("Not enough gold")
 		else
@@ -81,7 +81,7 @@ local function give_effect(cost, id, effect)
 			if id then
 				event_unit.variables["creepwars_" .. id] = event_unit.variables["creepwars_" .. id] + 1
 			end
-			wesnoth.add_modification(event_unit, "object", effect)
+			wesnoth.add_modification(event_unit, "object", effect_wml)
 		end
 	end
 end

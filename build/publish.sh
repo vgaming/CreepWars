@@ -4,6 +4,9 @@ set -o pipefail
 
 test -z "$(git status --porcelain)" || (echo "You have local changes. Please publish finished commits or tags only."; exit -1)
 
+readarray -td '' all_lua_files < <(find -name '*.lua' -print0)
+luacheck "${all_lua_files[@]}" --config build/.luacheckrc
+
 build/build.sh
 
 printf 'version="%s"\ndescription="%s"' \

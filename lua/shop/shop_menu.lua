@@ -73,7 +73,7 @@ end
 
 local function give_effect(cost, id, effect)
 	return function ()
-		local effect_wml = effect[1] == "effect" and effect or { effect }
+		local effect_wml = effect[1] == "effect" and { effect } or effect
 		if event_side.gold < cost then
 			err("Not enough gold")
 		else

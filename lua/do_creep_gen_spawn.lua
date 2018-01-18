@@ -2,10 +2,9 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local gen_creep = creepwars_generate_creep
+local generate_creep = creepwars.generate_creep
 local is_ai_array = creepwars.is_ai_array
 local side_to_team = creepwars.side_to_team
-local creepwars_creep_count = creepwars_creep_count
 local array_filter = creepwars.array_filter
 
 local side_number = wesnoth.get_variable("side_number")
@@ -22,8 +21,8 @@ if is_ai_array[side_number] and not wesnoth.sides[side_number].lost then
 	local start_loc = wesnoth.get_starting_location(side_number)
 	-- print("side", side_number, "loc", creepwars.format(start_loc), "current creeps", creeps_count_before)
 
-	for _ = creeps_count_before + 1, creepwars_creep_count do
-		local unit = gen_creep(creep_score)
+	for _ = creeps_count_before + 1, creepwars.creep_count do
+		local unit = generate_creep(creep_score)
 		unit.side = side_number
 		local x, y = wesnoth.find_vacant_tile(start_loc[1], start_loc[2], unit)
 		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then

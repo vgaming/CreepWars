@@ -3,7 +3,6 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
-local creepwars_score_start = creepwars_score_start
 
 local is_ai_array = {}
 for _, side in ipairs(wesnoth.sides) do
@@ -28,7 +27,7 @@ for team_id, _ in ipairs(team_array) do
 	wesnoth.set_variable("creepwars_gold_" .. team_id,
 		wesnoth.get_variable("creepwars_gold_" .. team_id) or 0)
 	wesnoth.set_variable("creepwars_score_" .. team_id,
-		wesnoth.get_variable("creepwars_score_" .. team_id) or creepwars_score_start)
+		wesnoth.get_variable("creepwars_score_" .. team_id) or creepwars.score_start)
 	wesnoth.set_variable("creepwars_creepkills_" .. team_id,
 		wesnoth.get_variable("creepwars_creepkills_" .. team_id) or 0)
 	wesnoth.set_variable("creepwars_leaderkills_" .. team_id,

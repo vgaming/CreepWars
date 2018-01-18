@@ -1,7 +1,7 @@
 -- << random_creep_generator
 
 -- This file provides function to generate Creeps with expected cost.
--- See end of file for the function itself, `creepwars_generate_creep`
+-- See end of file for the function itself, `creepwars.generate_creep`
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -15,7 +15,7 @@ local creep_array = creepwars.creep_array
 
 local creep_rand_string = "1.." .. #creep_array
 
-local function generate(desired_cost)
+local function generate_creep(desired_cost)
 	local function rand_creep() return creep_array[helper.rand(creep_rand_string)] end
 	local creep_type
 	local unit
@@ -82,7 +82,7 @@ local function generate(desired_cost)
 end
 
 
-creepwars_generate_creep = generate
+creepwars.generate_creep = generate_creep
 
 
 -- >>

@@ -12,7 +12,9 @@ local event_side
 local event_unit
 
 
-local err = creepwars.wesnoth_error_message
+local err = function(message)
+	creepwars.wesnoth_message(message, "misc/red-x.png")
+end
 
 local function show_shop_dialog(conf)
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then

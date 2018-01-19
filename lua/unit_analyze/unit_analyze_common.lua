@@ -17,13 +17,14 @@ if not pcall(function() return wesnoth.game_config.era end) then
 	-- this cannot happen on wesnoth-1.13,
 	-- but does happen on 1.12 for a multiplayer game if the host
 	-- has a specific add-on, but observers and/or players do not.
-	creepwars.wesnoth_error_message("ERROR: Unknown Era:\n\n" .. wesnoth.game_config.mp_settings.mp_era
+	creepwars.wesnoth_message("ERROR: Unknown Era:\n\n" .. wesnoth.game_config.mp_settings.mp_era
 		.. "\n\nPlease ask game host to choose another Era (for example, Default),\n"
 		.. "or download "
-		.. wesnoth.game_config.mp_settings.mp_era .. " yourself.\n\nSorry for the inconvenience.")
+		.. wesnoth.game_config.mp_settings.mp_era .. " yourself.\n\nSorry for the inconvenience.",
+		"misc/red-x.png")
 elseif wesnoth.game_config.mp_settings.mp_era == "Creep_War_Era_v0.3.5" then
 	-- I'm writing this warning because it is a very popular reason for the bug above.
-	creepwars.wesnoth_error_message("WARNING: " .. wesnoth.game_config.mp_settings.mp_era .. " is used.\n\n"
+	creepwars.wesnoth_message("WARNING: " .. wesnoth.game_config.mp_settings.mp_era .. " is used.\n\n"
 		.. "Please use Default Era with this map instead.\n\n"
 		.. "Unfortunately, the combination of those is known to "
 		.. "produce problems in Multiplayer game.\n\n"

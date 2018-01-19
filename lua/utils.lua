@@ -110,20 +110,27 @@ local function generate_until(gen_func, until_func)
 	return result
 end
 
-
-local function wesnoth_error_message(message)
+local function wesnoth_message(message, image)
 	local wesnoth = wesnoth
-	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 	wesnoth.synchronize_choice(function()
-		wesnoth.show_dialog {
-			T.tooltip { id = "tooltip_large" },
-			T.helptip { id = "tooltip_large" },
-			T.grid {
-				T.row { T.column { T.image { label = "misc/red-x.png" } } },
-				T.row { T.column { T.label { label = message .. "\n" } } },
-				T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
+		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
+			local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+			local ugly_index = image and 2 or 1
+			wesnoth.show_dialog {
+				T.tooltip { id = "tooltip_large" },
+				T.helptip { id = "tooltip_large" },
+				T.grid {
+					[1] = T.row { T.column { T.image { label = image } } },
+					[ugly_index] = T.row { T.column { T.label { label = message .. "\n" } } },
+					[ugly_index + 1] = T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
+				}
 			}
-		}
+		else
+			wesnoth.wml_actions.message {
+				message = message,
+				image = image
+			}
+		end
 		return {} -- strange obligatory "table" result
 	end)
 end
@@ -140,6 +147,6 @@ creepwars.format = format
 creepwars.generate_until = generate_until
 creepwars.print = _print
 creepwars.split_comma = split_comma
-creepwars.wesnoth_error_message = wesnoth_error_message
+creepwars.wesnoth_message = wesnoth_message
 
 -- >>

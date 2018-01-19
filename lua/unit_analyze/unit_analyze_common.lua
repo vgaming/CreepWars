@@ -43,8 +43,8 @@ for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer
 end
 
 
-	local result = {}
 local function unit_count_specials(unit)
+	local result = {}
 	for attack in helper.child_range(wesnoth.unit_types[unit].__cfg, "attack") do
 		for specials in helper.child_range(attack, "specials") do
 			for _, special in ipairs(specials) do

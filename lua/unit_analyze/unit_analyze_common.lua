@@ -17,20 +17,18 @@ if not pcall(function() return wesnoth.game_config.era end) then
 	-- this cannot happen on wesnoth-1.13,
 	-- but does happen on 1.12 for a multiplayer game if the host
 	-- has a specific add-on, but observers and/or players do not.
-	creepwars.wesnoth_error_message( "ERROR: Unknown Era:\n\n" .. wesnoth.game_config.mp_settings.mp_era
+	creepwars.wesnoth_error_message("ERROR: Unknown Era:\n\n" .. wesnoth.game_config.mp_settings.mp_era
 		.. "\n\nPlease ask game host to choose another Era (for example, Default),\n"
 		.. "or download "
-		.. wesnoth.game_config.mp_settings.mp_era .. " yourself.\n\nSorry for the inconvenience."
-	)
+		.. wesnoth.game_config.mp_settings.mp_era .. " yourself.\n\nSorry for the inconvenience.")
 elseif wesnoth.game_config.mp_settings.mp_era == "Creep_War_Era_v0.3.5" then
 	-- I'm writing this warning because it is a very popular reason for the bug above.
 	creepwars.wesnoth_error_message("WARNING: " .. wesnoth.game_config.mp_settings.mp_era .. " is used.\n\n"
 		.. "Please use Default Era with this map instead.\n\n"
 		.. "Unfortunately, the combination of those is known to "
 		.. "produce problems in Multiplayer game.\n\n"
-		.. "Sorry for the inconvenience. You can still have and use the legacy Creep War addon+Era, "
-		.. "just please don't use one with another."
-	)
+		.. "Sorry for the inconvenience. You can still play the legacy Creep War addon, "
+		.. "just please don't mix one with another.")
 end
 for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
 	local units = multiplayer_side.recruit or multiplayer_side.leader or ""

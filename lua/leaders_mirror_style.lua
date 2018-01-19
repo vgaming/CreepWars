@@ -75,25 +75,22 @@ end
 
 local function force_mirror()
 	local units = {}
-	local team
-	for _, side in ipairs(wesnoth.sides) do
-		local has_leaders = #wesnoth.get_units { canrecruit = true, side = side.side } > 0
-		local is_human = is_ai_array[side.side] ~= true
-		if has_leaders and is_human then
-			if team == nil then team = side.team_name end
-			if team == side.team_name then
-				local unit_type = wesnoth.get_units { canrecruit = true, side = side.side }[1].type
-				if creepwars.can_be_a_leader(unit_type) then
-					units[#units + 1] = unit_type
-				else
-					units[#units + 1] = random_leader()
-				end
+	while #units < #wesnoth.sides do
+		units[#units + 1] = random_leader()
+	end
+	for _, side_array in ipairs(creepwars.team_array) do
+		side_array = creepwars.array_filter(side_array, function(s)
+			return not is_ai_array[s] and #wesnoth.get_units { canrecruit = true, side = s } > 0
+		end)
+		for side_in_team_index, side_number in ipairs(side_array) do
+			print("iterating over side", side_number,
+				"chose_random", wesnoth.sides[side_number].__cfg.chose_random,
+				"was type", wesnoth.get_units { canrecruit = true, side = side_number }[1].type)
+			if wesnoth.sides[side_number].__cfg.chose_random == false then
+				units[side_in_team_index] = wesnoth.get_units { canrecruit = true, side = side_number }[1].type
 			end
 		end
 	end
-	if #units < 4 then units[#units + 1] = random_leader() end
-	if #units < 4 then units[#units + 1] = random_leader() end
-	if #units < 4 then units[#units + 1] = random_leader() end
 	set_all_leaders(function() return units end)
 end
 

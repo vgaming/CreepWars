@@ -10,7 +10,6 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local assert = assert
 local ipairs = ipairs
-local print = print
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 
 

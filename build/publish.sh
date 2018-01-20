@@ -8,6 +8,8 @@ test -z "$(git status --porcelain)" || (echo "You have local changes. Please pub
 readarray -td '' all_lua_files < <(find -name '*.lua' -print0)
 luacheck "${all_lua_files[@]}" --config build/.luacheckrc
 
+git tag "$1"
+
 build/build.sh
 
 printf 'version="%s"\ndescription="%s"' \

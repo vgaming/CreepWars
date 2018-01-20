@@ -237,7 +237,7 @@ local weapon_loop = function()
 					damage = 9,
 					number = 1,
 					T.specials {
-						wesnoth.macros.WEAPON_SPECIAL_BACKSTAB
+						creepwars.weapon_specials.WEAPON_SPECIAL_BACKSTAB
 					}
 				}
 			},
@@ -333,7 +333,7 @@ local weapon_loop = function()
 					damage = 6,
 					number = 3,
 					T.specials {
-						wesnoth.macros.WEAPON_SPECIAL_MARKSMAN
+						creepwars.weapon_specials.WEAPON_SPECIAL_MARKSMAN
 					}
 				}
 			},
@@ -349,7 +349,7 @@ local weapon_loop = function()
 					damage = 4,
 					number = 2,
 					T.specials {
-						wesnoth.macros.WEAPON_SPECIAL_SLOW
+						creepwars.weapon_specials.WEAPON_SPECIAL_SLOW
 					}
 				}
 			},
@@ -365,7 +365,7 @@ local weapon_loop = function()
 					damage = 4,
 					number = 2,
 					T.specials {
-						wesnoth.macros.WEAPON_SPECIAL_POISON
+						creepwars.weapon_specials.WEAPON_SPECIAL_POISON
 					}
 				}
 			},
@@ -381,7 +381,7 @@ local weapon_loop = function()
 					damage = 6,
 					number = 2,
 					T.specials {
-						wesnoth.macros.WEAPON_SPECIAL_MAGICAL
+						creepwars.weapon_specials.WEAPON_SPECIAL_MAGICAL
 					}
 				}
 			},
@@ -397,7 +397,7 @@ local weapon_loop = function()
 					damage = 7,
 					number = 2,
 					T.specials {
-						wesnoth.macros.WEAPON_SPECIAL_MAGICAL
+						creepwars.weapon_specials.WEAPON_SPECIAL_MAGICAL
 					}
 				}
 			},

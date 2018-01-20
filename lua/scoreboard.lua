@@ -51,7 +51,6 @@ local function unit_kill_event(attacker, defender)
 	local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
 	local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
 
-
 	-- score
 	local score = wesnoth.get_variable("creepwars_score_" .. team)
 	score = score + score_per_kill(creepkills + leaderkills)
@@ -76,11 +75,11 @@ local function unit_kill_event(attacker, defender)
 	local gold_kills = creepkills + 4 * leaderkills
 
 	local leader_multiplier = defender.canrecruit
-		and 4
+		and creepwars.gold_leader_multiplier
 		or 1
 
 	local guard_multiplier = defender.canrecruit and is_ai_array[defender.side]
-		and creepwars.guard_gold_multiplier
+		and creepwars.gold_guard_multiplier
 		or 1
 
 	local external_multiplier = creepwars.gold_multiplier_func

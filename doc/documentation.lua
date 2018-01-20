@@ -24,7 +24,7 @@ replace("#lvl3plus_barrier", creepwars.lvl3plus_barrier)
 replace("#gold_start_p0", gold_per_kill_start)
 replace("#gold_start_p1", gold_per_kill_start + 1)
 replace("#gold_start_p2", gold_per_kill_start + 2)
-replace("#guard_gold_multiplier", creepwars.guard_gold_multiplier)
+replace("#gold_guard_multiplier", creepwars.gold_guard_multiplier)
 replace("#gold_kills_to_increase", gold_kills_to_increase)
 
 local _, check = string.gsub(note, "[^']#[^w]", "")

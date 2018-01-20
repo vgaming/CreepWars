@@ -14,24 +14,36 @@ local recruitable_array = creepwars.recruitable_array
 
 
 local function leaders_mirror_show_warning()
-	creepwars.wesnoth_message("Game rules have <b>" .. mirror_style .. " leader</b> option.\n\n"
-		.. "Your leader (side " .. wesnoth.current.side .. ") was replaced to allow fair game play.")
+	wesnoth.wml_actions.message {
+		message = "Game rules have <b>" .. mirror_style .. " leader</b> option.\n\n"
+			.. "Your leader (side " .. wesnoth.current.side .. ") was replaced to allow fair game play.",
+		side_for = wesnoth.current.side,
+		speaker = "unit",
+	}
 end
 
 
-local function set_type(unit, type, is_downgrade)
-	if unit.type ~= type then
-		wesnoth.transform_unit(unit, type)
-		unit.attacks_left = unit.max_attacks
-		unit.hitpoints = unit.max_hitpoints
-		unit.moves = unit.max_moves
-		if is_downgrade == false and wesnoth.sides[unit.side].__cfg.chose_random == false then
-			wesnoth.wml_actions.event {
-				name = ("side %s turn 1"):format(unit.side),
-				T.lua { code = "creepwars.leaders_mirror_show_warning()" }
-			}
-		end
+local function set_type(old_unit, type, is_downgrade)
+	print("changing side", old_unit.side, old_unit.type, "to", type)
+	if is_downgrade == false
+		and wesnoth.sides[old_unit.side].__cfg.chose_random == false
+		and old_unit.type ~= type
+	then
+		print("will show a transformation warning for side" .. old_unit.side)
+		wesnoth.wml_actions.event {
+			name = "side " .. old_unit.side .. " turn 1",
+			T.lua { code = "creepwars.leaders_mirror_show_warning()" }
+		}
 	end
+	local new_unit = wesnoth.create_unit {
+		x = old_unit.x,
+		y = old_unit.y,
+		canrecruit = true,
+		side = old_unit.side,
+		type = type
+	}
+	wesnoth.wml_actions.kill { id = old_unit.id, fire_event = false, animate = false }
+	wesnoth.put_unit(new_unit)
 end
 
 

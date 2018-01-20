@@ -11,7 +11,14 @@ for _, side in ipairs(wesnoth.sides) do
 	local x, y = start_loc[1], start_loc[2]
 	local has_other_leaders = #wesnoth.get_units { side = side.side, canrecruit = true } > 1
 	if is_ai_array[side.side] and has_other_leaders then
-		wesnoth.wml_actions.kill { x = x, y = y, canrecruit = true, side = side.side }
+		wesnoth.wml_actions.kill {
+			x = x,
+			y = y,
+			canrecruit = true,
+			side = side.side,
+			fire_event = false,
+			animate = false,
+		}
 	end
 end
 

@@ -1,5 +1,11 @@
 -- << first_turn_advantage
 
+-- A number of ugly hacks is used here to do a very simple operation:
+-- give a side +N movement on turn 1.
+--
+-- When wesnoth-1.12 stops being supported, consider cleaning this file up.
+-- (You can then just increase `moves` from Lua on unit-s turn, and that's all.)
+
 local wesnoth = wesnoth
 local creepwars = creepwars
 local assert = assert
@@ -40,7 +46,7 @@ end
 
 
 local function first_turn_advantage_fix_moves()
-	print("setting moves for side", wesnoth.current.side)
+	-- print("setting moves for side", wesnoth.current.side)
 	assert(wesnoth.current.turn == 1)
 	for _, unit in ipairs(wesnoth.get_units { side = wesnoth.current.side }) do
 		unit.moves = unit.max_moves

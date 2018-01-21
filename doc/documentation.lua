@@ -40,7 +40,8 @@ if wesnoth then
 		text = "<span color='#FFFFFF'>Mirror style: " .. creepwars.mirror_style .. "</span>"
 	}
 
-	local recent = "Recent changes: gold multiplier for leaderkill increased 4->5, mirror mode now retains manually chosen leaders."
+	local recent = "Recent changes: gold multiplier for leaderkill increased 4->5, "
+		.. "mirror mode now retains manually chosen leaders."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. recent)
 else
 	return note

@@ -24,12 +24,12 @@ end
 
 
 local function set_type(old_unit, type, is_downgrade)
-	print("changing side", old_unit.side, old_unit.type, "to", type)
+	--print("changing side", old_unit.side, old_unit.type, "to", type)
 	if is_downgrade == false
 		and wesnoth.sides[old_unit.side].__cfg.chose_random == false
 		and old_unit.type ~= type
 	then
-		print("will show a transformation warning for side" .. old_unit.side)
+		-- print("will show a transformation warning for side" .. old_unit.side)
 		wesnoth.wml_actions.event {
 			name = "side " .. old_unit.side .. " turn 1",
 			T.lua { code = "creepwars.leaders_mirror_show_warning()" }
@@ -94,9 +94,9 @@ local function force_mirror()
 			return not is_ai_array[s] and #wesnoth.get_units { canrecruit = true, side = s } > 0
 		end)
 		for side_in_team_index, side_number in ipairs(side_array) do
-			print("iterating over side", side_number,
-				"chose_random", wesnoth.sides[side_number].__cfg.chose_random,
-				"was type", wesnoth.get_units { canrecruit = true, side = side_number }[1].type)
+			--print("iterating over side", side_number,
+			--	"chose_random", wesnoth.sides[side_number].__cfg.chose_random,
+			--	"was type", wesnoth.get_units { canrecruit = true, side = side_number }[1].type)
 			if wesnoth.sides[side_number].__cfg.chose_random == false then
 				units[side_in_team_index] = wesnoth.get_units { canrecruit = true, side = side_number }[1].type
 			end

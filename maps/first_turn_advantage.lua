@@ -24,7 +24,7 @@ local function first_turn_advantage_register(side, value)
 	}
 	wesnoth.wml_actions.event {
 		name = "side " .. side .. " turn 1 end",
-		T.lua { code = "creepwars.first_turn_advantage_remove_object()" }
+		T.lua { code = "creepwars.first_turn_advantage_remove_object(" .. value .. ")" }
 	}
 end
 
@@ -53,11 +53,11 @@ local function first_turn_advantage_fix_moves()
 end
 
 
-local function first_turn_advantage_remove_object()
+local function first_turn_advantage_remove_object(value)
 	assert(wesnoth.current.turn == 1)
 	for _, unit in ipairs(wesnoth.get_units { side = wesnoth.current.side }) do
 		wesnoth.add_modification(unit, "object", {
-			T.effect { apply_to = "movement", increase = -2 },
+			T.effect { apply_to = "movement", increase = -value },
 		})
 	end
 end

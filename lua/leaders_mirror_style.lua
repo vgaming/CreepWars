@@ -38,6 +38,11 @@ local function set_type(old_unit, type, is_downgrade)
 	local new_unit = wesnoth.create_unit {
 		x = old_unit.x,
 		y = old_unit.y,
+		name = old_unit.name,
+		gender = old_unit.gender,
+		unrenamable = old_unit.unrenamable,
+		extra_recruit = old_unit.extra_recruit,
+		upkeep = old_unit.upkeep,
 		canrecruit = true,
 		side = old_unit.side,
 		type = type

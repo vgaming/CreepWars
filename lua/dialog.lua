@@ -30,6 +30,7 @@ local function show_dialog_unsynchronized(settings)
 	label = label and (spacer .. pango_escape(label) .. spacer) or ""
 	local options = settings.options
 	local show_images = options[1].image and true or false
+	local has_minimum = settings.has_minimum ~= false and true or false
 
 	local description_row = T.row {
 		T.column { T.label { use_markup = true, label = label } },
@@ -52,7 +53,7 @@ local function show_dialog_unsynchronized(settings)
 
 	local list_definition = T.list_definition { T.row { T.column { horizontal_grow = true, toggle_panel } } }
 
-	local listbox = T.listbox { id = "the_list", list_definition } -- has_minimum = false
+	local listbox = T.listbox { id = "the_list", list_definition, has_minimum = has_minimum }
 
 	local ok_cancel_buttons = T.grid {
 		T.row {
@@ -73,7 +74,6 @@ local function show_dialog_unsynchronized(settings)
 	}
 
 	local function preshow()
-
 		for i, v in ipairs(options) do
 			wesnoth.set_dialog_value(spacer .. pango_escape(v.text) .. spacer, "the_list", i, "the_label")
 			if show_images then
@@ -82,7 +82,6 @@ local function show_dialog_unsynchronized(settings)
 				wesnoth.set_dialog_value(img or "misc/blank-hex.png", "the_list", i, "the_icon")
 			end
 		end
-		wesnoth.set_dialog_value(1, "the_list")
 
 		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
 			wesnoth.set_dialog_focus("the_list")

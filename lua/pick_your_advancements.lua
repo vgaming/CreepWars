@@ -3,20 +3,27 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local string = string
+local tostring = tostring
 local array_map = creepwars.array_map
 local show_dialog = creepwars.show_dialog
 local split_comma = creepwars.split_comma
 
+local function advance_array(unit_type)
+	local unfiltered = split_comma(wesnoth.unit_types[unit_type].__cfg.advances_to)
+	return array_map(unfiltered, function(adv)
+		return wesnoth.unit_types[adv] and adv
+	end)
+end
+
 local unit_can_advance = function(unit)
-	local advances = wesnoth.unit_types[unit.type].__cfg.advances_to or ""
-	return string.match(advances, ",")
+	return #advance_array(unit.type) > 1
 end
 
 local function pick_advancement_menu()
 	local x1 = wesnoth.get_variable("x1") or 0
 	local y1 = wesnoth.get_variable("y1") or 0
 	local unit = wesnoth.get_unit(x1, y1)
-	local advances_to = split_comma(wesnoth.unit_types[unit.type].__cfg.advances_to)
+	local advances_to = advance_array(unit.type)
 	local options = array_map(advances_to, function(adv)
 		local ut = wesnoth.unit_types[adv]
 		return { text = tostring(ut.name), image = ut.__cfg.image }

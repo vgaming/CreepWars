@@ -42,7 +42,7 @@ local function set_type(old_unit, type, is_downgrade)
 		gender = old_unit.gender,
 		unrenamable = old_unit.unrenamable,
 		upkeep = old_unit.upkeep,
-		canrecruit = true,
+		canrecruit = old_unit.canrecruit,
 		side = old_unit.side,
 		type = type
 	}

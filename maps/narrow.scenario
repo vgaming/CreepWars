@@ -1,26 +1,4 @@
-map_data="Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gs^Fp, Hh, Gg, Gs^Fp, Gg, Hh, Hh, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gs^Fp, Gs^Fp, Gg, Hh, Gg, Gs^Fp, Hh, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Gg, Ww, Gg, Ch, Gg, Gg, Gg, Ww, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ww, Gg, Gg, Gg, Ch, Gg, Ww, Gg, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Hh, Gg, Ww, Dd^Do, Wwf, Wwf, Wwf, Ww, Wwf, Hh, Ww, Wwf, Qxua^Xo, Qxua^Xo, Qxua^Xo, Wwf, Ww, Gs^Fp, Wwf, Ww, Wwf, Wwf, Wwf, Dd^Do, Ww, Gg, Gs^Fp, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Hh, Gg, Gg, Wwf, Gg, Gg, Xu, Xu, Xu, Gg, Gg, Gg, Wwf, Gs^Fp, Hh, Hh, Ww, Gg, Gg, Gg, Xu, Xu, Xu, Gg, Gg, Wwf, Gg, Gg, Gs^Fp, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ch, Gs^Fp, Gg, Ww, Gg, Gg, Wwf, Cud, Xu, Gs^Fp, Hh, Gs^Fp, Ss, Wwf, Wwf, Wwf, Gs, Hh, Gs^Fp, Hh, Xu, Cud, Wwf, Gg, Gg, Ww, Gg, Hh, Ch, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Ch, 4 Cud, Ch, Wwf, Wwf, Wwf, Wwf, Gg, 1 Cud, Xu, Uu, Uu^Uf, Ss, Mm, Ds, Wwr, Gs^Fp, Mm, Uh, Uu^Uf, Uu, Xu, 5 Cud, Gg, Wwf, Wwf, Wwf, Wwf, Ch, 8 Cud, Ch, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Ch, Ch, Ch, Gg, Wwf, Gg, Wwf, Wwf, 3 Cud, Xu, Uu, Gs^Fp, Uh, Gs, Gs^Fp, Wwf, Ds, Ss, Ss, Hh, Uu, Xu, 2 Cud, Wwf, Wwf, Gg, Wwf, Gg, Ch, Ch, Ch, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gs^Fp, Hh, Gg, Ww, Gg, Gg, Xu, 6 Cud, Xu, Hh, Gg, Hh, Ww, Wwf, Hh, Wwf, Wwf, Gs^Fp, Gg, Gs^Fp, Xu, 7 Cud, Xu, Gg, Gg, Ww, Gg, Gs^Fp, Hh, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Gg, Wwf, Dd^Do, Gg, Wwf, Xu, Ww, Gg, Gs^Fp, Gg, Wwf, Hh, Qxua^Xo, Gs^Fp, Wwf, Gg, Hh, Gg, Ww, Xu, Wwf, Gg, Dd^Do, Wwf, Gg, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gs^Fp, Gg, Ww, Ww, Wwf, Ch, Wwf, Gg, Wwf, Ww, Ww, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Ww, Ww, Wwf, Gg, Wwf, Ch, Wwf, Ww, Ww, Gg, Hh, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Hh, Gg, Gg, Gg, Gg, Gg, Gs^Fp, Gg, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gg, Hh, Gg, Gg, Gg, Gg, Gg, Gs^Fp, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Gs^Fp, Qxua^Xo, Hh, Qxua^Xo, Gs^Fp, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Hh, Qxua^Xo, Gs^Fp, Qxua^Xo, Hh, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo, Qxua^Xo
-"
+map_data="{./narrow.map}"
 
 #define CREEPWARS_SCENARIO_ID
 Creep_Wars_narrow_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
@@ -36,8 +14,27 @@ Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 	first_time_only=no
 	[lua]
 		code = <<
+			creepwars = {}
+			creepwars.shop_coordinates = {
+				{ { 8, 9 }, { 8, 11 }, },
+				{ { 28, 9 }, { 28, 11 }, },
+			}
 			creepwars.scoreboard_pos = { { x = 17, y = 6 }, { x = 19, y = 6 } }
 			creepwars.scoreboard_help_label = { x = 18, y = 4 }
+			creepwars.mirror_style_label_pos = { x = 18, y = 15 }
 		 >>
 	[/lua]
 [/event]
+
+
+[label]
+	color="255,255,255"
+	immutable=yes
+	team_name=""
+	text="Game Rules:
+press Ctrl + J"
+	visible_in_fog=yes
+	visible_in_shroud=yes
+	x=18
+	y=16
+[/label]

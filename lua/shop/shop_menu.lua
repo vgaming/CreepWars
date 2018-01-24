@@ -4,8 +4,10 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local ipairs = ipairs
-local string = string
 local math = math
+local string = string
+local table = table
+local tostring = tostring
 
 
 local event_side
@@ -196,13 +198,19 @@ end
 
 local function weapon_item(settings)
 	local effect = settings.effect
+	effect[#effect + 1] = T.specials(settings.specials)
+
+	local specials_names = creepwars.array_map(settings.specials or {},
+		function(s) return tostring(s[2].name) end)
+	local specials_string = table.concat(specials_names, ",")
 	local text = string.format("%s-%s %s\n%s %s %s\n",
 		effect.damage,
 		effect.number,
 		effect.name,
 		effect.range,
 		effect.type,
-		settings.specials or "")
+		specials_string)
+
 	effect.damage = effect.damage + event_unit.variables.creepwars_damage
 	effect.number = effect.number + event_unit.variables.creepwars_strikes
 	if effect.range == "melee" then
@@ -227,7 +235,7 @@ local weapon_loop = function()
 		local options = {
 			weapon_item {
 				gold = 34,
-				specials = "backstab",
+				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_BACKSTAB },
 				effect = {
 					apply_to = "new_attack",
 					name = "dagger",
@@ -236,9 +244,6 @@ local weapon_loop = function()
 					range = "melee",
 					damage = 9,
 					number = 1,
-					T.specials {
-						creepwars.weapon_specials.WEAPON_SPECIAL_BACKSTAB
-					}
 				}
 			},
 			weapon_item {
@@ -323,7 +328,7 @@ local weapon_loop = function()
 --			},
 			weapon_item {
 				gold = 36,
-				specials = "marksman",
+				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_MARKSMAN },
 				effect = {
 					apply_to = "new_attack",
 					name = "longbow",
@@ -332,14 +337,11 @@ local weapon_loop = function()
 					range = "ranged",
 					damage = 6,
 					number = 3,
-					T.specials {
-						creepwars.weapon_specials.WEAPON_SPECIAL_MARKSMAN
-					}
 				}
 			},
 			weapon_item {
 				gold = 72,
-				specials = "slows",
+				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_SLOW },
 				effect = {
 					apply_to = "new_attack",
 					name = "net",
@@ -348,14 +350,11 @@ local weapon_loop = function()
 					range = "ranged",
 					damage = 4,
 					number = 2,
-					T.specials {
-						creepwars.weapon_specials.WEAPON_SPECIAL_SLOW
-					}
 				}
 			},
 			weapon_item {
 				gold = 56,
-				specials = "poison",
+				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_POISON },
 				effect = {
 					apply_to = "new_attack",
 					name = "poisoned knife",
@@ -364,14 +363,11 @@ local weapon_loop = function()
 					range = "ranged",
 					damage = 4,
 					number = 2,
-					T.specials {
-						creepwars.weapon_specials.WEAPON_SPECIAL_POISON
-					}
 				}
 			},
 			weapon_item {
 				gold = 40,
-				specials = "magical",
+				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_MAGICAL },
 				effect = {
 					apply_to = "new_attack",
 					name = "fireball",
@@ -380,14 +376,11 @@ local weapon_loop = function()
 					range = "ranged",
 					damage = 6,
 					number = 2,
-					T.specials {
-						creepwars.weapon_specials.WEAPON_SPECIAL_MAGICAL
-					}
 				}
 			},
 			weapon_item {
 				gold = 40,
-				specials = "magical",
+				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_MAGICAL },
 				effect = {
 					apply_to = "new_attack",
 					name = "chill wave",
@@ -396,9 +389,6 @@ local weapon_loop = function()
 					range = "ranged",
 					damage = 7,
 					number = 2,
-					T.specials {
-						creepwars.weapon_specials.WEAPON_SPECIAL_MAGICAL
-					}
 				}
 			},
 		}

@@ -57,8 +57,8 @@ local function random_leader() return recruitable_array[helper.rand(leader_rand_
 
 local function downgrade_leaders()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		local downgrade_array = creepwars.unit_downgrades(unit.type)
 		if is_ai_array[unit.side] ~= true and wesnoth.unit_types[unit.type].level == 2 then
+			local downgrade_array = creepwars.unit_downgrades(unit.type)
 			if downgrade_array
 				and #downgrade_array > 0
 				and creepwars.can_be_a_leader(downgrade_array[1])

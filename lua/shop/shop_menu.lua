@@ -15,7 +15,7 @@ local event_unit
 
 
 local err = function(message)
-	creepwars.wesnoth_message(message, "misc/red-x.png")
+	creepwars.wesnoth_message { message = message, image = "misc/red-x.png" }
 end
 
 local function show_shop_dialog(conf)

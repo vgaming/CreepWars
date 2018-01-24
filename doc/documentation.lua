@@ -10,7 +10,7 @@ local gold_per_kill_start = creepwars.gold_per_kill_start
 
 local note
 if wesnoth then
-	note = wesnoth.get_variable("creepwars_about")
+	note = wesnoth.get_variable("creepwars_game_rules")
 else
 	note = ... -- lua arguments
 end
@@ -32,7 +32,7 @@ assert(check == 0, "Unhandled variable")
 
 if wesnoth then
 	replace("''", '"')
-	wesnoth.set_variable("creepwars_about", note)
+	wesnoth.set_variable("creepwars_game_rules", note)
 
 	wesnoth.wml_actions.label {
 		x = creepwars.mirror_style_label_pos.x,

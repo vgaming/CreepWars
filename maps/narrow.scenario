@@ -32,7 +32,7 @@ Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 	immutable=yes
 	team_name=""
 	text="Game Rules:
-press Ctrl + J"
+     Ctrl + i"
 	visible_in_fog=yes
 	visible_in_shroud=yes
 	x=18

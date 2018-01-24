@@ -20,11 +20,13 @@ if not pcall(function() return wesnoth.get_era(era_id).id end) then
 	-- this cannot happen on wesnoth-1.13,
 	-- but does happen on 1.12 for a multiplayer game if the host
 	-- has a specific add-on, but observers and/or players do not.
-	creepwars.wesnoth_message("ERROR: Unknown Era:\n\n" .. wesnoth.game_config.mp_settings.mp_era
-		.. "\n\nPlease ask game host to choose another Era (for example, Default),\n"
-		.. "or download "
-		.. wesnoth.game_config.mp_settings.mp_era .. " yourself.\n\nSorry for the inconvenience.",
-		"misc/red-x.png")
+	creepwars.wesnoth_message {
+		message = "ERROR: Unknown Era:\n\n" .. wesnoth.game_config.mp_settings.mp_era
+			.. "\n\nPlease ask game host to choose another Era (for example, Default)."
+			--		.. ",\nor download " .. wesnoth.game_config.mp_settings.mp_era .. " yourself."
+			.. "\n\nSorry for the inconvenience.",
+		image = "misc/red-x.png"
+	}
 end
 for multiplayer_side in helper.child_range(wesnoth.get_era(era_id), "multiplayer_side") do
 	local units = multiplayer_side.recruit or multiplayer_side.leader or ""

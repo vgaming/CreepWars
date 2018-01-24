@@ -119,6 +119,7 @@ end
 
 
 creepwars.show_dialog = show_dialog
+creepwars.show_dialog_unsynchronized = show_dialog_unsynchronized
 
 
 -- >>

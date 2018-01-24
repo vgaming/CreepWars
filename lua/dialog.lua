@@ -25,13 +25,14 @@ end
 --   item = {text = "", image = ""}
 --   show_dialog { label = "Choose from this list", options = {item, item, item} }
 local function show_dialog_unsynchronized(settings)
-	local label = settings.label
 	local spacer = settings.spacer or "\n"
+	local label = settings.label
+	label = label and (spacer .. pango_escape(label) .. spacer) or ""
 	local options = settings.options
 	local show_images = options[1].image and true or false
 
 	local description_row = T.row {
-		T.column { T.label { use_markup = true, label = spacer .. pango_escape(label) .. spacer } },
+		T.column { T.label { use_markup = true, label = label } },
 	}
 
 	local list_sub_row

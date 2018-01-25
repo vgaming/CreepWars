@@ -1,4 +1,4 @@
--- << config_user
+-- << parse_user_options
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -25,9 +25,17 @@ else
 end
 
 
-creepwars.reveal_leaders = reveal_leaders
-creepwars.mirror_style = mirror_style
+local guard_health_user_config = wesnoth.get_variable("creepwars_guard_health" .. scenario_suffix) or 4
+
+
+local gold_multiplier_user_config = wesnoth.get_variable("creepwars_gold_multiplier" .. scenario_suffix) or 1
+
+
 creepwars.forbid_berserkers = forbid_berserkers
+creepwars.gold_multiplier_user_config = gold_multiplier_user_config
+creepwars.guard_health_user_config = guard_health_user_config
+creepwars.mirror_style = mirror_style
+creepwars.reveal_leaders = reveal_leaders
 
 
 -- >>

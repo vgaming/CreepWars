@@ -3,6 +3,7 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local generate_creep = creepwars.generate_creep
 local is_ai_array = creepwars.is_ai_array
 local side_to_team = creepwars.side_to_team
@@ -13,6 +14,7 @@ local side_number = wesnoth.get_variable("side_number")
 if is_ai_array[side_number] and not wesnoth.sides[side_number].lost then
 
 	for _, unit in ipairs(wesnoth.get_units { side = side_number, canrecruit = true }) do
+		wesnoth.add_modification(unit, "object", { T.effect { apply_to = "movement", set = 0 } })
 		unit.moves = 0
 	end
 

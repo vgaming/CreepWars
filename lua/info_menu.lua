@@ -2,11 +2,6 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-local ipairs = ipairs
-local math = math
-local string = string
-local table = table
 local tostring = tostring
 
 local function show_game_config()

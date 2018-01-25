@@ -2,7 +2,6 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local string = string
 local tostring = tostring
 local array_map = creepwars.array_map
 local show_dialog = creepwars.show_dialog

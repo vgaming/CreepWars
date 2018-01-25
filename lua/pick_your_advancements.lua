@@ -9,8 +9,8 @@ local show_dialog = creepwars.show_dialog
 local split_comma = creepwars.split_comma
 
 local function advance_array(unit_type)
-	local unfiltered = split_comma(wesnoth.unit_types[unit_type].__cfg.advances_to)
-	return array_map(unfiltered, function(adv)
+	local raw = split_comma(wesnoth.unit_types[unit_type].__cfg.advances_to)
+	return array_map(raw, function(adv)
 		return wesnoth.unit_types[adv] and adv
 	end)
 end

@@ -59,7 +59,7 @@ local function unit_kill_event(attacker, defender)
 	-- guard hp
 	local guard_give_hp = creepwars.guard_hp_for_kill(defender.canrecruit)
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if side_to_team[unit.side] == team and unit.max_moves == 0 then
+		if side_to_team[unit.side] == team and is_ai_array[unit.side] then
 			wesnoth.add_modification(unit, "object", {
 				T.effect {
 					apply_to = "hitpoints",

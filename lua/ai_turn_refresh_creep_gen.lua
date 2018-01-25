@@ -1,7 +1,8 @@
--- << do_creep_gen_spawn
+-- << ai_turn_refresh_creep_gen
 
 local wesnoth = wesnoth
 local creepwars = creepwars
+local ipairs = ipairs
 local generate_creep = creepwars.generate_creep
 local is_ai_array = creepwars.is_ai_array
 local side_to_team = creepwars.side_to_team
@@ -10,6 +11,10 @@ local array_filter = creepwars.array_filter
 local side_number = wesnoth.get_variable("side_number")
 
 if is_ai_array[side_number] and not wesnoth.sides[side_number].lost then
+
+	for _, unit in ipairs(wesnoth.get_units { side = side_number, canrecruit = true }) do
+		unit.moves = 0
+	end
 
 	local team = side_to_team[side_number]
 	local creep_score = wesnoth.get_variable("creepwars_score_" .. team)

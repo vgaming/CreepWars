@@ -13,7 +13,7 @@ local function pango_escape(str)
 	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13") then
 		return str
 	else
-		str = string.gsub(str, "<[^>]+>", "") -- html tags
+		str = string.gsub(tostring(str), "<[^>]+>", "") -- html tags
 		str = string.gsub(str, "&lt;", "<")
 		str = string.gsub(str, "&gt;", ">")
 		return str

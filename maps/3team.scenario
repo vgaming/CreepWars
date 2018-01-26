@@ -74,6 +74,6 @@ Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 	tooltip=""
 	visible_in_fog=yes
 	visible_in_shroud=yes
-	x=29
-	y=20
+	x=17
+	y=6
 [/label]

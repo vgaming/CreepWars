@@ -1,4 +1,4 @@
--- << scoreboard
+-- << score_gold_calculator
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -15,9 +15,7 @@ if creepwars.scoreboard_help_label then
 	wesnoth.wml_actions.label {
 		x = creepwars.scoreboard_help_label.x,
 		y = creepwars.scoreboard_help_label.y,
-		text = "<span color='#FFFFFF'>Scoreboard: </span>"
-			.. "<span color='#FF8080'>score</span> <span color='#FFE680'>gold</span>\n"
-			.. " <span color='#FFFFFF'>(total_kills leader_kills)</span>"
+		text = "<span color='#FFFFFF'>Scoreboard (Ctrl i):</span>"
 	}
 end
 
@@ -57,7 +55,7 @@ local function unit_kill_event(attacker, defender)
 	wesnoth.set_variable("creepwars_score_" .. team, score)
 
 	-- guard hp
-	local guard_give_hp = creepwars.guard_hp_for_kill(defender.canrecruit)
+	local guard_give_hp = (creepwars.guard_health_level_add + (defender.__cfg.level or 0)) / 4
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if side_to_team[unit.side] == team and is_ai_array[unit.side] then
 			wesnoth.add_modification(unit, "object", {

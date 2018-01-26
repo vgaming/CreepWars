@@ -9,8 +9,6 @@ creepwars.lvl3plus_barrier = lvl3plus_barrier
 
 creepwars.creep_count = 8
 
-creepwars.guard_hp_for_kill = function(is_leader) return is_leader and 3 or 1 end
-
 
 local creepwars_expected_total_kills = 80
 

@@ -8,7 +8,6 @@ local helper = wesnoth.require("lua/helper.lua")
 
 creepwars.scoreboard_pos = { { x = 17, y = 1 }, { x = 19, y = 1 } }
 creepwars.mirror_style_label_pos = { x = 34, y = 2 }
-creepwars.scoreboard_help_label = { x = 34, y = 3 }
 creepwars.shop_coordinates = {
 	{ { 8, 6 }, { 8, 8 }, },
 	{ { 28, 6 }, { 28, 8 }, },

@@ -20,8 +20,7 @@ Creep Wars wide {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 				{ { 28, 9 }, { 28, 11 }, },
 			}
 			creepwars.scoreboard_pos = { { x = 17, y = 10 }, { x = 19, y = 10 } }
-			creepwars.scoreboard_help_label = { x = 18, y = 1 }
-			creepwars.mirror_style_label_pos = { x = 28, y = 1 }
+			creepwars.mirror_style_label_pos = { x = 26, y = 2 }
 		 >>
 	[/lua]
 [/event]
@@ -35,6 +34,6 @@ Creep Wars wide {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
      Ctrl + i"
 	visible_in_fog=yes
 	visible_in_shroud=yes
-	x=28
-	y=2
+	x=26
+	y=1
 [/label]

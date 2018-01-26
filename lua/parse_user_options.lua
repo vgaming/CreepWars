@@ -25,7 +25,8 @@ else
 end
 
 
-local guard_health_user_config = wesnoth.get_variable("creepwars_guard_health" .. scenario_suffix) or 4
+local guard_health_percentage = wesnoth.get_variable("creepwars_guard_health" .. scenario_suffix) or 100
+local guard_health_level_add = guard_health_percentage / 25
 
 
 local gold_multiplier_user_config = wesnoth.get_variable("creepwars_gold_multiplier" .. scenario_suffix) or 1
@@ -33,7 +34,8 @@ local gold_multiplier_user_config = wesnoth.get_variable("creepwars_gold_multipl
 
 creepwars.forbid_berserkers = forbid_berserkers
 creepwars.gold_multiplier_user_config = gold_multiplier_user_config
-creepwars.guard_health_user_config = guard_health_user_config
+creepwars.guard_health_percentage = guard_health_percentage
+creepwars.guard_health_level_add = guard_health_level_add
 creepwars.mirror_style = mirror_style
 creepwars.reveal_leaders = reveal_leaders
 

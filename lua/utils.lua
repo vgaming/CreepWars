@@ -121,7 +121,7 @@ local function wesnoth_message(msg)
 				T.helptip { id = "tooltip_large" },
 				T.grid {
 					[1] = T.row { T.column { T.image { label = msg.image } } },
-					[ugly_index] = T.row { T.column { T.label { label = msg.message .. "\n" } } },
+					[ugly_index] = T.row { T.column { T.label { label = msg.message .. "\n", use_markup = true } } },
 					[ugly_index + 1] = T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
 				}
 			}

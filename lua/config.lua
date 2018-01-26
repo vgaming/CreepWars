@@ -14,7 +14,6 @@ local creepwars_expected_total_kills = 80
 
 local gold_per_kill_start = 4
 local gold_kills_to_increase = 20
-local function gold_per_kill(kills) return gold_per_kill_start + math.floor(kills / gold_kills_to_increase) end
 creepwars.gold_guard_multiplier = 4
 creepwars.gold_leader_multiplier = 5
 
@@ -34,7 +33,6 @@ end
 
 
 creepwars.gold_kills_to_increase = gold_kills_to_increase
-creepwars.gold_per_kill = gold_per_kill
 creepwars.gold_per_kill_start = gold_per_kill_start
 creepwars.score_per_kill = score_per_kill
 

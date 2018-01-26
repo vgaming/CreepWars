@@ -2,6 +2,7 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
+local math = math
 
 
 -- ugly hack to support wesnoth-1.12
@@ -29,13 +30,18 @@ local guard_health_percentage = wesnoth.get_variable("creepwars_guard_health" ..
 local guard_health_level_add = guard_health_percentage / 25
 
 
-local gold_multiplier_user_config = wesnoth.get_variable("creepwars_gold_multiplier" .. scenario_suffix) or 1
+local gold_multiplier_percent = wesnoth.get_variable("creepwars_gold_multiplier" .. scenario_suffix) or 100
+local function gold_per_kill(kills)
+	local default = creepwars.gold_per_kill_start + math.floor(kills / creepwars.gold_kills_to_increase)
+	return math.floor((default * gold_multiplier_percent + 50) / 100)
+end
 
 
 creepwars.forbid_berserkers = forbid_berserkers
-creepwars.gold_multiplier_user_config = gold_multiplier_user_config
-creepwars.guard_health_percentage = guard_health_percentage
+creepwars.gold_multiplier_percent = gold_multiplier_percent
+creepwars.gold_per_kill = gold_per_kill
 creepwars.guard_health_level_add = guard_health_level_add
+creepwars.guard_health_percentage = guard_health_percentage
 creepwars.mirror_style = mirror_style
 creepwars.reveal_leaders = reveal_leaders
 

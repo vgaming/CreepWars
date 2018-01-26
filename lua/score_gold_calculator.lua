@@ -5,7 +5,6 @@ local creepwars = creepwars
 local ipairs = ipairs
 local string = string
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-local gold_per_kill = creepwars.gold_per_kill
 local is_ai_array = creepwars.is_ai_array
 local score_per_kill = creepwars.score_per_kill
 local side_to_team = creepwars.side_to_team
@@ -86,7 +85,7 @@ local function unit_kill_event(attacker, defender)
 
 	local gold = gold_orig
 	for i = 0, leader_multiplier * guard_multiplier * external_multiplier - 1 do
-		gold = gold + gold_per_kill(gold_kills + i)
+		gold = gold + creepwars.gold_per_kill(gold_kills + i)
 	end
 	wesnoth.set_variable("creepwars_gold_" .. team, gold)
 	for _, side in ipairs(wesnoth.sides) do

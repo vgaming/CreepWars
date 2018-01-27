@@ -1,6 +1,5 @@
 -- << config
 
-local math = math
 local creepwars = creepwars
 
 creepwars.lvl0_barrier = 12 -- creep score lower than this value will generate lvl0 creeps

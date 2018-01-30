@@ -89,25 +89,12 @@ local function moveto_event()
 	local y1 = wesnoth.get_variable("y1") or 0
 	local unit = wesnoth.get_unit(x1, y1)
 	if unit and is_ai_array[wesnoth.current.side] == false then
-
 		local x2 = wesnoth.get_variable("x2") or 0
 		local y2 = wesnoth.get_variable("y2") or 0
 		if is_at_shop(unit.side, x1, y1) then
 			full_heal(unit)
-			local text = "<span color='" .. get_color() .. "'>"
-				.. unit.name .. " "
-				.. translate("is at the shop") .. "</span>"
-			wesnoth.wml_actions.print { size = 24, duration = 200, text = text }
 			creepwars.show_shop_menu()
 		end
-
-		if is_at_shop(unit.side, x2, y2) then
-			local text = "<span color='" .. get_color() .. "'>"
-				.. unit.name .. " "
-				.. translate("has left the shop") .. "</span>"
-			wesnoth.wml_actions.print { size = 24, duration = 100, text = text }
-		end
-
 	end
 end
 

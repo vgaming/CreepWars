@@ -1,4 +1,4 @@
--- << 3players_settings
+-- << 3player_settings
 
 creepwars = {}
 local creepwars = creepwars

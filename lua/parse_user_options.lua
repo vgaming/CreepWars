@@ -3,6 +3,7 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local math = math
+local string = string
 
 
 -- ugly hack to support wesnoth-1.12
@@ -12,10 +13,9 @@ local scenario_suffix = wesnoth.compare_versions(wesnoth.game_config.version, ">
 	or wesnoth.game_config.mp_settings.mp_scenario
 
 
-local mirror_style = wesnoth.get_variable("creepwars_mirror_style" .. scenario_suffix) or "manual"
-
-
-local forbid_berserkers = wesnoth.get_variable("creepwars_forbid_berserkers" .. scenario_suffix) or false
+local leader_type_mirror = wesnoth.get_variable("creepwars_leader_type" .. scenario_suffix) or "manual_normal"
+local mirror_style, overpowered_string = string.match(leader_type_mirror, "^(.*)_(.-)$")
+local allow_overpowered = overpowered_string == "overpowered"
 
 
 local reveal_leaders
@@ -37,7 +37,7 @@ local function gold_per_kill(kills)
 end
 
 
-creepwars.forbid_berserkers = forbid_berserkers
+creepwars.allow_overpowered = allow_overpowered
 creepwars.gold_multiplier_percent = gold_multiplier_percent
 creepwars.gold_per_kill = gold_per_kill
 creepwars.guard_health_level_add = guard_health_level_add

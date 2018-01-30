@@ -9,7 +9,6 @@ local array_filter = creepwars.array_filter
 local split_comma = creepwars.split_comma
 
 
-
 local era_array = {}
 local era_set = {}
 local era_id = wesnoth.game_config.mp_settings.mp_era == "Creep_War_Era_v0.3.5"
@@ -54,7 +53,10 @@ end
 
 
 local function can_be_a_leader(unit_type)
-	if creepwars.forbid_berserkers then
+	if creepwars.allow_overpowered then
+		return unit_type ~= "Fog Clearer"
+			and wesnoth.unit_types[unit_type].level <= 1
+	else
 		local advance_array = { unit_type }
 		creepwars.add_advances(advance_array, nil, nil)
 		for _, adv in ipairs(advance_array) do
@@ -62,11 +64,10 @@ local function can_be_a_leader(unit_type)
 				return false
 			end
 		end
+		return unit_count_specials(unit_type)["plague"] == nil
+			and unit_type ~= "Fog Clearer"
+			and wesnoth.unit_types[unit_type].level <= 1
 	end
-	return unit_count_specials(unit_type)["plague"] == nil
-		and unit_count_specials(unit_type)["berserk"] == nil
-		and unit_type ~= "Fog Clearer"
-		and wesnoth.unit_types[unit_type].level <= 1
 end
 
 

@@ -9,6 +9,7 @@ local tostring = tostring
 local function info_message()
 	local msg = ""
 		.. "Mirror style : " .. creepwars.mirror_style .. "\n"
+		.. "Over-powered leaders : " .. (creepwars.allow_overpowered and "allowed" or "forbidden") .. "\n"
 		.. "Gold multiplier : " .. creepwars.gold_multiplier_percent .. "%\n"
 		.. "Guard health : " .. creepwars.guard_health_percentage .. "%\n"
 		.. "Reveal leaders : " .. tostring(creepwars.reveal_leaders) .. "\n"

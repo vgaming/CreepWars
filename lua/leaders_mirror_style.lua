@@ -10,7 +10,7 @@ local array_map = creepwars.array_map
 local format = creepwars.format
 local is_ai_array = creepwars.is_ai_array
 local mirror_style = creepwars.mirror_style
-local recruitable_array = creepwars.recruitable_array
+local all_leaders_array = creepwars.all_leaders_array
 
 
 local function leaders_mirror_show_warning()
@@ -51,8 +51,8 @@ local function set_type(old_unit, type, is_downgrade)
 end
 
 
-local leader_rand_string = "1.." .. #recruitable_array
-local function random_leader() return recruitable_array[helper.rand(leader_rand_string)] end
+local leader_rand_string = "1.." .. #all_leaders_array
+local function random_leader() return all_leaders_array[helper.rand(leader_rand_string)] end
 
 
 local function downgrade_leaders()

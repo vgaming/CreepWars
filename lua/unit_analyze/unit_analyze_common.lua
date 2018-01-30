@@ -90,7 +90,7 @@ end
 
 creepwars.can_be_a_leader = can_be_a_leader
 creepwars.creep_array = creep_array
-creepwars.recruitable_array = all_leaders_array
+creepwars.all_leaders_array = all_leaders_array
 creepwars.unit_downgrades = unit_downgrades
 
 

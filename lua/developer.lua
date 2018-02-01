@@ -10,8 +10,7 @@ local tostring = tostring
 
 local cli_string = tostring(wesnoth.sides[1].user_team_name)
 for _, assignment in ipairs(creepwars.split_comma(cli_string)) do
-	local left = string.gsub(assignment, "=[^=]*", "")
-	local right = string.gsub(assignment, "[^=]*=", "")
+	local left, right = string.match(assignment, "(.-)=(.*)")
 	wesnoth.set_variable(left, right)
 end
 wesnoth.sides[1].user_team_name = wesnoth.sides[1].team_name

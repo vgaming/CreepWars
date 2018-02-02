@@ -66,6 +66,7 @@ local function can_be_a_leader(unit_type)
 		end
 		return unit_count_specials(unit_type)["plague"] == nil
 			and unit_type ~= "Fog Clearer"
+			and unit_type ~= "Ghost" -- ugly hack until "resistances" is calculated properly
 			and wesnoth.unit_types[unit_type].level <= 1
 	end
 end

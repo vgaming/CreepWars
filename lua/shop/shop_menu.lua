@@ -610,7 +610,8 @@ local function show_shop_menu()
 	unit.variables.creepwars_res_fire = unit.variables.creepwars_res_fire or 0
 	unit.variables.creepwars_res_impact = unit.variables.creepwars_res_impact or 0
 	unit.variables.creepwars_res_pierce = unit.variables.creepwars_res_pierce or 0
-	unit.variables.creepwars_base_hp = unit.variables.creepwars_base_hp or unit.max_hitpoints
+	unit.variables.creepwars_base_hp = unit.variables.creepwars_base_hp
+		or wesnoth.unit_types[unit.type].max_hitpoints
 	unit.variables.creepwars_health_small = unit.variables.creepwars_health_small or 0
 	unit.variables.creepwars_health_big = unit.variables.creepwars_health_big or 0
 	unit.variables.creepwars_mp = unit.variables.creepwars_mp or 0

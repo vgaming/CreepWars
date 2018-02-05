@@ -40,8 +40,7 @@ if wesnoth then
 		text = "<span color='#FFFFFF'>Mirror style: " .. creepwars.mirror_style .. "</span>"
 	}
 
-	local recent = "Recent changes: gold multiplier for leaderkill increased 4->5, "
-		.. "mirror mode now retains manually chosen leaders."
+	local recent = 'Recent changes: removed "berserker" creeps, gold multiplier for leaderkill increased 4->5.'
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. recent)
 
 	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}

@@ -6,6 +6,6 @@ If you also want leader mirroring, add this:
 
 
 You may find using git "post-checkout" and "post-commit" hooks useful.
-To add them:
-	ln -s ../../build/build.sh .git/hooks/post-commit
-	ln -s ../../build/build.sh .git/hooks/post-checkout
+To add them, symlink the script wesnoth_addon_build.sh to the paths:
+	.git/hooks/post-commit
+	.git/hooks/post-checkout

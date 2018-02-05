@@ -26,6 +26,9 @@ else
 end
 
 
+local is_cli_game = wesnoth.get_variable("creepwars_guard_health" .. scenario_suffix) == nil
+
+
 local guard_health_percentage = wesnoth.get_variable("creepwars_guard_health" .. scenario_suffix) or 100
 local guard_health_level_add = guard_health_percentage / 25
 
@@ -42,6 +45,7 @@ creepwars.gold_multiplier_percent = gold_multiplier_percent
 creepwars.gold_per_kill = gold_per_kill
 creepwars.guard_health_level_add = guard_health_level_add
 creepwars.guard_health_percentage = guard_health_percentage
+creepwars.is_cli_game = is_cli_game
 creepwars.mirror_style = mirror_style
 creepwars.reveal_leaders = reveal_leaders
 

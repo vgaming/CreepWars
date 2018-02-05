@@ -43,6 +43,20 @@ if wesnoth then
 	local recent = "Recent changes: gold multiplier for leaderkill increased 4->5, "
 		.. "mirror mode now retains manually chosen leaders."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. recent)
+
+	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+	wesnoth.wml_actions.objectives {
+		silent = creepwars.is_cli_game,
+		T.objective {
+			description="Kill enemy guard",
+			condition = "win",
+		},
+		T.objective {
+			description="Death of your own guard",
+			condition = "lose",
+		},
+		note = note
+	}
 else
 	return note
 end

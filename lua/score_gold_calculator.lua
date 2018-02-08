@@ -93,7 +93,7 @@ local function unit_kill_event(attacker, defender)
 	if defender.canrecruit then
 		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + guard_multiplier)
 	else
-		wesnoth.set_variable("creepwars_creepkills_" .. team, creepkills)
+		wesnoth.set_variable("creepwars_creepkills_" .. team, creepkills + 1)
 	end
 
 	display_stats()

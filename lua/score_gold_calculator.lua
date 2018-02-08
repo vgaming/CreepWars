@@ -79,12 +79,8 @@ local function unit_kill_event(attacker, defender)
 		and creepwars.gold_guard_multiplier
 		or 1
 
-	local external_multiplier = creepwars.gold_multiplier_func
-		and creepwars.gold_multiplier_func(attacker)
-		or 1
-
 	local gold = gold_orig
-	for i = 0, leader_multiplier * guard_multiplier * external_multiplier - 1 do
+	for i = 0, leader_multiplier * guard_multiplier - 1 do
 		gold = gold + creepwars.gold_per_kill(gold_kills + i)
 	end
 	wesnoth.set_variable("creepwars_gold_" .. team, gold)
@@ -95,11 +91,9 @@ local function unit_kill_event(attacker, defender)
 	end
 
 	if defender.canrecruit then
-		wesnoth.set_variable("creepwars_leaderkills_" .. team,
-			leaderkills + guard_multiplier * external_multiplier)
+		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + guard_multiplier)
 	else
-		wesnoth.set_variable("creepwars_creepkills_" .. team,
-			creepkills + external_multiplier)
+		wesnoth.set_variable("creepwars_creepkills_" .. team, creepkills)
 	end
 
 	display_stats()

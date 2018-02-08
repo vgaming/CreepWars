@@ -1,9 +1,9 @@
-map_data="{./vortex.map}"
+map_data="{./middle.map}"
 
 #define CREEPWARS_SCENARIO_ID
-Creep_Wars_vortex_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
+Creep_Wars_middle_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars vortex {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
+Creep Wars middle {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 
 
 {./common_side_definitions.cfg}
@@ -36,21 +36,15 @@ Creep Wars vortex {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 	name=preload
 	first_time_only=no
 	[lua]
-		code = {./vortex.lua}
-	[/lua]
-[/event]
-[event]
-	name=start
-	first_time_only=yes
-	[lua]
-		code = << creepwars.vortex_start() >>
-	[/lua]
-[/event]
-[event]
-	name=side turn end
-	first_time_only=no
-	[lua]
-		code = << creepwars.vortex_side_turn_end() >>
+		code = <<
+			creepwars = {}
+			creepwars.scoreboard_pos = { { x = 17, y = 1 }, { x = 19, y = 1 } }
+			creepwars.mirror_style_label_pos = { x = 34, y = 2 }
+			creepwars.shop_coordinates = {
+				{ { 8, 6 }, { 8, 8 }, },
+				{ { 28, 6 }, { 28, 8 }, },
+			}
+		>>
 	[/lua]
 [/event]
 

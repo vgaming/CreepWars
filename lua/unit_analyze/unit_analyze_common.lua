@@ -5,7 +5,6 @@ local creepwars = creepwars
 local ipairs = ipairs
 local pcall = pcall
 local helper = wesnoth.require("lua/helper.lua")
-local array_filter = creepwars.array_filter
 local split_comma = creepwars.split_comma
 
 
@@ -72,25 +71,36 @@ local function can_be_a_leader(unit_type)
 end
 
 
-local all_leaders_array = array_filter(era_array, can_be_a_leader)
-
-
-local downgrade_map = {}
-for _, unit_name in ipairs(era_array) do
-	local unit_data = wesnoth.unit_types[unit_name]
-	for _, adv in ipairs(creepwars.split_comma(unit_data.__cfg.advances_to)) do
-		downgrade_map[adv] = downgrade_map[adv] or {}
-		local arr = downgrade_map[adv]
-		arr[#arr + 1] = unit_name
+local era_unit_rand_string = "1.." .. #era_array
+local function random_leader()
+	while true do
+		local candidate = era_array[helper.rand(era_unit_rand_string)]
+		if can_be_a_leader(candidate) then
+			return candidate
+		end
 	end
 end
+
+
+local downgrade_map
 local function unit_downgrades(unit)
+	if downgrade_map == nil then
+		downgrade_map = {}
+		for _, unit_name in ipairs(era_array) do
+			local unit_data = wesnoth.unit_types[unit_name]
+			for _, adv in ipairs(creepwars.split_comma(unit_data.__cfg.advances_to)) do
+				downgrade_map[adv] = downgrade_map[adv] or {}
+				local arr = downgrade_map[adv]
+				arr[#arr + 1] = unit_name
+			end
+		end
+	end
 	return downgrade_map[unit] or {}
 end
 
 
 creepwars.can_be_a_leader = can_be_a_leader
-creepwars.all_leaders_array = all_leaders_array
+creepwars.random_leader = random_leader
 creepwars.unit_downgrades = unit_downgrades
 
 

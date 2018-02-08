@@ -102,12 +102,13 @@ local function array_forall(arr, func)
 end
 
 
-local function generate_until(gen_func, until_func)
-	local result
+local function generate_until_ok(gen_func, ok_func)
 	repeat
-		result = gen_func()
-	until until_func(result)
-	return result
+		local result = gen_func()
+		if ok_func(result) then
+			return result
+		end
+	until false
 end
 
 local function wesnoth_message(msg)
@@ -144,7 +145,7 @@ creepwars.array_map = array_map
 creepwars.array_merge = array_merge
 creepwars.array_to_set = array_to_set
 creepwars.format = format
-creepwars.generate_until = generate_until
+creepwars.generate_until_ok = generate_until_ok
 creepwars.print = _print
 creepwars.split_comma = split_comma
 creepwars.wesnoth_message = wesnoth_message

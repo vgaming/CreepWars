@@ -4,13 +4,12 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
 local math = math
-local helper = wesnoth.require("lua/helper.lua")
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local array_map = creepwars.array_map
 local format = creepwars.format
 local is_ai_array = creepwars.is_ai_array
 local mirror_style = creepwars.mirror_style
-local all_leaders_array = creepwars.all_leaders_array
+local random_leader = creepwars.random_leader
 
 
 local function leaders_mirror_show_warning()
@@ -49,10 +48,6 @@ local function set_type(old_unit, type, is_downgrade)
 	wesnoth.wml_actions.kill { id = old_unit.id, fire_event = false, animate = false }
 	wesnoth.put_unit(new_unit)
 end
-
-
-local leader_rand_string = "1.." .. #all_leaders_array
-local function random_leader() return all_leaders_array[helper.rand(leader_rand_string)] end
 
 
 local function downgrade_leaders()

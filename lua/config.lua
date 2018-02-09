@@ -6,7 +6,7 @@ creepwars.lvl0_barrier = 12 -- creep score lower than this value will generate l
 local lvl3plus_barrier = 50
 creepwars.lvl3plus_barrier = lvl3plus_barrier
 
-creepwars.creep_count = 8
+creepwars.creep_count = creepwars.creep_count or 8
 
 
 local creepwars_expected_total_kills = 80

@@ -44,6 +44,7 @@ Creep Wars middle {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 				{ { 8, 6 }, { 8, 8 }, },
 				{ { 28, 6 }, { 28, 8 }, },
 			}
+			creepwars.creep_count = 9
 		>>
 	[/lua]
 [/event]

@@ -49,7 +49,10 @@ end
 local function first_turn_advantage_add_object(side, value)
 	assert(wesnoth.current.turn == 1)
 	for _, unit in ipairs(wesnoth.get_units { side = side }) do
-		local ability = T.dummy { name = "first turn advantage", description = "+" .. value .. " movement" }
+		local ability = T.dummy {
+			name = "first turn advantage",
+			description = "+" .. value .. " movement on turn 1"
+		}
 		wesnoth.add_modification(unit, "object", {
 			T.effect { apply_to = "new_ability", T.abilities { ability } },
 			duration = "turn",

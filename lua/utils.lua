@@ -83,15 +83,6 @@ local function array_to_set(arr)
 end
 
 
-local function array_merge(first, second)
-	local i = 1
-	local result = {}
-	for _, v in ipairs(first) do result[i] = v; i = i + 1 end
-	for _, v in ipairs(second) do result[i] = v; i = i + 1 end
-	return result
-end
-
-
 local function array_forall(arr, func)
 	for _, v in ipairs(arr) do
 		if not func(v) then
@@ -142,7 +133,6 @@ creepwars.array_copy = array_copy
 creepwars.array_filter = array_filter
 creepwars.array_forall = array_forall
 creepwars.array_map = array_map
-creepwars.array_merge = array_merge
 creepwars.array_to_set = array_to_set
 creepwars.format = format
 creepwars.generate_until_ok = generate_until_ok

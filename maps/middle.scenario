@@ -6,7 +6,7 @@ Creep_Wars_middle_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
 Creep Wars middle {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 
 
-{./common_side_definitions.cfg}
+{./human_ai_sides_macros.cfg}
 {CWD_HUMAN West}
 {CWD_HUMAN East}
 {CWD_HUMAN West}

@@ -6,9 +6,6 @@ Creep_Wars_narrow_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
 Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 
 
-{./2player_settings.cfg}
-
-
 [event]
 	name=preload
 	first_time_only=no
@@ -25,3 +22,6 @@ Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 		 >>
 	[/lua]
 [/event]
+
+
+{./2player_settings.cfg}

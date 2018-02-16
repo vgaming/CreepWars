@@ -19,6 +19,7 @@ Creep Wars wide {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 			creepwars.scoreboard_pos = { { x = 17, y = 10 }, { x = 19, y = 10 } }
 			creepwars.mirror_style_label_pos = { x = 26, y = 2 }
 			creepwars.creep_count = 9
+			creepwars.starting_locations_wesnoth12_hack = { [10] = {32, 10} }
 		 >>
 	[/lua]
 [/event]
@@ -29,6 +30,8 @@ Creep Wars wide {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 {CWD_HUMAN East}
 {CWD_HUMAN West}
 {CWD_AI West 10 6 10 14}
+{CWD_HUMAN East}
+{CWD_HUMAN West}
 {CWD_HUMAN East}
 {CWD_HUMAN West}
 {CWD_HUMAN East}

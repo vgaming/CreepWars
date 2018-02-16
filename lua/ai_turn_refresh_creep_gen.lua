@@ -26,6 +26,8 @@ if is_ai_array[side_number] and not wesnoth.sides[side_number].lost then
 		function(unit) return unit.variables["creepwars_creep"] end)
 
 	local start_loc = wesnoth.get_starting_location(side_number)
+		or creepwars.starting_locations_wesnoth12_hack[side_number]
+
 	-- print("side", side_number, "loc", creepwars.format(start_loc), "current creeps", creeps_count_before)
 
 	for _ = creeps_count_before + 1, creepwars.creep_count do

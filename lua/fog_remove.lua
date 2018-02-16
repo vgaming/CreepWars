@@ -2,6 +2,7 @@
 
 local wesnoth = wesnoth
 local ipairs = ipairs
+local creepwars = creepwars
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local is_ai_array = creepwars.is_ai_array
 
@@ -27,8 +28,7 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		end
 	else
 		if creepwars.reveal_leaders then
-			local start_loc = wesnoth.get_starting_location(unit.side)
-			lift_fog(start_loc[1], start_loc[2])
+			lift_fog(unit.x, unit.y)
 		end
 	end
 end

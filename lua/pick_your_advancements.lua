@@ -36,6 +36,7 @@ local function pick_advancement_menu()
 	else
 		unit.advances_to = advances_to
 	end
+	print("set advances_to to", creepwars.format(unit.advances_to))
 end
 
 

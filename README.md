@@ -3,6 +3,8 @@ Creep Wars -- a "wesnoth" add-on with custom game rules
 
 Creep Wars is an add-on for "Battle for Wesnoth" that provides a series of maps and custom game rules.
 
+Building and uploading is done via `wesnoth_upload` tool: https://github.com/vgaming/wesnoth_upload
+
 
 License
 =================

@@ -13,6 +13,7 @@ local era_set = {}
 local era_id = wesnoth.game_config.mp_settings.mp_era == "Creep_War_Era_v0.3.5"
 	and "era_default"
 	or wesnoth.game_config.mp_settings.mp_era
+
 if not pcall(function() return wesnoth.get_era(era_id).id end) then
 	-- this cannot happen on wesnoth-1.13,
 	-- but does happen on 1.12 for a multiplayer game if the host
@@ -20,7 +21,6 @@ if not pcall(function() return wesnoth.get_era(era_id).id end) then
 	creepwars.wesnoth_message {
 		message = "ERROR: Unknown Era:\n\n" .. wesnoth.game_config.mp_settings.mp_era
 			.. "\n\nPlease ask game host to choose another Era (for example, Default)."
-			--		.. ",\nor download " .. wesnoth.game_config.mp_settings.mp_era .. " yourself."
 			.. "\n\nSorry for the inconvenience.",
 		image = "misc/red-x.png"
 	}

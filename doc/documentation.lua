@@ -44,17 +44,23 @@ if wesnoth then
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. recent)
 
 	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+	local objectives = ""
+		.. wesnoth.get_variable("creepwars_about") .. "\n"
+		.. note .. "\n"
+		.. wesnoth.get_variable("creepwars_contacts") .. "\n"
+		.. wesnoth.get_variable("creepwars_changelog")
+	wesnoth.set_variable("creepwars_objectives", objectives)
 	wesnoth.wml_actions.objectives {
 		silent = creepwars.is_cli_game,
 		T.objective {
-			description="Kill enemy guard",
+			description = "Kill enemy guard",
 			condition = "win",
 		},
 		T.objective {
-			description="Death of your own guard",
+			description = "Death of your own guard",
 			condition = "lose",
 		},
-		note = note
+		note = objectives
 	}
 else
 	return note

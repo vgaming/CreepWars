@@ -50,7 +50,7 @@ Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 	side=0
 	team_name=""
 	text="Game Rules:
-     Ctrl + i"
+     Ctrl + j"
 	tooltip=""
 	visible_in_fog=yes
 	visible_in_shroud=yes

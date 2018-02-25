@@ -4,6 +4,7 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
 local string = string
+local tostring = tostring
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local is_ai_array = creepwars.is_ai_array
 local score_per_kill = creepwars.score_per_kill
@@ -14,8 +15,33 @@ if creepwars.scoreboard_help_label then
 	wesnoth.wml_actions.label {
 		x = creepwars.scoreboard_help_label.x,
 		y = creepwars.scoreboard_help_label.y,
-		text = "<span color='#FFFFFF'>Scoreboard (Ctrl i):</span>"
+		text = "<span color='#FFFFFF'>Scoreboard (Ctrl j):</span>"
 	}
+end
+
+
+local function info_message()
+	local msg = ""
+		.. "Mirror style : " .. creepwars.mirror_style .. "\n"
+		.. "Over-powered leaders : " .. (creepwars.allow_overpowered and "allowed" or "forbidden") .. "\n"
+		.. "Gold multiplier : " .. creepwars.gold_multiplier_percent .. "%\n"
+		.. "Guard health : " .. creepwars.guard_health_percentage .. "%\n"
+		.. "Reveal leaders : " .. tostring(creepwars.reveal_leaders) .. ""
+
+	for team, team_sides in ipairs(creepwars.team_array) do
+		local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
+		local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
+		local gold = wesnoth.get_variable("creepwars_gold_" .. team)
+		local score = string.format("%.2f", wesnoth.get_variable("creepwars_score_" .. team))
+		local text = "\n" .. wesnoth.sides[team_sides[1]].user_team_name
+			.. ": <span color='#FF8080'>" .. score .. " score</span>, "
+			.. "<span color='#FFE680'>" .. gold .. " gold</span>"
+			.. "<span color='#FFFFFF'>, " .. creepkills + leaderkills .. " total kills, "
+			.. leaderkills .. " leader kills."
+			.. "</span>"
+		msg = msg .. text
+	end
+	return msg .. "\n\n"
 end
 
 
@@ -31,15 +57,33 @@ local function display_stats()
 				.. " <span color='#FFFFFF'>"
 				.. "(" .. creepkills + leaderkills .. "  "
 				.. leaderkills .. ")"
-				.. "</span>"
+				.. "</span>\n"
 		wesnoth.wml_actions.label {
 			x = creepwars.scoreboard_pos[team].x,
 			y = creepwars.scoreboard_pos[team].y,
 			text = text
 		}
+		wesnoth.wml_actions.objectives {
+			silent = true,
+			T.objective {
+				description = "Kill enemy guard",
+				condition = "win",
+			},
+			T.objective {
+				description = "Death of your own guard",
+				condition = "lose",
+			},
+			note = "<span size='x-large' underline='low'>This game statistics</span>\n"
+				.. info_message()
+				.. wesnoth.get_variable("creepwars_objectives") .. "\n"
+		}
+
 	end
 end
-display_stats()
+wesnoth.wml_actions.event {
+	name = "start",
+	T.lua { code = "creepwars.display_stats()" }
+}
 
 
 local function unit_kill_event(attacker, defender)
@@ -101,5 +145,6 @@ end
 
 
 creepwars.unit_kill_event = unit_kill_event
+creepwars.display_stats = display_stats
 
 -- >>

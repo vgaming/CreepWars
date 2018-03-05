@@ -3,4 +3,19 @@ description() {
 	lua .build/generate_server_description.lua
 }
 
-upload_to_wesnoth_versions=(1.12 1.13)
+versions=(12 13)
+declare -A titles=(
+	[12]="Creep Wars New"
+	[13]="Creep Wars"
+)
+
+upload() {
+	for ver in "${versions[@]}"; do
+		wesnoth_addon_manager --port "1.$ver.x" \
+			--pbl-key "version" "$(version)" \
+			--pbl-key "description" "$(description)" \
+			--pbl-key "passphrase" "$(passphrase)" \
+			--pbl-key "title" "${titles[$ver]}" \
+			--upload .
+	done
+}

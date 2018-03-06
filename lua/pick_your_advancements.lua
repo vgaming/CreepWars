@@ -15,7 +15,10 @@ local function advance_array(unit_type)
 end
 
 local unit_can_advance = function(unit)
-	return #advance_array(unit.type) > 1
+	return unit.x == wesnoth.get_variable("x1")
+		and unit.y == wesnoth.get_variable("y1")
+		and unit.side == wesnoth.current.side
+		and #advance_array(unit.type) > 1
 end
 
 local function pick_advancement_menu()

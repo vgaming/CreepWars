@@ -1,10 +1,12 @@
 -- << first_turn_advantage
 
 -- A number of ugly hacks is used here to do a very simple operation:
--- give a side +N movement on turn 1.
+-- give side +N movement on turn 1.
 --
 -- When wesnoth-1.12 stops being supported, consider cleaning this file up.
--- (You can then just increase `moves` from Lua on unit-s turn, and that's all.)
+--
+-- Maybe this could also work for 1.12, though no big point in doing so:
+-- https://wiki.wesnoth.org/DirectActionsWML#.5Bmodify_unit.5D
 
 local wesnoth = wesnoth
 local creepwars = creepwars

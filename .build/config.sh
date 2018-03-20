@@ -16,6 +16,6 @@ upload() {
 			--pbl-key "description" "$(description)" \
 			--pbl-key "passphrase" "$(passphrase)" \
 			--pbl-key "title" "${titles[$ver]}" \
-			--upload data
+			--upload Creep_War_Dev
 	done
 }

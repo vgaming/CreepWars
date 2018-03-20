@@ -5,4 +5,4 @@ globals = {
 	"format_as_json", "print_as_json"
 }
 --codes = true
-files["lua/unit_analyze/default_era_creeps.lua"] = { max_line_length = false }
+files["**/default_era_creeps.lua"] = { max_line_length = false }

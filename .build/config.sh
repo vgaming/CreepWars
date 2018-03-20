@@ -2,13 +2,16 @@ not_pushed_ignore=true
 
 #### If you want a custom description to be put in _server.pbl, override this method
 description() {
-	lua .build/generate_server_description.lua
+	cd Creep_War_Dev
+	lua ../.build/generate_server_description.lua
+	cd ..
 }
 
-versions=(12 13)
+versions=(12 13 14)
 declare -A titles=(
 	[12]="Creep Wars New"
 	[13]="Creep Wars"
+	[14]="Creep Wars"
 )
 
 upload() {

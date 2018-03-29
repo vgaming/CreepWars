@@ -103,7 +103,7 @@ end
 
 
 local function unit_kill_event(attacker, defender)
-	local team = attacker and attacker.side or get_opposite_team(side_to_team[defender.side])
+	local team = attacker and side_to_team[attacker.side] or get_opposite_team(side_to_team[defender.side])
 	if team == nil then
 		local msg = "Warning: Unit died without attacker. This is unexpected. " ..
 			"No creep score or gold bonus will be generated. " ..

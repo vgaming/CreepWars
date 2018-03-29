@@ -86,8 +86,33 @@ wesnoth.wml_actions.event {
 }
 
 
+local function get_opposite_team(team)
+	local result_team = {}
+	for _, side in ipairs(wesnoth.sides) do
+		if side_to_team[side.side] ~= team
+			and side_to_team[side.side] ~= result_team[#result_team] then
+			result_team[#result_team + 1] = side_to_team[side.side]
+		end
+	end
+	if #result_team ~= 1 then
+		return nil
+	else
+		return result_team[1]
+	end
+end
+
+
 local function unit_kill_event(attacker, defender)
-	local team = side_to_team[attacker.side]
+	local team = attacker and attacker.side or get_opposite_team(side_to_team[defender.side])
+	if team == nil then
+		local msg = "Warning: Unit died without attacker. This is unexpected. " ..
+			"No creep score or gold bonus will be generated. " ..
+			"This is probably because of a conflicting addon/modification. " ..
+			"If the host has no modifications, please report the issue."
+		print(msg)
+		wesnoth.message("Creep Wars", msg)
+		return
+	end
 
 	local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
 	local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)

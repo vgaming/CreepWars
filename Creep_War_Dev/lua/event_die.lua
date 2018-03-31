@@ -26,7 +26,9 @@ else
 	elseif defender.canrecruit and not is_ai_array[defender.side] then
 		creepwars.leader_died_event(defender)
 	end
-	creepwars.unit_kill_event(attacker, defender)
+	if defender then
+		creepwars.unit_kill_event(attacker, defender)
+	end
 end
 
 -- >>

@@ -517,11 +517,15 @@ local heal_guards = function()
 	else
 		local max_damage = 0
 		for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
-			max_damage = math.max(max_damage, unit.max_hitpoints - unit.hitpoints)
+			if wesnoth.sides[unit.side].team_name == event_side.team_name then
+				max_damage = math.max(max_damage, unit.max_hitpoints - unit.hitpoints)
+			end
 		end
 		if max_damage > 0 then
 			for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
-				if unit.max_hitpoints - unit.hitpoints == max_damage then
+				if unit.max_hitpoints - unit.hitpoints == max_damage
+					and wesnoth.sides[unit.side].team_name == event_side.team_name
+				then
 					unit.hitpoints = math.min(unit.hitpoints + unit.max_hitpoints / 5, unit.max_hitpoints)
 					break
 				end

@@ -441,14 +441,16 @@ local function resistance_item(sum, weap)
 		else
 			event_side.gold = event_side.gold - 22
 			event_unit.variables["creepwars_res_" .. weap] = have + 1
+			local vulnerability = wesnoth.unit_resistance(event_unit, weap)
+			local add_res = math.floor(vulnerability - vulnerability * 0.9 + 0.5)
 			wesnoth.add_modification(event_unit, "object", {
-				T.effect { apply_to = "resistance", T.resistance { [weap] = -10 } },
+				T.effect { apply_to = "resistance", T.resistance { [weap] = -add_res } },
 			})
 		end
 	end
-	local have_string = have > 0 and " (" .. have .. ")" or ""
+	local have_string = have > 0 and "(" .. have .. ") " or ""
 	return {
-		text = "+10% " .. string.gsub(weap, "^%l", string.upper) .. " Resistance" .. have_string .. "  ",
+		text = "-10% " .. string.gsub(weap, "^%l", string.upper) .. " Vulnerability " .. have_string .. " ",
 		gold = 22,
 		func = func
 	}

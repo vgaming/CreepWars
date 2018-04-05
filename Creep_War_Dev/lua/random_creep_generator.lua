@@ -53,11 +53,10 @@ local function generate_creep(desired_cost)
 	if boost > 0 then
 		local boost_ability = T.name_only {
 			name = "boost +" .. boost,
-			description = "+" .. boost .. " movement, +" .. boost .. " strikes, +" .. boost * 2 .. " damage"
+			description = "Boost for excessive team score: +" .. boost .. " movement, +" .. boost * 50 .. "% strikes"
 		}
 		wesnoth.add_modification(unit, "object", {
-			T.effect { apply_to = "attack", increase_damage = boost * 2 },
-			T.effect { apply_to = "attack", increase_attacks = boost },
+			T.effect { apply_to = "attack", increase_attacks = boost * 50 .. "%" },
 			T.effect { apply_to = "movement", increase = boost },
 			T.effect { apply_to = "new_ability", T.abilities { boost_ability } },
 		})

@@ -372,7 +372,24 @@ end
 
 
 local function armor_item(gold, id, name, image, a, b, c, f, i, p)
-	name = name .. string.format("\narcane %+d, blade %+d, cold %+d, fire %+d, impact %+d, pierce %+d\n", a, b, c, f, i, p)
+	local function vuln_name(name, value)
+		if value < 0 then
+			return "<span color='#FF7F7F'>" .. value .. "% " .. name .. "</span>" -- red
+		elseif value == 0 then
+			return '0% ' .. name
+		else
+			return "<span color='#BFFFBF'>" .. value .. "% " .. name .. "</span>" -- green
+		end
+	end
+	name = name
+		.. "\n"
+		.. vuln_name("arcane", a) .. ", "
+		.. vuln_name("blade", b) .. ", "
+		.. vuln_name("cold", c) .. ", "
+		.. vuln_name("fire", f) .. ", "
+		.. vuln_name("impact", i) .. ", "
+		.. vuln_name("pierce", p)
+		.. "\n"
 	local total_armor = event_unit.variables.creepwars_armor_ldc +
 			event_unit.variables.creepwars_armor_hdc +
 			event_unit.variables.creepwars_armor_hhc +
@@ -410,6 +427,7 @@ end
 local armor_loop = function()
 	repeat
 		local label = "Armor is a cheaper alternative to Resistances, \nyet it affects many resistances at once.\n"
+		label = label .. "Values are <b>multiplicative</b> with current stats. So +20% means you'll get 20% less damage.\n"
 		label = label .. "\nYour gold: " .. event_side.gold
 		local options = {
 			armor_item(100, "hhc", "Heavy Human Cuirass", "icons/breastplate.png",
@@ -432,14 +450,15 @@ end
 
 
 local function resistance_item(sum, weap)
+	local cost = 20
 	local have = event_unit.variables["creepwars_res_" .. weap]
 	local func = function()
 		if sum >= 10 then
 			err("Too many resistances bought")
-		elseif wesnoth.sides[wesnoth.current.side].gold < 22 then
-			err("Not enough gold (need 22)")
+		elseif wesnoth.sides[wesnoth.current.side].gold < cost then
+			err("Not enough gold (need " .. cost .. ")")
 		else
-			event_side.gold = event_side.gold - 22
+			event_side.gold = event_side.gold - cost
 			event_unit.variables["creepwars_res_" .. weap] = have + 1
 			local vulnerability = wesnoth.unit_resistance(event_unit, weap)
 			local add_res = math.floor(vulnerability - vulnerability * 0.9 + 0.5)
@@ -450,8 +469,8 @@ local function resistance_item(sum, weap)
 	end
 	local have_string = have > 0 and "(" .. have .. ") " or ""
 	return {
-		text = "-10% " .. string.gsub(weap, "^%l", string.upper) .. " Vulnerability " .. have_string .. " ",
-		gold = 22,
+		text = "+10% " .. string.gsub(weap, "^%l", string.upper) .. " Resistance " .. have_string .. " ",
+		gold = cost,
 		func = func
 	}
 end
@@ -464,7 +483,7 @@ local resistance_loop = function()
 				event_unit.variables.creepwars_res_fire +
 				event_unit.variables.creepwars_res_impact +
 				event_unit.variables.creepwars_res_pierce
-		local label = "Resistance. \nAvailable:" .. 10 - sum .. "/10\n"
+		local label = "Resistance is <b>multiplicative</b> with current stats. \nAvailable:" .. 10 - sum .. "/10\n"
 		label = label .. "(Hower unit HP on the right to see current resistances)\n"
 		label = label .. "\nYour gold: " .. event_side.gold
 		local options = {

@@ -633,7 +633,7 @@ local function show_shop_menu()
 	unit.variables.creepwars_armor_pg = unit.variables.creepwars_armor_pg or 0
 
 	shop_loop()
-	creepwars.set_leader_ability()
+	creepwars.set_leader_ability(unit)
 end
 
 creepwars.show_shop_menu = show_shop_menu

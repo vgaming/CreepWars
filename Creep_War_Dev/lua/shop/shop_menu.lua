@@ -121,8 +121,10 @@ local hero_loop = function()
 			}, {
 				text = "Movement +1 \n",
 				image = hex .. "~BLIT(icons/jewelry_butterfly_pin.png,5,5)",
-				gold = 28,
-				func = give_effect(28, "mp", T.effect {
+				gold = event_unit.max_moves * 4 .. ", "
+					.. (event_unit.max_moves * 4 + 4) .. ", "
+					.. (event_unit.max_moves * 4 + 8) .. ", ...",
+				func = give_effect(event_unit.max_moves * 4, "mp", T.effect {
 					apply_to = "movement",
 					increase = 1
 				})

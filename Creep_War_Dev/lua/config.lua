@@ -11,8 +11,8 @@ creepwars.creep_count = creepwars.creep_count or 8
 
 local creepwars_expected_total_kills = 80
 
-local gold_per_kill_start = 4
-local gold_kills_to_increase = 20
+local gold_per_kill_start = 3
+local gold_kills_to_increase = 13
 creepwars.gold_guard_multiplier = 4
 creepwars.gold_leader_multiplier = 5
 

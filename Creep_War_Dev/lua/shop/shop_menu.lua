@@ -94,14 +94,14 @@ local hero_loop = function()
 	repeat
 		local label = "Hero Upgrade."
 		label = label .. "\nYour gold: " .. event_side.gold
-		local small_hp = math.floor(wesnoth.unit_types[event_unit.type].max_hitpoints * 40 / 100)
-		local big_hp = math.floor(wesnoth.unit_types[event_unit.type].max_hitpoints)
+		local big_hp = math.floor(wesnoth.unit_types[event_unit.type].max_hitpoints * 70 / 100)
+		local small_hp = math.floor(wesnoth.unit_types[event_unit.type].max_hitpoints * 28 / 100)
 		local hex = "misc/blank-hex.png"
 		local sword = "items/sword.png~CROP(20,24,32,32)"
 		local bow = "items/bow-crystal.png~CROP(19,21,33,31)~ROTATE(90)"
 		local options = {
 			{
-				text = "Large Hitpoint Boost +" .. big_hp .. " HP (40% unit type HP)\n", -- \n(formula 50% orig + 14)
+				text = "Large Hitpoint Boost +" .. big_hp .. " HP (70% unit type HP)\n",
 				image = hex .. "~BLIT(icons/potion_red_medium.png,5,5)",
 				gold = 50,
 				func = give_effect(50, "health_big", T.effect {
@@ -110,7 +110,7 @@ local hero_loop = function()
 					increase = big_hp,
 				})
 			}, {
-				text = "Small Hitpoint Boost +" .. small_hp .. " HP (100% unit type HP)\n",
+				text = "Small Hitpoint Boost +" .. small_hp .. " HP (28% unit type HP)\n",
 				image = hex .. "~BLIT(icons/potion_red_small.png,5,5)",
 				gold = 22,
 				func = give_effect(22, "health_small", T.effect {

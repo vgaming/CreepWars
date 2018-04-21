@@ -37,7 +37,10 @@ Creep Wars wide {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
 #undef CWD_AI
 
 
+#define TURN_ADVANTAGE
+2#enddef
 {./first_turn_advantage.cfg}
+#undef TURN_ADVANTAGE
 
 
 [label]

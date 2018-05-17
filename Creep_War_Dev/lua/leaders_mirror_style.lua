@@ -52,7 +52,7 @@ end
 
 local function downgrade_leaders()
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-		if is_ai_array[unit.side] ~= true and wesnoth.unit_types[unit.type].level == 2 then
+		if is_ai_array[unit.side] ~= true and wesnoth.unit_types[unit.type].level >= 2 then
 			local downgrade_array = creepwars.unit_downgrades(unit.type)
 			if downgrade_array
 				and #downgrade_array > 0

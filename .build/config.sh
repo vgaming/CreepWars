@@ -7,7 +7,7 @@ description() {
 	cd ..
 }
 
-versions=(12 14)
+versions=(14)
 declare -A titles=(
 	[12]="Creep Wars New"
 	[14]="Creep Wars"

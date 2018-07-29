@@ -51,13 +51,27 @@ local function unit_count_specials(unit)
 end
 
 
+local function add_advances(arr, set, filter)
+	set = set or creepwars.array_to_set(arr)
+	filter = filter or function(_) return true end
+	for _, unit in ipairs(arr) do
+		for _, adv in ipairs(creepwars.split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
+			if set[adv] == nil and wesnoth.unit_types[adv] and filter(adv) then
+				set[adv] = true
+				arr[#arr + 1] = adv
+			end
+		end
+	end
+end
+
+
 local function can_be_a_leader(unit_type)
 	if creepwars.allow_overpowered then
 		return unit_type ~= "Fog Clearer"
 			and wesnoth.unit_types[unit_type].level <= 1
 	else
 		local advance_array = { unit_type }
-		creepwars.add_advances(advance_array, nil, nil)
+		add_advances(advance_array, nil, nil)
 		for _, adv in ipairs(advance_array) do
 			if unit_count_specials(adv)["berserk"] ~= nil then
 				return false

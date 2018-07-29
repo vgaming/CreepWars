@@ -1,8 +1,6 @@
 -- << default_era_creeps
 
-local wesnoth = wesnoth
 local creepwars = creepwars
-local ipairs = ipairs
 
 creepwars.default_era_creeps = {
 	"Peasant", "Woodsman", "Ruffian", "Goblin Spearman", -- only creeps
@@ -17,23 +15,6 @@ creepwars.default_era_creeps = {
 	-- auto-generated (all advances <=lvl3):
 	"Thug", "Goblin Impaler", "Goblin Rouser", "Blood Bat", "Fire Drake", "Drake Flare", "Drake Thrasher", "Drake Arbiter", "Drake Warrior", "Sky Drake", "Saurian Oracle", "Saurian Soothsayer", "Saurian Ambusher", "Dwarvish Steelclad", "Dwarvish Stalwart", "Dwarvish Thunderguard", "Gryphon Master", "Outlaw", "Trapper", "Rogue", "Longbowman", "Dragoon", "Duelist", "Shock Trooper", "Knight", "Lancer", "White Mage", "Red Mage", "Merman Warrior", "Swordsman", "Pikeman", "Javelineer", "Naga Warrior", "Orcish Crossbowman", "Orcish Slayer", "Orcish Warrior", "Troll", "Troll Rocklobber", "Goblin Knight", "Goblin Pillager", "Elvish Ranger", "Elvish Marksman", "Elvish Captain", "Elvish Hero", "Elvish Rider", "Elvish Druid", "Elvish Sorceress", "Merman Spearman", "Merman Netcaster", "Elder Wose", "Dark Sorcerer", "Wraith", "Shadow", "Necrophage", "Bone Shooter", "Revenant", "Deathblade", "Bandit", "Dread Bat", "Inferno Drake", "Drake Flameheart", "Drake Enforcer", "Drake Warden", "Drake Blademaster", "Hurricane Drake", "Saurian Flanker", "Dwarvish Lord", "Dwarvish Sentinel", "Dwarvish Dragonguard", "Fugitive", "Huntsman", "Ranger", "Assassin", "Master Bowman", "Cavalier", "Master at Arms", "Iron Mauler", "Paladin", "Grand Knight", "Mage of Light", "Arch Mage", "Silver Mage", "Merman Triton", "Merman Hoplite", "Royal Guard", "Halberdier", "Naga Myrmidon", "Orcish Slurbow", "Orcish Warlord", "Troll Warrior", "Direwolf Rider", "Elvish Avenger", "Elvish Sharpshooter", "Elvish Marshal", "Elvish Champion", "Elvish Outrider", "Elvish Shyde", "Elvish Enchantress", "Merman Javelineer", "Merman Entangler", "Ancient Wose", "Lich", "Necromancer", "Spectre", "Nightgaunt", "Ghast", "Banebow", "Draug", "Highwayman"
 }
-
-
-local function add_advances(arr, set, filter)
-	set = set or creepwars.array_to_set(arr)
-	filter = filter or function(_) return true end
-	for _, unit in ipairs(arr) do
-		for _, adv in ipairs(creepwars.split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
-			if set[adv] == nil and wesnoth.unit_types[adv] and filter(adv) then
-				set[adv] = true
-				arr[#arr + 1] = adv
-			end
-		end
-	end
-end
-
-
-creepwars.add_advances = add_advances
 
 
 -- >>

@@ -6,3 +6,4 @@ globals = {
 }
 --codes = true
 files["**/default_era_creeps.lua"] = { max_line_length = false }
+files["**/advertisement.lua"] = { max_line_length = false }

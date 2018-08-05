@@ -15,6 +15,8 @@ if creepwars.scoreboard_help_label then
 	wesnoth.wml_actions.label {
 		x = creepwars.scoreboard_help_label.x,
 		y = creepwars.scoreboard_help_label.y,
+		visible_in_fog = true,
+		visible_in_shroud = true,
 		text = "<span color='#FFFFFF'>Scoreboard (Ctrl j):</span>"
 	}
 end
@@ -61,6 +63,8 @@ local function display_stats()
 		wesnoth.wml_actions.label {
 			x = creepwars.scoreboard_pos[team].x,
 			y = creepwars.scoreboard_pos[team].y,
+			visible_in_fog = true,
+			visible_in_shroud = true,
 			text = text
 		}
 		wesnoth.wml_actions.objectives {

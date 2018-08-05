@@ -5,12 +5,13 @@ local tostring = tostring
 
 local script_arguments = ...
 local remote_version = tostring(script_arguments.remote_version)
+local filename = "~add-ons/Creep_War_Dev/target/version.txt"
 
-if not wesnoth.have_file("~add-ons/Creep_War_Dev/target/version.txt") then
+if not wesnoth.have_file(filename) then
 	wesnoth.message("", 'This is "Creep Wars" map, Leaders must fight creeps and each other to gain gold and upgrades')
 	wesnoth.message("", 'If you(\'ll) like the map, feel free to download it. ("Creep Wars" add-on).')
 else
-	local local_version = wesnoth.read_file("~add-ons/Creep_War_Dev/target/version.txt")
+	local local_version = wesnoth.read_file(filename)
 	if wesnoth.compare_versions(remote_version, ">", local_version) then
 		wesnoth.wml_actions.message {
 			caption = "Creep Wars",

@@ -7,7 +7,8 @@ description() {
 	cd ..
 }
 
-versions=(14)
+upload_to_wesnoth_versions=(1.14)
+
 declare -A titles=(
 	[12]="Creep Wars New"
 	[14]="Creep Wars"

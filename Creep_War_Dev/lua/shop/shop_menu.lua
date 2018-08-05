@@ -102,6 +102,7 @@ local hero_loop = function()
 		local options = {
 			{
 				text = "Large Hitpoint Boost +" .. big_hp .. " HP (70% unit type HP)\n",
+
 				image = hex .. "~BLIT(icons/potion_red_medium.png,5,5)",
 				gold = 50,
 				func = give_effect(50, "health_big", T.effect {

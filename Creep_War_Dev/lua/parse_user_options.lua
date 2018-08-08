@@ -11,15 +11,12 @@ local mirror_style, overpowered_string = string.match(leader_type_mirror, "^(.*)
 local allow_overpowered = overpowered_string == "overpowered"
 
 
-local reveal_leaders
-if mirror_style == "mirror" then
-	reveal_leaders = true
-else
-	reveal_leaders = wesnoth.get_variable("creepwars_reveal_leaders") or true
-end
-
-
 local is_cli_game = wesnoth.get_variable("creepwars_guard_health") == nil
+
+
+local reveal_leaders = mirror_style == "mirror"
+	or is_cli_game
+	or wesnoth.get_variable("creepwars_reveal_leaders")
 
 
 local guard_health_percentage = wesnoth.get_variable("creepwars_guard_health") or 100

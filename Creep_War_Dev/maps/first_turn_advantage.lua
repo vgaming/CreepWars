@@ -6,6 +6,10 @@ local assert = assert
 local ipairs = ipairs
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 
+wesnoth.wml_actions.event {
+	name = "turn 2",
+	T.lua { code = [[ wesnoth.wml_actions.remove_object{object_id="creep_wars_first_turn"} ]] }
+}
 
 local function first_turn_advantage_register(side, value)
 	wesnoth.wml_actions.event {
@@ -19,7 +23,7 @@ local function first_turn_advantage_register(side, value)
 		}
 		wesnoth.add_modification(unit, "object", {
 			T.effect { apply_to = "new_ability", T.abilities { ability } },
-			duration = "turn",
+			id = "creep_wars_first_turn",
 		})
 	end
 end

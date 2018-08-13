@@ -3,7 +3,6 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
-local pcall = pcall
 local helper = wesnoth.require("lua/helper.lua")
 local split_comma = creepwars.split_comma
 

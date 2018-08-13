@@ -32,11 +32,7 @@ if is_ai_array[side_number] and not wesnoth.sides[side_number].lost then
 		local unit = generate_creep(creep_score)
 		unit.side = side_number
 		local x, y = wesnoth.find_vacant_tile(start_loc[1], start_loc[2], unit)
-		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-			wesnoth.put_unit(unit, x, y)
-		else
-			wesnoth.put_unit(x, y, unit)
-		end
+		wesnoth.put_unit(unit, x, y)
 	end
 end
 

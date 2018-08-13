@@ -105,24 +105,17 @@ end
 local function wesnoth_message(msg)
 	local wesnoth = wesnoth
 	wesnoth.synchronize_choice(function()
-		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-			local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
-			local ugly_index = msg.image and 2 or 1
-			wesnoth.show_dialog {
-				T.tooltip { id = "tooltip_large" },
-				T.helptip { id = "tooltip_large" },
-				T.grid {
-					[1] = T.row { T.column { T.image { label = msg.image } } },
-					[ugly_index] = T.row { T.column { T.label { label = msg.message .. "\n", use_markup = true } } },
-					[ugly_index + 1] = T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
-				}
+		local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+		local ugly_index = msg.image and 2 or 1
+		wesnoth.show_dialog {
+			T.tooltip { id = "tooltip_large" },
+			T.helptip { id = "tooltip_large" },
+			T.grid {
+				[1] = T.row { T.column { T.image { label = msg.image } } },
+				[ugly_index] = T.row { T.column { T.label { label = msg.message .. "\n", use_markup = true } } },
+				[ugly_index + 1] = T.row { T.column { T.button { label = "\nOK\n", return_value = -1 } } },
 			}
-		else
-			if msg.force_show and #msg == 0 then
-				msg[#msg + 1] = { "option", { message = "OK" } }
-			end
-			wesnoth.wml_actions.message(msg)
-		end
+		}
 		return {} -- strange obligatory "table" result
 	end)
 end

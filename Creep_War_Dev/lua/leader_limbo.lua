@@ -24,11 +24,7 @@ local function leader_died_event(unit)
 	show_limbo_text(unit.side, "Limbo 2")
 
 	local x, y = wesnoth.find_vacant_tile(start_loc[1], start_loc[2], unit)
-	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-		wesnoth.put_unit(unit, x, y)
-	else
-		wesnoth.put_unit(x, y, unit)
-	end
+	wesnoth.put_unit(unit, x, y)
 
 	if unit.side == wesnoth.current.side then
 		wesnoth.wml_actions.end_turn {}

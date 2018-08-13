@@ -19,46 +19,16 @@ local err = function(message)
 end
 
 local function show_shop_dialog(conf)
-	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-		local options = {}
-		for _, e in ipairs(conf.options) do
-			local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
-			options[#options + 1] = {
-				text = e.text .. gold_msg,
-				image = e.image,
-				func = e.func
-			}
-		end
-		return creepwars.show_dialog { label = conf.label, spacer = conf.spacer, options = options }
-	else
-		local msg = {
-			speaker = "narrator",
-			message = conf.label,
+	local options = {}
+	for _, e in ipairs(conf.options) do
+		local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
+		options[#options + 1] = {
+			text = e.text .. gold_msg,
+			image = e.image,
+			func = e.func
 		}
-		local spacer = conf.spacer or "\n"
-		msg[#msg + 1] = T.option { message = "\nCancel\n" }
-		for index, e in ipairs(conf.options) do
-			local gold_msg = e.gold and "<span color='#FFE680'>cost " .. e.gold .. "</span>" or ""
-			local image_msg = e.image and "&" .. e.image .. "=" or ""
-			msg[#msg + 1] = T.option {
-				message = image_msg .. spacer ..  e.text .. gold_msg .. spacer,
-				T.command { T.lua { code = "creepwars_shop_result = " .. index } },
-			}
-		end
-
-		wesnoth.wml_actions.message(msg)
-
-		local result = creepwars_shop_result
-		--noinspection GlobalCreationOutsideO
-		creepwars_shop_result = nil
-
-		-- print("result", creepwars.format(result))
-		if result == nil then
-			return { is_ok = false, index = -2 }
-		else
-			return { is_ok = true, index = result }
-		end
 	end
+	return creepwars.show_dialog { label = conf.label, spacer = conf.spacer, options = options }
 end
 
 

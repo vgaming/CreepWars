@@ -9,17 +9,6 @@ local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local translate = wesnoth.textdomain "wesnoth"
 
 
-local function pango_escape(str)
-	if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13") then
-		return str
-	else
-		str = string.gsub(tostring(str), "<[^>]+>", "") -- html tags
-		str = string.gsub(str, "&lt;", "<")
-		str = string.gsub(str, "&gt;", ">")
-		return str
-	end
-end
-
 --- shows a wesnoth "list" dialog and returns the result.
 -- Example:
 --   item = {text = "", image = ""}
@@ -27,7 +16,7 @@ end
 local function show_dialog_unsynchronized(settings)
 	local spacer = settings.spacer or "\n"
 	local label = settings.label
-	label = label and (spacer .. pango_escape(label) .. spacer) or ""
+	label = label and (spacer .. label .. spacer) or ""
 	local options = settings.options
 	local show_images = options[1].image and true or false
 	local has_minimum = settings.has_minimum ~= false and true or false
@@ -75,7 +64,7 @@ local function show_dialog_unsynchronized(settings)
 
 	local function preshow()
 		for i, v in ipairs(options) do
-			wesnoth.set_dialog_value(spacer .. pango_escape(v.text) .. spacer, "the_list", i, "the_label")
+			wesnoth.set_dialog_value(spacer .. v.text .. spacer, "the_list", i, "the_label")
 			if show_images then
 				local img = v.image
 				if type(img) == "function" then img = img() end
@@ -83,9 +72,7 @@ local function show_dialog_unsynchronized(settings)
 			end
 		end
 
-		if wesnoth.compare_versions(wesnoth.game_config.version, ">=", "1.13.10") then
-			wesnoth.set_dialog_focus("the_list")
-		end
+		wesnoth.set_dialog_focus("the_list")
 
 		if show_images then
 			local function select()

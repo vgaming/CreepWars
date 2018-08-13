@@ -55,8 +55,8 @@ local function add_advances(arr, set, filter)
 	set = set or creepwars.array_to_set(arr)
 	filter = filter or function(_) return true end
 	for _, unit in ipairs(arr) do
-		for _, adv in ipairs(creepwars.split_comma(wesnoth.unit_types[unit].__cfg.advances_to)) do
-			if set[adv] == nil and wesnoth.unit_types[adv] and filter(adv) then
+		for _, adv in ipairs(wesnoth.unit_types[unit].advances_to) do
+			if set[adv] == nil and filter(adv) then
 				set[adv] = true
 				arr[#arr + 1] = adv
 			end
@@ -102,7 +102,7 @@ local function unit_downgrades(unit)
 		downgrade_map = {}
 		for _, unit_name in ipairs(era_array) do
 			local unit_data = wesnoth.unit_types[unit_name]
-			for _, adv in ipairs(creepwars.split_comma(unit_data.__cfg.advances_to)) do
+			for _, adv in ipairs(unit_data.advances_to) do
 				downgrade_map[adv] = downgrade_map[adv] or {}
 				local arr = downgrade_map[adv]
 				arr[#arr + 1] = unit_name

@@ -3,7 +3,7 @@ map_data="{./wide_Tondo.map}"
 #define CREEPWARS_SCENARIO_ID
 Creep_Wars_wide_Tondo#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars wide/Tondo#enddef
+Creep Wars wide/Tondo (experimental)#enddef
 
 
 [event]

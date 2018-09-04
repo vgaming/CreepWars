@@ -138,11 +138,11 @@ local hero_loop = function()
 				})
 			}, {
 				text = "Combo Damage +1 \n(discounts per buy)\n",
-				gold = math.max(16, 24 - event_unit.variables.creepwars_damage) .. ", "
-					.. math.max(16, 23 - event_unit.variables.creepwars_damage)
+				gold = math.max(16, 23 - event_unit.variables.creepwars_damage) .. ", "
+					.. math.max(16, 22 - event_unit.variables.creepwars_damage)
 					.. ", ..., 16, 16, 16",
 				image = string.format("%s~BLIT(%s~SCALE(64,64))~BLIT(%s~SCALE(64,64),5,5)", hex, bow, sword),
-				func = give_effect(math.max(16, 24 - event_unit.variables.creepwars_damage),
+				func = give_effect(math.max(16, 23 - event_unit.variables.creepwars_damage),
 					"damage",
 					T.effect {
 						apply_to = "attack",
@@ -150,12 +150,12 @@ local hero_loop = function()
 					})
 			}, {
 				text = "Combo Strikes +1 \n(discounts per buy)\n",
-				gold = math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes) .. ", "
-					.. math.max(48, 66 - 6 * event_unit.variables.creepwars_strikes)
+				gold = math.max(48, 66 - 6 * event_unit.variables.creepwars_strikes) .. ", "
+					.. math.max(48, 60 - 6 * event_unit.variables.creepwars_strikes)
 					.. ", ..., 48, 48, 48",
 				image = string.format("%s~BLIT(%s~BLIT(%s,0,0)~BLIT(%s,36,0)~BLIT(%s,0,30)~BLIT(%s,36,30)~SCALE(50,50),10,20)",
 					hex, hex, bow, sword, bow, sword),
-				func = give_effect(math.max(48, 72 - 6 * event_unit.variables.creepwars_strikes),
+				func = give_effect(math.max(48, 66 - 6 * event_unit.variables.creepwars_strikes),
 					"strikes",
 					T.effect {
 						apply_to = "attack",

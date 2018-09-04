@@ -1,9 +1,9 @@
 map_data="{./narrow.map}"
 
 #define CREEPWARS_SCENARIO_ID
-Creep_Wars_narrow_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
+Creep_Wars_narrow#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars narrow {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
+Creep Wars narrow#enddef
 
 
 [event]

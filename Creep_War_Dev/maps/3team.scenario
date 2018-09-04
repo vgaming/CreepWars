@@ -2,9 +2,9 @@ map_data="{./3team.map}"
 
 
 #define CREEPWARS_SCENARIO_ID
-Creep_Wars_3team_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
+Creep_Wars_3team#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars 3team {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
+Creep Wars 3team#enddef
 
 
 {./human_ai_sides_macros.cfg}

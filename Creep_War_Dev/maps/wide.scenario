@@ -1,9 +1,9 @@
 map_data="{./wide.map}"
 
 #define CREEPWARS_SCENARIO_ID
-Creep_Wars_wide_{~add-ons/{CREEPWARS_DIR}/target/version_nodot.txt}#enddef
+Creep_Wars_wide#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars wide {~add-ons/{CREEPWARS_DIR}/target/version.txt}#enddef
+Creep Wars wide#enddef
 
 
 [event]

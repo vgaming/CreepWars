@@ -1,6 +1,7 @@
 -- << init_state.lua
 
 local wesnoth = wesnoth
+local creepwars = creepwars
 local ipairs = ipairs
 local is_ai_array = creepwars.is_ai_array
 
@@ -16,5 +17,19 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 	end
 end
 
+for _, guard in ipairs(creepwars.guards_pos) do
+	local unit = {
+		side = guard.side,
+		type = "Elvish Marshal",
+		name = "Guard",
+		max_moves = 0,
+		max_hitpoints = 60,
+		max_experience = 100000,
+		random_traits = false,
+		canrecruit = true,
+		{ "defense", { castle = 50, } },
+	}
+	wesnoth.put_unit(guard.x, guard.y, unit)
+end
 
 -- >>

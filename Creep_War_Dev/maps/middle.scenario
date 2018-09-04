@@ -10,11 +10,11 @@ Creep Wars middle#enddef
 {CWD_HUMAN West}
 {CWD_HUMAN East}
 {CWD_HUMAN West}
-{CWD_AI West 10 3 10 11}
+{CWD_AI West}
 {CWD_HUMAN East}
 {CWD_HUMAN West}
 {CWD_HUMAN East}
-{CWD_AI East 26 3 26 11}
+{CWD_AI East}
 #undef CWD_HUMAN
 #undef CWD_AI
 
@@ -38,6 +38,12 @@ Creep Wars middle#enddef
 	[lua]
 		code = <<
 			creepwars = {}
+			creepwars.guards_pos = {
+				{ side = 4, x = 10, y = 3 },
+				{ side = 4, x = 10, y = 11 },
+				{ side = 8, x = 26, y = 3 },
+				{ side = 8, x = 26, y = 11 },
+			}
 			creepwars.scoreboard_pos = { { x = 17, y = 1 }, { x = 19, y = 1 } }
 			creepwars.mirror_style_label_pos = { x = 34, y = 2 }
 			creepwars.shop_coordinates = {

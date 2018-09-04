@@ -10,13 +10,13 @@ Creep Wars 3team#enddef
 {./human_ai_sides_macros.cfg}
 {CWD_HUMAN West}
 {CWD_HUMAN East}
-{CWD_AI South 13 19 21 19}
+{CWD_AI South}
 {CWD_HUMAN South}
 {CWD_HUMAN West}
-{CWD_AI East 23 4 27 10}
+{CWD_AI East}
 {CWD_HUMAN East}
 {CWD_HUMAN South}
-{CWD_AI West 11 4 7 10}
+{CWD_AI West}
 #undef CWD_HUMAN
 #undef CWD_AI
 
@@ -32,6 +32,14 @@ Creep Wars 3team#enddef
 				{ x = 16, y = 10 },
 				{ x = 18, y = 10 },
 				{ x = 17, y = 12 },
+			}
+			creepwars.guards_pos = {
+				{ side = 3, x = 13, y = 19 },
+				{ side = 3, x = 21, y = 19 },
+				{ side = 6, x = 23, y = 4 },
+				{ side = 6, x = 27, y = 10 },
+				{ side = 9, x = 11, y = 4 },
+				{ side = 9, x = 7, y = 10 },
 			}
 			creepwars.shop_coordinates = {
 				{ { 7, 4 }, { 5, 7 } },

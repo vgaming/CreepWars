@@ -16,6 +16,12 @@ Creep Wars narrow#enddef
 				{ { 6, 5 }, { 6, 7 }, },
 				{ { 26, 5 }, { 26, 7 }, },
 			}
+			creepwars.guards_pos = {
+				{ side = 4, x = 8, y = 2 },
+				{ side = 4, x = 8, y = 10 },
+				{ side = 8, x = 24, y = 2 },
+				{ side = 8, x = 24, y = 10 },
+			}
 			creepwars.scoreboard_pos = { { x = 15, y = 2 }, { x = 17, y = 2 } }
 			creepwars.scoreboard_help_label = { x = 16, y = 1 }
 			creepwars.mirror_style_label_pos = { x = 16, y = 11 }
@@ -28,11 +34,11 @@ Creep Wars narrow#enddef
 {CWD_HUMAN West}
 {CWD_HUMAN East}
 {CWD_HUMAN West}
-{CWD_AI West 8 2 8 10}
+{CWD_AI West}
 {CWD_HUMAN East}
 {CWD_HUMAN West}
 {CWD_HUMAN East}
-{CWD_AI East 24 2 24 10}
+{CWD_AI East}
 #undef CWD_HUMAN
 #undef CWD_AI
 

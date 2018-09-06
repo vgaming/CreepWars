@@ -371,6 +371,10 @@ local weapon_loop = function()
 end
 
 
+local function resistance_value(base, upgrade_count)
+	return math.floor(base - base * math.pow(0.9, upgrade_count) + 0.5)
+end
+
 local function apply_resistances()
 	for _, weap in ipairs { "arcane", "blade", "cold", "fire", "impact", "pierce" } do
 		local key_percent = "creepwars_respercent_" .. weap
@@ -381,7 +385,7 @@ local function apply_resistances()
 
 		local upgrade_count = event_unit.variables["creepwars_res_" .. weap]
 		local vulnerability = wesnoth.unit_resistance(event_unit, weap)
-		local new_resistance = math.floor(vulnerability - vulnerability * math.pow(0.9, upgrade_count) + 0.5)
+		local new_resistance = resistance_value(vulnerability, upgrade_count)
 		event_unit.variables[key_percent] = new_resistance
 
 		-- wesnoth.wml_actions.remove_object { object_id = key_number } -- doesn't work, wesnoth seems broken for res.
@@ -406,8 +410,14 @@ local function resistance_item(available, weap)
 		end
 	end
 	local have_string = have > 0 and "(" .. have .. ") " or ""
+	local key_percent = "creepwars_respercent_" .. weap
+	local current_bonus = event_unit.variables[key_percent]
+	local base_vuln = wesnoth.unit_resistance(event_unit, weap) + current_bonus
+	local possible_increase = resistance_value(base_vuln, have + 1) - current_bonus
 	return {
-		text = "-10% " .. string.gsub(weap, "^%l", string.upper) .. " vulnerability " .. have_string .. " ",
+		text = "+" .. possible_increase .. "% "
+			.. string.gsub(weap, "^%l", string.upper)
+			.. " resistance " .. have_string .. " ",
 		gold = cost,
 		func = func
 	}
@@ -415,6 +425,7 @@ end
 
 local resistance_loop = function()
 	repeat
+		apply_resistances()
 		local sum = event_unit.variables.creepwars_res_arcane +
 				event_unit.variables.creepwars_res_blade +
 				event_unit.variables.creepwars_res_cold +

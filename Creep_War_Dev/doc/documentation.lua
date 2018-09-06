@@ -40,7 +40,7 @@ if wesnoth then
 		text = "<span color='#FFFFFF'>Mirror style: " .. creepwars.mirror_style .. "</span>"
 	}
 
-	local recent = ""
+	local recent = "Recent changes: cheaper, but multiplicative resistance upgrades."
 	wesnoth.message("Creep Wars", "Press Ctrl J to see game rules. " .. recent)
 
 	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}

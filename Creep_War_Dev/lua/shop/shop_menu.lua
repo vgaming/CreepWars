@@ -371,105 +371,43 @@ local weapon_loop = function()
 end
 
 
-local function armor_item(gold, id, name, image, a, b, c, f, i, p)
-	local function vuln_name(name, value)
-		if value < 0 then
-			return "<span color='#FF7F7F'>" .. value .. "% " .. name .. "</span>" -- red
-		elseif value == 0 then
-			return '0% ' .. name
-		else
-			return "<span color='#BFFFBF'>" .. value .. "% " .. name .. "</span>" -- green
-		end
-	end
-	name = name
-		.. "\n"
-		.. vuln_name("arcane", a) .. ", "
-		.. vuln_name("blade", b) .. ", "
-		.. vuln_name("cold", c) .. ", "
-		.. vuln_name("fire", f) .. ", "
-		.. vuln_name("impact", i) .. ", "
-		.. vuln_name("pierce", p)
-		.. "\n"
-	local total_armor = event_unit.variables.creepwars_armor_ldc +
-			event_unit.variables.creepwars_armor_hdc +
-			event_unit.variables.creepwars_armor_hhc +
-			event_unit.variables.creepwars_armor_smr
-	local total_boots = event_unit.variables.creepwars_armor_eb +
-			event_unit.variables.creepwars_armor_pg
-	local robe_conflict = total_armor > 0 and (id == "ldc" or id == "hdc" or id == "hhc" or id == "smr")
-	local boots_conflict = total_boots > 0 and (id == "eb" or id == "pg")
-	local give_effect_func = give_effect(gold, "armor_" .. id, T.effect {
-			apply_to = "resistance", T.resistance {
-				arcane = -a,
-				blade = -b,
-				cold = -c,
-				fire = -f,
-				impact = -i,
-				pierce = -p,
-			}
+local function apply_resistances()
+	for _, weap in ipairs { "arcane", "blade", "cold", "fire", "impact", "pierce" } do
+		local key_percent = "creepwars_respercent_" .. weap
+		local old_resistance = event_unit.variables[key_percent] or 0
+		wesnoth.add_modification(event_unit, "object", {
+			T.effect { apply_to = "resistance", T.resistance { [weap] = old_resistance } },
 		})
-	local func = function()
-		if robe_conflict or boots_conflict then
-			err("Too many items of same type")
-		else
-			give_effect_func()
-		end
+
+		local upgrade_count = event_unit.variables["creepwars_res_" .. weap]
+		local vulnerability = wesnoth.unit_resistance(event_unit, weap)
+		local new_resistance = math.floor(vulnerability - vulnerability * math.pow(0.9, upgrade_count) + 0.5)
+		event_unit.variables[key_percent] = new_resistance
+
+		-- wesnoth.wml_actions.remove_object { object_id = key_number } -- doesn't work, wesnoth seems broken for res.
+		wesnoth.add_modification(event_unit, "object", {
+			T.effect { apply_to = "resistance", T.resistance { [weap] = -new_resistance } },
+		})
 	end
-
-	return {
-		text = name,
-		image = image,
-		gold = gold,
-		func = func
-	}
 end
 
-local armor_loop = function()
-	repeat
-		local label = "Armor is a cheaper alternative to Resistances, \nyet it affects many resistances at once.\n"
-		label = label .. "Values are <b>multiplicative</b> with current stats. So +20% means you'll get 20% less damage.\n"
-		label = label .. "\nYour gold: " .. event_side.gold
-		local options = {
-			armor_item(100, "hhc", "Heavy Human Cuirass", "icons/breastplate.png",
-				0, 35, -10, -10, 20, 35),
-			armor_item(115, "ldc", "Light Dwarven Cuirass", "icons/cuirass_leather_studded.png",
-				0, 20, 10, 10, 20, 20),
-			armor_item(150, "hdc", "Heavy Dwarven Cuirass", "icons/cuirass_muscled.png",
-				3, 27, 12, 12, 23, 23),
-			armor_item(150, "smr", "Silver Mage Robe", "icons/cloak_leather_brown.png",
-				20, 0, 40, 40, 0, 0),
-			armor_item(42, "eb", "Elven Boots", "icons/boots_elven.png",
-				0, 8, 8, 8, 8, 8),
-			armor_item(25, "pg", "Plate Greaves", "icons/greaves.png",
-				0, 8, 0, -10, 8, 8),
-		}
-		local result = show_shop_dialog { label = label, spacer = "", options = options }
-		if result.is_ok then options[result.index].func() end
-	until not result.is_ok
-end
-
-
-local function resistance_item(sum, weap)
-	local cost = 20
-	local have = event_unit.variables["creepwars_res_" .. weap]
+local function resistance_item(available, weap)
+	local cost = 15
+	local key_name = "creepwars_res_" .. weap
+	local have = event_unit.variables[key_name]
 	local func = function()
-		if sum >= 10 then
+		if available == 0 then
 			err("Too many resistances bought")
 		elseif wesnoth.sides[wesnoth.current.side].gold < cost then
 			err("Not enough gold (need " .. cost .. ")")
 		else
 			event_side.gold = event_side.gold - cost
-			event_unit.variables["creepwars_res_" .. weap] = have + 1
-			local vulnerability = wesnoth.unit_resistance(event_unit, weap)
-			local add_res = math.floor(vulnerability - vulnerability * 0.9 + 0.5)
-			wesnoth.add_modification(event_unit, "object", {
-				T.effect { apply_to = "resistance", T.resistance { [weap] = -add_res } },
-			})
+			event_unit.variables[key_name] = have + 1
 		end
 	end
 	local have_string = have > 0 and "(" .. have .. ") " or ""
 	return {
-		text = "+10% " .. string.gsub(weap, "^%l", string.upper) .. " Resistance " .. have_string .. " ",
+		text = "-10% " .. string.gsub(weap, "^%l", string.upper) .. " vulnerability " .. have_string .. " ",
 		gold = cost,
 		func = func
 	}
@@ -483,16 +421,17 @@ local resistance_loop = function()
 				event_unit.variables.creepwars_res_fire +
 				event_unit.variables.creepwars_res_impact +
 				event_unit.variables.creepwars_res_pierce
-		local label = "Resistance is <b>multiplicative</b> with current stats. \nAvailable:" .. 10 - sum .. "/10\n"
-		label = label .. "(Hower unit HP on the right to see current resistances)\n"
+		local available = 15 - sum
+		local label = "Resistance is <b>multiplicative</b>. \nAvailable:" .. available .. "/10\n"
+		label = label .. "(Wesnoths shows unit resistances by howering unit HP on the right)\n"
 		label = label .. "\nYour gold: " .. event_side.gold
 		local options = {
-			resistance_item(sum, "arcane"),
-			resistance_item(sum, "blade"),
-			resistance_item(sum, "cold"),
-			resistance_item(sum, "fire"),
-			resistance_item(sum, "impact"),
-			resistance_item(sum, "pierce"),
+			resistance_item(available, "arcane"),
+			resistance_item(available, "blade"),
+			resistance_item(available, "cold"),
+			resistance_item(available, "fire"),
+			resistance_item(available, "impact"),
+			resistance_item(available, "pierce"),
 		}
 		local result = show_shop_dialog { label = label, options = options }
 		if result.is_ok then options[result.index].func() end
@@ -553,7 +492,7 @@ local unpoison_guards = function()
 	end
 end
 
-local guard_loop = loop("Guard.") {
+local guard_loop = loop("Guard healing, available once per player turn.") {
 	{
 		text = "Heal most damaged guard 20% HP \n",
 		image = "icons/potion_red_small.png",
@@ -579,12 +518,7 @@ local shop_loop = loop("Shop.") {
 		image = "icons/crossed_sword_and_hammer.png",
 		func = weapon_loop
 	}, {
-		text = "Buy Armor",
-		image = "icons/cuirass_muscled.png",
-		func = armor_loop
-	}, {
 		text = "Buy Resistance",
---		image = "items/ornate1.png",
 		image = "icons/ring_gold.png",
 		func = resistance_loop
 	}, {
@@ -619,14 +553,9 @@ local function show_shop_menu()
 	unit.variables.creepwars_ranged_strikes = unit.variables.creepwars_ranged_strikes or 0
 	unit.variables.creepwars_damage = unit.variables.creepwars_damage or 0
 	unit.variables.creepwars_strikes = unit.variables.creepwars_strikes or 0
-	unit.variables.creepwars_armor_ldc = unit.variables.creepwars_armor_ldc or 0
-	unit.variables.creepwars_armor_hdc = unit.variables.creepwars_armor_hdc or 0
-	unit.variables.creepwars_armor_hhc = unit.variables.creepwars_armor_hhc or 0
-	unit.variables.creepwars_armor_smr = unit.variables.creepwars_armor_smr or 0
-	unit.variables.creepwars_armor_eb = unit.variables.creepwars_armor_eb or 0
-	unit.variables.creepwars_armor_pg = unit.variables.creepwars_armor_pg or 0
 
 	shop_loop()
+	apply_resistances() -- needs to be applied after each shop visit
 	creepwars.set_leader_ability(unit)
 end
 

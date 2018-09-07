@@ -32,4 +32,8 @@ for _, guard in ipairs(creepwars.guards_pos) do
 	wesnoth.put_unit(guard.x, guard.y, unit)
 end
 
+for _, side in ipairs(wesnoth.sides) do
+	side.recruit = {}
+end
+
 -- >>

@@ -127,7 +127,7 @@ local function unit_kill_event(attacker, defender)
 	wesnoth.set_variable("creepwars_score_" .. team, score)
 
 	-- guard hp
-	local guard_give_hp = (creepwars.guard_health_level_add + (defender.__cfg.level or 0)) / 4
+	local guard_give_hp = (creepwars.guard_health_level_add + defender.level) / 4
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if side_to_team[unit.side] == team and is_ai_array[unit.side] then
 			wesnoth.add_modification(unit, "object", {

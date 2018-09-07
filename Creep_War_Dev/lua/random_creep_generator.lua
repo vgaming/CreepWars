@@ -75,7 +75,7 @@ local function generate_creep(desired_cost)
 
 	--print("Good unit for cost " .. math.floor(desired_cost + 0.5) .. " is " ..
 	--	unit.__cfg.cost .. "gold " ..
-	--	"lvl" .. unit.__cfg.level .. " " ..
+	--	"lvl" .. unit.level .. " " ..
 	--	"'" .. creep_type .. "', boost: " .. boost .. ". Iterations spent: " .. iterations)
 	return unit
 end

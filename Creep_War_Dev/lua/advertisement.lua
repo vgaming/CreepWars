@@ -61,7 +61,7 @@ end
 wesnoth.wml_actions.message {
 	caption = addon_name,
 	message = advertisement,
-	image = addon_icon,
+	image = string.gsub(addon_icon, "\n", "") .. "~SCALE_INTO(144,144)",
 }
 
 

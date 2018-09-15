@@ -1,0 +1,1 @@
+misc/blank-hex.png~BLIT(units/goblins/spearman-attack-n1.png~CROP(26,25,23,33)~SCALE(12,20)~FL(), 16, 52)~BLIT(units/drakes/burner-takeoff-4.png~CROP(2,10,55,55), 0, 0)~BLIT(units/undead/soulless-dwarf-attack-n.png~CROP(25,21,26,35)~SCALE(13,23),0,40)~BLIT(units/human-peasants/woodsman-bow-attack-2.png~FL()~CROP(13,19,38,40)~SCALE(25,25), 47, 47)

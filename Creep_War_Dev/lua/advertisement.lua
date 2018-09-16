@@ -29,11 +29,13 @@ for _, side in ipairs(wesnoth.sides) do
 end
 
 local sync_choices = wesnoth.synchronize_choices(human_ver, ai_ver, human_sides)
+for k, v in pairs(sync_choices) do sync_choices[k] = v.v end
+if rawget(_G, "print_as_json") then print_as_json("addon versions", addon_name, sync_choices) end
 
 local highest_version = "0.0.0"
 for _, side_version in pairs(sync_choices) do
-	if wesnoth.compare_versions(side_version.v, ">", highest_version) then
-		highest_version = side_version.v
+	if wesnoth.compare_versions(side_version, ">", highest_version) then
+		highest_version = side_version
 	end
 end
 

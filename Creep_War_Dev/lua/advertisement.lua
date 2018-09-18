@@ -1,7 +1,6 @@
 -- << advertisement
 
 local wesnoth = wesnoth
-local ipairs = ipairs
 local string = string
 local tostring = tostring
 local wml = wml
@@ -21,11 +20,19 @@ local function show_message(text)
 end
 
 local filename = "~add-ons/" .. addon_dir .. "/target/version.txt"
-local function version_func()
-	return { v = wesnoth.have_file(filename) and wesnoth.read_file(filename) or "0.0.0" }
-end
+local my_version = wesnoth.have_file(filename) and wesnoth.read_file(filename) or "0.0.0"
 
-local my_version = version_func().v
+local highest_ver_key = "addon_" .. addon_dir .. "_highest"
+wml.variables[highest_ver_key] = "0.0.0"
+
+on_event("side turn 1", function()
+	local side_version = wesnoth.synchronize_choice(function() return { v = my_version } end).v
+	if rawget(_G, "print_as_json") then _G.print_as_json("addon", addon_name, wesnoth.current.side, side_version) end
+
+	if wesnoth.compare_versions(side_version, ">", wml.variables[highest_ver_key]) then
+		wml.variables[highest_ver_key] = side_version
+	end
+end)
 
 if my_version == "0.0.0" then
 	local text = "This game uses " .. addon_name .. " add-on. "
@@ -38,29 +45,14 @@ if my_version == "0.0.0" then
 	return
 end
 
-on_event("side turn 1", function()
-	wml.variables["addon_ver_" .. addon_dir .. "_" .. wesnoth.current.side] = wesnoth.synchronize_choice(version_func).v
-end)
-
 on_event("turn 2", function()
-	local highest_version = "0.0.0"
-	local log = {}
-	for _, side in ipairs(wesnoth.sides) do
-		local side_version = wml.variables["addon_ver_" .. addon_dir .. "_" .. side.side]
-		log[side.side] = side_version
-		if wesnoth.compare_versions(side_version, ">", highest_version) then
-			highest_version = side_version
-		end
-	end
-	if rawget(_G, "print_as_json") then _G.print_as_json("addon versions", addon_name, log) end
-
-	if my_version == highest_version then
+	if my_version == wml.variables[highest_ver_key] then
 		return
 	end
 
 	local advertisement = "🠉🠉🠉 Please upgrade your " .. addon_name .. " add-on 🠉🠉🠉"
 		.. "\n"
-		.. my_version .. " -> " .. highest_version
+		.. my_version .. " -> " .. wml.variables[highest_ver_key]
 		.. "  (you may do that after the game)\n\n"
 	show_message(advertisement)
 end)

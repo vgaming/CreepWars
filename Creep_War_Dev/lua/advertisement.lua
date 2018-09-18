@@ -5,17 +5,32 @@ local string = string
 local tostring = tostring
 local wml = wml
 local on_event = wesnoth.require("lua/on_event.lua")
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 
 local addon_name = tostring((...).name)
 local addon_dir = tostring((...).dir)
 local addon_about = tostring((...).about)
 local addon_icon = tostring((...).icon)
+addon_icon = string.gsub(addon_icon, "\n", "") .. "~SCALE_INTO(144,144)"
+
+wesnoth.wml_actions.set_menu_item {
+	id = "about_" .. addon_dir,
+	description = "About: " .. addon_name,
+	synced = false,
+	T.command {
+		T.message {
+			caption = addon_name,
+			message = addon_about,
+			image = addon_icon
+		}
+	}
+}
 
 local function show_message(text)
 	wesnoth.wml_actions.message {
 		caption = addon_name,
 		message = text,
-		image = string.gsub(addon_icon, "\n", "") .. "~SCALE_INTO(144,144)",
+		image = addon_icon,
 	}
 end
 

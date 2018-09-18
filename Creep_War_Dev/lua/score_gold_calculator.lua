@@ -5,6 +5,7 @@ local creepwars = creepwars
 local ipairs = ipairs
 local string = string
 local tostring = tostring
+local wml = wml
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local is_ai_array = creepwars.is_ai_array
 local score_per_kill = creepwars.score_per_kill
@@ -128,6 +129,7 @@ local function unit_kill_event(attacker, defender)
 
 	-- guard hp
 	local guard_give_hp = (creepwars.guard_health_level_add + defender.level) / 4
+	guard_give_hp = guard_give_hp * (wml.variables.lessrandom_multiplier or 1)
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if side_to_team[unit.side] == team and is_ai_array[unit.side] then
 			wesnoth.add_modification(unit, "object", {

@@ -175,8 +175,8 @@ local function weapon_item(settings)
 
 	local specials_names = creepwars.array_map(settings.specials or {},
 		function(s) return tostring(s[2].name) end)
-	local specials_string = table.concat(specials_names, ",")
-	local text = string.format("%s-%s %s\n%s %s %s\n",
+	local specials_string = table.concat(specials_names, ", ")
+	local text = string.format("%s-%s %s\n%s %s <b>%s</b>\n",
 		effect.damage,
 		effect.number,
 		effect.name,
@@ -202,6 +202,15 @@ local function weapon_item(settings)
 end
 
 local weapon_loop = function()
+	local attack_only_slow = {
+		T.disable {
+			active_on = "defense",
+			id = "creepwars_attack_only",
+			name = wesnoth.textdomain("wesnoth-Ageless_Era")("attack only"),
+			description = wesnoth.textdomain("wesnoth-Ageless_Era")("This weapon will never be used on defense."),
+		},
+		creepwars.weapon_specials.WEAPON_SPECIAL_SLOW,
+	}
 	repeat
 		local label = "Weapon Upgrade."
 		label = label .. "\nYour gold: " .. event_side.gold
@@ -215,20 +224,21 @@ local weapon_loop = function()
 					type = "blade",
 					icon = "attacks/dagger-human.png",
 					range = "melee",
-					damage = 9,
-					number = 1,
+					damage = 4,
+					number = 3,
 				}
 			},
 			weapon_item {
 				gold = 34,
+				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_FIRSTSTRIKE },
 				effect = {
 					apply_to = "new_attack",
-					name = "short sword",
-					type = "blade",
-					icon = "attacks/sword-human-short.png",
+					name = "pike",
+					type = "pierce",
+					icon = "attacks/pike.png",
 					range = "melee",
-					damage = 6,
-					number = 3,
+					damage = 13,
+					number = 1,
 				}
 			},
 			weapon_item {
@@ -244,15 +254,16 @@ local weapon_loop = function()
 				}
 			},
 			weapon_item {
-				gold = 34,
+				gold = 50,
+				specials = attack_only_slow,
 				effect = {
 					apply_to = "new_attack",
-					name = "mace",
+					name = "whip",
 					type = "impact",
-					icon = "attacks/mace.png",
+					icon = "attacks/whip.png",
 					range = "melee",
-					damage = 9,
-					number = 2,
+					damage = 5,
+					number = 3,
 				}
 			},
 			weapon_item {
@@ -267,24 +278,8 @@ local weapon_loop = function()
 					number = 3
 				}
 			},
-			--			{
-			--				text = "spear + javelin",
-			--				image = "attacks/spear.png",
-			--			},
 			weapon_item {
-				gold = 40,
-				effect = {
-					apply_to = "new_attack",
-					name = "thunderstick",
-					type = "pierce",
-					icon = "attacks/thunderstick.png",
-					range = "ranged",
-					damage = 15,
-					number = 1
-				}
-			},
-			weapon_item {
-				gold = 28,
+				gold = 26,
 				effect = {
 					apply_to = "new_attack",
 					name = "bow",
@@ -295,10 +290,6 @@ local weapon_loop = function()
 					number = 3
 				}
 			},
---			{
---				text = "crossbow",
---				image = "attacks/crossbow-human.png",
---			},
 			weapon_item {
 				gold = 36,
 				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_MARKSMAN },
@@ -308,25 +299,25 @@ local weapon_loop = function()
 					type = "pierce",
 					icon = "attacks/bow-elven-magic.png",
 					range = "ranged",
-					damage = 6,
-					number = 3,
+					damage = 13,
+					number = 1,
 				}
 			},
 			weapon_item {
-				gold = 72,
-				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_SLOW },
+				gold = 50,
+				specials = attack_only_slow,
 				effect = {
 					apply_to = "new_attack",
 					name = "net",
 					type = "impact",
 					icon = "attacks/net.png",
 					range = "ranged",
-					damage = 4,
-					number = 2,
+					damage = 5,
+					number = 3,
 				}
 			},
 			weapon_item {
-				gold = 56,
+				gold = 50,
 				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_POISON },
 				effect = {
 					apply_to = "new_attack",
@@ -353,14 +344,13 @@ local weapon_loop = function()
 			},
 			weapon_item {
 				gold = 40,
-				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_MAGICAL },
 				effect = {
 					apply_to = "new_attack",
 					name = "chill wave",
 					type = "cold",
 					icon = "attacks/iceball.png",
 					range = "ranged",
-					damage = 7,
+					damage = 9,
 					number = 2,
 				}
 			},

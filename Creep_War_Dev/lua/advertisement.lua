@@ -38,7 +38,7 @@ local filename = "~add-ons/" .. addon_dir .. "/target/version.txt"
 local my_version = wesnoth.have_file(filename) and wesnoth.read_file(filename) or "0.0.0"
 
 local highest_ver_key = "addon_" .. addon_dir .. "_highest"
-wml.variables[highest_ver_key] = "0.0.0"
+wml.variables[highest_ver_key] = my_version
 
 on_event("side turn 1", function()
 	local side_version = wesnoth.synchronize_choice(function() return { v = my_version } end).v

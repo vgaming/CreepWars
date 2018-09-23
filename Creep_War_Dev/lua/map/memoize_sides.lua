@@ -6,7 +6,7 @@ local ipairs = ipairs
 
 local is_ai_array = {}
 for _, side in ipairs(wesnoth.sides) do
-	is_ai_array[side.side] = side.defeat_condition == "no_leader_left"
+	is_ai_array[side.side] = not side.__cfg.allow_player
 end
 
 local side_to_team = {}

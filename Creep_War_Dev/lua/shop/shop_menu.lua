@@ -262,7 +262,7 @@ local weapon_loop = function()
 					type = "impact",
 					icon = "attacks/whip.png",
 					range = "melee",
-					damage = 5,
+					damage = 7,
 					number = 3,
 				}
 			},
@@ -312,7 +312,7 @@ local weapon_loop = function()
 					type = "impact",
 					icon = "attacks/net.png",
 					range = "ranged",
-					damage = 5,
+					damage = 7,
 					number = 3,
 				}
 			},

@@ -1,9 +1,9 @@
-map_data="{./middle.map}"
+map_data="{./snow.map}"
 
 #define CREEPWARS_SCENARIO_ID
-Creep_Wars_middle#enddef
+Creep_Wars_snow#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars middle#enddef
+Creep Wars snow#enddef
 
 
 {./human_ai_sides_macros.cfg}

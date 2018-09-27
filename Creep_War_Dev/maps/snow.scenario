@@ -1,7 +1,7 @@
 map_data="{./snow.map}"
 
 #define CREEPWARS_SCENARIO_ID
-Creep_Wars_snow#enddef
+{CREEPWARS_DIR}_snow#enddef
 #define CREEPWARS_SCENARIO_NAME
 Creep Wars snow#enddef
 

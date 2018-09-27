@@ -1,7 +1,7 @@
 map_data="{./narrow.map}"
 
 #define CREEPWARS_SCENARIO_ID
-Creep_Wars_narrow#enddef
+{CREEPWARS_DIR}_narrow#enddef
 #define CREEPWARS_SCENARIO_NAME
 Creep Wars narrow#enddef
 

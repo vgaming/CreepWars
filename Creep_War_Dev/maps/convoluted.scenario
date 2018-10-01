@@ -3,7 +3,7 @@ map_data="{./convoluted.map}"
 #define CREEPWARS_SCENARIO_ID
 {CREEPWARS_DIR}_convoluted#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars convoluted#enddef
+Creep Wars mountain pass by Eurydike (experimental)#enddef
 
 
 [event]

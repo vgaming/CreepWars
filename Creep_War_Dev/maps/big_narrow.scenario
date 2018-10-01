@@ -3,7 +3,7 @@ map_data="{./big_narrow.map}"
 #define CREEPWARS_SCENARIO_ID
 {CREEPWARS_DIR}_big_narrow#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars big narrow#enddef
+Creep Wars arena by Eurydike (experimental)#enddef
 
 
 [event]

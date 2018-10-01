@@ -1,0 +1,62 @@
+map_data="{./convoluted.map}"
+
+#define CREEPWARS_SCENARIO_ID
+{CREEPWARS_DIR}_convoluted#enddef
+#define CREEPWARS_SCENARIO_NAME
+Creep Wars convoluted#enddef
+
+
+[event]
+	name=preload
+	first_time_only=no
+	[lua]
+		code = <<
+			creepwars = {}
+			creepwars.shop_coordinates = {
+				{ { 5, 8 }, { 5, 13 }, },
+				{ { 31, 8 }, { 31, 13 }, },
+			}
+			creepwars.guards_pos = {
+				{ side = 4, x = 7, y = 6 },
+				{ side = 4, x = 7, y = 15 },
+				{ side = 8, x = 29, y = 6 },
+				{ side = 8, x = 29, y = 15 },
+			}
+			creepwars.scoreboard_pos = { { x = 17, y = 10 }, { x = 19, y = 10 } }
+			creepwars.mirror_style_label_pos = { x = 26, y = 2 }
+			creepwars.creep_count = 9
+		 >>
+	[/lua]
+[/event]
+
+
+{./human_ai_sides_macros.cfg}
+{CWD_HUMAN West}
+{CWD_HUMAN East}
+{CWD_HUMAN West}
+{CWD_AI West}
+{CWD_HUMAN East}
+{CWD_HUMAN West}
+{CWD_HUMAN East}
+{CWD_AI East}
+#undef CWD_HUMAN
+#undef CWD_AI
+
+
+#define TURN_ADVANTAGE
+2#enddef
+{./first_turn_advantage.cfg}
+#undef TURN_ADVANTAGE
+
+
+[label]
+	color="255,255,255"
+	immutable=yes
+	team_name=""
+	text="Game Rules:
+     Ctrl + j"
+	visible_in_fog=yes
+	visible_in_shroud=yes
+	x=26
+	y=1
+[/label]

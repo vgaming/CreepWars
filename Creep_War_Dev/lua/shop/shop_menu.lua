@@ -449,19 +449,18 @@ local heal_guards = function()
 	elseif wesnoth.get_variable(variable_name) == this_turn then
 		err("Can only heal once per turn")
 	else
-		local max_damage = 0
-		for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
-			if wesnoth.sides[unit.side].team_name == event_side.team_name
+		local guards = wesnoth.get_units { canrecruit = true }
+		guards = creepwars.array_filter(guards, function(unit)
+			return wesnoth.sides[unit.side].team_name == event_side.team_name
 				and wesnoth.sides[unit.side].__cfg.allow_player == false
-			then
-				max_damage = math.max(max_damage, unit.max_hitpoints - unit.hitpoints)
-			end
+		end)
+		local max_damage = 0
+		for _, unit in ipairs(guards) do
+			max_damage = math.max(max_damage, unit.max_hitpoints - unit.hitpoints)
 		end
 		if max_damage > 0 then
-			for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
-				if unit.max_hitpoints - unit.hitpoints == max_damage
-					and wesnoth.sides[unit.side].team_name == event_side.team_name
-				then
+			for _, unit in ipairs(guards) do
+				if unit.max_hitpoints - unit.hitpoints == max_damage then
 					unit.hitpoints = math.min(unit.hitpoints + unit.max_hitpoints / 5, unit.max_hitpoints)
 					break
 				end

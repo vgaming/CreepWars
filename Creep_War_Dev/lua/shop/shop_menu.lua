@@ -440,6 +440,15 @@ local resistance_loop = function()
 end
 
 
+local function allied_guards()
+	local guards = wesnoth.get_units { canrecruit = true }
+	guards = creepwars.array_filter(guards, function(unit)
+		return wesnoth.sides[unit.side].team_name == event_side.team_name
+			and wesnoth.sides[unit.side].__cfg.allow_player == false
+	end)
+	return guards
+end
+
 local heal_guard_cost = 5
 local heal_guards = function()
 	local this_turn = wesnoth.current.turn .. "," .. wesnoth.current.side
@@ -449,11 +458,7 @@ local heal_guards = function()
 	elseif wesnoth.get_variable(variable_name) == this_turn then
 		err("Can only heal once per turn")
 	else
-		local guards = wesnoth.get_units { canrecruit = true }
-		guards = creepwars.array_filter(guards, function(unit)
-			return wesnoth.sides[unit.side].team_name == event_side.team_name
-				and wesnoth.sides[unit.side].__cfg.allow_player == false
-		end)
+		local guards = allied_guards()
 		local max_damage = 0
 		for _, unit in ipairs(guards) do
 			max_damage = math.max(max_damage, unit.max_hitpoints - unit.hitpoints)
@@ -479,7 +484,7 @@ local unpoison_guards = function()
 		err("Not enough gold")
 	else
 		local cured = false
-		for _, unit in ipairs(wesnoth.get_units { ability = "creepwars_guard" }) do
+		for _, unit in ipairs(allied_guards()) do
 			if unit.status.poisoned then
 				cured = true
 				unit.status.poisoned = false

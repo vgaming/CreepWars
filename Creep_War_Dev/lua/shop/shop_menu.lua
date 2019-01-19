@@ -562,10 +562,14 @@ local function show_shop_menu()
 	unit.variables.creepwars_strikes = unit.variables.creepwars_strikes or 0
 
 	if rawget(_G, "lessrandom") then _G.lessrandom.remove_object(unit) end
-	unit.hitpoints = unit.max_hitpoints
+	unit.hitpoints = math.max(unit.hitpoints, unit.max_hitpoints)
 	shop_loop()
-	if rawget(_G, "lessrandom") then _G.lessrandom.add_object(unit) end
-	unit.hitpoints = unit.max_hitpoints
+	if rawget(_G, "lessrandom") then
+		_G.lessrandom.add_object(unit)
+		unit.hitpoints = unit.max_hitpoints -- compensate for object removale scaling
+	else
+		unit.hitpoints = math.max(unit.hitpoints, unit.max_hitpoints)
+	end
 	apply_resistances() -- needs to be applied after each shop visit
 	creepwars.set_leader_ability(unit)
 end

@@ -79,6 +79,7 @@ local hero_loop = function()
 					apply_to = "hitpoints",
 					increase_total = big_hp,
 					increase = big_hp,
+					violate_maximum = true,
 				})
 			}, {
 				text = "Small Hitpoint Boost +" .. small_hp .. " HP (28% unit type HP)\n",
@@ -88,6 +89,7 @@ local hero_loop = function()
 					apply_to = "hitpoints",
 					increase_total = small_hp,
 					increase = small_hp,
+					violate_maximum = true,
 				})
 			}, {
 				text = "Movement +1 \n",

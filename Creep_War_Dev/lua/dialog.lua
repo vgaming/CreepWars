@@ -1,7 +1,7 @@
 -- << dialog
 
 local wesnoth = wesnoth
-local creepwars = creepwars
+local addon = creepwars
 local ipairs = ipairs
 local string = string
 local type = type
@@ -17,9 +17,9 @@ local function show_dialog_unsynchronized(settings)
 	local spacer = settings.spacer or "\n"
 	local label = settings.label
 	label = label and (spacer .. label .. spacer) or ""
+	local has_minimum = settings.has_minimum ~= false and true or false
 	local options = settings.options
 	local show_images = options[1].image and true or false
-	local has_minimum = settings.has_minimum ~= false and true or false
 
 	local description_row = T.row {
 		T.column { T.label { use_markup = true, label = label } },
@@ -106,8 +106,8 @@ local function show_dialog(settings)
 end
 
 
-creepwars.show_dialog = show_dialog
-creepwars.show_dialog_unsynchronized = show_dialog_unsynchronized
+addon.show_dialog = show_dialog
+addon.show_dialog_unsynchronized = show_dialog_unsynchronized
 
 
 -- >>

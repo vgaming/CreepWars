@@ -20,18 +20,18 @@ local function is_single_survivor()
 end
 
 
-local function side_is_local(side)
+local function is_local_human(side)
 	return wesnoth.sides[side].controller == "human" and wesnoth.sides[side].is_local ~= false
 end
 
 local function am_i_victorious(winner_team)
 	for _, side in ipairs(wesnoth.sides) do
-		if side.team_name == winner_team and side_is_local(side.side) then
+		if side.team_name == winner_team and is_local_human(side.side) then
 			return true
 		end
 	end
 	for _, side in ipairs(wesnoth.sides) do
-		if side_is_local(side.side) then
+		if is_local_human(side.side) then
 			return false
 		end
 	end

@@ -39,6 +39,15 @@ for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
 		cumulative_y_coords[#cumulative_y_coords + 1] = xy[2]
 		set[xy[1] .. "," .. xy[2]] = true
 	end
+
+	for side_number, _ in ipairs(wesnoth.sides) do
+		if creepwars.side_to_team[side_number] == team_index then
+			local start_loc = wesnoth.get_starting_location(side_number)
+				cumulative_x_coords[#cumulative_x_coords + 1] = start_loc[1]
+				cumulative_y_coords[#cumulative_y_coords + 1] = start_loc[2]
+		end
+	end
+
 	wesnoth.wml_actions.modify_ai {
 		side = creepwars.team_ai_side[team_index],
 		action = "add",

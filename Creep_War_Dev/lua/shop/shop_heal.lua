@@ -23,7 +23,7 @@ for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
 		wesnoth.wml_actions.label {
 			x = xy[1],
 			y = xy[2],
-			team_name = wesnoth.sides[creepwars.team_array[team_index][1]].team_name,
+			team_name = creepwars.team_array[team_index][1].team_name,
 			text = "Shop"
 		}
 		wesnoth.wml_actions.event {
@@ -32,7 +32,7 @@ for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
 				x = xy[1],
 				y = xy[2],
 				text = "",
-				team_name = wesnoth.sides[creepwars.team_array[team_index][1]].team_name,
+				team_name = creepwars.team_array[team_index][1].team_name,
 			}
 		}
 		cumulative_x_coords[#cumulative_x_coords + 1] = xy[1]

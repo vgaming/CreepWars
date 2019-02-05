@@ -36,7 +36,7 @@ local function info_message()
 		local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
 		local gold = wesnoth.get_variable("creepwars_gold_" .. team)
 		local score = string.format("%.2f", wesnoth.get_variable("creepwars_score_" .. team))
-		local text = "\n" .. wesnoth.sides[team_sides[1]].user_team_name
+		local text = "\n" .. team_sides[1].user_team_name
 			.. ": <span color='#FF8080'>" .. score .. " score</span>, "
 			.. "<span color='#FFE680'>" .. gold .. " gold</span>"
 			.. "<span color='#FFFFFF'>, " .. creepkills + leaderkills .. " total kills, "

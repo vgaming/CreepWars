@@ -70,12 +70,12 @@ end
 local function set_all_leaders(unit_array_function)
 	for team_index, side_array in ipairs(creepwars.team_array) do
 		side_array = creepwars.array_filter(side_array, function(s)
-			return not is_ai_array[s] and #wesnoth.get_units { canrecruit = true, side = s } > 0
+			return not is_ai_array[s.side] and #wesnoth.get_units { canrecruit = true, side = s.side } > 0
 		end)
 		local unit_array = unit_array_function()
-		for side_in_team_index, side_number in ipairs(side_array) do
+		for side_in_team_index, side in ipairs(side_array) do
 			local unit_type = unit_array[math.fmod(side_in_team_index - team_index + #side_array, #side_array) + 1]
-			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side_number }) do
+			for _, unit in ipairs(wesnoth.get_units { canrecruit = true, side = side.side }) do
 				set_type(unit, unit_type, false)
 			end
 		end
@@ -90,14 +90,14 @@ local function force_mirror()
 	end
 	for _, side_array in ipairs(creepwars.team_array) do
 		side_array = creepwars.array_filter(side_array, function(s)
-			return not is_ai_array[s] and #wesnoth.get_units { canrecruit = true, side = s } > 0
+			return not is_ai_array[s.side] and #wesnoth.get_units { canrecruit = true, side = s.side } > 0
 		end)
-		for side_in_team_index, side_number in ipairs(side_array) do
+		for side_in_team_index, side in ipairs(side_array) do
 			--print("iterating over side", side_number,
 			--	"chose_random", wesnoth.sides[side_number].__cfg.chose_random,
 			--	"was type", wesnoth.get_units { canrecruit = true, side = side_number }[1].type)
-			if wesnoth.sides[side_number].__cfg.chose_random == false then
-				units[side_in_team_index] = wesnoth.get_units { canrecruit = true, side = side_number }[1].type
+			if side.__cfg.chose_random == false then
+				units[side_in_team_index] = wesnoth.get_units { canrecruit = true, side = side.side }[1].type
 			end
 		end
 	end

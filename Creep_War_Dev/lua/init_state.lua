@@ -1,9 +1,10 @@
 -- << init_state.lua
 
 local wesnoth = wesnoth
-local creepwars = creepwars
+local addon = creepwars
 local ipairs = ipairs
-local is_ai_array = creepwars.is_ai_array
+local is_ai_array = addon.is_ai_array
+local on_event = wesnoth.require("lua/on_event.lua")
 
 
 -- kill auto-generated AI leaders (not guards)
@@ -17,7 +18,7 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 	end
 end
 
-for _, guard in ipairs(creepwars.guards_pos) do
+for _, guard in ipairs(addon.guards_pos) do
 	local unit = {
 		side = guard.side,
 		type = "Elvish Marshal",
@@ -35,5 +36,16 @@ end
 for _, side in ipairs(wesnoth.sides) do
 	side.recruit = {}
 end
+
+on_event("start", function()
+	for _, team in ipairs(addon.team_array) do
+		local active = addon.array_filter(team, function(s)
+			return #wesnoth.get_units { canrecruit = true, side = s.side } > 0
+		end)
+		for _, side in ipairs(team) do
+			side.gold = side.gold * (6 - #active) / 2
+		end
+	end
+end)
 
 -- >>

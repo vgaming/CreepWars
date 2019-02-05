@@ -19,7 +19,7 @@ for _, side in ipairs(wesnoth.sides) do
 	side_to_team[side.side] = team_id
 	if is_ai_array[side.side] then team_ai_side[team_id] = side.side end
 	team_array[team_id] = team_array[team_id] or {}
-	team_array[team_id][#team_array[team_id] + 1] = side.side
+	team_array[team_id][#team_array[team_id] + 1] = side
 end
 
 

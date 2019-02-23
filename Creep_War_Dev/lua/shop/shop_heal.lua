@@ -2,12 +2,13 @@
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local ipairs = ipairs
 local math = math
 local table = table
+local wml = wml
 local is_ai_array = creepwars.is_ai_array
 local side_to_team = creepwars.side_to_team
+local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 
 local team_shop_set = {}
 for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
@@ -68,8 +69,12 @@ local function is_at_shop(side, x, y)
 	return team_shop_set[side_to_team[side]][x .. "," .. y]
 end
 
-local unit_at_shop = function(unit)
-	return team_shop_set[side_to_team[unit.side]][unit.x .. "," .. unit.y]
+local unit_at_shop = function()
+	local unit = wesnoth.get_unit(wml.variables.x1, wml.variables.y1)
+	return unit
+		and unit.canrecruit
+		and unit.side == wesnoth.current.side
+		and team_shop_set[side_to_team[unit.side]][unit.x .. "," .. unit.y]
 end
 
 

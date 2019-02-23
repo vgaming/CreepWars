@@ -578,4 +578,19 @@ end
 
 creepwars.show_shop_menu = show_shop_menu
 
+wesnoth.wml_actions.set_menu_item {
+	id = "creepwars_enter_shop_menu",
+	description = "Enter Shop",
+	T.show_if {
+		T.lua {
+			code = "return creepwars_unit_at_shop()"
+		},
+	},
+	T.command {
+		T.lua {
+			code = "creepwars.show_shop_menu()"
+		}
+	}
+}
+
 -- >>

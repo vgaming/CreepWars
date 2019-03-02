@@ -54,8 +54,3 @@ Creep Wars snow#enddef
 		>>
 	[/lua]
 [/event]
-
-#define TURN_ADVANTAGE
-1#enddef
-{./first_turn_advantage.cfg}
-#undef TURN_ADVANTAGE

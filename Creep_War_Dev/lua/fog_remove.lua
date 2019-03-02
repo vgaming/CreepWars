@@ -14,7 +14,7 @@ for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 	if is_ai_array[unit.side] == true then
 		local ability = T.name_only {
 			name = "guard",
-			description = "All team members lose if this unit dies. \n"
+			description = "Team loses if this unit dies. \n"
 				.. "You can heal and unpoison your guard at the Shop."
 		}
 		wesnoth.add_modification(unit, "object", {

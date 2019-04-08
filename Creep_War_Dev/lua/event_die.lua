@@ -1,8 +1,8 @@
 -- << event_die.lua
 
 local wesnoth = wesnoth
-local creepwars = creepwars
-local is_ai_array = creepwars.is_ai_array
+local addon = creepwars
+local is_ai_array = addon.is_ai_array
 
 local defender = wesnoth.get_unit(wesnoth.get_variable("x1") or 0, wesnoth.get_variable("y1") or 0)
 local attacker = wesnoth.get_unit(wesnoth.get_variable("x2") or 0, wesnoth.get_variable("y2") or 0)
@@ -16,11 +16,16 @@ elseif not defender.canrecruit and not defender.variables["creepwars_creep"] the
 	print(msg)
 	-- wesnoth.message("Creep Wars", msg)
 else
-	creepwars.unit_kill_event(attacker, defender)
-	if defender.canrecruit and is_ai_array[defender.side] then
-		creepwars.guard_killed_event(attacker.side, defender.side)
-	elseif defender.canrecruit and not is_ai_array[defender.side] then
+	if not defender.canrecruit then
+		addon.unit_kill_event(attacker, defender)
+	elseif not is_ai_array[defender.side] then
+		addon.unit_kill_event(attacker, defender)
 		creepwars.leader_died_event(defender)
+	elseif #addon.alive_teams_count() >= 3 then
+		addon.unit_kill_event(attacker, defender)
+		addon.guard_killed_event(attacker.side, defender.side)
+	else
+		addon.guard_killed_event(attacker.side, defender.side)
 	end
 end
 

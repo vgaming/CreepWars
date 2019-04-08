@@ -46,7 +46,7 @@ local function show_dialog_unsynchronized(settings)
 
 	local ok_cancel_buttons = T.grid {
 		T.row {
-			T.column { T.button { id = "cancel", return_value = -2, label = "\n" .. translate "Cancel" .. "\n" } },
+			T.column { T.button { id = "cancel", return_value = -2, label = "\n" .. translate "Back (Esc)" .. "\n" } },
 			T.column { T.button { id = "ok", return_value = -1, label = "\n" .. translate "OK" .. "\n" } },
 		}
 	}

@@ -218,7 +218,7 @@ local weapon_loop = function()
 		label = label .. "\nYour gold: " .. event_side.gold
 		local options = {
 			weapon_item {
-				gold = 34,
+				gold = 30,
 				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_BACKSTAB },
 				effect = {
 					apply_to = "new_attack",
@@ -281,7 +281,7 @@ local weapon_loop = function()
 				}
 			},
 			weapon_item {
-				gold = 26,
+				gold = 24,
 				effect = {
 					apply_to = "new_attack",
 					name = "bow",
@@ -319,7 +319,7 @@ local weapon_loop = function()
 				}
 			},
 			weapon_item {
-				gold = 50,
+				gold = 46,
 				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_POISON },
 				effect = {
 					apply_to = "new_attack",
@@ -532,7 +532,7 @@ local shop_loop = loop("Shop.") {
 		func = resistance_loop
 	}, {
 		text = "Heal Guard",
-		image = "units/human-loyalists/lieutenant.png",
+		image = "units/elves-wood/marshal.png",
 		func = guard_loop
 	},
 }

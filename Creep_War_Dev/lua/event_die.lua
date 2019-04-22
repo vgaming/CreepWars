@@ -21,7 +21,7 @@ else
 	elseif not is_ai_array[defender.side] then
 		addon.unit_kill_event(attacker, defender)
 		creepwars.leader_died_event(defender)
-	elseif #addon.alive_teams_count() >= 3 then
+	elseif addon.alive_teams_count() >= 3 then
 		addon.unit_kill_event(attacker, defender)
 		addon.guard_killed_event(attacker.side, defender.side)
 	else

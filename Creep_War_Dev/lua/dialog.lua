@@ -18,6 +18,7 @@ local function show_dialog_unsynchronized(settings)
 	local label = settings.label
 	label = label and (spacer .. label .. spacer) or ""
 	local has_minimum = settings.has_minimum ~= false and true or false
+	local can_cancel = settings.can_cancel ~= false
 	local options = settings.options
 	local show_images = options[1].image and true or false
 
@@ -44,12 +45,17 @@ local function show_dialog_unsynchronized(settings)
 
 	local listbox = T.listbox { id = "the_list", list_definition, has_minimum = has_minimum }
 
-	local ok_cancel_buttons = T.grid {
-		T.row {
+	local ok_cancel_row
+	if can_cancel then
+		ok_cancel_row = T.row {
 			T.column { T.button { id = "cancel", return_value = -2, label = "\n" .. translate "Back (Esc)" .. "\n" } },
 			T.column { T.button { id = "ok", return_value = -1, label = "\n" .. translate "OK" .. "\n" } },
 		}
-	}
+	else
+		ok_cancel_row = T.row {
+			T.column { T.button { id = "ok", return_value = -1, label = "\n" .. translate "OK" .. "\n" } },
+		}
+	end
 
 	local dialog = {
 		T.tooltip { id = "tooltip_large" },
@@ -58,7 +64,7 @@ local function show_dialog_unsynchronized(settings)
 			T.row { T.column { T.spacer { width = 250 } } },
 			description_row,
 			T.row { T.column { horizontal_grow = true, listbox } },
-			T.row { T.column { ok_cancel_buttons } }
+			T.row { T.column { T.grid { ok_cancel_row } } }
 		}
 	}
 

@@ -107,7 +107,6 @@ end
 
 
 addon.show_dialog = show_dialog
-addon.show_dialog_unsynchronized = show_dialog_unsynchronized
 
 
 -- >>

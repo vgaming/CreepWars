@@ -38,10 +38,10 @@ local function ai_creep_gen(current_side_object)
 	end
 end
 
-if wesnoth.current.turn == 1 then
+on_event("start", function ()
 	ai_creep_gen({ side = 4})
 	ai_creep_gen({ side = 8})
-end
+end)
 
 on_event("turn refresh", ai_creep_gen)
 

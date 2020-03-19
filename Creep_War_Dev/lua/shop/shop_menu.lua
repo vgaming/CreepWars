@@ -269,7 +269,7 @@ local weapon_loop = function()
 				}
 			},
 			weapon_item {
-				gold = 40,
+				gold = 36,
 				effect = {
 					apply_to = "new_attack",
 					name = "torch",
@@ -281,7 +281,7 @@ local weapon_loop = function()
 				}
 			},
 			weapon_item {
-				gold = 24,
+				gold = 20,
 				effect = {
 					apply_to = "new_attack",
 					name = "bow",
@@ -314,12 +314,12 @@ local weapon_loop = function()
 					type = "impact",
 					icon = "attacks/net.png",
 					range = "ranged",
-					damage = 6,
+					damage = 5,
 					number = 3,
 				}
 			},
 			weapon_item {
-				gold = 46,
+				gold = 40,
 				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_POISON },
 				effect = {
 					apply_to = "new_attack",
@@ -388,7 +388,7 @@ local function apply_resistances()
 end
 
 local function resistance_item(available, weap)
-	local cost = 15
+	local cost = 14
 	local key_name = "creepwars_res_" .. weap
 	local have = event_unit.variables[key_name]
 	local func = function()
@@ -424,9 +424,11 @@ local resistance_loop = function()
 				event_unit.variables.creepwars_res_fire +
 				event_unit.variables.creepwars_res_impact +
 				event_unit.variables.creepwars_res_pierce
-		local available = 15 - sum
-		local label = "Resistance is <b>multiplicative</b>. \nAvailable:" .. available .. "/10\n"
-		label = label .. "(Wesnoths shows unit resistances by howering unit HP on the right)\n"
+		local maximum_allowed = 15
+		local available = maximum_allowed - sum
+		local label = "Resistance is <b>multiplicative</b>. \n"
+		label = label .. "Available:" .. available .. "/" .. maximum_allowed .. "\n"
+		label = label .. "(Wesnoths shows unit resistances by howering unit HP on the right panel)\n"
 		label = label .. "\nYour gold: " .. event_side.gold
 		local options = {
 			resistance_item(available, "arcane"),

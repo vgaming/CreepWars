@@ -24,7 +24,7 @@ for _, guard in ipairs(addon.guards_pos) do
 		type = "Elvish Marshal",
 		name = "Guard",
 		max_moves = 0,
-		max_hitpoints = 60,
+		max_hitpoints = 60 * creepwars.guard_health_percentage / 100,
 		max_experience = 100000,
 		random_traits = false,
 		canrecruit = true,

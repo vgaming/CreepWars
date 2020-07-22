@@ -10,6 +10,7 @@ Creep Wars villages by Tondo#enddef
 	name=preload
 	first_time_only=no
 	[lua]
+		name = wide_Tondo
 		code = <<
 			creepwars = {}
 			creepwars.shop_coordinates = {

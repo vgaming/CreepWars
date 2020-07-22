@@ -10,6 +10,7 @@ Creep Wars wide#enddef
 	name=preload
 	first_time_only=no
 	[lua]
+		name = wide
 		code = <<
 			creepwars = {}
 			creepwars.shop_coordinates = {

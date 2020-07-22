@@ -25,6 +25,7 @@ Creep Wars 3team#enddef
 	name=preload
 	first_time_only=no
 	[lua]
+		name = 3team
 		code = <<
 			creepwars = {}
 			creepwars.mirror_style_label_pos = { x = 17, y = 3 }

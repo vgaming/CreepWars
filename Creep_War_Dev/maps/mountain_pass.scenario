@@ -10,6 +10,7 @@ Creep Wars mountain pass by Eurydike#enddef
 	name=preload
 	first_time_only=no
 	[lua]
+		name = mountain_pass
 		code = <<
 			creepwars = {}
 			creepwars.shop_coordinates = {

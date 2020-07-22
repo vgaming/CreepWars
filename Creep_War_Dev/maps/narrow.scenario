@@ -10,6 +10,7 @@ Creep Wars narrow#enddef
 	name=preload
 	first_time_only=no
 	[lua]
+		name = narrow
 		code = <<
 			creepwars = {}
 			creepwars.shop_coordinates = {

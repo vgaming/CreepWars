@@ -36,6 +36,7 @@ Creep Wars snow#enddef
 	name=preload
 	first_time_only=no
 	[lua]
+		name = snow
 		code = <<
 			creepwars = {}
 			creepwars.guards_pos = {

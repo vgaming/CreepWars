@@ -10,6 +10,7 @@ Creep Wars arena by Eurydike (experimental)#enddef
 	name=preload
 	first_time_only=no
 	[lua]
+		name = big_narrow
 		code = <<
 			creepwars = {}
 			creepwars.shop_coordinates = {

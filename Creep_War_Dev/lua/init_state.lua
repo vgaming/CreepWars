@@ -30,7 +30,7 @@ for _, guard in ipairs(addon.guards_pos) do
 		canrecruit = true,
 		{ "defense", { castle = 50, } },
 	}
-	wesnoth.put_unit(guard.x, guard.y, unit)
+	wesnoth.put_unit(unit, guard.x, guard.y)
 end
 
 for _, side in ipairs(wesnoth.sides) do

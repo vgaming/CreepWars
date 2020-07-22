@@ -160,7 +160,7 @@ local function unit_kill_event(attacker, defender)
 	end
 	wesnoth.set_variable("creepwars_gold_" .. team, gold)
 	for _, side in ipairs(wesnoth.sides) do
-		if side_to_team[side.side] == team then
+		if side_to_team[side.side] == team and not is_ai_array[side.side] then
 			side.gold = side.gold + gold - gold_orig
 		end
 	end

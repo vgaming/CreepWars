@@ -10,17 +10,25 @@ local split_comma = creepwars.split_comma
 local era_array = {}
 local era_set = {}
 
-for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
-	local units = multiplayer_side.recruit or multiplayer_side.leader or ""
-	for _, unit in ipairs(split_comma(units)) do
-		if era_set[unit] == nil and wesnoth.unit_types[unit] then
-			-- print("importing era unit " .. unit)
-			era_set[unit] = true
-			era_array[#era_array + 1] = unit
+local function init_era()
+	for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
+		local units = multiplayer_side.recruit or multiplayer_side.leader or ""
+		for _, unit in ipairs(split_comma(units)) do
+			if era_set[unit] == nil and wesnoth.unit_types[unit] then
+				-- print("importing era unit " .. unit)
+				era_set[unit] = true
+				era_array[#era_array + 1] = unit
+			end
 		end
 	end
 end
-
+if not pcall(init_era) then
+	local msg = "Failed to load Era " .. wesnoth.game_config.mp_settings.mp_era
+	wesnoth.wml_actions.message { caption = "Creep Wars", message = msg }
+	wesnoth.message("Creep Wars", msg)
+	wesnoth.wml_actions.endlevel { result = "defeat" }
+	init_era()
+end
 
 local function unit_count_specials(unit)
 	local result = {}

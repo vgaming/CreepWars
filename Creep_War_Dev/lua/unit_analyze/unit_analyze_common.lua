@@ -61,7 +61,7 @@ end
 local function can_be_a_leader(unit_type)
 	if creepwars.allow_overpowered then
 		return unit_type ~= "Fog Clearer"
-			and wesnoth.unit_types[unit_type].level <= 1
+			and wesnoth.unit_types[unit_type].level == 1
 	else
 		local advance_array = { unit_type }
 		add_advances(advance_array, nil, nil)
@@ -72,7 +72,7 @@ local function can_be_a_leader(unit_type)
 		end
 		return unit_count_specials(unit_type)["plague"] == nil
 			and unit_type ~= "Ghost" -- ugly hack until "resistances" is calculated properly
-			and wesnoth.unit_types[unit_type].level <= 1
+			and wesnoth.unit_types[unit_type].level == 1
 	end
 end
 

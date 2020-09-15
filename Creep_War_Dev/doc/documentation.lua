@@ -43,7 +43,7 @@ if wesnoth then
 	-- Recent changes:
 	wesnoth.message(
 		"Creep Wars",
-		"Press Ctrl J to see game rules."
+		"Press Ctrl J to see game rules. New in version 1.5.11: leaders can no longer be lvl-0 units, they are always lvl-1"
 	)
 
 	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}

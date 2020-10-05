@@ -226,12 +226,12 @@ local weapon_loop = function()
 					type = "blade",
 					icon = "attacks/dagger-human.png",
 					range = "melee",
-					damage = 4,
+					damage = 5,
 					number = 3,
 				}
 			},
 			weapon_item {
-				gold = 34,
+				gold = 40,
 				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_FIRSTSTRIKE },
 				effect = {
 					apply_to = "new_attack",
@@ -239,7 +239,7 @@ local weapon_loop = function()
 					type = "pierce",
 					icon = "attacks/pike.png",
 					range = "melee",
-					damage = 13,
+					damage = 14,
 					number = 1,
 				}
 			},
@@ -269,7 +269,7 @@ local weapon_loop = function()
 				}
 			},
 			weapon_item {
-				gold = 36,
+				gold = 40,
 				effect = {
 					apply_to = "new_attack",
 					name = "torch",
@@ -293,7 +293,7 @@ local weapon_loop = function()
 				}
 			},
 			weapon_item {
-				gold = 36,
+				gold = 40,
 				specials = { creepwars.weapon_specials.WEAPON_SPECIAL_MARKSMAN },
 				effect = {
 					apply_to = "new_attack",
@@ -301,7 +301,7 @@ local weapon_loop = function()
 					type = "pierce",
 					icon = "attacks/bow-elven-magic.png",
 					range = "ranged",
-					damage = 13,
+					damage = 14,
 					number = 1,
 				}
 			},

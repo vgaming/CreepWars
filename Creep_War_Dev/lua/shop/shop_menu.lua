@@ -211,6 +211,11 @@ local weapon_loop = function()
 			name = wesnoth.textdomain("wesnoth-Ageless_Era")("attack only"),
 			description = wesnoth.textdomain("wesnoth-Ageless_Era")("This weapon will never be used on defense."),
 		},
+		T.damage {
+			multiply = "0.70",
+			name = "weak70%",
+			description = "This weapon only deals 70% of its maximum damage (including upgrades)",
+		},
 		creepwars.weapon_specials.WEAPON_SPECIAL_SLOW,
 	}
 	repeat
@@ -264,7 +269,7 @@ local weapon_loop = function()
 					type = "impact",
 					icon = "attacks/whip.png",
 					range = "melee",
-					damage = 6,
+					damage = 10,
 					number = 3,
 				}
 			},
@@ -314,7 +319,7 @@ local weapon_loop = function()
 					type = "impact",
 					icon = "attacks/net.png",
 					range = "ranged",
-					damage = 5,
+					damage = 10,
 					number = 3,
 				}
 			},

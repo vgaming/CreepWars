@@ -43,7 +43,7 @@ if wesnoth then
 	-- Recent changes:
 	wesnoth.message(
 		"Creep Wars",
-		"Press Ctrl J to see game rules. New in version 1.5.13: slow weapons are stronger at start but get weaker later."
+		"Press Ctrl J to see game rules. Recent changes: new \"Random\" experimental map created. Try it out!"
 	)
 
 	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}

@@ -1,0 +1,18 @@
+{./snow.scenario}
+
+map_data="{./random.map}"
+
+#define CREEPWARS_SCENARIO_ID
+{CREEPWARS_DIR}_random#enddef
+
+#define CREEPWARS_SCENARIO_NAME
+Creep Wars random#enddef
+
+[event]
+	name=start
+	first_time_only=yes
+	[lua]
+		name = random_map
+		code = {~add-ons/{CREEPWARS_DIR}/lua/random_map.lua}
+	[/lua]
+[/event]

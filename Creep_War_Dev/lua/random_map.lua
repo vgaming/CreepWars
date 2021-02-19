@@ -3,10 +3,10 @@
 local helper = wesnoth.require("lua/helper.lua")
 
 local terrain_base_probabilities = {
-	["Gs"] = 3, -- grass
-	["Gd"] = 3, -- grass
+	["Gs"] = 2, -- grass
+	["Gd"] = 2, -- grass
 	["Gg"] = 2, -- grass
-	["Wwf"] = 25, -- ford
+	["Wwf"] = 20, -- ford
 	["Gs^Fms"] = 2, -- forest
 	["Gll^Fp"] = 2, -- forest
 	["Mm"] = 1, -- mountain
@@ -14,7 +14,7 @@ local terrain_base_probabilities = {
 	["Hh"] = 2, -- hill
 	["Hhd"] = 2, -- dry hill
 	["Uu^Uf"] = 2, -- mushrooms
-	["Dd^Do"] = 1, -- oasis
+	["Dd^Do"] = 0, -- oasis
 	["Ss"] = 1, -- swamp
 	["Gs^Vh"] = 0, -- village
 }

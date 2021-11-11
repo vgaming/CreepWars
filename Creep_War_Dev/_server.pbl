@@ -2,6 +2,7 @@ email="n1m5spm@yandex.com"
 author="Vasya N"
 type="scenario_mp"
 title="Creep Wars"
+dependencies=""
 [feedback]
 	topic_id=47655
 [/feedback]

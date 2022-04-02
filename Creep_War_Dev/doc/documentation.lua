@@ -43,7 +43,8 @@ if wesnoth then
 	-- Recent changes:
 	wesnoth.message(
 		"Creep Wars",
-		"Press Ctrl J to see game rules. Recent changes: new \"Random\" experimental map created. Try it out!"
+		"Press Ctrl J to see game rules. Recent changes: the new Random map is now symmetrical. "
+			.. "Score display improved to be more intuitive and fun. Try it out!"
 	)
 
 	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}

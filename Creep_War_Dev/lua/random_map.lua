@@ -68,14 +68,25 @@ local function is_near_leader(x, y)
 	return wesnoth.get_unit { x = x, y = y, canrecruit = true } ~= nil
 end
 
+local function rotate(wes_x, wes_y)
+	if wes_x % 2 == 0 then
+		return 36 - wes_x, 14 - wes_y
+	else
+		return 36 - wes_x, 15 - wes_y
+	end
+end
+
 local drake = wesnoth.create_unit { type = "Drake Burner" }
-for x = 14, 22, 1 do
+for x = 18, 22, 1 do
 	for y = 4, 10, 1 do
 		local terr = wesnoth.get_terrain(x, y)
 		local info = wesnoth.get_terrain_info(terr)
 		local move_cost = wesnoth.unit_movement_cost(drake, terr)
 		if move_cost < 50 and not info.castle and not is_near_leader(x, y) then
-			wesnoth.set_terrain(x, y, random_terrain())
+			terr = random_terrain()
+			wesnoth.set_terrain(x, y, terr)
+			local rot_x, rot_y = rotate(x, y)
+			wesnoth.set_terrain(rot_x, rot_y, terr)
 		end
 	end
 end

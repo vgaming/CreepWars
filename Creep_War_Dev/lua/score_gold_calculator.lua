@@ -53,14 +53,12 @@ local function display_stats()
 		local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
 		local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
 		local gold = wesnoth.get_variable("creepwars_gold_" .. team)
-		local score = string.format("%.2f", wesnoth.get_variable("creepwars_score_" .. team))
+		--local score = string.format("%.2f", wesnoth.get_variable("creepwars_score_" .. team))
 		local text = ""
-				.. "<span color='#FF8080'>" .. score .. "  " .. "</span>"
-				.. "<span color='#FFE680'>" .. gold .. "</span>\n"
-				.. " <span color='#FFFFFF'>"
-				.. "(" .. creepkills + leaderkills .. "  "
-				.. leaderkills .. ")"
-				.. "</span>\n"
+			.. "<span color='#FFFFFF'>" .. creepkills .. " kills</span>\n"
+			.. "<span color='#FF8080'>" .. leaderkills .. " leaderkills</span>\n"
+			.. "<span color='#FFE680'>" .. gold .. " gold</span>\n"
+		--.. "<span color='#FFE680'>" .. score .. " creep cost</span>"  -- 4-line message doesn't work in wesnoth
 		wesnoth.wml_actions.label {
 			x = creepwars.scoreboard_pos[team].x,
 			y = creepwars.scoreboard_pos[team].y,

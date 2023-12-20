@@ -43,6 +43,28 @@ on_event("start", function ()
 	ai_creep_gen({ side = 8})
 end)
 
+--- Give score per turn. It's important that "side 1 turn" is triggered before "turn refresh",
+--- as documented here: https://wiki.wesnoth.org/EventWML#side_X_turn
+on_event("side 1 turn", function(current_side_object)
+	local turn = current_side_object.turn or wesnoth.current.turn
+	if turn > 1 then
+		for team_id, _ in ipairs(creepwars.team_array) do
+			creepwars.increase_score_for_team(team_id, creepwars.score_per_turn)
+		end
+	end
+end)
+
 on_event("turn refresh", ai_creep_gen)
+
+-- Give gold each AI turn
+on_event("turn refresh", function(current_side_object)
+	local current_side = current_side_object.side or wesnoth.current.side
+	if is_ai_array[current_side] and not wesnoth.sides[current_side].lost then
+		for team_id, _ in ipairs(creepwars.team_array) do
+			creepwars.increase_gold_for_team(team_id, creepwars.gold_per_ai_turn)
+		end
+	end
+
+end)
 
 -- >>

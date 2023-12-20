@@ -21,6 +21,7 @@ end
 
 replace("#lvl0_barrier", lvl0_barrier)
 replace("#lvl3plus_barrier", creepwars.lvl3plus_barrier)
+replace("#gold_per_ai_turn", creepwars.gold_per_ai_turn)
 replace("#gold_start_p0", gold_per_kill_start)
 replace("#gold_start_p1", gold_per_kill_start + 1)
 replace("#gold_start_p2", gold_per_kill_start + 2)
@@ -42,9 +43,17 @@ if wesnoth then
 
 	-- Recent changes:
 	wesnoth.message(
+		"Creep Wars December 2023 update",
+		"The game is completely re-balanced, it should be easier to make a comeback. "
+			.. "A steady income 4g/turn is added, early kill bonus is nerfed."
+	)
+	wesnoth.message(
 		"Creep Wars",
-		"Press Ctrl J to see game rules. Recent changes: the new Random map is now symmetrical. "
-			.. "Score display improved to be more intuitive and fun. Try it out!"
+		"Press Ctrl J for details."
+	)
+	wesnoth.message(
+		"Creep Wars",
+		"If you create new CW maps, submit them to the forum! https://forums.wesnoth.org/viewtopic.php?t=47655"
 	)
 
 	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}

@@ -3,12 +3,9 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
-local string = string
-local tostring = tostring
 local wml = wml
 local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
 local is_ai_array = creepwars.is_ai_array
-local score_per_kill = creepwars.score_per_kill
 local side_to_team = creepwars.side_to_team
 local team_array = creepwars.team_array
 
@@ -20,31 +17,6 @@ if creepwars.scoreboard_help_label then
 		visible_in_shroud = true,
 		text = "<span color='#FFFFFF'>Scoreboard (Ctrl j):</span>"
 	}
-end
-
-
-local function info_message()
-	local msg = ""
-		.. "Mirror style : " .. creepwars.mirror_style .. "\n"
-		.. "Over-powered leaders : " .. (creepwars.allow_overpowered and "allowed" or "forbidden") .. "\n"
-		.. "Gold multiplier : " .. creepwars.gold_multiplier_percent .. "%\n"
-		.. "Guard health : " .. creepwars.guard_health_percentage .. "%\n"
-		.. "Reveal leaders : " .. tostring(creepwars.reveal_leaders) .. ""
-
-	for team, team_sides in ipairs(creepwars.team_array) do
-		local creepkills = wesnoth.get_variable("creepwars_creepkills_" .. team)
-		local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
-		local gold = wesnoth.get_variable("creepwars_gold_" .. team)
-		local score = string.format("%.2f", wesnoth.get_variable("creepwars_score_" .. team))
-		local text = "\n" .. team_sides[1].user_team_name
-			.. ": <span color='#FF8080'>" .. score .. " score</span>, "
-			.. "<span color='#FFE680'>" .. gold .. " gold</span>"
-			.. "<span color='#FFFFFF'>, " .. creepkills + leaderkills .. " total kills, "
-			.. leaderkills .. " leader kills."
-			.. "</span>"
-		msg = msg .. text
-	end
-	return msg .. "\n\n"
 end
 
 
@@ -76,9 +48,7 @@ local function display_stats()
 				description = "Death of your own guard",
 				condition = "lose",
 			},
-			note = "<span size='x-large' underline='low'>This game statistics</span>\n"
-				.. info_message()
-				.. wesnoth.get_variable("creepwars_objectives") .. "\n"
+			note = wesnoth.get_variable("creepwars_objectives")
 		}
 
 	end
@@ -104,8 +74,29 @@ local function get_opposite_team(team)
 	end
 end
 
+---@param team number, see `side_to_team`
+---@param give_gold number
+---@return void
+function creepwars.increase_gold_for_team(team, give_gold)
+	local gold_orig = wesnoth.get_variable("creepwars_gold_" .. team)
+	wesnoth.set_variable("creepwars_gold_" .. team, gold_orig + give_gold)
+	for _, side in ipairs(wesnoth.sides) do
+		if side_to_team[side.side] == team and not is_ai_array[side.side] then
+			side.gold = side.gold + give_gold
+		end
+	end
+end
+
+---@param team number, see `side_to_team`
+---@param give_score number
+---@return void
+function creepwars.increase_score_for_team(team, give_score)
+	local score = wesnoth.get_variable("creepwars_score_" .. team)
+	wesnoth.set_variable("creepwars_score_" .. team, score + give_score)
+end
 
 local function unit_kill_event(attacker, defender)
+	---@type number
 	local team = attacker and side_to_team[attacker.side] or get_opposite_team(side_to_team[defender.side])
 	if team == nil then
 		local msg = "Warning: Unit died without attacker. This is unexpected. " ..
@@ -121,9 +112,8 @@ local function unit_kill_event(attacker, defender)
 	local leaderkills = wesnoth.get_variable("creepwars_leaderkills_" .. team)
 
 	-- score
-	local score = wesnoth.get_variable("creepwars_score_" .. team)
-	score = score + score_per_kill(creepkills + leaderkills)
-	wesnoth.set_variable("creepwars_score_" .. team, score)
+	local give_score = creepwars.score_for_another_kill(creepkills + leaderkills)
+	creepwars.increase_score_for_team(team, give_score)
 
 	-- guard hp
 	local guard_give_hp = (creepwars.guard_health_level_add + defender.level) / 4
@@ -141,9 +131,6 @@ local function unit_kill_event(attacker, defender)
 	end
 
 	-- gold
-	local gold_orig = wesnoth.get_variable("creepwars_gold_" .. team)
-	local gold_kills = creepkills + 4 * leaderkills
-
 	local leader_multiplier = defender.canrecruit
 		and creepwars.gold_leader_multiplier
 		or 1
@@ -152,17 +139,14 @@ local function unit_kill_event(attacker, defender)
 		and creepwars.gold_guard_multiplier
 		or 1
 
-	local gold = gold_orig
+	local gold_kills = creepkills + 4 * leaderkills
+	local give_gold = 0
 	for i = 0, leader_multiplier * guard_multiplier - 1 do
-		gold = gold + creepwars.gold_per_kill(gold_kills + i)
+		give_gold = give_gold + creepwars.gold_per_kill(gold_kills + i)
 	end
-	wesnoth.set_variable("creepwars_gold_" .. team, gold)
-	for _, side in ipairs(wesnoth.sides) do
-		if side_to_team[side.side] == team and not is_ai_array[side.side] then
-			side.gold = side.gold + gold - gold_orig
-		end
-	end
+	creepwars.increase_gold_for_team(team, give_gold)
 
+	-- Update kill stats
 	if defender.canrecruit then
 		wesnoth.set_variable("creepwars_leaderkills_" .. team, leaderkills + guard_multiplier)
 	else

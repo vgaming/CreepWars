@@ -1,9 +1,15 @@
--- << ai_creep_gen
+-- << ai_creep_gen | Creep_War_Dev
+if rawget(_G, "ai_creep_gen | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "ai_creep_gen | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 local on_event = wesnoth.require("lua/on_event.lua")
 local generate_creep = creepwars.generate_creep
 local is_ai_array = creepwars.is_ai_array
@@ -15,7 +21,7 @@ local function ai_creep_gen(current_side_object)
 	print_as_json("current side is", current_side)
 	if is_ai_array[current_side] and not wesnoth.sides[current_side].lost then
 		for _, unit in ipairs(wesnoth.get_units { side = current_side, canrecruit = true }) do
-			wesnoth.add_modification(unit, "object", { T.effect { apply_to = "movement", set = 0 } })
+			wesnoth.units.add_modification(unit, "object", { T.effect { apply_to = "movement", set = 0 } })
 			unit.moves = 0
 		end
 

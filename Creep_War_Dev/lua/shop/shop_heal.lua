@@ -1,4 +1,10 @@
--- << shop_heal
+-- << shop_heal | Creep_War_Dev
+if rawget(_G, "shop_heal | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "shop_heal | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -8,7 +14,7 @@ local table = table
 local wml = wml
 local is_ai_array = creepwars.is_ai_array
 local side_to_team = creepwars.side_to_team
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 
 local team_shop_set = {}
 for team_index, team_arr in ipairs(creepwars.shop_coordinates) do

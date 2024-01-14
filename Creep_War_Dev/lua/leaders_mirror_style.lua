@@ -1,10 +1,16 @@
--- << leaders_mirror_style
+-- << leaders_mirror_style | Creep_War_Dev
+if rawget(_G, "leaders_mirror_style | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "leaders_mirror_style | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
 local math = math
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 local array_map = creepwars.array_map
 local format = creepwars.format
 local is_ai_array = creepwars.is_ai_array

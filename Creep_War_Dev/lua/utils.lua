@@ -1,4 +1,10 @@
--- << utils
+-- << utils | Creep_War_Dev
+if rawget(_G, "utils | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "utils | Creep_War_Dev", true)
+end
 
 local ipairs = ipairs
 local next = next
@@ -104,8 +110,8 @@ end
 
 local function wesnoth_message(msg)
 	local wesnoth = wesnoth
-	wesnoth.synchronize_choice(function()
-		local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+	wesnoth.sync.evaluate_single(function()
+		local T = wml.tag
 		local ugly_index = msg.image and 2 or 1
 		wesnoth.show_dialog {
 			T.tooltip { id = "tooltip_large" },

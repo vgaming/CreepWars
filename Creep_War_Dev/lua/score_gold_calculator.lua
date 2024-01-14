@@ -1,10 +1,16 @@
--- << score_gold_calculator
+-- << score_gold_calculator | Creep_War_Dev
+if rawget(_G, "score_gold_calculator | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "score_gold_calculator | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
 local wml = wml
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 local is_ai_array = creepwars.is_ai_array
 local side_to_team = creepwars.side_to_team
 local team_array = creepwars.team_array
@@ -120,7 +126,7 @@ local function unit_kill_event(attacker, defender)
 	guard_give_hp = guard_give_hp * (wml.variables.lessrandom_multiplier or 1)
 	for _, unit in ipairs(wesnoth.get_units { canrecruit = true }) do
 		if side_to_team[unit.side] == team and is_ai_array[unit.side] then
-			wesnoth.add_modification(unit, "object", {
+			wesnoth.units.add_modification(unit, "object", {
 				T.effect {
 					apply_to = "hitpoints",
 					increase_total = guard_give_hp,

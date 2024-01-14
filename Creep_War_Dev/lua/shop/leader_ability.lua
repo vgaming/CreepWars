@@ -1,8 +1,14 @@
---<< leader_ability
+--<< leader_ability | Creep_War_Dev
+if rawget(_G, "leader_ability | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "leader_ability | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 local table = table
 
 local function set_leader_ability(unit)
@@ -30,11 +36,11 @@ local function set_leader_ability(unit)
 		name = "<b>leader</b>",
 		description = "Upgrades: " .. table.concat(arr, ", ")
 	}
-	wesnoth.add_modification(unit, "object", {
+	wesnoth.units.add_modification(unit, "object", {
 		id = "creepwars_leader_zoc",
 		T.effect { apply_to = "zoc", value = true },
 	})
-	wesnoth.add_modification(unit, "object", {
+	wesnoth.units.add_modification(unit, "object", {
 		T.effect { apply_to = "remove_ability", T.abilities { ability } },
 		T.effect { apply_to = "new_ability", T.abilities { ability } }
 	})

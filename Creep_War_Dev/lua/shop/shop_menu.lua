@@ -1,8 +1,14 @@
--- << shop_menu
+-- << shop_menu | Creep_War_Dev
+if rawget(_G, "shop_menu | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "shop_menu | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 local ipairs = ipairs
 local math = math
 local string = string
@@ -55,7 +61,7 @@ local function give_effect(cost, id, effect)
 			if id then
 				event_unit.variables["creepwars_" .. id] = event_unit.variables["creepwars_" .. id] + 1
 			end
-			wesnoth.add_modification(event_unit, "object", effect_wml)
+			wesnoth.units.add_modification(event_unit, "object", effect_wml)
 		end
 	end
 end
@@ -376,7 +382,7 @@ local function apply_resistances()
 	for _, weap in ipairs { "arcane", "blade", "cold", "fire", "impact", "pierce" } do
 		local key_percent = "creepwars_respercent_" .. weap
 		local old_resistance = event_unit.variables[key_percent] or 0
-		wesnoth.add_modification(event_unit, "object", {
+		wesnoth.units.add_modification(event_unit, "object", {
 			T.effect { apply_to = "resistance", T.resistance { [weap] = old_resistance } },
 		})
 
@@ -386,7 +392,7 @@ local function apply_resistances()
 		event_unit.variables[key_percent] = new_resistance
 
 		-- wesnoth.wml_actions.remove_object { object_id = key_number } -- doesn't work, wesnoth seems broken for res.
-		wesnoth.add_modification(event_unit, "object", {
+		wesnoth.units.add_modification(event_unit, "object", {
 			T.effect { apply_to = "resistance", T.resistance { [weap] = -new_resistance } },
 		})
 	end

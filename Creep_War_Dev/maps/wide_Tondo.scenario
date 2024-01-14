@@ -12,6 +12,12 @@ Creep Wars villages by Tondo#enddef
 	[lua]
 		name = wide_Tondo
 		code = <<
+			if rawget(_G, "wide_Tondo.scenario") then
+				-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+				return
+			else
+				rawset(_G, "wide_Tondo.scenario", true)
+			end
 			creepwars = {}
 			creepwars.shop_coordinates = {
 				{ { 8, 9 }, { 8, 11 }, },

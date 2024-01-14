@@ -38,6 +38,12 @@ Creep Wars snow#enddef
 	[lua]
 		name = snow
 		code = <<
+			if rawget(_G, "snow.scenario") then
+				-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+				return
+			else
+				rawset(_G, "snow.scenario", true)
+			end
 			creepwars = {}
 			creepwars.guards_pos = {
 				{ side = 4, x = 10, y = 3 },

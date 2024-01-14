@@ -1,4 +1,10 @@
--- << random_creep_generator
+-- << random_creep_generator | Creep_War_Dev
+if rawget(_G, "random_creep_generator | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "random_creep_generator | Creep_War_Dev", true)
+end
 
 -- This file provides function to generate Creeps with expected cost.
 -- See end of file for the function itself, `creepwars.generate_creep`
@@ -7,7 +13,7 @@ local wesnoth = wesnoth
 local creepwars = creepwars
 local math = math
 local helper = wesnoth.require("lua/helper.lua")
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 local lvl0_barrier = creepwars.lvl0_barrier
 local lvl3plus_barrier = creepwars.lvl3plus_barrier
 local creep_array = creepwars.default_era_creeps
@@ -16,7 +22,7 @@ local creep_array = creepwars.default_era_creeps
 local creep_rand_string = "1.." .. #creep_array
 
 local function generate_creep(desired_cost)
-	local function rand_creep() return creep_array[helper.rand(creep_rand_string)] end
+	local function rand_creep() return creep_array[mathx.random_choice(creep_rand_string)] end
 	local creep_type
 	local unit
 	local iterations = 0
@@ -27,7 +33,7 @@ local function generate_creep(desired_cost)
 			local u = wesnoth.unit_types[creep_type]
 		until u.level == 0 and u.__cfg.cost < 12
 	elseif desired_cost < lvl3plus_barrier then
-		local desired_closeness = (helper.rand("1..100") + helper.rand("1..100")) / 200
+		local desired_closeness = (mathx.random_choice("1..100") + mathx.random_choice("1..100")) / 200
 		local closeness_step = 1 / #creep_array / 5 -- widen acceptable range over time
 		repeat
 			iterations = iterations + 1
@@ -55,7 +61,7 @@ local function generate_creep(desired_cost)
 			name = "boost +" .. boost,
 			description = "Boost for excessive team score: +" .. boost .. " movement, +" .. boost * 50 .. "% strikes"
 		}
-		wesnoth.add_modification(unit, "object", {
+		wesnoth.units.add_modification(unit, "object", {
 			T.effect { apply_to = "attack", increase_attacks = boost * 50 .. "%" },
 			T.effect { apply_to = "movement", increase = boost },
 			T.effect { apply_to = "new_ability", T.abilities { boost_ability } },
@@ -66,7 +72,7 @@ local function generate_creep(desired_cost)
 		description = "This is a creep unit. It has no ZoC."
 			.. "Creeps are very aggressive, they only care about inflicting damage."
 	}
-	wesnoth.add_modification(unit, "object", {
+	wesnoth.units.add_modification(unit, "object", {
 		T.effect { apply_to = "zoc", value = false },
 		T.effect { apply_to = "loyal" },
 		T.effect { apply_to = "new_ability", T.abilities { creep_ability } },

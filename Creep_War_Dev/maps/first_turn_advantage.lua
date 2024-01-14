@@ -1,10 +1,16 @@
--- << first_turn_advantage
+-- << first_turn_advantage | Creep_War_Dev
+if rawget(_G, "first_turn_advantage | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "first_turn_advantage | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
 local assert = assert
 local ipairs = ipairs
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 
 wesnoth.wml_actions.event {
 	name = "turn 2",
@@ -21,7 +27,7 @@ local function first_turn_advantage_register(side, value)
 			name = "first turn advantage",
 			description = "+" .. value .. " movement on turn 1"
 		}
-		wesnoth.add_modification(unit, "object", {
+		wesnoth.units.add_modification(unit, "object", {
 			T.effect { apply_to = "new_ability", T.abilities { ability } },
 			id = "creep_wars_first_turn",
 		})

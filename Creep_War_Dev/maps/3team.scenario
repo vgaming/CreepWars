@@ -27,6 +27,12 @@ Creep Wars 3team#enddef
 	[lua]
 		name = 3team
 		code = <<
+			if rawget(_G, "3team.scenario") then
+				-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+				return
+			else
+				rawset(_G, "3team.scenario", true)
+			end
 			creepwars = {}
 			creepwars.mirror_style_label_pos = { x = 17, y = 3 }
 			creepwars.scoreboard_pos = {

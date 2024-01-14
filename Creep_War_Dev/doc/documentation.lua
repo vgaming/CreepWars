@@ -56,7 +56,7 @@ if wesnoth then
 		"If you create new CW maps, submit them to the forum! https://forums.wesnoth.org/viewtopic.php?t=47655"
 	)
 
-	local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+	local T = wml.tag
 	local objectives = ""
 		.. wesnoth.get_variable("creepwars_about") .. "\n"
 		.. note .. "\n"

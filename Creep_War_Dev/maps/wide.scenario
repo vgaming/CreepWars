@@ -12,6 +12,12 @@ Creep Wars wide#enddef
 	[lua]
 		name = wide
 		code = <<
+			if rawget(_G, "wide.scenario") then
+				-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+				return
+			else
+				rawset(_G, "wide.scenario", true)
+			end
 			creepwars = {}
 			creepwars.shop_coordinates = {
 				{ { 8, 9 }, { 8, 11 }, },

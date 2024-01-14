@@ -1,4 +1,10 @@
--- << random_map
+-- << random_map | Creep_War_Dev
+if rawget(_G, "random_map | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "random_map | Creep_War_Dev", true)
+end
 
 local helper = wesnoth.require("lua/helper.lua")
 
@@ -42,7 +48,7 @@ for idx, terr in ipairs(terrain_iterator) do
 end
 
 local function random_terrain()
-	local offset = helper.rand("1.." .. terrain_total * terrain_variability_multiplier)
+	local offset = mathx.random_choice("1.." .. terrain_total * terrain_variability_multiplier)
 	for idx, terrain in ipairs(terrain_iterator) do
 		offset = offset - get_probability(idx)
 		if offset <= 0 then

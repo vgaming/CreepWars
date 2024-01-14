@@ -1,11 +1,17 @@
--- << dialog
+-- << dialog | Creep_War_Dev
+if rawget(_G, "dialog | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "dialog | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local addon = creepwars
 local ipairs = ipairs
 local string = string
 local type = type
-local T = wesnoth.require("lua/helper.lua").set_wml_tag_metatable {}
+local T = wml.tag
 local translate = wesnoth.textdomain "wesnoth"
 
 
@@ -108,7 +114,7 @@ end
 
 local function show_dialog(settings)
 	local func = function() return show_dialog_unsynchronized(settings) end
-	return wesnoth.synchronize_choice(func)
+	return wesnoth.sync.evaluate_single(func)
 end
 
 

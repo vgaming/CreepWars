@@ -1,4 +1,10 @@
--- << unit_analyze_common
+-- << unit_analyze_common | Creep_War_Dev
+if rawget(_G, "unit_analyze_common | Creep_War_Dev") then
+	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
+	return
+else
+	rawset(_G, "unit_analyze_common | Creep_War_Dev", true)
+end
 
 local wesnoth = wesnoth
 local creepwars = creepwars
@@ -80,7 +86,7 @@ end
 local era_unit_rand_string = "1.." .. #era_array
 local function random_leader()
 	while true do
-		local candidate = era_array[helper.rand(era_unit_rand_string)]
+		local candidate = era_array[mathx.random_choice(era_unit_rand_string)]
 		if can_be_a_leader(candidate) then
 			return candidate
 		end

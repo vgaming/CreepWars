@@ -12,7 +12,6 @@ end
 local wesnoth = wesnoth
 local creepwars = creepwars
 local math = math
-local helper = wesnoth.require("lua/helper.lua")
 local T = wml.tag
 local lvl0_barrier = creepwars.lvl0_barrier
 local lvl3plus_barrier = creepwars.lvl3plus_barrier

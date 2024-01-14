@@ -1,4 +1,4 @@
---<< fog_label_leader | Creep_War_Dev
+-- << fog_label_leader | Creep_War_Dev
 if rawget(_G, "fog_label_leader | Creep_War_Dev") then
 	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
 	return

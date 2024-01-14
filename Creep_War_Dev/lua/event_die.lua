@@ -22,7 +22,14 @@ elseif not defender.canrecruit and not defender.variables["creepwars_creep"] the
 	print(msg)
 	-- wesnoth.message("Creep Wars", msg)
 else
-	print_as_json("killed a unit", defender.canrecruit, is_ai_array[defender.side], addon.alive_teams_count(), attacker, defender)
+	print_as_json(
+		"killed a unit",
+		defender.canrecruit,
+		is_ai_array[defender.side],
+		addon.alive_teams_count(),
+		attacker,
+		defender
+	)
 	if not defender.canrecruit then
 		addon.unit_kill_event(attacker, defender)
 	elseif not is_ai_array[defender.side] then

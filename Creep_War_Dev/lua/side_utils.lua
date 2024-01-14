@@ -46,6 +46,7 @@ end
 
 
 local function guard_killed_event(aggressive_side, defeated_side)
+	print_as_json("Guard killed event", aggressive_side, defeated_side)
 	for _, ally_side in ipairs(team_array[side_to_team[defeated_side]]) do
 		wesnoth.wml_actions.kill { side = ally_side.side }
 	end

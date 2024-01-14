@@ -13,7 +13,7 @@ local is_ai_array = addon.is_ai_array
 local defender = wesnoth.get_unit(wesnoth.get_variable("x1") or 0, wesnoth.get_variable("y1") or 0)
 local attacker = wesnoth.get_unit(wesnoth.get_variable("x2") or 0, wesnoth.get_variable("y2") or 0)
 if defender == nil then
-	local msg = "Warning: cannot find killed unit. No gold/creep bonus was generated."
+	local msg = "Warning: cannot find the killed unit. No gold/creep bonus was generated."
 	print(msg)
 	wesnoth.message("Creep Wars", msg)
 elseif not defender.canrecruit and not defender.variables["creepwars_creep"] then
@@ -22,6 +22,7 @@ elseif not defender.canrecruit and not defender.variables["creepwars_creep"] the
 	print(msg)
 	-- wesnoth.message("Creep Wars", msg)
 else
+	print_as_json("killed a unit", defender.canrecruit, is_ai_array[defender.side], addon.alive_teams_count(), attacker, defender)
 	if not defender.canrecruit then
 		addon.unit_kill_event(attacker, defender)
 	elseif not is_ai_array[defender.side] then

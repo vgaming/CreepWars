@@ -375,7 +375,8 @@ end
 
 
 local function resistance_value(base, upgrade_count)
-	return math.floor(base - base * math.pow(0.9, upgrade_count) + 0.5)
+	--The `^` Lua operator is `math.pow`
+	return math.floor(base - base * (0.9 ^ upgrade_count) + 0.5)
 end
 
 local function apply_resistances()

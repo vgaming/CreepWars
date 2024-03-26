@@ -1,10 +1,4 @@
 -- << first_turn_advantage | Creep_War_Dev
-if rawget(_G, "first_turn_advantage | Creep_War_Dev") then
-	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
-	return
-else
-	rawset(_G, "first_turn_advantage | Creep_War_Dev", true)
-end
 
 local wesnoth = wesnoth
 local creepwars = creepwars

@@ -1,10 +1,4 @@
 -- << leader_limbo | Creep_War_Dev
-if rawget(_G, "leader_limbo | Creep_War_Dev") then
-	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
-	return
-else
-	rawset(_G, "leader_limbo | Creep_War_Dev", true)
-end
 
 local wesnoth = wesnoth
 local creepwars = creepwars

@@ -3,7 +3,7 @@ map_data="{./snow.map}"
 #define CREEPWARS_SCENARIO_ID
 {CREEPWARS_DIR}_snow#enddef
 #define CREEPWARS_SCENARIO_NAME
-Creep Wars snow#enddef
+Creep Wars snow (Default)#enddef
 
 
 {./human_ai_sides_macros.cfg}
@@ -38,12 +38,6 @@ Creep Wars snow#enddef
 	[lua]
 		name = snow
 		code = <<
-			if rawget(_G, "snow.scenario") then
-				-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
-				return
-			else
-				rawset(_G, "snow.scenario", true)
-			end
 			creepwars = {}
 			creepwars.guards_pos = {
 				{ side = 4, x = 10, y = 3 },

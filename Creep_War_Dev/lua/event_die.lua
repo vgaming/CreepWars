@@ -1,10 +1,4 @@
 -- << event_die | Creep_War_Dev
-if rawget(_G, "event_die | Creep_War_Dev") then
-	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
-	return
-else
-	rawset(_G, "event_die | Creep_War_Dev", true)
-end
 
 local wesnoth = wesnoth
 local addon = creepwars
@@ -22,14 +16,14 @@ elseif not defender.canrecruit and not defender.variables["creepwars_creep"] the
 	print(msg)
 	-- wesnoth.message("Creep Wars", msg)
 else
-	print_as_json(
-		"killed a unit",
-		defender.canrecruit,
-		is_ai_array[defender.side],
-		addon.alive_teams_count(),
-		attacker,
-		defender
-	)
+	--print_as_json(
+	--	"killed a unit",
+	--	defender.canrecruit,
+	--	is_ai_array[defender.side],
+	--	addon.alive_teams_count(),
+	--	attacker,
+	--	defender
+	--)
 	if not defender.canrecruit then
 		addon.unit_kill_event(attacker, defender)
 	elseif not is_ai_array[defender.side] then

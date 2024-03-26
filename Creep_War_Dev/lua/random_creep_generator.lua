@@ -1,10 +1,4 @@
 -- << random_creep_generator | Creep_War_Dev
-if rawget(_G, "random_creep_generator | Creep_War_Dev") then
-	-- TODO: remove this code once https://github.com/wesnoth/wesnoth/issues/8157 is fixed
-	return
-else
-	rawset(_G, "random_creep_generator | Creep_War_Dev", true)
-end
 
 -- This file provides function to generate Creeps with expected cost.
 -- See end of file for the function itself, `creepwars.generate_creep`

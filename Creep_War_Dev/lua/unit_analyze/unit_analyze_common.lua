@@ -3,17 +3,15 @@
 local wesnoth = wesnoth
 local creepwars = creepwars
 local ipairs = ipairs
-local helper = wesnoth.require("lua/helper.lua")
-local split_comma = creepwars.split_comma
 
 
 local era_array = {}
 local era_set = {}
 
 local function init_era()
-	for multiplayer_side in helper.child_range(wesnoth.game_config.era, "multiplayer_side") do
+	for multiplayer_side in wml.child_range(wesnoth.scenario.era, "multiplayer_side") do
 		local units = multiplayer_side.recruit or multiplayer_side.leader or ""
-		for _, unit in ipairs(split_comma(units)) do
+		for _, unit in ipairs(stringx.split(units)) do
 			if era_set[unit] == nil and wesnoth.unit_types[unit] then
 				-- print("importing era unit " .. unit)
 				era_set[unit] = true
@@ -23,19 +21,19 @@ local function init_era()
 	end
 end
 if not pcall(init_era) then
-	local msg = "Failed to load Era " .. wesnoth.game_config.mp_settings.mp_era
+	local msg = "Failed to load Era " .. wesnoth.scenario.era.id
 	wesnoth.wml_actions.message { caption = "Creep Wars", message = msg }
-	wesnoth.message("Creep Wars", msg)
+	wesnoth.interface.add_chat_message("Creep Wars", msg)
 	wesnoth.wml_actions.endlevel { result = "defeat" }
 	init_era()
 end
 
 local function unit_count_specials(unit)
 	local result = {}
-	for attack in helper.child_range(wesnoth.unit_types[unit].__cfg, "attack") do
-		for specials in helper.child_range(attack, "specials") do
+	for attack in wml.child_range(wesnoth.unit_types[unit].__cfg, "attack") do
+		for specials in wml.child_range(attack, "specials") do
 			for _, special in ipairs(specials) do
-				local name = special[1]
+				local name = special.tag
 				result[name] = (result[name] or 0) + 1
 			end
 		end

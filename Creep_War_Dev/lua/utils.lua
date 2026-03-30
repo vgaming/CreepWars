@@ -8,18 +8,6 @@ local table = table
 local tostring = tostring
 local type = type
 
-local function split_comma(str)
-	local result = {}
-	local n = 1
-	for s in string.gmatch(str or "", "%s*[^,]+%s*") do
-		if s ~= "" and s ~= "null" then
-			result[n] = s
-			n = n + 1
-		end
-	end
-	return result
-end
-
 
 local function _format_any_value(obj, buffer)
 	if type(obj) == "table" then
@@ -130,7 +118,6 @@ creepwars.array_to_set = array_to_set
 creepwars.format = format
 creepwars.generate_until_ok = generate_until_ok
 creepwars.print = _print
-creepwars.split_comma = split_comma
 creepwars.wesnoth_message = wesnoth_message
 
 -- >>

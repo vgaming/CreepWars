@@ -1,0 +1,61 @@
+<span size='x-large' underline='low'>Changelog</span>
+2023-12-20: The game is completely re-balanced, it should be easier to make a comeback. Early kill bonus is nerfed, a steady income 4g/turn is added instead.
+2021-02-18: A new experimental ''Random'' map is introduced with randomized terrain.
+2020-10-05: Slow weapons are stronger at start but get weaker later.
+2020-08-27: Leaders can no longer be lvl-0 units, they are always lvl-1.
+2020-03-19: Fix guard initial HP (if you used guard HP override).
+2020-03-19: Re-balanced weapons, reduced resistance cost.
+2020-03-08: Fix creep generation bug on game reload.
+2020-03-07: Slowing weapons damage decreased 7 -> 6.
+2020-03-07: Creeps are additionally generated on turn 1 for new players to understand the game principle.
+2019-04-22: Fixed guard death end game.
+2019-03-02: Balance ''snow'' map, remove ''first turn advantage'' for East.
+2019-03-02: Balance ''snow'' map to reduce bottleneck on turn 1.
+2019-02-10: Change ''snow'' map to make it more accessible for creeps on turn 1 (shallow water -> ford).
+2019-02-02: Teams with less than 3 leaders get more gold at game start (useful for 2vs2 or 1vs1).
+2019-02-02: Default visibility for enemy leaders changed to ''not visible''. You can override that in game creation settings.
+2019-01-14: More gold is given in late game.
+2018-11-03: Fix guard healing bug.
+2018-10-01: Add maps made by Eurydike.
+2018-09-27: Guard healing bug fixed.
+2018-09-26: Slightly modified the ''middle'' map, renamed it to ''snow''.
+2018-09-19: Added slowing attack-only weapons to make ''rush'' strategy more challenging.
+2018-09-19: Weapon re-balancing. More weapons should be feasible now depending on Leader types.
+2018-09-07: Guard visual terrain changed to ''hill'' to better match the 50% terrain resistance.
+2018-09-07: Leaders always have ZoneOfControl (even level 0 leaders).
+2018-09-06: Resistances upgrade cost less and should me more lucrative now.
+2018-09-06: Resistances are now multiplicative, not additive. Effect is thus increased for e.g. cold resistance of Drakes, but reduced for e.g. blade resistance of Dwarves.
+2018-09-06: Maximum number of resistances upgrades increased.
+2018-09-06: Legacy ''armor'' upgrades removed completely (superseded by resistance upgrades).
+2018-09-04: Combo weapons cost slightly reduced. This should make certain choices more challenging.
+2018-09-04: Added new experimental map version from Tondo (thanks for the contribution!)
+2018-07-20: HP upgrades are tightly bound to current unit type HP. Leveled-up unit can get more HP per one buy.
+2018-07-20: Movement upgrade cost depends on the current value now: the higher your speed is already, the more expensive each new upgrade.
+2018-07-20: Creep late-game damage boost is now percentage of original damage, not absolute value.
+2018-07-20: Guard terrain defense reduced to 50%.
+2018-07-20: Guard promoted to neutral lvl3 Elvish Marshal.
+2018-07-20: Guard initial health increased a bit (now 60).
+2018-04-11: Reduced gold per kill in early game (4->3), but increased in late game (value increases each 13 kills instead of each 20).
+2018-04-02: Guard health fixes, proper endgame status.
+2018-03-30: Add swamps and mushrooms to ''middle'' map.
+2018-03-29: Handle ''die'' event without attacker (for very tricky Mods/Eras).
+2018-02-22: First move advantage reduced to 2 (was 3).
+2018-02-15: Movement bug fixed for game re-loads on turn 1.
+2018-02-09: Number of creep spawns depends on map now. ''narrow'': 8 (old default), ''middle'': 9, ''wide'': 9.
+2018-02-06: Remove hard-coded rules from ''vortex'' map, make it a standard map called ''middle''.
+2018-02-06: Removed ''berserker'' creeps.
+2018-01-30: Removed ''has entered shop'' / ''has left shop'' public messages to avoid sharing tactical information.
+2018-01-24: Improved handling of Creep_War_Era_0.3.5 (Default Era is still recommended instead).
+2018-01-21: Gold multiplier for leaderkill increased 4->5.
+2018-01-20: Fixed bug with visiting shop after game reload.
+2018-01-20: Improved ''Mirror'' mode unit transformation to handle unit traits.
+2018-01-19: Increase first turn advantage to +3.
+2018-01-19: Make Mirror mode retain some of the manual choices. Suggested by Ravana.
+2018-01-17: Fix [options] on wesnoth-1.13 (development version).
+2018-01-17: Fix some save-load problems that could've caused OOS.
+2018-01-16: Mirror mode now shifts Leader types (suggestion by mmmax).
+2018-01-16: Enter shop when you move to the hex.
+2018-01-15: Added +2 movement bonus on turn 1 to East side as a compensation for West first move priority.
+2018-01-14: Added new Vortex map.
+2018-01-14: Started maintaining a changelog. Lua re-write changing creep types, gold formula &amp; others.
+2015-06-29: ''Creep War'' written by Blitzmerker and piezocuttlefish.

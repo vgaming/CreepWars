@@ -45,7 +45,7 @@ local function leader_restore_limbo()
 			unit.variables.limbo_turns = 0
 			unit.status.petrified = false
 			show_limbo_text(side, "")
-            move_ai_to_shop()
+            creepwars.move_ai_to_shop()
 		end
 	end
 end

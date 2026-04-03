@@ -45,13 +45,37 @@ local function leader_restore_limbo()
 			unit.variables.limbo_turns = 0
 			unit.status.petrified = false
 			show_limbo_text(side, "")
+            creepwars.move_ai_to_shop()
 		end
 	end
+end
+
+local function move_ai_to_shop()
+    -- if setting to ai after game start, use droid full
+    if wesnoth.sides[wesnoth.current.side].controller ~= "ai" then
+        return
+    end
+    local current_side_shops = creepwars.team_shop_array[creepwars.side_to_team[wesnoth.current.side]]
+    for _, loc in ipairs(current_side_shops) do
+        if not wesnoth.units.get(loc) then
+            local unit = wesnoth.units.find{side=wesnoth.current.side, canrecruit=true}[1]
+            -- Ideally unit should go to closest shop, not just first
+            -- AI teleports to shop with single movement point, bug of wesnoth engine, but for this use case it is suitable
+            wesnoth.wml_actions.do_command{
+                wml.tag.move{
+                    x=unit.x .. "," .. loc.x,
+                    y=unit.y .. "," .. loc.y
+                }
+            }
+            return
+        end
+    end
 end
 
 
 creepwars.leader_died_event = leader_died_event
 creepwars.leader_restore_limbo = leader_restore_limbo
+creepwars.move_ai_to_shop = move_ai_to_shop
 
 
 -- >>

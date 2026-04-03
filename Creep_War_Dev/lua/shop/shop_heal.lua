@@ -11,7 +11,9 @@ local side_to_team = creepwars.side_to_team
 local T = wml.tag
 
 local team_shop_set = {}
+local team_shop_array = {}
 for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
+    table.insert(team_shop_array, {})
 	local set = {}
 	local cumulative_x_coords = {}
 	local cumulative_y_coords = {}
@@ -39,6 +41,7 @@ for team_index, team_arr in ipairs(creepwars.shop_coordinates) do
 		cumulative_x_coords[#cumulative_x_coords + 1] = xy[1]
 		cumulative_y_coords[#cumulative_y_coords + 1] = xy[2]
 		set[xy[1] .. "," .. xy[2]] = true
+        table.insert(team_shop_array[#team_shop_array], {xy[1], xy[2], x=xy[1], y=xy[2]})
 	end
 
 	for side_number, _ in ipairs(wesnoth.sides) do
@@ -113,5 +116,7 @@ creepwars.moveto_event = moveto_event
 creepwars.heal_static = heal_static
 
 creepwars_unit_at_shop = unit_at_shop
+
+creepwars.team_shop_array = team_shop_array
 
 -- >>

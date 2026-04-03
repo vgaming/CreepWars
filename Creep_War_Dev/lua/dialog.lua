@@ -105,10 +105,15 @@ local function show_dialog_unsynchronized(settings)
 	return { is_ok = is_ok, index = item_result }
 end
 
-
 local function show_dialog(settings)
 	local func = function() return show_dialog_unsynchronized(settings) end
-	return wesnoth.sync.evaluate_single(func)
+    if stringx.starts_with then
+        -- 1.19.4+
+        local ai_func = function() return creepwars.ai_answer_dialog(settings) end
+        return wesnoth.sync.evaluate_single(func, ai_func)
+    else
+        return wesnoth.sync.evaluate_single(func)
+    end
 end
 
 
